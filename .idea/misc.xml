@@ -56,6 +56,27 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2630769230769231" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2630769230769231" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/xml/root_preferences.xml" value="0.25104166666666666" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_loggin.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_nav_administrador.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_nav_cliente.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_recuperar_password.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_registrarse.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/app_bar_main.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/app_bar_nav_cliente.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/cardview_producto_tienda.xml" value="0.22" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/custom_toast_red.xml" value="0.1" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_agregar_modelo.xml" value="0.1" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_aviso_privacidad.xml" value="0.1" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ayuda.xml" value="0.1" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_buscar_mi_kit.xml" value="0.1" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_confirmar_envio.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_creditos.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_eliminar_kit.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_home_admin.xml" value="0.25" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_lista_nuevos_pedidos_inicio_admin.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_lista_nuevos_pedidos_inicio_admin_list.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_lista_pocas_existencias_inicio_admin.xml" value="0.18541666666666667" />
       </map>
     </option>
   </component>
