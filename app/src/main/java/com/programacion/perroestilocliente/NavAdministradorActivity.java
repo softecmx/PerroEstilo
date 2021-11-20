@@ -133,22 +133,22 @@ public class NavAdministradorActivity extends AppCompatActivity
             childList.put(menuModel, null);
         }
 
-        menuModel = new MenuModel("Productos", true, true, "",""); //Menu of Java Tutorials
+        menuModel = new MenuModel("Categorías", true, true, "",""); //Menu of Java Tutorials
         headerList.add(menuModel);
         List<MenuModel> childModelsList = new ArrayList<>();
-        MenuModel childModel = new MenuModel("Agrega producto", false, false, "Agrega producto","");
+        MenuModel childModel = new MenuModel("Agregar categoría", false, false, "Agrega producto","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modifica producto", false, false, "","");
+        childModel = new MenuModel("Modifica categoría", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Busca producto", false, false, "","");
+        childModel = new MenuModel("Buscar categoría", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Elimina producto", false, false, "","");
+        childModel = new MenuModel("Consultar categoría", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consulta producto", false, false, "","");
+        childModel = new MenuModel("Eliminar categoría", false, false, "","");
         childModelsList.add(childModel);
 
 
@@ -159,7 +159,7 @@ public class NavAdministradorActivity extends AppCompatActivity
         childModelsList = new ArrayList<>();
         menuModel = new MenuModel("Modelos", true, true, "",""); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Crear modelo", false, false, "","");
+        childModel = new MenuModel("Agregar modelo", false, false, "","");
         childModelsList.add(childModel);
 
         childModel = new MenuModel("Modificar modelo", false, false, "","");
@@ -168,10 +168,44 @@ public class NavAdministradorActivity extends AppCompatActivity
         childModel = new MenuModel("Buscar modelos", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Eliminar modelo", false, false, "","");
+        childModel = new MenuModel("Consultar modelo", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar modelos", false, false, "","");
+        childModel = new MenuModel("Eliminar modelos", false, false, "","");
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+        menuModel = new MenuModel("Diseños", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        if (!menuModel.hasChildren) {
+            childList.put(childModel, null);
+        }
+        menuModel = new MenuModel("Tallas", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        if (!menuModel.hasChildren) {
+            childList.put(childModel, null);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Productos", true, true, "",""); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Agregar productos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Modificar productos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Buscar productos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Consultar productos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Eliminar productos", false, false, "","");
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
@@ -181,31 +215,98 @@ public class NavAdministradorActivity extends AppCompatActivity
         childModelsList = new ArrayList<>();
         menuModel = new MenuModel("Kits", true, true, "",""); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Crear KIT", false, false, "","");
+        childModel = new MenuModel("Crear kits", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modificar KIT", false, false, "","");
+        childModel = new MenuModel("Modificar kits", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Buscar KIT", false, false, "","");
+        childModel = new MenuModel("Buscar kits", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Eliminar KIT", false, false, "","");
+        childModel = new MenuModel("Consultar kits", false, false, "","");
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar KITS", false, false, "","");
+        childModel = new MenuModel("Eliminar kits", false, false, "","");
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
-        menuModel = new MenuModel("Talllas", true, false, "",""); //Menu of Android Tutorial. No sub menus
+
+        menuModel = new MenuModel("Inventario", true, false, "",""); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
-            childList.put(menuModel, null);
+            childList.put(childModel, null);
         }
-        menuModel = new MenuModel("Diseño", true, false, "",""); //Menu of Android Tutorial. No sub menus
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Pagos", true, true, "",""); //Menu of Python Tutorials
+        headerList.add(menuModel);
+
+        childModel = new MenuModel("Consultar pagos", false, false, "","");
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Pedidos", true, true, "",""); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Crear pedidos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Modificar pedidos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Buscar pedidos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Consultar pedidos", false, false, "","");
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Cancelar pedidos", false, false, "","");
+        childModelsList.add(childModel);
+
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Envios", true, true, "",""); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Ver envios", false, false, "","");
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+        menuModel = new MenuModel("Ventas", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        if (!menuModel.hasChildren) {
+            childList.put(childModel, null);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Clientes", true, true, "",""); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Ver clientes", false, false, "","");
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+
+        menuModel = new MenuModel("Cuenta", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        if (!menuModel.hasChildren) {
+            childList.put(childModel, null);
+        }
+        menuModel = new MenuModel("Ajustes", true, false, "",""); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -226,7 +327,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                         String dir = headerList.get(groupPosition).menuName.toString();
                         switch (dir){
                             case "Inicio":
-                                com.programacion.perroestilocliente.ui.administrador.modelos.crearModelo.CrearModeloFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.modelos.crearModelo.CrearModeloFragment();
+                                com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
                                 Bundle args = new Bundle();
                                 newFragment.setArguments(args);
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -234,14 +335,58 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.addToBackStack(null);
                                 transaction.commit();
                                 break;
-                            case "Talllas":
+                            case "Tallas":
+                                com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment newFragment1= new com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment();
+                                 args = new Bundle();
+                                newFragment1.setArguments(args);
+                                transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.container, newFragment1);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
                                 break;
-                            case "Diseño":
-                                com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment frag= new com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment();
+                            case "Inventario":
+                                com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment2= new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
+                                args = new Bundle();
+                                newFragment2.setArguments(args);
+                                transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.container, newFragment2);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                                break;
+                            case "Ventas":
+                                com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment frag= new com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment();
                                 args = new Bundle();
                                 frag.setArguments(args);
                                 transaction = getSupportFragmentManager().beginTransaction();
                                 transaction.replace(R.id.container, frag);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                                break;
+                            case "Cuenta":
+                                com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment frag1= new com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment();
+                                args = new Bundle();
+                                frag1.setArguments(args);
+                                transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.container, frag1);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                                break;
+                            case "Ajustes":
+                                com.programacion.perroestilocliente.ui.ajustes.AjustesFragment frag2= new com.programacion.perroestilocliente.ui.ajustes.AjustesFragment();
+                                args = new Bundle();
+                                frag2.setArguments(args);
+                                transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.container, frag2);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                                break;
+
+                            case "Diseños":
+                                com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment frag3= new com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment();
+                                args = new Bundle();
+                                frag3.setArguments(args);
+                                transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.container, frag3);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
                                 break;
@@ -261,8 +406,8 @@ public class NavAdministradorActivity extends AppCompatActivity
                     MenuModel model = childList.get(headerList.get(groupPosition)).get(childPosition);
                     String dir = childList.get(headerList.get(groupPosition)).get(childPosition).menuName.toString();
                     switch (dir){
-                        case "Agrega producto":
-                            com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
+                        case "Agregar categoría":
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment();
                             Bundle args = new Bundle();
                             newFragment.setArguments(args);
                             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -270,33 +415,212 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.addToBackStack(null);
                             transaction.commit();
                             break;
-                        case "Modifica producto":
+                        case "Modifica categoría":
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment newFragment1= new com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment();
+                            args = new Bundle();
+                            newFragment1.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment1);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Busca producto":
+                        case "Buscar categoría":
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment newFragment2= new com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment();
+                            args = new Bundle();
+                            newFragment2.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment2);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Elimina producto":
+                        case "Consultar categoría":
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment newFragment3= new com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment();
+                            args = new Bundle();
+                            newFragment3.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment3);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Consulta producto":
+                        case "Eliminar categoría":
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment newFragment4= new com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment();
+                            args = new Bundle();
+                            newFragment4.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment4);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Crear modelo":
+                        case "Agregar productos":
+                            com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment newFragment5= new com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment();
+                            args = new Bundle();
+                            newFragment5.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment5);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Modificar modelo":
+                        case "Modificar productos":
+                            com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment newFragment6= new com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment();
+                            args = new Bundle();
+                            newFragment6.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment6);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Buscar modelos":
+                        case "Buscar productos":
+                            com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment newFragment7= new com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment();
+                            args = new Bundle();
+                            newFragment7.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment7);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Eliminar modelo":
+                        case "Consultar productos":
+                            com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment newFragment8= new com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment();
+                            args = new Bundle();
+                            newFragment8.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment8);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Consultar modelos":
+                        case "Eliminar productos":
+                            com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment newFragment9= new com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment();
+                            args = new Bundle();
+                            newFragment9.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment9);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Crear KIT":
+                        case "Crear kits":
+                            com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment newFragment10= new com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment();
+                            args = new Bundle();
+                            newFragment10.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment10);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Modificar KIT":
+                        case "Modificar kits":
+                            com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment newFragment11= new com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment();
+                            args = new Bundle();
+                            newFragment11.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment11);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Buscar KIT":
+                        case "Buscar kits":
+                            com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment newFragment12= new com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment();
+                            args = new Bundle();
+                            newFragment12.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment12);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Eliminar KIT":
+                        case "Consultar kits":
+                            com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment newFragment13= new com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment();
+                            args = new Bundle();
+                            newFragment13.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment13);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
-                        case "Consultar KIT":
+                        case "Eliminar kits":
+                            com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment newFragment14= new com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment();
+                            args = new Bundle();
+                            newFragment14.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment14);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Inventario":
+                            com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment15= new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
+                            args = new Bundle();
+                            newFragment15.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment15);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Crear pedidos":
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment newFragment16= new com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment();
+                            args = new Bundle();
+                            newFragment16.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment16);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Modificar pedidos":
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment newFragment17= new com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment();
+                            args = new Bundle();
+                            newFragment17.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment17);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Buscar pedidos":
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment newFragment18= new com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment();
+                            args = new Bundle();
+                            newFragment18.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment18);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Consultar pedidos":
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment newFragment19= new com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment();
+                            args = new Bundle();
+                            newFragment19.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment19);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Cancelar pedidos":
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment newFragment20= new com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment();
+                            args = new Bundle();
+                            newFragment20.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment20);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Ver envios":
+                            com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment newFragment21= new com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment();
+                            args = new Bundle();
+                            newFragment21.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment21);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Ver clientes":
+                            com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment newFragment22= new com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment();
+                            args = new Bundle();
+                            newFragment22.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment22);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            break;
+                        case "Consultar pagos":
+                            com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment newFragment23= new com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment();
+                            args = new Bundle();
+                            newFragment23.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment23);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             break;
                     }
                     onBackPressed();
