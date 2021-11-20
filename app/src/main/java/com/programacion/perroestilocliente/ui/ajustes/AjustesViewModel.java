@@ -1,4 +1,4 @@
-package com.programacion.perroestilocliente.ui.cliente.ajustes;
+package com.programacion.perroestilocliente.ui.ajustes;
 
 import androidx.lifecycle.ViewModel;
 
