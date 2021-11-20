@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/background_personalizado"/>
+    <item>
+        <bitmap android:src="@drawable/img_azteca"
+            android:tileMode="repeat"
+            android:alpha="0.1"
+            />
+    </item>
+</layer-list>

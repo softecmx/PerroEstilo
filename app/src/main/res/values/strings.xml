@@ -1,0 +1,403 @@
+<resources>
+    <string name="app_name">Perro Estilo Movil</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Admininstrador</string>
+    <string name="nav_header_subtitle">Hola Rousse!!</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_inicio">Inicio</string>
+    <string name="menu_categorias">Categorias</string>
+    <string name="menu_etiquetas">Etiquetas</string>
+    <string name="menu_modelos">Modelos</string>
+    <string name="menu_tallas">Tallas</string>
+    <string name="menu_productos">Productos</string>
+    <string name="menu_kit">MATCHS</string>
+    <string name="menu_pedidos">Pedidos</string>
+    <string name="menu_envios">Envios</string>
+    <string name="menu_inventario">Inventario</string>
+    <string name="menu_ventas">Ventas</string>
+    <string name="menu_clientes">Clientes</string>
+    <string name="menu_cuenta">Cuenta</string>
+    <string name="pe">PERRO ESTILO</string>
+    <string name="pe1">Perro estilo</string>
+    <string name="slogan">ACCESORIOS PARA TI Y TU MASCOTA</string>
+
+
+    <string name="txtBienvenida">Bienvenido</string>
+    <string name="txtInicioSession">Iniciar sesión</string>
+    <string name="txtRegistro">Registrar</string>
+    <string name="txtOlvidasteContras">¿Olvidaste tu contraseña?</string>
+    <string name="txtAunNoTienesCuenta">¿Aún no tienes cuenta?</string>
+    <string name="txtCrearCuenta">Crea una</string>
+    <string name="txtIngreseUsuario">Ingrese el usuario o email</string>
+    <string name="txtIngreseEmail">Correo electronico</string>
+    <string name="txtIngreseContrasena">Ingrese la contraseña</string>
+
+    <string name="txtNuevaCuenta">Nueva cuenta</string>
+    <string name="txtYaTienesCuenta">¿Ya tienes cuenta?</string>
+    <string name="txtIniciaSesion">Inicia sessión</string>
+    <string name="txtRegistrate">Registrate</string>
+    <string name="txtNombreUsuario">Nombre</string>
+    <string name="txtApellidoUsuario">Apellido</string>
+    <string name="txtConfirmeContrasena">Confirme la contraseña</string>
+    <string name="txtTerminosYcondiciones">He leído y acepto los Terminos y Condiciones de uso</string>
+
+
+    <string name="correo">Correo electrónico: </string>
+    <string name="password">Contraseña: </string>
+    <string name="iniciar">Iniciar sesión</string>
+    <string name="re_pass">¿Olvidaste tu contraseña? </string>
+    <string name="facebook">Ingresar con facebook</string>
+    <string name="google">Ingresar con google </string>
+    <string name="contexto">contextoimagenes</string>
+
+    <string name="registrar">Crear cuenta </string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="email">E-mail </string>
+    <string name="telefono">Celular </string>
+    <string name="r_pass">Contraseña</string>
+    <string name="conf_pass">Confirmar contraseña </string>
+    <string name="terminos">Aceptarpoliticas de privacidad.
+                            Terminos y condiciones de uso.</string>
+    <string name="registrarme">Registrarme </string>
+    <string name="r_google">Registrarme con google</string>
+    <string name="r_facebook">Registrarme con facebook</string>
+
+    <string name="recuperar">Recuperar contraseña</string>
+    <string name="forma">Como desea recuperar su contraseña</string>
+    <string name="enviar_codigo">Enviaremos un código a tu correo electrónico o número registrado</string>
+    <string name="f_correo">Mandamos un codigo a tu correo eléctrónico</string>
+    <string name="f_telefono">Mandamos un codigo a tu teléfono celular</string>
+    <string name="codigo">Ingrese el codigo</string>
+    <string name="restablecer">Restablecer contraseña</string>
+    <string name="new_pass">Nueva contraseña</string>
+
+    <!-- -->
+    <string name="enviar">Enviar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="enviarx2">Volver a enviar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- -->
+    <string name="bienvenida">Bienvenido</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_inicio_cliente">Inicio</string>
+    <string name="title_tienda_cliente">Tienda</string>
+    <string name="title_carrito_cliente">Carrito</string>
+    <string name="title_cuenta_cliente">Cuenta</string>
+    <string name="title_kits_cliente">KITS</string>
+    <string name="txtDescImg">Descripcion de la imagen</string>
+    <string name="txtDerechos">Copyright&#169; Todos los derechos reservados | Perro Estilo &amp;2021</string>
+
+    <!-- Home-->
+    <string name="txtCategorias">Categorías</string>
+    <string name="txtProductos">Productos</string>
+    <string name="txtNombreProducto">Nombre del producto</string>
+    <string name="txtPrecio">$$$  </string>
+    <string name="txtNuestraGaleri">Nuestra galeria</string>
+    <string name="txtMejoresComentarios">Los mejores comentarios</string>
+    <string name="txtUser">User</string>
+    <string name="txtLorem">LoremIm asdjgdfjhskfhkshdf lahfkjsdhfldsjfkdfdslfhkjsgh
+    dskjfhdskjfhksghkshgs</string>
+    <string name="txtLicencias">Licencias</string>
+    <string name="txtParaTi">Para ti    </string>
+    <!-- Tienda-->
+    <string name="txtOfertas">Ofertas</string>
+    <string name="txtModa">Moda</string>
+    <string name="txtKITS">KITS</string>
+    <string name="txtProductosNuevos">Productos nuevos</string>
+    <string name="txtTodasCategorias">Todas las categorias</string>
+    <string name="txtDescuento">Descuento %</string>
+    <string name="txtVerMas">Ver más...</string>
+    <string name="txtNuevo">Nuevo</string>
+    <string name="txtTemporada">Temporada</string>
+    <string name="txtCategoriaPadre">Cateogoria Padre</string>
+    <string name="txtVerTodasCategorias">Ver todas las categorias...</string>
+    <string name="txtVerTodosKits">Ver todos los kits... </string>
+    <string name="txtCategoria1">Categoria 1</string>
+    <string name="txtRaiting">Raiting </string>
+    <string name="txtEscogerTalla">Talla:</string>
+    <string name="txtCantidad">Cantidad:</string>
+    <string name="txtUno">1</string>
+    <string name="txtNombreDelProducto">Nombre del prodcuto</string>
+    <string name="txtComprarAhora">Comprar ahora</string>
+    <string name="txtAgregarCarrito">Añadir al carrito</string>
+    <string name="txtDetallesProducto">Detalles del producto</string>
+    <string name="txtMedidas">Medidas</string>
+    <string name="txtModelo">Modelo</string>
+    <string name="txtMarca">Marca</string>
+    <string name="txtDescripcion">Descripcion</string>
+    <string name="txtPreguntar">Preguntar</string>
+    <string name="txtProductosRelacionados">Productos relacionados</string>
+    <string name="txtTotal">Total:</string>
+    <string name="txtTotalAPagar">Total a pagar:</string>
+    <string name="txtSubtotal">Subtotal</string>
+    <string name="txtVerDetalle">Ver detalle</string>
+    <string name="txtEditar">Editar</string>
+    <string name="txtQuitar">Quitar</string>
+    <string name="txtContinuarComprando">Continuar comprando</string>
+    <string name="txtConfirmarCompra">Confirmar compra</string>
+    <string name="txtCancelar">Cancelar</string>
+    <string name="txtMiCarrito">Mi carrito</string>
+    <string name="txtVerCarrito">Ver carrito</string>
+    <string name="txtContacto">Contacto</string>
+    <string name="txtDireccionEntrega">DireccionEntrega </string>
+    <string name="txtNombreContacto">Nombre(s) </string>
+    <string name="txtAppPContacto">Apellido paterno </string>
+    <string name="txtAppMContacto">Apellido materno </string>
+    <string name="txtTelContacto">Telefono</string>
+    <string name="txtEditarContacto">Editar contacto</string>
+    <string name="txtAgregarDireccion">Agregar direccion</string>
+    <string name="txtAgregarOtraDireccion">Agregar otra direccion</string>
+    <string name="txtEstado">Estado</string>
+    <string name="txtMunicipio">Municipio</string>
+    <string name="txtLocalidad">Localidad</string>
+    <string name="txtCodigoPostal">Codigo postal</string>
+    <string name="txtCalleExterior">Calle y número exterior</string>
+    <string name="txtCalleInterior">Calle y número interior</string>
+    <string name="txtReferencias">Referencias</string>
+    <string name="txtLongitud">Longitud</string>
+    <string name="txtLatitud">Latitud</string>
+    <string name="txtAgregar">Agregar</string>
+    <string name="txtInstrucciones">Instrucciones</string>
+    <string name="txtEnviarPedidoWhats">Enviar pedido por WhatsApp</string>
+    <string name="txtTicketCompra">Ver ticket compra</string>
+    <string name="txtGraciasPorSuCompra">Gracias por su compra</string>
+    <string name="txtOrden">Orden</string>
+    <string name="txtNumeral">#####</string>
+    <string name="txtNoSerie">No. Serie</string>
+    <string name="txtClave">AAAA-4321234</string>
+    <string name="txtDetalleCompra">Detalle de compra</string>
+    <string name="txtDetalleEntrega">Detalle de entrega</string>
+    <string name="txtEstimadoPara">Estimado para el ## de ## de ####</string>
+    <string name="txtVerEnMisPedidos">Ver en mis pedidos</string>
+    <string name="txtImportarTicket">Importar Ticket</string>
+    <string name="txtFechaCompra">Fecha de compra</string>
+    <string name="txtEstatusPedido">Estatus del pedido</string>
+    <string name="txtEstatusProcesando">Procesando</string>
+    <string name="txtEstatusPendiente">Pendiente</string>
+    <string name="txtEstatusEntregado">Entregado</string>
+    <string name="txtEstatusEnCamino">En camino</string>
+    <string name="txtRecogidoEl">Recogido el 31 de octrubre</string>
+    <string name="txtCalificar">Calificar</string>
+    <string name="txtCerrar">Cerrar</string>
+
+    <!-- Cuenta-->
+    <string name="txtNombreUser">Nombre de usuario</string>
+    <string name="txtCuenta">Cuenta</string>
+    <string name="txtCorreoUser">correo del usuario</string>
+    <string name="txtMisDirecciones">Mis direcciones</string>
+    <string name="txtMisPedidos">Mis pedidos</string>
+    <string name="txtAyuda">Ayuda</string>
+    <string name="txtAcercaDeNosotros">Acerca de nosotros</string>
+    <string name="txtAcercaDeAplicacion">Acerca de la aplicación</string>
+    <string name="txtCondicionesYTerminos">Condiciones y política de privacidad</string>
+    <string name="txtAjustes">Ajustes y configuraciones</string>
+    <string name="txtCerrarSessiom">Cerrar sesión</string>
+    <string name="txtPerfil">Perfil</string>
+    <string name="txtLealtad">Lealtad</string>
+    <string name="txtNombreCompleto">Nombre completo</string>
+    <string name="txtFechaNaciimiento">Fecha de nacimiento</string>
+    <string name="txtGenero">Genero</string>
+    <string name="txtTelefono">Telefono</string>
+    <string name="txtEmail">Email</string>
+    <string name="txtCambiarContrasena">Cambiar contraseña</string>
+    <string name="txtEliminarCuenta">Eliminar cuenta</string>
+    <string name="txtTuEdadEs">Tu edad es:</string>
+    <string name="txtEdad">Edad</string>
+    <string name="txtSeleccionGenero">Seleccione su género</string>
+    <string name="txtPrefieroNoDecir">Prefiero no decir</string>
+    <string name="txtMasculino">Masculino</string>
+    <string name="txtFemenino">Femenino</string>
+    <string name="txtOtro">Otro</string>
+    <string name="txtVer">Ver</string>
+    <string name="txtEliminar">Eliminar</string>
+    <string name="txtEntidadFederativa">Entidad federativa</string>
+    <string name="txtAyudaAtencionCliente">Ayuda y atención al cliente</string>
+    <string name="txtEmpresa">Perro estilo</string>
+    <string name="txtQuienesSomos">¿Quienes somos?</string>
+    <string name="txtNuestraMision">Nuestra misión</string>
+    <string name="txtNuestraVisión">Nuestra visión</string>
+    <string name="txtNuestrosValores">Nuestros valores</string>
+    <string name="txtNuestroEquipo">Nuestro equipo</string>
+    <string name="txtOcupacion">Ocupacón</string>
+    <string name="txtCorreoEmpresarial">Correo eléctronico:</string>
+    <string name="txtTelefonoEmpresarial">Teléfono:</string>
+    <string name="txtCreditos">Créditos</string>
+    <string name="txtNombreApp">Nombre de la app</string>
+    <string name="txtUniversidad">Universidad:</string>
+    <string name="txtUniversidadEx">Instituto Tecnologico de Toluca</string>
+    <string name="txtMateria">Materia:</string>
+    <string name="txtMateriaEx">Desarrollo de aplicaciones móviles en Android</string>
+    <string name="txtAutores">Autores</string>
+    <string name="txtPeriodo">Periodo:</string>
+    <string name="txtPeriodoEx">Jun-Dic 2021</string>
+    <string name="txtVersion">Version:</string>
+    <string name="txtVersionEx">1.2.231</string>
+    <string name="txtTerminos">Terminos y condiciones</string>
+    <string name="txtPolitica">Política de privacidad</string>
+    <string name="txtConfiguracion">Ajustes</string>
+    <string name="txtNotificaciones">Notificaciones</string>
+    <string name="txtRecibirNotificaciones">Recibir notificaciones cuando existan nuevos prodcutos</string>
+    <string name="txtRecibirCorreos">Recibir correos cuando existan nuevos prodcutos</string>
+    <string name="txtNotificacionesPrioridad">Recibir notificaciones en alta prioridad</string>
+    <string name="txtVibracion">Vibración</string>
+    <string name="txtLuz">Luz</string>
+    <string name="txtSonido">Sonido</string>
+    <string name="txtTono">Tono de notificación</string>
+    <string name="txtArmarKit">Armar un kit</string>
+    <string name="txtKITSPersonalizado">KIT personalizado</string>
+    <string name="txtQueProdcutosConforman">¿Qué productos conforman tu kit?</string>
+    <string name="txtEscogerKIT">Escoger el KIT</string>
+    <string name="txtConfirmar">Confirmar</string>
+    <string name="txtAtras">Atras</string>
+    <string name="txtAplicarDescuento">Aplicar descuento</string>
+    <string name="txtEscogeMedidas">Escoge tus medidas</string>
+    <string name="txtTerminarKIT">Terminar KIT y añadir al carrito</string>
+    <string name="txtGuiaTallas">Guia de tallas</string>
+    <string name="txtMedidasTalla">Medidas</string>
+    <string name="txtPersonalizarTalla">Personalizada</string>
+    <string name="txtEscogeTalla">Escoger talla </string>
+    <string name="txtBusqueda">Busqueda</string>
+    <string name="txtNoResultados">Resultados entrontrados  </string>
+
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="txtLimpiar">Limpiar</string>
+    <string name="txtGuardar">Guardar</string>
+    <string name="txtEtiqeutasAsociadas">Etiquetas asociadas</string>
+
+    <string name="txtRecuperarContrasenia">Recuperar contraseña</string>
+    <string name="txtIngreseEmailRecuperar">Se enviará un correo para  recuperar la contraseña</string>
+    <string name="txtEnviar">Enviar correo</string>
+    <string name="txtEmailRecuperar">Ingrese el correo eléctronico</string>
+    <string name="Terminos1">1.  Estos Términos  y  Condiciones  de  Uso  regulan  las  reglas  a  que  se  sujeta  la  utilización  de  la   APP MascotApp
+        (en  adelante,  la  APP),  que  puede  descargarse  desde  el dominio .<b>SofTec</b>  La  descarga  o  utilización  de  la  APP  atribuye
+        la  condición  de  Usuario  a  quien  lo  haga  e implica  la  aceptación  de  todas las  condiciones  incluidas  en  este   documento
+        y  en  la  Política  de  Privacidad  y  el Aviso  Legal  de  dicha  página  Web.  El Usuario  debería  leer  estas condiciones  cada
+        vez  que  utilice  la  APP,  ya  que  podrían  ser   modificadas  en  lo  sucesivo.
+        <br />
+        <br /></string>
+    <string name="Terminos2">
+        2.  Únicamente los  Usuarios  expresamente autorizados
+        por  <b>SofTec</b> podrán  acceder  a  la   descarga  y  uso  de  la  APP.  Los  Usuarios  que  no  dispongan  de  autorización,  no
+        podrán  acceder   a  dicho contenido.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos3">
+        3.  Cargos:  eres  responsable  del pago  de  todos  los  costes  o  gastos  en  los  que  incurras
+        como  resultado  de descargar  y  usar  la  Aplicación  de  <b>SofTec</b>,  incluido  cualquier  cargo  de  red  de  operador  o
+        itinerancia.  Consulta  con  tu  proveedor  de  servicios  los  detalles  al respecto.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos4">
+        4.  Estadísticas anónimas: <b>SofTec</b>  se
+        reserva  el derecho  a  realizar  un  seguimiento  de  tu actividad  en  la  Aplicación  de  y  a  informar  de  ello  a  nuestros
+        proveedores  de  servicios  estadísticos  de terceros.  Todo  ello  de  forma  anónima.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos5">
+        5.  Protección  de  tu  información  personal:
+        queremos  ayudarte a  llevar  a  cabo  todos  los  pasos  necesarios para  proteger  tu  privacidad  e información.  Consulta  la
+        Política  de  privacidad  de  <b>SofTec</b> y  los avisos  sobre  privacidad  de  la  Aplicación  para  conocer  qué  tipo  de
+        información  recopilamos  y  las medidas que  tomamos  para  proteger  tu  información  personal.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos6">
+        6.  Queda  prohibido  alterar  o
+        modificar  ninguna  parte de  la  APP  a  de  los  contenidas de  la   misma,  eludir, desactivar  o  manipular  de  cualquier  otra
+        forma  (o  tratar  de  eludir,  desactivar  o   manipular)  las funciones  de  seguridad  u  otras  funciones  del programa  y
+        utilizar  la  APP  o  sus  contenidos  para  un  fin comercial o  publicitario.  Queda  prohibido  el uso  de  la  APP  con  la
+        finalidad  de  lesionar  bienes, derechos  o  intereses  de   <b>SofTec</b> o  de  terceros.  Queda  igualmente prohibido  realizar
+        cualquier  otro  uso  que  altere,  dañe  o   inutilice  las  redes,  servidores,  equipos,  productos  y  programas informáticos
+        de  <b>SofTec</b> o  de   terceros.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos7">
+        7.  La APP  y  sus  contenidos  (textos,  fotografías,  gráficos,  imágenes,  tecnología,  software,
+        links,   contenidos,  diseño  gráfico,  código  fuente,  etc.),  así como  las  marcas  y  demás  signos  distintivos  son propiedad
+        de  <b>SofTec</b> o  de  terceros,  no  adquiriendo  el Usuario  ningún  derecho  sobre  ellos  por  el mero  uso  de  la  APP.  El
+        Usuario,  deberá  abstenerse  de:   a)  Reproducir,  copiar,  distribuir,  poner  a  disposición  de   terceros,  comunicar
+        públicamente, transformar  o  modificar  la  APP  o  sus contenidos,  salvo  en   los  casos  contemplados  en  la  ley  o
+        expresamente  autorizados  por  <b>SofTec</b> o  por  el titular  de   dichos  derechos. b)  Reproducir o  copiar  para  uso
+        privado  la  APP  o  sus contenidos,  así como   comunicarlos públicamente o  ponerlos  a  disposición  de  terceros  cuando
+        ello  conlleve  su   reproducción. c)  Extraer  o  reutilizar  todo  o  parte sustancial de  los  contenidos  integrantes  de  la
+        APP.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos8">
+        8.  Con sujeción  a  las  condiciones  establecidas  en  el apartado  anterior,  <b>SofTec</b> concede  al Usuario  una   licencia
+        de  uso  de  la  APP,  no  exclusiva,  gratuita,  para  uso  personal,  circunscrita  al territorio  nacional   y
+        con  carácter indefinido.  Dicha  licencia  se  concede  también  en  los  mismos términos  con  respecto  a   las
+        actualizaciones  y  mejoras  que  se  realizasen  en  la  aplicación.  Dichas licencias  de  uso  podrán  ser   revocadas por
+        <b>SofTec</b>  unilateralmente  en  cualquier  momento, mediante la  mera  notificación  al Usuario.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos9">
+        9.  Corresponde  al Usuario,
+        en  todo  caso,  disponer  de  herramientas  adecuadas para  la   detección  y desinfección  de  programas  maliciosos  o  cualquier
+        otro  elemento  informático   dañino. <b>SofTec</b> no  se  responsabiliza  de  los  daños  producidos  a  equipos  informáticos
+        durante el   uso de  la  APP.  Igualmente,  <b>SofTec</b> no  será  responsable  de  los  daños  producidos  a  los  Usuarios  cuando
+        dichos  daños  tengan  su  origen  en  fallos  o  desconexiones  en  las  redes  de   telecomunicaciones que  interrumpan  el servicio.
+        <br />
+        <br />
+    </string>
+    <string name="Terminos10">
+        10.  IMPORTANTE: Podemos,  sin  que  esto  suponga  ninguna  obligación  contigo,  modificar  estas Condiciones  de  uso  sin  avisar
+        en  cualquier  momento.  Si continúas utilizando  la  aplicación  una  vez realizada  cualquier  modificación  en  estas  Condiciones
+        de  uso,  esa  utilización  continuada  constituirá  la aceptación  por  tu  parte de  tales  modificaciones.  Si no  aceptas  estas
+        condiciones  de  uso  ni  aceptas quedar  sujeto  a  ellas,  no  debes  utilizar  la  aplicación  ni descargar  o  utilizar  cualquier
+        software relacionado.  El uso  que  hagas  de  la  aplicación  queda  bajo  tu  única  responsabilidad.  No  tenemos responsabilidad
+        alguna  por  la  eliminación  o  la  incapacidad  de  almacenar  o  trasmitir  cualquier contenido  u  otra  información  mantenida  o
+        trasmitida  por  la  aplicación.  No  somos  responsables  de  la precisión  o  la  fiabilidad  de  cualquier  información  o  consejo
+        trasmitidos  a  través  de  la  aplicación. Podemos,  en  cualquier  momento,  limitar  o  interrumpir tu  uso  a  nuestra  única
+        discreción.  Hasta  el máximo  que  permite la  ley,  en  ningún  caso  seremos  responsables  por  cualquier  pérdida  o
+        daño relacionados. 11.  El Usuario  se  compromete a  hacer un  uso  correcto  de  la  APP,  de  conformidad  con  la  Ley,
+        con   los presentes  Términos  y  Condiciones  de  Uso  y  con  las  demás  reglamentos  e instrucciones  que,  en   su caso,
+        pudieran  ser  de  aplicación  El Usuario  responderá  frente a  <b>SofTec</b> y  frente  a  terceros de   cualesquiera  daños
+        o  perjuicios  que  pudieran  causarse  por  incumplimiento  de  estas  obligaciones. 12.  Estos  Términos  y  Condiciones  de
+        Uso  se  rigen  íntegramente  por  la  legislación  española.  Para  la  resolución  de  cualquier  conflicto  relativo  a  su
+        interpretación  o  aplicación,  el Usuario  se  somete  expresamente  a  la  jurisdicción  de  los  tribunales.
+
+    </string>
+    <string name="Politicas">"De  conformidad  con  el  Reglamento  (UE)  2016/679,  del  Parlamento  Europeo  y  del  Consejo,  de 27  de  abril  de  2016,  relativo  a la  protección  de  las  personas  físicas  en  lo  que  respecta  al  tratamiento  de datos  personales  y  a  la  libre  circulación  de  estos datos  (Reglamento  General  de  Protección  de  Datos  -  RGPD), <b>SofTec</b>,  informa a los  usuarios  de  la aplicación  <b>MascotApp</b>  (en  adelante,  la  Aplicación),  acerca del  tratamiento  de  los  datos  personales,  que  ellos voluntariamente hayan  facilitado  durante  el  proceso  de  registro,acceso  y  utilización  del  servicio. "</string>
+    <string name="identificacion">"<b>SofTec</b>,  con  CIF/NIF  nº:  SOFTEC0918R23  y  domicilio  a  efectos  de  notificacionesen: México, Toluca. Metepec, Calle Ext: Lazaro Cardenas #0932,  e  inscrita  en  el  Registro  Mercantil  de Derechos Intelectuales del Autor  Tomo  IV,Folio  AVSD-9876234-112H,  Sección 3ª,  Hoja  972232723 ,  inscripción  ª  (en  adelante,  el  Responsable  del  Tratamiento),es  la  entidad responsable  del  tratamiento  de  los  datos  facilitados  por  los  clientes  de  la  Aplicación  (en  adelante,el/los  Usuario/s). "</string>
+    <string name="finalidad">"Para  proceder  al  registro,  acceso  y  posterior  uso  de  la  Aplicación,  el  Usuario  deberá  facilitar-de  forma  voluntaria-,  datos  de carácter  personal  (esencialmente,  identificativos  y  de  contacto),  los  cuales  seránincorporados  a  soportes  automatizados titularidad  de  <b>SofTec</b> La  recogida,  almacenamiento,  modificación,  estructuracióny  en  su  caso,  eliminación,  de  los  datos  proporcionados  por  los Usuarios,  constituirán  operaciones  de  tratamiento  llevadasa  cabo  por  el  Responsable,  con  la  finalidad  de  garantizar  el correcto  funcionamiento  de  la  Aplicación,  mantener  larelación  de  prestación  de  servicios  y/o  comercial  con  el  Usuario,  y para  la  gestión,  administración,  información,prestación  y  mejora  del  servicio. Los  datos  personales  facilitados  por  el  Usuario  -especialmente,  el  correo  electrónicoo  e-mail-  podrán  emplearse  también para  remitir  boletines  (newsletters),  así  como  comunicaciones  comerciales  de  promociones y/o  publicidad  de  la  Aplicación, siempre  y  cuando,  el  Usuario  haya  prestado  previamente  su  consentimiento  expreso  parala  recepción  de  estas comunicaciones  vía  electrónica. "</string>
+    <string name="legitimidad">"El  tratamiento  de  los  datos  del  Usuario,  se  realiza  con  las  siguientes  bases  jurídicas  que legitiman  el  mismo: •  La solicitud  de  información  y/o  la  contratación  de  los  servicios  de  la  Aplicación,  cuyos  términos  y condiciones  se pondrán  a  disposición  del  Usuario  en  todo  caso,  con  carácter previo,  para  su  expresa  aceptación. •  El consentimiento libre,  específico,  informado  e inequívoco  del  Usuario,  poniendo  a  su  disposición  la  presente política de  privacidad,  que  deberá aceptar  mediante una  declaración  o  una  clara  acción  afirmativa,  como  el  marcado  de  una casilla  dispuesta  al  efecto. En  caso de  que  el  Usuario  no  facilite  a  <b>SofTec</b>  sus  datos,  o  lo  haga  de  forma  errónea  o  incompleta,  no  será  posible proceder al  uso  de  la  Aplicación. "</string>
+    <string name="conservacion">Los  datos  personales  proporcionados  por  el  Usuario,  se  conservarán  en  los  sistemas  y  bases  de  datos  del    Responsable  del Tratamiento,  mientras  aquél  continúe  haciendo  uso  de  la  Aplicación,  y  siempre  que  no  solicite su  supresión. Con  el  objetivo  de depurar  las  posibles  responsabilidades  derivadas  del  tratamiento,  los  datos  se  conservarán  por  un  período mínimo  de  cinco  años.
+    </string>
+    <string name="destinatarios">"Los  datos  no  se  comunicarán  a  ningún  tercero  ajeno  a  <b>SofTec</b>,  salvo  obligación  legal  o  en cualquier  caso,  previa solicitud  del  consentimiento  del  Usuario. De  otra  parte,  <b>SofTec</b>  podrá  dar  acceso  o  transmitirlos  datos  personales  facilitados  por  el  Usuario,  a  terceros proveedores  de  servicios,  con  los  que  haya  suscrito  acuerdos  de encargo  de  tratamiento  de  datos,  y  que  únicamente  accedan a  dicha  información  para  prestar  un  servicio  en  favor  y  por  cuenta del  Responsable. "</string>
+    <string name="retencion">"<b>SofTec</b>,  informa  al  Usuario  de  que,  como  prestador  de  servicio  de  alojamiento  de  datos  y  en  virtud de  lo establecido  en  la  Ley  34/2002  de  11  de  julio  de  Servicios  de  la  Sociedad  de  la  Información  y  de  Comercio  Electrónico (LSSI), retiene  por  un  período  máximo  de  12  meses  la  información  imprescindible  para  identificar  el  origen  de  los  datos  alojados y  el momento  en  que  se  inició  la  prestación  del  servicio. La  retención  de  estos  datos  no  afecta  al  secreto  de  las  comunicaciones y  sólo  podrán  ser  utilizados  en  el  marco  de  una investigación  criminal  o  para  la  salvaguardia  de  la  seguridad  pública,  poniéndose a  disposición  de  los  jueces  y/o  tribunales  o del  Ministerio  que  así  los  requiera. La  comunicación  de  datos  a  las  Fuerzas  y  Cuerpos de  Seguridad  del  Estado,  se  hará  en  virtud  de  lo  dispuesto  por  la  normativa sobre  protección  de  datos  personales,  y  bajo  el máximo  respeto  a  la  misma. "</string>
+    <string name="proteccion">"El  Responsable  del  Tratamiento,  adopta  las  medidas  necesarias  para  garantizar  la  seguridad,  integridad  y confidencialidad  de los  datos  conforme  a  lo  dispuesto  en  el  Reglamento  (UE)  2016/679  del  Parlamento  Europeo  y  del  Consejo, de  27  de  abril  de 2016,  relativo  a  la  protección  de  las  personas  físicas  en  lo  que  respecta  al  tratamiento  de  datos personales  y  a  la  libre circulación  de  los  mismos. Si  bien  el  Responsable,  realiza  copias  de  seguridad  de  los  contenidos alojados  en  sus  servidores,  sin  embargo  no  se responsabiliza  de  la  pérdida  o  el  borrado  accidental  de  los  datos  por  parte  de  los  Usuarios.  Deigual  manera,  no  garantiza  la reposición  total  de  los  datos  borrados  por  los  Usuarios,  ya  que  los  citados  datos  podrían  haber  sido  suprimidos y/o modificados  durante el  periodo  de  tiempo  transcurrido  desde  la  última  copia  de  seguridad. Los  servicios  facilitados  o  prestados  a  través  de la  Aplicación,  excepto  los  servicios  específicos  de  backup,  no  incluyen  la reposición  de  los  contenidos  conservados  en  las  copias  de  seguridad realizadas  por  el  Responsable  del  Tratamiento,  cuando esta  pérdida  sea  imputable  al  usuario;  en  este  caso,  se  determinará  una  tarifa  acorde  a la  complejidad  y  volumen  de  la recuperación,  siempre  previa  aceptación  del  usuario.  La  reposición  de  datos  borrados  sólo  está  incluida  en  el precio  del servicio  cuando  la  pérdida  del  contenido  sea  debida  a  causas atribuibles  al  Responsable. "</string>
+    <string name="ejercicio">"<b>SofTec</b>,  informa  al  Usuario  de  que  le  asisten  los  derechos  de  acceso,  rectificación,  limitación, supresión,  oposición y  portabilidad,  los  cuales  podrá  ejercitar  mediante petición  dirigida  al    correo  electrónico:  softecCorporation@softec.com.mx. Asimismo, el  Usuario  tiene  derecho  a  revocar  el  consentimiento  inicialmente  prestado,  y  a  interponer  reclamaciones  de derechos  frente a  la  Agencia  Española de  Protección  de  Datos  (AEPD). "</string>
+    <string name="comunicaciones">"En  aplicación  de  la  LSSI  (Ley  de  Servicios  de  la  Sociedad  de  la  Información),  <b>SofTec</b>,  no enviará  comunicaciones publicitarias  o  promocionales  por  correo  electrónico  u  otro  medio  de  comunicación  electrónica  equivalente que  previamente no  hubieran  sido  solicitadas o  expresamente  autorizadas por  los  destinatarios  de  las  mismas. En  el  caso  de usuarios  con  los  que  exista  una  relación  contractual,  jurídica  o  de  servicios  previa,  el  Responsable  del Tratamiento,  sí  está autorizado  al  envío  de  comunicaciones  comerciales  referentes  a  productos  o  servicios  del  Responsable que  sean  similares  a  los que  inicialmente  fueron  objeto  de  contratación  con  el  cliente. En  caso  de  que  el  Usuario  quiera  darse  de  baja  a  la  hora  de recibir  las  citadas  comunicaciones,  podrá  hacerlo  remitiendo  su voluntad  por  e-mail  al  correo  electrónico:  softecCorporation@softec.com.mx. "</string>
+    <string name="txtPhone">Teléfono</string>
+
+
+    <string name="web_client_id">760810468991-kbdj8jiee1kl6stajjrqoc69bql1qdva.apps.googleusercontent.com</string>
+    <string name="title_activity_nav_cliente">NavClienteActivity</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>

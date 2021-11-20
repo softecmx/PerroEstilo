@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "668008391957",
+    "firebase_url": "https://perroestiloapp-default-rtdb.firebaseio.com",
+    "project_id": "perroestiloapp",
+    "storage_bucket": "perroestiloapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668008391957:android:2aae0ab8feb2a9b040f51c",
+        "android_client_info": {
+          "package_name": "com.example.perroestilopfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668008391957-rcc807j6ujvk5kdqsr857i3cqecf509e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.perroestilopfinal",
+            "certificate_hash": "2e6747ea883231d18973851f14e51bef5abaa00c"
+          }
+        },
+        {
+          "client_id": "668008391957-b5p7kepsr39pbk2cmvluj813s695b3q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp4Cy4I2fbn9w73MlfyjGrM6jhu6VQFHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668008391957-b5p7kepsr39pbk2cmvluj813s695b3q3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668008391957:android:a340af4513c3ab3c40f51c",
+        "android_client_info": {
+          "package_name": "com.programacion.perroestilocliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668008391957-dq8stnrkrjjbkesnsacpisddpmucick0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.programacion.perroestilocliente",
+            "certificate_hash": "32d34a2adec211b6ab58ac81c1b728094607d75c"
+          }
+        },
+        {
+          "client_id": "668008391957-b5p7kepsr39pbk2cmvluj813s695b3q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp4Cy4I2fbn9w73MlfyjGrM6jhu6VQFHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668008391957-b5p7kepsr39pbk2cmvluj813s695b3q3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

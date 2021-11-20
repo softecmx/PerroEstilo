@@ -1,0 +1,38 @@
+package com.programacion.perroestilocliente.ui.cliente.comprar.comprarAhora;
+
+import androidx.lifecycle.ViewModelProvider;
+
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.programacion.perroestilocliente.R;
+
+public class ComprarAhoraFragment extends Fragment {
+
+    private ComprarAhoraViewModel mViewModel;
+
+    public static ComprarAhoraFragment newInstance() {
+        return new ComprarAhoraFragment();
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_comprar_ahora, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(ComprarAhoraViewModel.class);
+        // TODO: Use the ViewModel
+    }
+
+}
