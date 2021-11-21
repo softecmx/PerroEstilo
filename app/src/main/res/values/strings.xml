@@ -394,9 +394,27 @@
     <string name="txtPhone">Teléfono</string>
 
 
-    <string name="web_client_id">760810468991-kbdj8jiee1kl6stajjrqoc69bql1qdva.apps.googleusercontent.com</string>
+    <string name="web_client_id">668008391957-b5p7kepsr39pbk2cmvluj813s695b3q3.apps.googleusercontent.com</string>
     <string name="title_activity_nav_cliente">NavClienteActivity</string>
 
+
+    <string name="menu_inicio_cliente">Inicio</string>
+    <string name="menu_tienda">Tienda</string>
+    <string name="menu_categoria">Categorías</string>
+    <string name="menu_producto">Productos</string>
+    <string name="menu_kits">KITS</string>
+    <string name="menu_mis_kits">Mis kits</string>
+    <string name="menu_mis_direcciones">Mis direcciones</string>
+    <string name="menu_mis_pedidos">Mis pedidos</string>
+    <string name="menu_mi_cuenta">Mi cuenta</string>
+    <string name="menu_sobre_nosotros">Sobre nosotros</string>
+    <string name="menu_ayuda">Ayuda</string>
+    <string name="menu_acerca_app">Acerca de la aplicacion</string>
+    <string name="menu_politicas_privacidad">Políticas de privacidad</string>
+    <string name="menu_ajustes">Ajustes y configuraciones</string>
+    <string name="menu_cerrar_session">Cerrar sessión</string>
+    <string name="txtAceptar">Aceptar</string>
+</resources>
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
