@@ -42,7 +42,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class NavAdministradorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    Toolbar toolbar;
     private int lastExpandedPosition = -1;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
@@ -55,8 +55,10 @@ public class NavAdministradorActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_administrador);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Inicio");
+       // getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         expandableListView = findViewById(R.id.expandableListView);
         prepareMenuData();
@@ -78,6 +80,8 @@ public class NavAdministradorActivity extends AppCompatActivity
         transaction.replace(R.id.container, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
+        toolbar.setTitle("Inicio");
 
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
@@ -175,27 +179,7 @@ public class NavAdministradorActivity extends AppCompatActivity
             childList.put(menuModel, childModelsList);
         }
 
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Modelos", true, true, "",R.drawable.ic_slideshow_black_24dp); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Agregar modelo", false, false, "",R.drawable.ic_add_black_24dp);
-        childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modificar modelo", false, false, "",R.drawable.ic_edit_black_24dp);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Buscar modelos", false, false, "",R.drawable.ic_search_black_24dp);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Consultar modelo", false, false, "",R.drawable.ic_list_black_24dp);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Eliminar modelos", false, false, "",R.drawable.ic_delete_forever_black_24dp);
-        childModelsList.add(childModel);
-
-        if (menuModel.hasChildren) {
-            childList.put(menuModel, childModelsList);
-        }
         menuModel = new MenuModel("Diseños", true, false, "",R.drawable.ic_baseline_style_24); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
@@ -354,6 +338,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.replace(R.id.container, newFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
+                                toolbar.setTitle("Inicio");
                                 break;
                             case "Tallas":
                                 com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment newFragment1= new com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment();
@@ -363,6 +348,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.replace(R.id.container, newFragment1);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
+                                toolbar.setTitle("Tallas");
                                 break;
                             case "Inventario":
                                 com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment2= new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
@@ -372,6 +358,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.replace(R.id.container, newFragment2);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
+                                toolbar.setTitle("Inventario");
                                 break;
                             case "Ventas":
                                 com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment frag= new com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment();
@@ -381,6 +368,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.replace(R.id.container, frag);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
+                                toolbar.setTitle("Ventas");
                                 break;
                             case "Cuenta":
                                 com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment frag1= new com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment();
@@ -390,6 +378,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.replace(R.id.container, frag1);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
+                                toolbar.setTitle("Cuenta");
                                 break;
                             case "Ajustes":
                                 com.programacion.perroestilocliente.ui.ajustes.AjustesFragment frag2= new com.programacion.perroestilocliente.ui.ajustes.AjustesFragment();
@@ -399,6 +388,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.replace(R.id.container, frag2);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
+                                toolbar.setTitle("Ajustes");
                                 break;
 
                             case "Diseños":
@@ -409,6 +399,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.replace(R.id.container, frag3);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
+                                toolbar.setTitle("Diseños");
                                 break;
                         }
                         onBackPressed();
@@ -434,6 +425,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Agregar categoría");
                             break;
                         case "Modifica categoría":
                             com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment newFragment1= new com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment();
@@ -443,6 +435,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment1);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Modificar categoría");
                             break;
                         case "Buscar categoría":
                             com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment newFragment2= new com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment();
@@ -452,6 +445,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment2);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Buscar categoría");
                             break;
                         case "Consultar categoría":
                             com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment newFragment3= new com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment();
@@ -461,6 +455,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment3);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Consultar categorías");
                             break;
                         case "Eliminar categoría":
                             com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment newFragment4= new com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment();
@@ -470,6 +465,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment4);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Eliminar categoría");
                             break;
                         case "Agregar productos":
                             com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment newFragment5= new com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment();
@@ -479,6 +475,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment5);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Agregar productos");
                             break;
                         case "Modificar productos":
                             com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment newFragment6= new com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment();
@@ -488,6 +485,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment6);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Modificar productos");
                             break;
                         case "Buscar productos":
                             com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment newFragment7= new com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment();
@@ -497,6 +495,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment7);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Buscar productos");
                             break;
                         case "Consultar productos":
                             com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment newFragment8= new com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment();
@@ -506,6 +505,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment8);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Consultar productos");
                             break;
                         case "Eliminar productos":
                             com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment newFragment9= new com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment();
@@ -515,6 +515,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment9);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Eliminar productos");
                             break;
                         case "Crear kits":
                             com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment newFragment10= new com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment();
@@ -524,6 +525,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment10);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Crear kit");
                             break;
                         case "Modificar kits":
                             com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment newFragment11= new com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment();
@@ -533,6 +535,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment11);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Modificar kit");
                             break;
                         case "Buscar kits":
                             com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment newFragment12= new com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment();
@@ -542,6 +545,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment12);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Buscar kit");
                             break;
                         case "Consultar kits":
                             com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment newFragment13= new com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment();
@@ -551,6 +555,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment13);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Consultar kit");
                             break;
                         case "Eliminar kits":
                             com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment newFragment14= new com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment();
@@ -560,6 +565,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment14);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Eliminar kit");
                             break;
                         case "Inventario":
                             com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment15= new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
@@ -569,6 +575,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment15);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Inventario");
                             break;
                         case "Crear pedidos":
                             com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment newFragment16= new com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment();
@@ -578,6 +585,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment16);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Crear pedido");
                             break;
                         case "Modificar pedidos":
                             com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment newFragment17= new com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment();
@@ -587,6 +595,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment17);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Modificar pedido");
                             break;
                         case "Buscar pedidos":
                             com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment newFragment18= new com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment();
@@ -596,6 +605,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment18);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Buscar pedido");
                             break;
                         case "Consultar pedidos":
                             com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment newFragment19= new com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment();
@@ -605,6 +615,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment19);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Consultar pedidos");
                             break;
                         case "Cancelar pedidos":
                             com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment newFragment20= new com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment();
@@ -614,6 +625,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment20);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Cancelar pedidos");
                             break;
                         case "Ver envios":
                             com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment newFragment21= new com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment();
@@ -623,6 +635,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment21);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Ver envios");
                             break;
                         case "Ver clientes":
                             com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment newFragment22= new com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment();
@@ -632,6 +645,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment22);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Ver clientes");
                             break;
                         case "Consultar pagos":
                             com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment newFragment23= new com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment();
@@ -641,6 +655,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.replace(R.id.container, newFragment23);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            toolbar.setTitle("Consultar pagos");
                             break;
                     }
                     onBackPressed();
