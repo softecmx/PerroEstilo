@@ -6,6 +6,8 @@ import android.view.Menu;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,7 +16,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.programacion.perroestilocliente.ui.cliente.mainCliente.databinding.ActivityNavClienteBinding;
 
 public class NavClienteActivity extends AppCompatActivity {
 
@@ -29,19 +30,14 @@ public class NavClienteActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarNavCliente.toolbar);
-        binding.appBarNavCliente.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_ajustes,R.id.nav_ayuda,R.id.nav_categoria,R.id.nav_producto,R.id.nav_kits,R.id.nav_mis_kits,
+        R.id.nav_mi_cuenta,R.id.nav_mis_direcciones,R.id.nav_tienda,R.id.nav_sobre_nosotros,R.id.nav_acerca_app,R.id.nav_politicas,R.id.nav_ajustes)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_nav_cliente);

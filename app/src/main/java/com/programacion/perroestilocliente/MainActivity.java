@@ -19,15 +19,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    public  static  String version;
+    public static String version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-            PackageInfo info=getPackageManager().getPackageInfo(getPackageName(), 0);
-            version= String.valueOf(info.versionName);
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+            version = String.valueOf(info.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -46,33 +46,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-              /*  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                GoogleSignInAccount account= GoogleSignIn.getLastSignedInAccount(MainActivity.this);
-                if (user != null&& account!=null) {
-                    Intent intent = new Intent(MainActivity.this, MascotasActivity.class);
-                    startActivity(intent);
-
-                } else {*/
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
+                if (user != null && account != null) {
+                    //checar el nivel de usuario
                     Intent intent = new Intent(MainActivity.this, NavAdministradorActivity.class);
-              /*  Pair[] pairs=new Pair[1];
-                pairs[0]=new Pair<View,String>(logo,"logoImageTrans");
-                pairs[1]=new Pair<View,String>(title,"textTrans");
-
-                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
-                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
-                    startActivity(intent,options.toBundle());
-                }else{
                     startActivity(intent);
-                }*/
+                } else {
+                    Intent intent = new Intent(MainActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
                     startActivity(intent);
-
-                    //startActivity(intent);
-                //}
+                }
                 finish();
-
-
             }
         }, 3000);
-
     }
 }
