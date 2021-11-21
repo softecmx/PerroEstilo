@@ -6,18 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.cliente.inicio.HomeClienteFragment"
     android:fillViewport="true">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,12 +42,9 @@
                         android:layout_height="wrap_content"
                         android:hint="Buscar"
                         android:inputType="text" />
-
                 </com.google.android.material.textfield.TextInputLayout>
-
             </LinearLayout>
         </LinearLayout>
-
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carruselInicio"
             android:layout_width="match_parent"
@@ -68,56 +61,8 @@
             app:showNavigationButtons="false"
             />
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            </LinearLayout>
-        </HorizontalScrollView>
-        <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </GridLayout>
-
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel4"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            android:translationZ="8dp"
-            app:autoPlay="true"
-            app:autoPlayDelay="4000"
-            app:carouselGravity="CENTER"
-            app:carouselPaddingBottom="8dp"
-            app:carouselPaddingTop="8dp"
-            app:carouselType="SHOWCASE"
-            app:imageScaleType="centerCrop"
-            app:scaleOnScroll="true"
-            app:scalingFactor=".25"
-            app:showBottomShadow="false"
-            app:showCaption="false"
-            app:showIndicator="false"
-            app:showNavigationButtons="false"
-            app:showTopShadow="false"  />
-
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carruselComentarios"
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            app:autoPlay="true"
-            app:autoPlayDelay="3000"
-            app:showNavigationButtons="false" />
-
-
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel6"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="16dp"
@@ -129,15 +74,66 @@
             app:showCaption="false"
             app:showIndicator="false"
             app:showNavigationButtons="false"
-            app:showTopShadow="false" />
-
+            app:showTopShadow="false"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/gray_400"
             >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp">
+                <ImageView
+                    android:id="@+id/iBtnRedFace"
+                    android:layout_width="24dp"
+                    android:src="@drawable/facebook"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/txtDescImg"
+                    />
+                <ImageView
+                    android:id="@+id/iBtnRedInsta"
+                    android:layout_width="24dp"
+                    android:src="@drawable/instagram"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:contentDescription="@string/txtDescImg"
+                    />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:src="@drawable/youtube"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:contentDescription="@string/txtDescImg"
+                    />
+                <ImageView
+                    android:id="@+id/iBtnRedGit"
+                    android:layout_width="24dp"
+                    android:src="@drawable/github"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/txtDescImg"
+                    />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:src="@drawable/gmail"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:contentDescription="@string/txtDescImg"
+                    />
 
+
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,9 +142,5 @@
                 android:textColor="@color/black"
                 android:textSize="12sp" />
         </LinearLayout>
-
     </LinearLayout>
-
-
-
 </ScrollView>

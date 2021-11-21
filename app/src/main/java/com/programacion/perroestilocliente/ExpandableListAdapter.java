@@ -59,6 +59,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }else{
             imageView.setImageResource(childImg);
         }
+        imageView.setColorFilter(R.color.black);
         txtListChild.setText(childText);
         return convertView;
     }
@@ -110,6 +111,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }else{
             imgVi.setImageResource(imgGroup);
         }
+        imgVi.setColorFilter(R.color.black);
         return convertView;
     }
 
