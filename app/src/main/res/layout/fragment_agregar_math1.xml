@@ -3,11 +3,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.matchs.crearMatch.CrearMath1Fragment">
 
-    <TextView
+    <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/prodkit"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="outline"
+            android:layout_marginTop="15dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:endIconMode="clear_text">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAKnom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nomkit"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <FrameLayout
+            android:id="@+id/flAK"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnckConfitma"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/confirmar" />
+            <Button
+                android:id="@+id/btnCKatras"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/atras" />
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/BtnCKCam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_add_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imvCCimg"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/pink_200"/>
+    </LinearLayout>
 </FrameLayout>
