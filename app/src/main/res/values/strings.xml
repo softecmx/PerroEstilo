@@ -452,6 +452,7 @@
     <string name="web_client_id">668008391957-b5p7kepsr39pbk2cmvluj813s695b3q3.apps.googleusercontent.com</string>
     <string name="title_activity_nav_cliente">NavClienteActivity</string>
 
+
     <string name="menu_inicio_cliente">Inicio</string>
     <string name="menu_tienda">Tienda</string>
     <string name="menu_categoria">Categorías</string>
@@ -468,4 +469,21 @@
     <string name="menu_ajustes">Ajustes y configuraciones</string>
     <string name="menu_cerrar_session">Cerrar sessión</string>
     <string name="txtAceptar">Aceptar</string>
+</resources>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="bienvenidaAdmin">¡Bienvenida Rousse!</string>
+    <string name="title_inicio_Admin">Inicio</string>
+    <string name="cantidadInicioAPedidos">10,293</string>
+    <string name="txtInicioAPedidos">Pedidos</string>
+    <string name="cantidadInicioAProductos">2,030</string>
+    <string name="txtInicioAProductos">Productos</string>
+    <string name="cantidadInicioAVentas">212,310</string>
+    <string name="txtInicioAVentas">Ventas</string>
+    <string name="cantidadInicioAClientes">4,000</string>
+    <string name="txtInicioAClientes">Clientes</string>
+    <string name="txtInicioANuevosPedidos">Mira los nuevos pedidos ... (5)</string>
+    <string name="txtInicioAPocasExistencias">Productos con pocas existencias ...(2)</string>
 </resources>
