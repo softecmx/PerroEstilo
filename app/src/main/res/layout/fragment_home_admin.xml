@@ -214,12 +214,6 @@
                     android:textStyle="bold" />
 
             </RelativeLayout>
-                <fragment
-                    android:name="com.programacion.perroestilocliente.ListaNuevosPedidosInicioAdminFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_weight="1">
-                </fragment>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
@@ -250,12 +244,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
-                <fragment
-                    android:name="com.programacion.perroestilocliente.ListaPocasExistenciasInicioAdminFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_weight="1">
-                </fragment>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
