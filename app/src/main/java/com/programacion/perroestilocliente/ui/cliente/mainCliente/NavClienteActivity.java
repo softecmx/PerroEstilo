@@ -14,7 +14,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.programacion.perroestilocliente.ui.cliente.mainCliente.databinding.ActivityNavClienteBinding;
+import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
+import com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity;
 
 public class NavClienteActivity extends AppCompatActivity {
 

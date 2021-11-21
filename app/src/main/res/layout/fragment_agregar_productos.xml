@@ -27,7 +27,7 @@
                 android:contentDescription="@string/txtDescImg"
                 android:outlineAmbientShadowColor="@color/black"
                 android:outlineSpotShadowColor="@color/black"
-                android:src="@drawable/monio1"
+                android:src="@drawable/no_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -45,24 +45,54 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundMode="outline"
-            android:layout_marginTop="15dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:endIconMode="clear_text">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editAddProdNombre"
+            app:boxCornerRadiusTopStart="10dp">
+            <AutoCompleteTextView
+                android:id="@+id/spinAPcategoria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txtNombreProducto"
-                android:inputType="text" />
+                android:hint="@string/admnAgreagCategor"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+            <AutoCompleteTextView
+                android:id="@+id/spinAPdisenio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/adminAPdisenio"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+            <AutoCompleteTextView
+                android:id="@+id/spinAPtalla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/adminAPtalla"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -82,111 +112,93 @@
                 android:hint="@string/txtDescripcion"
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:layout_marginTop="20dp"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:endIconMode="clear_text">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAPCosProd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:boxBackgroundMode="outline"
-
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:endIconMode="clear_text"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editBuscaElimID"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/txtEtiqeutasAsociadas"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageButton
-                android:id="@+id/iBtnAddProdAddEtiqueta"
-                android:layout_width="109dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:elevation="4dp"
-                android:backgroundTint="@color/pink_200"
-                android:contentDescription="@string/txtDescripcion"
-                app:srcCompat="@drawable/ic_add_black_24dp" />
-        </LinearLayout>
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupAddProd"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+                android:ems="10"
+                android:background="@android:color/transparent"
+                android:hint="@string/costoProd"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:singleSelection="true"
-
-            android:outlineSpotShadowColor="@color/pink_300">
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:endIconMode="clear_text">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAPPrecProd"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Etiqueta1"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/flat_grey_dark_2"/>
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
+                android:ems="10"
+                android:background="@android:color/transparent"
+                android:hint="@string/precioProd"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:endIconMode="clear_text">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAPDesc"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Etiqueta 2"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/flat_blue_1"/>
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
+                android:ems="10"
+                android:background="@android:color/transparent"
+                android:hint="@string/descuento"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:endIconMode="clear_text">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAPStock"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Etiqueta 3"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/flat_green_2"/>
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
+                android:ems="10"
+                android:background="@android:color/transparent"
+                android:hint="@string/stock"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+            <AutoCompleteTextView
+                android:id="@+id/spinAPstatus"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Etiqueta 2"
-                android:textColor="@color/black"
-                app:chipBackgroundColor="@color/flat_yellow_1"/>
+                android:hint="@string/status"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Etiqueta Larga 1"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/flat_orange_2"/>
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Etiqueta Larga 1"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/flat_pink_2"/>
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Etiqueta 2"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/success"/>
 
-        </com.google.android.material.chip.ChipGroup>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp">
+            <Button
+                android:id="@+id/btnAddProdAgregar"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtAgregar" />
 
             <Button
                 android:id="@+id/btnAddProdLimpiar"
@@ -195,23 +207,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/txtLimpiar" />
-
-            <Button
-                android:id="@+id/btnAddProdAgregar"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/txtAgregar" />
-            <Button
-                android:id="@+id/btnAddProdCancelar"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/txtCancelar" />
-
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

@@ -265,6 +265,61 @@
     <string name="txtBusqueda">Busqueda</string>
     <string name="txtNoResultados">Resultados entrontrados  </string>
 
+    <!-- Productos-->
+
+    <string name="admnAgreagCategor">Categoría</string>
+    <string name="adminAPdisenio">Diseño</string>
+    <string name="adminAPtalla">Talla</string>
+
+    <string name="costoProd">Costo del producto $</string>
+    <string name="precioProd">Precio al público $</string>
+    <string name="descuento">Descuento %</string>
+    <string name="stock">Stock</string>
+    <string name="status">Estatus</string>
+    <string name="crear">Crear</string>
+    <string name="limpiar">Limpiar</string>
+
+
+    <string name="idmodifCod">Ingrese el código a modificar</string>
+    <string name="idBuscCod">Ingrese el código a buscar</string>
+    <string name="idFiltraCod">Ingrese el código a filtrar</string>
+    <string name="reempMod">Reemplazar modelo por</string>
+    <string name="idElimCod">Ingrese el código a eliminar</string>
+    <string name="reemplTall">Reemplazar talla por</string>
+    <string name="Modificar">Modificar</string>
+    <string name="eliminar">Eliminar</string>
+
+
+    <string name="rating">Raiting:</string>
+    <string name="categoria">Categoria:</string>
+    <string name="dise">Diseño:</string>
+    <string name="tall">Talla:</string>
+    <string name="cost">Costo:</string>
+    <string name="preci">Precio:</string>
+    <string name="descu">Descuento:</string>
+    <string name="stoc">Stock:</string>
+    <string name="sta">Estatus:</string>
+    <string name="cod">Código:</string>
+    <string name="mod">Modelo:</string>
+    <string name="desc">Descripción:</string>
+
+    <!-- KIts -->
+    <string name="prodkit">¿Qué productos conforman el kit?</string>
+    <string name="nomkit">Nombre del kit</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="atras">Atrás</string>
+    <string name="escogeDisenio">\nEscoge el diseño</string>
+    <string name="pEstim">Precio estimado $$$</string>
+    <string name="precio">Precio</string>
+    <string name="creaKit">Crear Kit</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="idKit">Ingrese el Id del Kit</string>
+
+
+    <string name="agregaTalla">Agregar talla</string>
+    <string name="buscaModelo">Buscar modelo</string>
+
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>

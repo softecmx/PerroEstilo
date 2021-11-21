@@ -12,8 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.programacion.perroestilocliente.ui.cliente.mainCliente.R;
-import com.programacion.perroestilocliente.ui.cliente.mainCliente.databinding.FragmentGalleryBinding;
+import com.programacion.perroestilocliente.databinding.FragmentGalleryBinding;
 
 public class GalleryFragment extends Fragment {
 
