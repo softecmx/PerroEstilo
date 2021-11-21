@@ -65,7 +65,8 @@
             app:topShadowHeight="0dp"
             app:autoPlayDelay="3000"
             app:imageScaleType="centerCrop"
-            app:showNavigationButtons="false" />
+            app:showNavigationButtons="false"
+            />
 
         <HorizontalScrollView
             android:layout_width="match_parent"

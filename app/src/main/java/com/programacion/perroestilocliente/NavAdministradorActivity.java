@@ -43,7 +43,7 @@ import androidx.appcompat.widget.Toolbar;
 public class NavAdministradorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private int lastExpandedPosition = -1;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
@@ -70,6 +70,25 @@ public class NavAdministradorActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
+        Bundle args = new Bundle();
+        newFragment.setArguments(args);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
+                    expandableListView.collapseGroup(lastExpandedPosition);
+                }
+                lastExpandedPosition = groupPosition;
+            }
+        });
+
     }
 
     @Override
@@ -126,29 +145,29 @@ public class NavAdministradorActivity extends AppCompatActivity
 
     private void prepareMenuData() {
 
-        MenuModel menuModel = new MenuModel("Inicio", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        MenuModel menuModel = new MenuModel("Inicio", true, false, "",R.drawable.ic_home_black_24dp); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
             childList.put(menuModel, null);
         }
 
-        menuModel = new MenuModel("Categorías", true, true, "",""); //Menu of Java Tutorials
+        menuModel = new MenuModel("Categorías", true, true, "",R.drawable.ic_menu_slideshow); //Menu of Java Tutorials
         headerList.add(menuModel);
         List<MenuModel> childModelsList = new ArrayList<>();
-        MenuModel childModel = new MenuModel("Agregar categoría", false, false, "Agrega producto","");
+        MenuModel childModel = new MenuModel("Agregar categoría", false, false, "Agrega producto",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modifica categoría", false, false, "","");
+        childModel = new MenuModel("Modifica categoría", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Buscar categoría", false, false, "","");
+        childModel = new MenuModel("Buscar categoría", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar categoría", false, false, "","");
+        childModel = new MenuModel("Consultar categoría", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Eliminar categoría", false, false, "","");
+        childModel = new MenuModel("Eliminar categoría", false, false, "",0);
         childModelsList.add(childModel);
 
 
@@ -157,84 +176,33 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Modelos", true, true, "",""); //Menu of Python Tutorials
+        menuModel = new MenuModel("Modelos", true, true, "",R.drawable.ic_slideshow_black_24dp); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Agregar modelo", false, false, "","");
+        childModel = new MenuModel("Agregar modelo", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modificar modelo", false, false, "","");
+        childModel = new MenuModel("Modificar modelo", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Buscar modelos", false, false, "","");
+        childModel = new MenuModel("Buscar modelos", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar modelo", false, false, "","");
+        childModel = new MenuModel("Consultar modelo", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Eliminar modelos", false, false, "","");
+        childModel = new MenuModel("Eliminar modelos", false, false, "",0);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
-        menuModel = new MenuModel("Diseños", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Diseños", true, false, "",0); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
             childList.put(childModel, null);
         }
-        menuModel = new MenuModel("Tallas", true, false, "",""); //Menu of Android Tutorial. No sub menus
-        headerList.add(menuModel);
-
-        if (!menuModel.hasChildren) {
-            childList.put(childModel, null);
-        }
-
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Productos", true, true, "",""); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Agregar productos", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Modificar productos", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Buscar productos", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Consultar productos", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Eliminar productos", false, false, "","");
-        childModelsList.add(childModel);
-
-        if (menuModel.hasChildren) {
-            childList.put(menuModel, childModelsList);
-        }
-
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Kits", true, true, "",""); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Crear kits", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Modificar kits", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Buscar kits", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Consultar kits", false, false, "","");
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Eliminar kits", false, false, "","");
-        childModelsList.add(childModel);
-
-        if (menuModel.hasChildren) {
-            childList.put(menuModel, childModelsList);
-        }
-
-        menuModel = new MenuModel("Inventario", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Tallas", true, false, "",0); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -242,48 +210,50 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Pagos", true, true, "",""); //Menu of Python Tutorials
+        menuModel = new MenuModel("Productos", true, true, "",0); //Menu of Python Tutorials
         headerList.add(menuModel);
-
-        childModel = new MenuModel("Consultar pagos", false, false, "","");
+        childModel = new MenuModel("Agregar productos", false, false, "",0);
         childModelsList.add(childModel);
 
-        if (menuModel.hasChildren) {
-            childList.put(menuModel, childModelsList);
-        }
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Pedidos", true, true, "",""); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Crear pedidos", false, false, "","");
+        childModel = new MenuModel("Modificar productos", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modificar pedidos", false, false, "","");
+        childModel = new MenuModel("Buscar productos", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Buscar pedidos", false, false, "","");
+        childModel = new MenuModel("Consultar productos", false, false, "",0);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar pedidos", false, false, "","");
+        childModel = new MenuModel("Eliminar productos", false, false, "",0);
         childModelsList.add(childModel);
-
-        childModel = new MenuModel("Cancelar pedidos", false, false, "","");
-        childModelsList.add(childModel);
-
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Envios", true, true, "",""); //Menu of Python Tutorials
+        menuModel = new MenuModel("Kits", true, true, "",0); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Ver envios", false, false, "","");
+        childModel = new MenuModel("Crear kits", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Modificar kits", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Buscar kits", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Consultar kits", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Eliminar kits", false, false, "",0);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
-        menuModel = new MenuModel("Ventas", true, false, "",""); //Menu of Android Tutorial. No sub menus
+
+        menuModel = new MenuModel("Inventario", true, false, "",0); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -291,22 +261,71 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Clientes", true, true, "",""); //Menu of Python Tutorials
+        menuModel = new MenuModel("Pagos", true, true, "",0); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Ver clientes", false, false, "","");
+
+        childModel = new MenuModel("Consultar pagos", false, false, "",0);
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Pedidos", true, true, "",0); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Crear pedidos", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Modificar pedidos", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Buscar pedidos", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Consultar pedidos", false, false, "",0);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Cancelar pedidos", false, false, "",0);
+        childModelsList.add(childModel);
+
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Envios", true, true, "",0); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Ver envios", false, false, "",0);
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
+        }
+        menuModel = new MenuModel("Ventas", true, false, "",0); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        if (!menuModel.hasChildren) {
+            childList.put(childModel, null);
+        }
+
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Clientes", true, true, "",0); //Menu of Python Tutorials
+        headerList.add(menuModel);
+        childModel = new MenuModel("Ver clientes", false, false, "",0);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
 
-        menuModel = new MenuModel("Cuenta", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Cuenta", true, false, "",R.drawable.ic_person_black_24dp); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
             childList.put(childModel, null);
         }
-        menuModel = new MenuModel("Ajustes", true, false, "",""); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Ajustes", true, false, "",0); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -625,6 +644,8 @@ public class NavAdministradorActivity extends AppCompatActivity
                     }
                     onBackPressed();
                 }
+
+
                 return false;
             }
         });

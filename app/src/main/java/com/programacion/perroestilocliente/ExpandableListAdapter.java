@@ -2,6 +2,7 @@ package com.programacion.perroestilocliente;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
         final String childText = getChild(groupPosition, childPosition).menuName;
-     //   final String childImg = getChild(groupPosition, childPosition).img;
+        final int childImg = getChild(groupPosition, childPosition).img;
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
@@ -53,7 +54,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
         ImageView imageView=convertView.findViewById(R.id.imgGroupDraw);
 
-      //  imageView.setImageResource(childImg);
+        if(childImg==0){
+            imageView.setImageResource(R.drawable.ic_home_black_24dp);
+        }else{
+            imageView.setImageResource(childImg);
+        }
         txtListChild.setText(childText);
         return convertView;
     }
@@ -88,16 +93,23 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         String headerTitle = getGroup(groupPosition).menuName;
+        int imgGroup=getGroup(groupPosition).img;
+
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group_header, null);
         }
 
+        ImageView imgVi=convertView.findViewById(R.id.imgNavGroup);
         TextView lblListHeader = convertView.findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
-
+        if(imgGroup==0){
+            imgVi.setImageResource(R.drawable.ic_home_black_24dp);
+        }else{
+            imgVi.setImageResource(imgGroup);
+        }
         return convertView;
     }
 
