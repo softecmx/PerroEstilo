@@ -45,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.programacion.perroestilocliente.modelo.Usuarios;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,7 +62,7 @@ public class LogginActivity extends AppCompatActivity {
     Button btnLoggin;
     SignInButton signInButton;
     GoogleSignInClient mGoogleSigInClient;
-    public static final int RC_SIGN_IN=0;
+    public static final int RC_SIGN_IN = 0;
     private Uri photoURI;
     public static String img = "";
     private FirebaseAuth mAuth;
@@ -77,13 +78,13 @@ public class LogginActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
         mAuth = FirebaseAuth.getInstance();
-        imgLogo=findViewById(R.id.imgLoggLogo);
-        txtBienvenida=findViewById(R.id.txtLoggBienvida);
-        txtRegistrase=findViewById(R.id.txtLogRegistrarse);
-        txtOlvidasteContrasenia=findViewById(R.id.txtLogOlviContra);
-        btnLoggin=findViewById(R.id.btnIniciarSession);
-        editEmail=findViewById(R.id.editLogUsuario);
-        editPassword=findViewById(R.id.editLogPass);
+        imgLogo = findViewById(R.id.imgLoggLogo);
+        txtBienvenida = findViewById(R.id.txtLoggBienvida);
+        txtRegistrase = findViewById(R.id.txtLogRegistrarse);
+        txtOlvidasteContrasenia = findViewById(R.id.txtLogOlviContra);
+        btnLoggin = findViewById(R.id.btnIniciarSession);
+        editEmail = findViewById(R.id.editLogUsuario);
+        editPassword = findViewById(R.id.editLogPass);
 
         txtRegistrase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +95,7 @@ public class LogginActivity extends AppCompatActivity {
         btnLoggin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(valida()){
+                if (valida()) {
                     iniciarSession();
                 }
             }
@@ -104,8 +105,8 @@ public class LogginActivity extends AppCompatActivity {
                 .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSigInClient= GoogleSignIn.getClient(this,gso);
-        signInButton=findViewById(R.id.logginGoogle);
+        mGoogleSigInClient = GoogleSignIn.getClient(this, gso);
+        signInButton = findViewById(R.id.logginGoogle);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,38 +117,39 @@ public class LogginActivity extends AppCompatActivity {
         txtOlvidasteContrasenia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LogginActivity.this,RecuperarPasswordActivity.class);
+                Intent intent = new Intent(LogginActivity.this, RecuperarPasswordActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
-    public void sigInWithGoogle(){
-        Intent sigInt=mGoogleSigInClient.getSignInIntent();
-        startActivityForResult(sigInt,RC_SIGN_IN);
+
+    public void sigInWithGoogle() {
+        Intent sigInt = mGoogleSigInClient.getSignInIntent();
+        startActivityForResult(sigInt, RC_SIGN_IN);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RC_SIGN_IN){
-            Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                GoogleSignInAccount account=task.getResult(ApiException.class);
+                GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
-            }catch (ApiException e){
+            } catch (ApiException e) {
                 //    mostarToast("Falló Google\n"+e.getCause(),3,true);
             }
         }
     }
 
-    public void firebaseAuthWithGoogle(String idToken){
-      /*  AuthCredential credential= GoogleAuthProvider.getCredential(idToken,null);
+    public void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                            @Override
                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                               if(task.isSuccessful()){
+                                               if (task.isSuccessful()) {
                                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                                    //  mostarToast("User "+user.getDisplayName(),0,true);
                                                    Query queryUsuarios = databaseReference.child("Usuarios").orderByChild("email").equalTo(user.getEmail());
@@ -155,64 +157,64 @@ public class LogginActivity extends AppCompatActivity {
                                                        @Override
                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                            if (snapshot.exists()) {
-                                                               Intent intent = new Intent(LogginActivity.this, MascotasActivity.class);
+                                                               Intent intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
                                                                startActivity(intent);
                                                                finish();
-                                                           }else{
+                                                           } else {
 
                                                                Usuarios usuario = new Usuarios();
                                                                //    usuario.setUid(UUID.randomUUID().toString());
-                                                               usuario.setUid(user.getUid());
-                                                               String nombre="";
-                                                               String apellido="";
-                                                               String phone="";
-                                                               String imagen="";
-                                                               if(user.getDisplayName()!=null){
-                                                                   String username[]=user.getDisplayName().split(" ");
+                                                               usuario.setIdUsuario(user.getUid());
+                                                               String nombre = "";
+                                                               String apellido = "";
+                                                               String phone = "";
+                                                               String imagen = "";
+                                                               if (user.getDisplayName() != null) {
+                                                                   String username[] = user.getDisplayName().split(" ");
 
-                                                                   if(username.length==0){
-                                                                       nombre=user.getEmail();
-                                                                   }else  if(username.length==1){
-                                                                       nombre=username[0];
-                                                                   }else{
-                                                                       nombre=username[0];
-                                                                       for (int i=1; i<username.length;i++){
-                                                                           apellido+=username[i];
+                                                                   if (username.length == 0) {
+                                                                       nombre = user.getEmail();
+                                                                   } else if (username.length == 1) {
+                                                                       nombre = username[0];
+                                                                   } else {
+                                                                       nombre = username[0];
+                                                                       for (int i = 1; i < username.length; i++) {
+                                                                           apellido += username[i];
                                                                        }
                                                                    }
-                                                               }else{
-                                                                   nombre=user.getEmail();
+                                                               } else {
+                                                                   nombre = user.getEmail();
                                                                }
-                                                               if(user.getPhoneNumber()!=null){
-                                                                   if(user.getPhoneNumber().isEmpty()){
-                                                                       phone="Sin telefono";
-                                                                   }else{
-                                                                       phone= user.getPhoneNumber();
+                                                               if (user.getPhoneNumber() != null) {
+                                                                   if (user.getPhoneNumber().isEmpty()) {
+                                                                       phone = "Sin telefono";
+                                                                   } else {
+                                                                       phone = user.getPhoneNumber();
                                                                    }
-                                                               }else{
-                                                                   phone="Sin telefono";
+                                                               } else {
+                                                                   phone = "Sin telefono";
                                                                }
-                                                               if(user.getPhotoUrl()!=null){
-                                                                   if(user.getPhotoUrl().toString().isEmpty()){
-                                                                       imagen="";
-                                                                   }else{
-                                                                       imagen=user.getPhotoUrl().toString();
+                                                               if (user.getPhotoUrl() != null) {
+                                                                   if (user.getPhotoUrl().toString().isEmpty()) {
+                                                                       imagen = "";
+                                                                   } else {
+                                                                       imagen = user.getPhotoUrl().toString();
                                                                    }
-                                                               }else{
-                                                                   imagen="";
+                                                               } else {
+                                                                   imagen = "";
                                                                }
 
-                                                               usuario.setNombre(nombre);
-                                                               usuario.setApellido(apellido);
+                                                               usuario.setUsername(nombre);
+                                                               usuario.setUsername(apellido);
                                                                usuario.setTelefono(phone);
-                                                               usuario.setImagen(imagen);
+                                                               usuario.setFotoPerfil(imagen);
                                                                usuario.setEmail(user.getEmail());
-                                                               usuario.setContrasenia("Authenticacion por Google");
-                                                               databaseReference.child("Usuarios").child(usuario.getUid()).setValue(usuario).addOnSuccessListener(
+                                                               usuario.setPassword("Authenticacion por Google");
+                                                               databaseReference.child("Usuarios").child(usuario.getIdUsuario()).setValue(usuario).addOnSuccessListener(
                                                                        new OnSuccessListener<Void>() {
                                                                            @Override
                                                                            public void onSuccess(Void unused) {
-                                                                               Intent intent = new Intent(LogginActivity.this, MascotasActivity.class);
+                                                                               Intent intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
                                                                                startActivity(intent);
                                                                                finish();
                                                                            }
@@ -227,15 +229,15 @@ public class LogginActivity extends AppCompatActivity {
                                                        }
                                                    });
 
-                                               }else{
-                                                   mostarToast("Falló conexión con Google",3,true);
+                                               } else {
+                                                   mostarToast("Falló conexión con Google", 3, true);
 
                                                }
                                            }
                                        }
 
                 );
-*/
+
     }
 
 
@@ -243,15 +245,15 @@ public class LogginActivity extends AppCompatActivity {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                  //  Intent intent = new Intent(LogginActivity.this, MascotasActivity.class);
-                   // startActivity(intent);
+                if (task.isSuccessful()) {
+                    Intent intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                    startActivity(intent);
                     finish();
-                }else{
-                    mostarToast("Datos incorrectos",2,true);
+                } else {
+                    mostarToast("Datos incorrectos", 2, true);
                 }
             }
         });
@@ -275,8 +277,8 @@ public class LogginActivity extends AppCompatActivity {
         return valicion;
     }
 
-    public void transsitionBack(){
-        Intent intent=new Intent(LogginActivity.this,RegistrarseActivity.class);
+    public void transsitionBack() {
+        Intent intent = new Intent(LogginActivity.this, RegistrarseActivity.class);
        /* Pair[] pairs=new Pair[2];
         pairs[0]=new Pair<View,String>(imgLogo,"logoImageTrans");
         pairs[1]=new Pair<View,String>(txtBienvenida,"textTrans");
@@ -300,7 +302,7 @@ public class LogginActivity extends AppCompatActivity {
     private void cargaArchivo() {
         img = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date()) + "." + extension(photoURI);
         try {
-            ConnectivityManager connectivityManager = (ConnectivityManager)LogginActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivityManager = (ConnectivityManager) LogginActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
             if (networkInfo != null && networkInfo.isConnected()) {
@@ -322,7 +324,7 @@ public class LogginActivity extends AppCompatActivity {
                 ref.putFile(photoURI);
                 // mostarToast("La imagen se cargo exitosamente" + "\nEstado: sin conexión", 4, true);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -334,45 +336,46 @@ public class LogginActivity extends AppCompatActivity {
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(cr.getType(photoUri));
     }
+
     public void mostarToast(String txt, int estatus, boolean corto) {
         LayoutInflater inflater = getLayoutInflater();
 
         View layout = null;
 
-        if(estatus==0){
+        if (estatus == 0) {
             //Default
             layout = inflater.inflate(R.layout.custom_toast_info,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==1){
+        } else if (estatus == 1) {
             //Success
             layout = inflater.inflate(R.layout.custom_toast_success,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==2) {
+        } else if (estatus == 2) {
             //Warning
             layout = inflater.inflate(R.layout.custom_toast_warning,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==3){
+        } else if (estatus == 3) {
             //Error
             layout = inflater.inflate(R.layout.custom_toast_error,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else if(estatus==4){
+        } else if (estatus == 4) {
             //Falla de red
             layout = inflater.inflate(R.layout.custom_toast_red,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else if(estatus==5){
+        } else if (estatus == 5) {
             //Falla de red
             layout = inflater.inflate(R.layout.custom_toast_sin_data,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else{
+        } else {
             //Informacion
             layout = inflater.inflate(R.layout.custom_toast_info,
                     (ViewGroup) findViewById(R.id.layout_base));
@@ -382,9 +385,11 @@ public class LogginActivity extends AppCompatActivity {
         textView.setText(txt);
         Toast toast = new Toast(this);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 50);
-        if(corto){
-            toast.setDuration(Toast.LENGTH_SHORT);}else{
-            toast.setDuration(Toast.LENGTH_LONG);}
+        if (corto) {
+            toast.setDuration(Toast.LENGTH_SHORT);
+        } else {
+            toast.setDuration(Toast.LENGTH_LONG);
+        }
         toast.setView(layout);
         toast.show();
     }

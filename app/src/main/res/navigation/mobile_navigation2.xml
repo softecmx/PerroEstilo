@@ -7,19 +7,88 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.programacion.perroestilocliente.ui.cliente.mainCliente.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.programacion.perroestilocliente.ui.cliente.inicio.HomeClienteFragment"
+        android:label="@string/menu_inicio"
+        tools:layout="@layout/fragment_home_cliente" />
+
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.programacion.perroestilocliente.ui.cliente.mainCliente.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_tienda"
+        android:name="com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment"
+        android:label="@string/menu_tienda"
+        tools:layout="@layout/fragment_tienda" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.programacion.perroestilocliente.ui.cliente.mainCliente.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_categoria"
+        android:name="com.programacion.perroestilocliente.ui.cliente.categorias.catalogo.CatalogoFragment"
+        android:label="@string/menu_categoria"
+        tools:layout="@layout/fragment_catalogo" />
+
+    <fragment
+        android:id="@+id/nav_producto"
+        android:name="com.programacion.perroestilocliente.ui.cliente.productos.todosLosProductos.TodosProductosFragment"
+        android:label="@string/menu_producto"
+        tools:layout="@layout/fragment_todos_productos" />
+
+    <fragment
+        android:id="@+id/nav_kits"
+        android:name="com.programacion.perroestilocliente.ui.cliente.kits.verKit.VerKitFragment"
+        android:label="@string/menu_kits"
+        tools:layout="@layout/fragment_ver_kit" />
+
+    <fragment
+        android:id="@+id/nav_mis_kits"
+        android:name="com.programacion.perroestilocliente.ui.cliente.kits.buscarMisKits.BuscarMiKitFragment"
+        android:label="@string/menu_mis_kits"
+        tools:layout="@layout/fragment_ver_kit" />
+
+    <fragment
+        android:id="@+id/nav_mis_direcciones"
+        android:name="com.programacion.perroestilocliente.ui.cliente.direcciones.misDirecciones.MisDireccionesFragment"
+        android:label="@string/menu_mis_direcciones"
+        tools:layout="@layout/fragment_mis_direcciones" />
+
+    <fragment
+        android:id="@+id/nav_pedidos"
+        android:name="com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.MisPedidosFragment"
+        android:label="@string/menu_mis_pedidos"
+        tools:layout="@layout/fragment_mis_pedidos" />
+
+
+    <fragment
+        android:id="@+id/nav_mi_cuenta"
+        android:name="com.programacion.perroestilocliente.ui.cliente.perfil.PerfilFragment"
+        android:label="@string/menu_mi_cuenta"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_sobre_nosotros"
+        android:name="com.programacion.perroestilocliente.ui.cliente.sobreNosotros.SobreNosotrosFragment"
+        android:label="@string/menu_sobre_nosotros"
+        tools:layout="@layout/fragment_sobre_nosotros" />
+
+    <fragment
+        android:id="@+id/nav_ayuda"
+        android:name="com.programacion.perroestilocliente.ui.cliente.ayuda.AyudaFragment"
+        android:label="@string/menu_ayuda"
+        tools:layout="@layout/fragment_ayuda" />
+
+    <fragment
+        android:id="@+id/nav_acerca_app"
+        android:name="com.programacion.perroestilocliente.ui.cliente.creditos.CreditosFragment"
+        android:label="@string/menu_acerca_app"
+        tools:layout="@layout/fragment_creditos" />
+
+    <fragment
+        android:id="@+id/nav_politicas"
+        android:name="com.programacion.perroestilocliente.ui.cliente.avisoPrivacidad.AvisoPrivacidadFragment"
+        android:label="@string/menu_politicas_privacidad"
+        tools:layout="@layout/fragment_aviso_privacidad" />
+
+    <fragment
+        android:id="@+id/nav_ajustes"
+        android:name="com.programacion.perroestilocliente.ui.ajustes.AjustesFragment"
+        android:label="@string/menu_ajustes"
+        tools:layout="@layout/fragment_ajustes" />
+
 </navigation>
