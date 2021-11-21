@@ -35,15 +35,19 @@
             android:theme="@style/Theme.PerroEstiloCliente.NoActionBar" />
         <activity
             android:name=".LogginActivity"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".RecuperarPasswordActivity"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".RegistrarseActivity"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
