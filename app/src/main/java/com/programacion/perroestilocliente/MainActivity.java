@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     ///
 
                 } else {
-                    Intent intent = new Intent(MainActivity.this, LogginActivity.class);
+                    Intent intent = new Intent(MainActivity.this, NavClienteActivity.class);
                     startActivity(intent);
                 }
                 finish();
