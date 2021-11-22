@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IInterface;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -249,7 +250,12 @@ public class LogginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                    Intent intent;
+                    if(email.equals("admin@perroestilo.com")){
+                         intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.NavAdministradorActivity.class);
+                    }else{
+                        intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                    }
                     startActivity(intent);
                     finish();
                 } else {

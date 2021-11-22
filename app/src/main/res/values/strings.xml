@@ -488,4 +488,5 @@
     <string name="txtInicioAPocasExistencias">Productos con pocas existencias ...(2)</string>
     <string name="menu_salir">Cerrar sessión</string>
     <string name="txtPreguntarPorWhatsApp">Preguntar por WhatsApp</string>
+    <string name="txtAgregarTalla">AgregarTalla</string>
 </resources>
