@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     app:cardBackgroundColor="@color/white"
@@ -13,15 +13,39 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_margin="15dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/monio1" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgCardProductoTienda"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/monio1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48dp"
+                android:text="OFERTA"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/flat_grey_dark_2"
+                android:padding="5dp"
+                android:textColor="@color/primaryDarkColor"
+                android:textStyle="bold"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <TextView
+            android:id="@+id/txtCardNombreProductoTienda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NOMBRE DEL PRODUCTO"
@@ -29,33 +53,65 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="$120"
-            android:textColor="@color/black"
-            android:textSize="15sp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="$120"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+            <TextView
+                android:id="@+id/txtDescuentoProdTienda"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$200"
+                android:textStyle="italic"
+                android:textColor="@color/flat_grey_normal_2"
 
+                />
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/raitingBarProductoTienda"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:rating="4"
+            android:layout_marginLeft="15dp"
+            android:numStars="5"
+            style="?android:attr/ratingBarStyleSmall"
+            android:theme="@style/RatingBar.Yellow"
             />
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="47dp"
             android:layout_margin="10dp"
             android:orientation="horizontal">
-            <ImageButton
-                android:layout_weight="1"
-                android:layout_width="40dp"
-                android:src="@drawable/ic_add_shopping_cart_black_24dp"
-                android:background="@color/pink_200"
-                android:layout_height="40dp"/>
 
-            <ImageButton
-                android:layout_weight="1"
+            <Button
                 android:layout_width="40dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_visibility_black_24dp"
-                android:layout_height="40dp"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:drawableBottom="@drawable/ic_add_shopping_cart_black_24dp"
+                android:drawableTint="@color/white" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableBottom="@drawable/ic_visibility_black_24dp"
+                android:drawableTint="@color/pink_200"
+                android:layout_gravity="center_vertical"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
         </LinearLayout>
 
     </LinearLayout>

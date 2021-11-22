@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
                                             Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
                                             startActivity(intentCliente);
                                         } else {
+                                            Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
+                                            startActivity(intentCliente);
                                             mostarToast("Error de autenticación",3,true);
                                         }
                                     }
