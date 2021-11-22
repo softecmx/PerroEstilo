@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, NavAdministradorActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(MainActivity.this, com.programacion.perroestilocliente.NavAdministradorActivity.class);
+                    Intent intent = new Intent(MainActivity.this, NavClienteActivity.class);
                     startActivity(intent);
                 }
                 finish();

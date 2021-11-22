@@ -486,4 +486,6 @@
     <string name="txtInicioAClientes">Clientes</string>
     <string name="txtInicioANuevosPedidos">Mira los nuevos pedidos ... (5)</string>
     <string name="txtInicioAPocasExistencias">Productos con pocas existencias ...(2)</string>
+    <string name="menu_salir">Cerrar sessión</string>
+    <string name="txtPreguntarPorWhatsApp">Preguntar por WhatsApp</string>
 </resources>

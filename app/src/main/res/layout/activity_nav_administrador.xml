@@ -26,8 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="176dp"
+            android:listSelector="@color/pink_200"
+            android:scrollbarSize="6dp"
             android:background="@android:color/white"
-            android:dividerHeight="0dp"
+            android:dividerHeight="0.4dp"
+            android:divider="@color/flat_grey_light_2"
             android:groupIndicator="@null" />
     </com.google.android.material.navigation.NavigationView>
 
