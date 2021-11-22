@@ -61,6 +61,8 @@
             app:showNavigationButtons="false"
             />
 
+
+
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carruselComentarios"
             android:layout_width="match_parent"

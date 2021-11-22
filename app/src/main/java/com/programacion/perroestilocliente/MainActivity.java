@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, NavAdministradorActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(MainActivity.this, NavAdministradorActivity.class);
+                    Intent intent = new Intent(MainActivity.this, NavClienteActivity.class);
                     startActivity(intent);
                 }
                 finish();
