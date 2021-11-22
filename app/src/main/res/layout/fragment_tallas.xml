@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,45 +13,68 @@
         android:orientation="vertical"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:endIconMode="clear_text">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTallaAgrega"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/agregaTalla"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageButton
-                android:id="@+id/ibtnTallaBtn"
-                android:layout_width="109dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:elevation="4dp"
-                android:backgroundTint="@color/pink_200"
-                android:contentDescription="@string/txtDescripcion"
-                app:srcCompat="@drawable/ic_add_black_24dp" />
-        </LinearLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:endIconMode="clear_text">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTallaAgrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/agregaTalla"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/ibtnTallaBtn"
+                    android:layout_width="109dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:elevation="4dp"
+                    android:backgroundTint="@color/pink_200"
+                    android:contentDescription="@string/txtDescripcion"
+                    app:srcCompat="@drawable/ic_add_black_24dp" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:id="@+id/flTallasFrame">
+
+            <ListView
+                android:id="@+id/listTallas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </FrameLayout>
     </LinearLayout>
-</ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fButtonAddTallas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_add_black_24dp"
+        android:layout_margin="25dp"
+        />
+</RelativeLayout>
