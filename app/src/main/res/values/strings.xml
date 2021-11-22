@@ -489,4 +489,23 @@
     <string name="menu_salir">Cerrar sessión</string>
     <string name="txtPreguntarPorWhatsApp">Preguntar por WhatsApp</string>
     <string name="txtAgregarTalla">AgregarTalla</string>
+    <string name="txtVarVersion">version</string>
+    <string name="txtVarPeriodo">JUN-DIC 2021</string>
+    <string name="txtVarMaestra">Elizabeth Alba Pulido</string>
+    <string name="txtMaestra">Asesor:</string>
+    <string name="txtVarMateria">Programacion Movil en Android</string>
+    <string name="txtVarCarrera">Ingenieria en Sistemas Computacionales e<b />
+        Ingenieria en Tecnologías de la Información y Comunicación</string>
+    <string name="txtCarrera">Ingeniería</string>
+    <string name="txtVarUniversidad">Instituto Técnologico de Toluca</string>
+    <string name="txtVarAutor1">Ana Mayra Aguilar</string>
+    <string name="txtVarAutor2">Kevin Ivan Sanchez Valdin</string>
+    <string name="txtVarAutor3">Carlos Emmanuel Mejia Mejia</string>
+    <string name="txtAutor">Autores:</string>
+    <string name="txtVarAutor1NoControl">No. Control: 18200987</string>
+    <string name="txtVarAutor2NoControl">No. Control: 17200987</string>
+    <string name="txtVarAutor3NoControl">No. Control: 17200987</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
 </resources>
