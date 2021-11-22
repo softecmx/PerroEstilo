@@ -14,9 +14,19 @@ import android.view.ViewGroup;
 
 import com.programacion.perroestilocliente.R;
 
+import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TiendaFragment extends Fragment {
 
     private TiendaViewModel mViewModel;
+
+    ImageCarousel carousel;
+    List<CarouselItem> list = new ArrayList<>();
+    View root;
 
     public static TiendaFragment newInstance() {
         return new TiendaFragment();
@@ -25,7 +35,19 @@ public class TiendaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tienda, container, false);
+    root= inflater.inflate(R.layout.fragment_tienda, container, false);
+
+        //====================================================================
+        carousel = root.findViewById(R.id.carruselTienda );
+        list.add(new CarouselItem(R.drawable.img_carrucel_admin1));
+        list.add(new CarouselItem(R.drawable.img_carrucel_admin2));
+        list.add(new CarouselItem(R.drawable.img_carrucel_admin3));
+        list.add(new CarouselItem(R.drawable.img_carrucel_admin4));
+        list.add(new CarouselItem(R.drawable.img_carrucel_admin5));
+
+        carousel.setData(list);
+        //=====================================================================
+        return root;
     }
 
     @Override

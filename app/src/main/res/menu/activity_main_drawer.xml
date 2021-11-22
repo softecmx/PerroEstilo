@@ -15,37 +15,37 @@
 
         <item
             android:id="@+id/nav_categoria"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_list_black_24dp"
             android:title="@string/menu_categoria" />
 
         <item
             android:id="@+id/nav_producto"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/outline_sell_24"
             android:title="@string/menu_producto" />
 
         <item
             android:id="@+id/nav_kits"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/outline_category_24"
             android:title="@string/menu_kits" />
 
         <item
             android:id="@+id/nav_mis_kits"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_loyalty_black_24dp"
             android:title="@string/menu_mis_kits" />
 
         <item
             android:id="@+id/nav_mis_direcciones"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_location_on_black_24dp"
             android:title="@string/menu_mis_direcciones" />
 
         <item
             android:id="@+id/nav_pedidos"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_local_mall_black_24dp"
             android:title="@string/menu_mis_pedidos" />
 
         <item
             android:id="@+id/nav_mi_cuenta"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="@string/menu_mi_cuenta" />
 
     </group>
@@ -56,28 +56,32 @@
 
         <item
             android:id="@+id/nav_sobre_nosotros"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_pets_black_24dp"
             android:title="@string/menu_sobre_nosotros" />
 
         <item
             android:id="@+id/nav_ayuda"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_help_outline_black_24dp"
             android:title="@string/menu_ayuda" />
 
         <item
             android:id="@+id/nav_acerca_app"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_android_black_24dp"
             android:title="@string/menu_acerca_app" />
 
         <item
             android:id="@+id/nav_politicas"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_security_black_24dp"
             android:title="@string/menu_politicas_privacidad" />
 
         <item
             android:id="@+id/nav_ajustes"
-            android:icon="@drawable/ic_tag_faces_black_24dp"
+            android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/menu_ajustes" />
+        <item
+            android:id="@+id/nav_salir"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="@string/menu_salir" />
     </group>
 
 </menu>
