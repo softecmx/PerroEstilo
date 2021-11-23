@@ -35,6 +35,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.programacion.perroestilocliente.ExpandableListAdapter;
 import com.programacion.perroestilocliente.MenuModel;
 import com.programacion.perroestilocliente.R;
@@ -59,7 +61,12 @@ public class NavAdministradorActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle("Inicio");
        // getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            System.out.println("NO NULL +++++++++++++++++++++++++++++++++++++++++++++++");
+        }else {
+            System.out.println("si NULL +++++++++++++++++++++++++++++++++++++++++++++++");
+        }
         expandableListView = findViewById(R.id.expandableListView);
         prepareMenuData();
         populateExpandableList();

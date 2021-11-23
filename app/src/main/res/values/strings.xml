@@ -508,4 +508,7 @@
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
+    <string name="txtUser1Git">\@ansual</string>
+    <string name="txtUser2Git">\@estetipo</string>
+    <string name="txtUser3Git">\@kevinsanchez-cat</string>
 </resources>
