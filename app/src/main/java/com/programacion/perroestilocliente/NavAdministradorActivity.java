@@ -1,11 +1,15 @@
 package com.programacion.perroestilocliente;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ExpandableListView;
 
@@ -34,6 +38,8 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -319,6 +325,12 @@ public class NavAdministradorActivity extends AppCompatActivity
         if (!menuModel.hasChildren) {
             childList.put(childModel, null);
         }
+        menuModel = new MenuModel("Salir", true, false, "",R.drawable.ic_exit_to_app_black_24dp); //Menu of Android Tutorial. No sub menus
+        headerList.add(menuModel);
+
+        if (!menuModel.hasChildren) {
+            childList.put(childModel, null);
+        }
     }
 
     private void populateExpandableList() {
@@ -403,6 +415,17 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.addToBackStack(null);
                                 transaction.commit();
                                 toolbar.setTitle("Diseños");
+                                break;
+                            case "Salir":
+                                FirebaseUser userj=FirebaseAuth.getInstance().getCurrentUser();
+                                mostarToast("usuario: "+userj,1,false);
+                                FirebaseAuth.getInstance().signOut();
+                                mostarToast("Sessión terminada exitosamente",1,true);
+                                startActivity(new Intent(NavAdministradorActivity.this, LogginActivity.class));
+                                finish();
+                                FirebaseUser userk=FirebaseAuth.getInstance().getCurrentUser();
+                                mostarToast("usuario: "+userk,5,false);
+
                                 break;
                         }
                         onBackPressed();
@@ -668,5 +691,59 @@ public class NavAdministradorActivity extends AppCompatActivity
                 return false;
             }
         });
+    }
+    public void mostarToast(String txt, int estatus, boolean corto) {
+        LayoutInflater inflater = getLayoutInflater();
+
+        View layout = null;
+
+        if(estatus==0){
+            //Default
+            layout = inflater.inflate(R.layout.custom_toast_info,
+                    (ViewGroup) findViewById(R.id.layout_base));
+
+        }else if(estatus==1){
+            //Success
+            layout = inflater.inflate(R.layout.custom_toast_success,
+                    (ViewGroup) findViewById(R.id.layout_base));
+
+        }else if(estatus==2) {
+            //Warning
+            layout = inflater.inflate(R.layout.custom_toast_warning,
+                    (ViewGroup) findViewById(R.id.layout_base));
+
+        }else if(estatus==3){
+            //Error
+            layout = inflater.inflate(R.layout.custom_toast_error,
+                    (ViewGroup) findViewById(R.id.layout_base));
+
+
+        }else if(estatus==4){
+            //Falla de red
+            layout = inflater.inflate(R.layout.custom_toast_red,
+                    (ViewGroup) findViewById(R.id.layout_base));
+
+
+        }else if(estatus==5){
+            //Falla de red
+            layout = inflater.inflate(R.layout.custom_toast_sin_data,
+                    (ViewGroup) findViewById(R.id.layout_base));
+
+
+        }else{
+            //Informacion
+            layout = inflater.inflate(R.layout.custom_toast_info,
+                    (ViewGroup) findViewById(R.id.layout_base));
+        }
+
+        TextView textView = layout.findViewById(R.id.txtToast);
+        textView.setText(txt);
+        Toast toast = new Toast(this);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 50);
+        if(corto){
+            toast.setDuration(Toast.LENGTH_SHORT);}else{
+            toast.setDuration(Toast.LENGTH_LONG);}
+        toast.setView(layout);
+        toast.show();
     }
 }
