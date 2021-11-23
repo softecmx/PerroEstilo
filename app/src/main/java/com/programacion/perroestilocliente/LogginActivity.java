@@ -46,6 +46,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.Usuarios;
 
 import java.text.SimpleDateFormat;
@@ -153,19 +154,19 @@ public class LogginActivity extends AppCompatActivity {
                                                if (task.isSuccessful()) {
                                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                                    //  mostarToast("User "+user.getDisplayName(),0,true);
-                                                   Query queryUsuarios = databaseReference.child("Usuarios").orderByChild("email").equalTo(user.getEmail());
+                                                   Query queryUsuarios = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
                                                    queryUsuarios.addValueEventListener(new ValueEventListener() {
                                                        @Override
                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                            if (snapshot.exists()) {
-                                                               Intent intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                                                               Intent intent = new Intent(LogginActivity.this,
+                                                                       com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
                                                                startActivity(intent);
                                                                finish();
                                                            } else {
 
-                                                               Usuarios usuario = new Usuarios();
-                                                               //    usuario.setUid(UUID.randomUUID().toString());
-                                                               usuario.setIdUsuario(user.getUid());
+                                                               Clientes clientes = new Clientes();
+                                                               clientes.setIdUsuario(user.getUid());
                                                                String nombre = "";
                                                                String apellido = "";
                                                                String phone = "";
@@ -205,17 +206,28 @@ public class LogginActivity extends AppCompatActivity {
                                                                    imagen = "";
                                                                }
 
-                                                               usuario.setUsername(nombre);
-                                                               usuario.setUsername(apellido);
-                                                               usuario.setTelefono(phone);
-                                                               usuario.setFotoPerfil(imagen);
-                                                               usuario.setEmail(user.getEmail());
-                                                               usuario.setPassword("Authenticacion por Google");
-                                                               databaseReference.child("Usuarios").child(usuario.getIdUsuario()).setValue(usuario).addOnSuccessListener(
+                                                               clientes.setUsername(user.getEmail());
+                                                               clientes.setTelefono(phone);
+                                                               clientes.setFotoPerfil(imagen);
+                                                               clientes.setEmail(user.getEmail());
+                                                               clientes.setPassword("Authenticacion por Google");
+                                                               clientes.setTipoUsuario("Cliente");
+                                                               clientes.setIntentosFallidosAcceso("0");
+                                                               clientes.setEstatus("NUEVO");
+                                                               clientes.setEstadoLogico("ACTIVO");
+                                                               clientes.setNombreCliente(nombre);
+                                                               clientes.setApellidoPaterno(apellido);
+                                                               clientes.setLealtad("No");
+                                                               clientes.setApellidoMaterno("");
+                                                               clientes.setFechaNacimiento("");
+                                                               clientes.setGenero("");
+
+                                                               databaseReference.child("Usuarios/Clientes").child(clientes.getIdUsuario()).setValue(clientes).addOnSuccessListener(
                                                                        new OnSuccessListener<Void>() {
                                                                            @Override
                                                                            public void onSuccess(Void unused) {
-                                                                               Intent intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                                                                               Intent intent = new Intent(LogginActivity.this,
+                                                                                       com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
                                                                                startActivity(intent);
                                                                                finish();
                                                                            }
@@ -250,20 +262,50 @@ public class LogginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Intent intent;
-                    if(email.equals("admin@perroestilo.com")){
-                         intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.NavAdministradorActivity.class);
-                    }else{
-                        intent = new Intent(LogginActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
-                    }
-                    startActivity(intent);
-                    finish();
+                    final Intent[] intent = new Intent[1];
+                    Query queryUsuarios = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(email);
+                    queryUsuarios.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                intent[0] = new Intent(LogginActivity.this,
+                                        com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                                startActivity(intent[0]);
+                                finish();
+                            }else{
+                                Query queryTienda = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(email);
+                                queryTienda.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            intent[0] = new Intent(LogginActivity.this,
+                                                    com.programacion.perroestilocliente.NavAdministradorActivity.class);
+                                            startActivity(intent[0]);
+                                            finish();
+                                        }else{
+                                            mostarToast("Usuario no autorizado", 2, true);
+                                            mAuth.signOut();
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 } else {
                     mostarToast("Datos incorrectos", 2, true);
                 }
             }
         });
-
     }
 
     private boolean valida() {

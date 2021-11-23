@@ -71,51 +71,96 @@ public class MainActivity extends AppCompatActivity {
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
-                if (user != null && account != null) {
+                if (user != null || account != null) {
                     //checar el nivel de usuario
-                    Query queryAdmin = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(user.getEmail());
-                    queryAdmin.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                Intent intentAdmin = new Intent(MainActivity.this, NavAdministradorActivity.class);
-                                startActivity(intentAdmin);
-                            } else {
-                                Query queryClientes = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
-                                queryAdmin.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()) {
-                                            Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
-                                            startActivity(intentCliente);
-                                        } else {
-                                            Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
-                                            startActivity(intentCliente);
-                                            mostarToast("Error de autenticación",3,true);
+                    if(user!=null){
+                        Query queryAdmin = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(user.getEmail());
+                        queryAdmin.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    Intent intentAdmin = new Intent(MainActivity.this, NavAdministradorActivity.class);
+                                    startActivity(intentAdmin);
+                                    finish();
+                                } else {
+                                    Query queryClientes = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
+                                    queryClientes.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
+                                                startActivity(intentCliente);
+                                                finish();
+                                            } else {
+                                                Intent intentCliente = new Intent(MainActivity.this, LogginActivity.class);
+                                                startActivity(intentCliente);
+                                                finish();
+                                                //  mostarToast("Error de autenticación",3,true);
+                                            }
                                         }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            }
+                        });
+                    }else if(account!=null){
+                        Query queryAdmin = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(account.getEmail());
+                        queryAdmin.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    Intent intentAdmin = new Intent(MainActivity.this, NavAdministradorActivity.class);
+                                    startActivity(intentAdmin);
+                                    finish();
+                                } else {
+                                    Query queryClientes = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(account.getEmail());
+                                    queryClientes.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
+                                                startActivity(intentCliente);
+                                                finish();
+                                            } else {
+                                                Intent intentCliente = new Intent(MainActivity.this, LogginActivity.class);
+                                                startActivity(intentCliente);
+                                                finish();
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }else{
+                        Intent intent = new Intent(MainActivity.this, LogginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
 
                     ///
-
                 } else {
-                    Intent intent = new Intent(MainActivity.this, NavClienteActivity.class);
+                    Intent intent = new Intent(MainActivity.this, LogginActivity.class);
                     startActivity(intent);
+                    finish();
                 }
-                finish();
+
             }
         }, 3000);
     }

@@ -11,45 +11,25 @@ import java.util.List;
  *
  * @author por_s
  */
-public class Clientes {
+public class Clientes extends Usuarios{
 
-    private String idCLiente;
     private String nombreCliente;
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String fechaNacimiento;
     private String genero;
     private String lealtad;
-    private String idUsuario;
 
     public Clientes() {
     }
 
-    public Clientes(String idCLiente, String nombreCliente, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String genero, String lealtad, String idUsuario) {
-        this.idCLiente = idCLiente;
+    public Clientes(String nombreCliente, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String genero, String lealtad, String idUsuario) {
         this.nombreCliente = nombreCliente;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
         this.lealtad = lealtad;
-        this.idUsuario = idUsuario;
-    }
-
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getIdCLiente() {
-        return idCLiente;
-    }
-
-    public void setIdCLiente(String idCLiente) {
-        this.idCLiente = idCLiente;
     }
 
     public String getNombreCliente() {

@@ -39,11 +39,17 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.programacion.perroestilocliente.modelo.Administrador;
+import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.Usuarios;
 
 import java.io.ByteArrayOutputStream;
@@ -110,7 +116,6 @@ public class RegistrarseActivity extends AppCompatActivity {
                 if (checkBox.isChecked()) {
                     btnRegistar.setEnabled(true);
                 } else {
-
                     btnRegistar.setEnabled(false);
                 }
             }
@@ -138,11 +143,7 @@ public class RegistrarseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (valida()) {
-                    if (registrarUsuario()) {
-                        mostarToast("Registro exitoso", 1, true);
-                    } else {
-                        mostarToast("Error al agregar al usuario", 3, true);
-                    }
+                    validarExistencia();
                 }
             }
         });
@@ -231,47 +232,167 @@ public class RegistrarseActivity extends AppCompatActivity {
 
     }
 
-    private boolean registrarUsuario() {
-        boolean exitoRegistro = true;
+    private void validarExistencia() {
+        mAuth.signInWithEmailAndPassword(editEmail.getText().toString().trim(), editPassword.getText().toString().trim()).
+                addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Query queryTienda = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(editEmail.getText().toString().trim());
+                            queryTienda.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        mostarToast("La cuenta ya existe, inicie sessión", 0, true);
+                                    } else {
+                                        Query queryUsuarios = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(editEmail.getText().toString().trim());
+                                        queryUsuarios.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (snapshot.exists()) {
+                                                    mostarToast("La cuenta ya existe, inicie sessión", 0, true);
+                                                } else {
+                                                    if (editEmail.getText().toString().trim().contains("@perroestilo.com.mx")) {
+                                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                                        Administrador administrador = new Administrador();
+                                                        //    usuario.setUid(UUID.randomUUID().toString());
+                                                        administrador.setIdUsuario(user.getUid());
 
-        mAuth.createUserWithEmailAndPassword(editEmail.getText().toString().trim(), editPassword.getText().toString().trim())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                           @Override
-                                           public void onComplete(@NonNull Task<AuthResult> task) {
-                                               if (task.isSuccessful()) {
-                                                   FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                                   Usuarios usuario = new Usuarios();
-                                                   //    usuario.setUid(UUID.randomUUID().toString());
-                                                   usuario.setIdUsuario(user.getUid());
-                                                   usuario.setUsername(editNombre.getText().toString().trim());
-                                                   //   usuario.setApellido(editApellido.getText().toString().trim());
-                                                   usuario.setEmail(editEmail.getText().toString().trim());
-                                                   usuario.setTelefono(editTelefono.getText().toString().trim());
-                                                   usuario.setPassword(editPassword.getText().toString().trim());
-                                                   usuario.setFotoPerfil(img);
-                                                   databaseReference.child("Usuarios").child(usuario.getIdUsuario()).setValue(usuario).addOnSuccessListener(
-                                                           new OnSuccessListener<Void>() {
-                                                               @Override
-                                                               public void onSuccess(Void unused) {
-                                                                   Intent intent = new Intent(RegistrarseActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
-                                                                   startActivity(intent);
-                                                                   finish();
-                                                               }
-                                                           }
-                                                   );
+                                                        administrador.setUsername(editNombre.getText().toString().trim());
+                                                        //   usuario.setApellido(editApellido.getText().toString().trim());
+                                                        administrador.setEmail(editEmail.getText().toString().trim());
+                                                        administrador.setTelefono(editTelefono.getText().toString().trim());
+                                                        administrador.setPassword(editPassword.getText().toString().trim());
+                                                        administrador.setFotoPerfil(img);
+                                                        administrador.setTipoUsuario("Administrador");
+                                                        administrador.setIntentosFallidosAcceso("0");
+                                                        administrador.setEstatus("NUEVO");
+                                                        administrador.setEstadoLogico("ACTIVO");
+
+                                                        administrador.setNombreAdministrador(editNombre.getText().toString().trim());
+                                                        administrador.setApellidoPaterno(editApellido.getText().toString().trim());
+                                                        administrador.setApellidoMaterno("");
+                                                        administrador.setFechaNacimiento("");
+                                                        administrador.setGenero("");
+                                                        administrador.setNombreContacto("");
+                                                        administrador.setTelefonoContacto("");
+                                                        administrador.setEmailContacto("");
+                                                        administrador.setLinks(null);
+                                                        databaseReference.child("Usuarios/Tienda").child(administrador.getIdUsuario()).setValue(administrador).addOnSuccessListener(
+                                                                new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void unused) {
+                                                                        Intent intent = new Intent(RegistrarseActivity.this, NavAdministradorActivity.class);
+                                                                        startActivity(intent);
+                                                                        finish();
+                                                                        mostarToast("Registro exitoso",1,true);
+                                                                    }
+                                                                }
+                                                        );
+
+                                                    } else {
+                                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                                        Clientes clientes = new Clientes();
+                                                        //    usuario.setUid(UUID.randomUUID().toString());
+                                                        clientes.setIdUsuario(user.getUid());
+                                                        clientes.setUsername(editNombre.getText().toString().trim());
+                                                        //   usuario.setApellido(editApellido.getText().toString().trim());
+                                                        clientes.setEmail(editEmail.getText().toString().trim());
+                                                        clientes.setTelefono(editTelefono.getText().toString().trim());
+                                                        clientes.setPassword(editPassword.getText().toString().trim());
+                                                        clientes.setFotoPerfil(img);
+                                                        clientes.setTipoUsuario("Cliente");
+                                                        clientes.setIntentosFallidosAcceso("0");
+                                                        clientes.setEstatus("NUEVO");
+                                                        clientes.setEstadoLogico("ACTIVO");
+                                                        clientes.setNombreCliente(editNombre.getText().toString().trim());
+                                                        clientes.setApellidoPaterno(editApellido.getText().toString().trim());
+                                                        clientes.setApellidoMaterno("");
+                                                        clientes.setFechaNacimiento("");
+                                                        clientes.setGenero("");
+                                                        clientes.setLealtad("No");
+                                                        databaseReference.child("Usuarios/Clientes").child(clientes.getIdUsuario()).setValue(clientes).addOnSuccessListener(
+                                                                new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void unused) {
+                                                                        Intent intent = new Intent(RegistrarseActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                                                                        startActivity(intent);
+                                                                        finish();
+                                                                        mostarToast("Registro exitoso",1,true);
+                                                                    }
+                                                                }
+                                                        );
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        } else {
+                            //mostarToast("Error de autenticación", 3, true);
+                             registrarNuevoCliente();
+                        }
+                    }
+                });
+    }
+
+    private void registrarNuevoCliente() {
+        mAuth.createUserWithEmailAndPassword(editEmail.getText().toString().trim(), editPassword.getText().toString().trim()).
+                addOnCompleteListener(
+                        new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    Clientes clientes = new Clientes();
+                                    //    usuario.setUid(UUID.randomUUID().toString());
+                                    clientes.setIdUsuario(user.getUid());
+                                    clientes.setUsername(editNombre.getText().toString().trim());
+                                    //   usuario.setApellido(editApellido.getText().toString().trim());
+                                    clientes.setEmail(editEmail.getText().toString().trim());
+                                    clientes.setTelefono(editTelefono.getText().toString().trim());
+                                    clientes.setPassword(editPassword.getText().toString().trim());
+                                    clientes.setFotoPerfil(img);
+                                    clientes.setTipoUsuario("Cliente");
+                                    clientes.setIntentosFallidosAcceso("0");
+                                    clientes.setEstatus("NUEVO");
+                                    clientes.setEstadoLogico("ACTIVO");
+                                    clientes.setNombreCliente(editNombre.getText().toString().trim());
+                                    clientes.setApellidoPaterno(editApellido.getText().toString().trim());
+                                    clientes.setApellidoMaterno("");
+                                    clientes.setFechaNacimiento("");
+                                    clientes.setGenero("");
+                                    clientes.setLealtad("No");
+                                    databaseReference.child("Usuarios/Clientes").child(clientes.getIdUsuario()).setValue(clientes).addOnSuccessListener(
+                                            new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Intent intent = new Intent(RegistrarseActivity.this, com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                    mostarToast("Registro exitoso",1,true);
+                                                }
+                                            }
+                                    );
 
 
-                                               } else {
-
-                                                   mostarToast("Ups! Ha ocurrido un error al registrar. Intentelo de nuevo", 3, true);
-                                               }
-                                           }
-
-
-                                       }
+                                } else {
+                                    mostarToast("Ups! Ha ocurrido un error al registrar. Intentelo de nuevo", 3, true);
+                                }
+                            }
+                        }
                 );
-
-        return exitoRegistro;
     }
 
     private boolean valida() {
