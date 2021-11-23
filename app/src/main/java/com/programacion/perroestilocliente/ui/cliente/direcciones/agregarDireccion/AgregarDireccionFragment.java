@@ -1,7 +1,10 @@
 package com.programacion.perroestilocliente.ui.cliente.direcciones.agregarDireccion;
 
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,16 +17,38 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.programacion.perroestilocliente.R;
 
-public class AgregarDireccionFragment extends Fragment {
+public class AgregarDireccionFragment extends Fragment implements OnMapReadyCallback {
 
     private AgregarDireccionViewModel mViewModel;
+    GoogleMap gMap;
 
+    MapView mapView;
+    Marker marcador;
+
+    /*
+    Modificar la ruta
+
+                try {
+                    latitud = Float.parseFloat(reporteSeleccionado.getLatitud());
+                    longitud = Float.parseFloat(reporteSeleccionado.getLongitud());
+
+                } catch (NumberFormatException e) {
+
+                }
+                gMap.clear();
+                gMap.addMarker(new MarkerOptions().position(new LatLng(latitud, longitud)).title("Ubicación del Animal"));
+                gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(latitud, longitud)));
+                gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+
+     */
     public static AgregarDireccionFragment newInstance() {
         return new AgregarDireccionFragment();
     }
@@ -31,7 +56,12 @@ public class AgregarDireccionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_agregar_direccion, container, false);
+        View root=inflater.inflate(R.layout.fragment_agregar_direccion, container, false);
+
+        mapView = (MapView) root.findViewById(R.id.mapView);
+        initGoogleMap(savedInstanceState);
+
+        return root;
     }
 
     @Override
@@ -41,33 +71,84 @@ public class AgregarDireccionFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(callback);
+
+    private void initGoogleMap(Bundle savedInstanceState) {
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle("MapViewBundleKey");
         }
+
+        mapView.onCreate(mapViewBundle);
+
+        mapView.getMapAsync(this);
     }
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            // googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,13));
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle("MapViewBundleKey");
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle("MapViewBundleKey", mapViewBundle);
         }
-    };
 
+        mapView.onSaveInstanceState(mapViewBundle);
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gMap = googleMap;
+        gMap.addMarker(new MarkerOptions().position(new LatLng(19.116620, -99.525949)).title("Marcador"));
+
+        //gMap.addMarker(new MarkerOptions().position(new LatLng(0,0)).title("Marcador2"));
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        gMap.setMyLocationEnabled(true);
+    }
 }
