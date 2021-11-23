@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.2" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-action/ic_dashboard_black_24dp.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-av/ic_equalizer_black_24dp.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-v24/background_personalizado.xml" value="0.1984375" />
@@ -335,9 +336,28 @@
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_tallas.xml" value="0.33" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/list_group_child.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/list_group_header.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/layout/custom_toast_error.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/custom_toast_info.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/custom_toast_sin_data.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/dialog_agregar_veterinario.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/dialog_disenio.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/dialog_modificar_lealtad.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/element_lista_tallas.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_agregar_categorias.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_agregar_match2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_agregar_math1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_agregar_modelo.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_agregar_pedido.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_agregar_productos.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_buscar_categoria.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_buscar_match.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_buscar_mi_kit.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_editar_categoria.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_eliminar_categoria.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_eliminar_match.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_tallas.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_lista_tallas.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_spn_categorias.xml" value="0.1921875" />
       </map>
     </option>
   </component>
