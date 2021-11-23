@@ -145,7 +145,7 @@
     <string name="txtMiCarrito">Mi carrito</string>
     <string name="txtVerCarrito">Ver carrito</string>
     <string name="txtContacto">Contacto</string>
-    <string name="txtDireccionEntrega">DireccionEntrega </string>
+    <string name="txtDireccionEntrega">Direccion de entrega: </string>
     <string name="txtNombreContacto">Nombre(s) </string>
     <string name="txtAppPContacto">Apellido paterno </string>
     <string name="txtAppMContacto">Apellido materno </string>
@@ -484,8 +484,65 @@
     <string name="txtInicioAVentas">Ventas</string>
     <string name="cantidadInicioAClientes">4,000</string>
     <string name="txtInicioAClientes">Clientes</string>
-    <string name="txtInicioANuevosPedidos">Mira los nuevos pedidos ... (5)</string>
-    <string name="txtInicioAPocasExistencias">Productos con pocas existencias ...(2)</string>
+    <string name="txtInicioANuevosPedidos">Mira los nuevos pedidos ...</string>
+    <string name="txtcantidadInicioANuevosPedidos">(#)</string>
+    <string name="txtInicioAPocasExistencias">Productos con pocas existencias ...</string>
+    <string name="txtcantidadInicioAPocasExistencias">(#)</string>
     <string name="menu_salir">Cerrar sessión</string>
     <string name="txtPreguntarPorWhatsApp">Preguntar por WhatsApp</string>
+    <string name="txtAgregarTalla">AgregarTalla</string>
+    <string name="txtVarVersion">version</string>
+    <string name="txtVarPeriodo">JUN-DIC 2021</string>
+    <string name="txtVarMaestra">Elizabeth Alba Pulido</string>
+    <string name="txtMaestra">Asesor:</string>
+    <string name="txtVarMateria">Programacion Movil en Android</string>
+    <string name="txtVarCarrera">Ingenieria en Sistemas Computacionales e<b />
+        Ingenieria en Tecnologías de la Información y Comunicación</string>
+    <string name="txtCarrera">Ingeniería</string>
+    <string name="txtVarUniversidad">Instituto Técnologico de Toluca</string>
+    <string name="txtVarAutor1">Ana Mayra Aguilar</string>
+    <string name="txtVarAutor2">Kevin Ivan Sanchez Valdin</string>
+    <string name="txtVarAutor3">Carlos Emmanuel Mejia Mejia</string>
+    <string name="txtAutor">Autores:</string>
+    <string name="txtVarAutor1NoControl">No. Control: 18200987</string>
+    <string name="txtVarAutor2NoControl">No. Control: 17200987</string>
+    <string name="txtVarAutor3NoControl">No. Control: 17200987</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+    <string name="txtUser1Git">\@ansual</string>
+    <string name="txtUser2Git">\@estetipo</string>
+    <string name="txtUser3Git">\@kevinsanchez-cat</string>
+    <string name="txtpagosPendientes">Pagos pendientes</string>
+    <string name="bus_pedido_pago">Buscar venta</string>
+
+    <string name="txtordenPedido">Orden del pedido</string>
+    <string name="txtstatusPendiente">Pendiente por confirmar</string>
+    <string name="pago">$$$$</string>
+    <string name="txtlimitePago">Limite del </string>
+    <string name="fechaLimite">00/00/000</string>
+    <string name="btnconfirmarPago">CONFIRMAR PAGO Y PREPARAR PEDIDO</string>
+    <string name="txtstatusPreparacion">En preparación</string>
+    <string name="txtstatusCamino">En camino</string>
+    <string name="txtstatusEntregado">Entrgado</string>
+    <string name="txtPersonaRetira">Retira: </string>
+
+    <string name="txtContactoEmpresa">Contacto de la empresa</string>
+    <string name="txtNombreContactoEmpresa">Nombre del contacto: </string>
+    <string name="redesEmpresariales">Redes sociales </string>
+    <string name="instagram">Instagram </string>
+    <string name="tiktok">TikTok </string>
+
+    <!--CLIENTES LEALES-->
+    <string name="txtNuevoClienteLeal">Ingresar usuaio/ nombre del cliente</string>
+    <!--PRODUCTOS-->
+    <string name="monioCorbatin">Moño corbatin</string>
+
+
+    <!--MODELOS-->
+    <string name="modeloAnaranjado">Anaranjado</string>
+
+    <!--Tallas-->
+    <string name="mediana">Mediana</string>
+
 </resources>

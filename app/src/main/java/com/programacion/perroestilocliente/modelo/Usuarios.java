@@ -18,17 +18,14 @@ public class Usuarios {
     private String fotoPerfil;
     private String estatus;
     private String estadoLogico;
-    private String ultimoAcceso;
     private String intentosFallidosAcceso;
-    private String confirmacionEmail;
     private String telefono;
-    private String confirmacionTelefono;
     private String tipoUsuario;
 
     public Usuarios() {
     }
 
-    public Usuarios(String idUsuario, String username, String password, String email, String fotoPerfil, String estatus, String estadoLogico, String ultimoAcceso, String intentosFallidosAcceso, String confirmacionEmail, String telefono, String confirmacionTelefono, String tipoUsuario) {
+    public Usuarios(String idUsuario, String username, String password, String email, String fotoPerfil, String estatus, String estadoLogico, String intentosFallidosAcceso, String telefono, String tipoUsuario) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.password = password;
@@ -36,11 +33,8 @@ public class Usuarios {
         this.fotoPerfil = fotoPerfil;
         this.estatus = estatus;
         this.estadoLogico = estadoLogico;
-        this.ultimoAcceso = ultimoAcceso;
         this.intentosFallidosAcceso = intentosFallidosAcceso;
-        this.confirmacionEmail = confirmacionEmail;
         this.telefono = telefono;
-        this.confirmacionTelefono = confirmacionTelefono;
         this.tipoUsuario = tipoUsuario;
     }
 
@@ -100,28 +94,12 @@ public class Usuarios {
         this.estadoLogico = estadoLogico;
     }
 
-    public String getUltimoAcceso() {
-        return ultimoAcceso;
-    }
-
-    public void setUltimoAcceso(String ultimoAcceso) {
-        this.ultimoAcceso = ultimoAcceso;
-    }
-
     public String getIntentosFallidosAcceso() {
         return intentosFallidosAcceso;
     }
 
     public void setIntentosFallidosAcceso(String intentosFallidosAcceso) {
         this.intentosFallidosAcceso = intentosFallidosAcceso;
-    }
-
-    public String getConfirmacionEmail() {
-        return confirmacionEmail;
-    }
-
-    public void setConfirmacionEmail(String confirmacionEmail) {
-        this.confirmacionEmail = confirmacionEmail;
     }
 
     public String getTelefono() {
@@ -132,14 +110,6 @@ public class Usuarios {
         this.telefono = telefono;
     }
 
-    public String getConfirmacionTelefono() {
-        return confirmacionTelefono;
-    }
-
-    public void setConfirmacionTelefono(String confirmacionTelefono) {
-        this.confirmacionTelefono = confirmacionTelefono;
-    }
-
     public String getTipoUsuario() {
         return tipoUsuario;
     }
@@ -147,5 +117,4 @@ public class Usuarios {
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
-
 }

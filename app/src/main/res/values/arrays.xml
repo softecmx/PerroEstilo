@@ -51,13 +51,13 @@
         <item>San Francisco de los Romo</item>
     </string-array>
     <string-array name="opc2">
-    <item>Ensenada</item>
-    <item>Mexicali</item>
-    <item>Tecate</item>
-    <item>Tijuana</item>
-    <item>Playas de Rosarito</item>
-    <item>San Quintín</item>
-</string-array>
+        <item>Ensenada</item>
+        <item>Mexicali</item>
+        <item>Tecate</item>
+        <item>Tijuana</item>
+        <item>Playas de Rosarito</item>
+        <item>San Quintín</item>
+    </string-array>
     <string-array name="opc3">
         <item>Comondú</item>
         <item>Mulegé</item>
@@ -2569,5 +2569,15 @@
         <item>Zacatecas</item>
         <item>Trancoso</item>
         <item>Santa María de la Paz</item>
+    </string-array>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
     </string-array>
 </resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/imgClienteLeal"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:adjustViewBounds="true"
+            android:padding="10dp"
+            android:src="@drawable/img_user_exist" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/imgClienteLeal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/valorNombreClienteLeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:text="@string/txtNombreUser"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+            <!--android:layout_toEndOf="@+id/imgClienteLeal"-->
+            <TextView
+                android:id="@+id/valorStatusNombreClienteLeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:text="@string/status"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+            <!--android:layout_toEndOf="@+id/imgClienteLeal"-->
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/imgLeal"
+                       android:layout_width="50dp"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentStart="true"
+                       android:adjustViewBounds="true"
+                       android:padding="10dp"
+                       android:src="@drawable/ic_favorite_black_24dp"/>
+
+                   <ImageView
+                       android:id="@+id/imgNoLeal"
+                       android:layout_width="50dp"
+                       android:layout_height="wrap_content"
+                       android:adjustViewBounds="true"
+                       android:padding="10dp"
+                       android:src="@drawable/ic_favorite_border_black_24dp" />
+
+               </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

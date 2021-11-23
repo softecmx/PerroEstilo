@@ -1,13 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/txtpagosPendientes"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="@color/titulos"/>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-</FrameLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPagoPendientePV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/bus_pedido_pago"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/ibtnBPbsc"
+                android:layout_width="109dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:elevation="4dp"
+                android:backgroundTint="@color/pink_200"
+                android:contentDescription="@string/txtDescripcion"
+                app:srcCompat="@drawable/ic_search_black_24dp" />
+        </LinearLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/flat_pink_1"
+            android:elevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:layout_margin="3dp"
+                    android:background="@color/white">
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </FrameLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>
+
+<!-- Lista de pagos
+   <TextView
+    android:id="@+id/no_ordenPedidoPago"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+   <TextView
+    android:id="@+id/statusPago"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+   <TextView
+    android:id="@+id/totalaPagarPago"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+-->
