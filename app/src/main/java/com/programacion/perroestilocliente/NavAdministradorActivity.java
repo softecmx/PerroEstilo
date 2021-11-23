@@ -62,11 +62,7 @@ public class NavAdministradorActivity extends AppCompatActivity
         toolbar.setTitle("Inicio");
        // getSupportActionBar().setDisplayShowTitleEnabled(false);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
-            System.out.println("NO NULL +++++++++++++++++++++++++++++++++++++++++++++++");
-        }else {
-            System.out.println("si NULL +++++++++++++++++++++++++++++++++++++++++++++++");
-        }
+
         expandableListView = findViewById(R.id.expandableListView);
         prepareMenuData();
         populateExpandableList();
