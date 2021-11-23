@@ -1,13 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.envios.detalleEnvios.DetalleEnvioFragment">
-
-    <TextView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtNombreRetiraDetEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtPersonaRetira"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/valorNombrRetiraDE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/txtNombreRetiraDetEntrega"
+                    android:text="@string/txtNombreContacto"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtNombreDireccionDetEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtDireccionEntrega"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/valorDireccionRetiraDE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/txtNombreDireccionDetEntrega"
+                    android:text="@string/txtMisDirecciones"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtCorreoDetEntrega"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/correo"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/valorCorreoRetiraDE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/txtCorreoDetEntrega"
+                        android:text="@string/txtCorreoUser"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtContactoDetEntrega"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtContacto"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/valorContactoRetiraDE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/txtContactoDetEntrega"
+                        android:text="@string/txtNombreContacto"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtTelefonoDetEntrega"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtTelefono"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/valorTelefonoRetiraDE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/txtTelefonoDetEntrega"
+                        android:text="@string/telefono"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-</FrameLayout>
+
+
+</LinearLayout>
