@@ -2,13 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.programacion.perroestilocliente">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <uses-feature android:name="android.hardware.camera.flash" />
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -24,6 +29,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PerroEstiloCliente">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".ui.cliente.mainCliente.NavClienteActivity"
             android:exported="true"
@@ -35,20 +53,20 @@
             android:theme="@style/Theme.PerroEstiloCliente.NoActionBar" />
         <activity
             android:name=".LogginActivity"
-            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar" />
         <activity
             android:name=".RecuperarPasswordActivity"
-            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar" />
         <activity
             android:name=".RegistrarseActivity"
-            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.PerroEstiloCliente.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,6 +83,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepath" />
         </provider>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

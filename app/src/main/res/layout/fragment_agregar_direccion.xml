@@ -132,11 +132,13 @@
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapViewAddDirUbicacion"
+        <fragment
+            android:id="@+id/frame1"
+            android:name="com.programacion.perroestilocliente.MapsFragment"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="250dp"
+            />
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
