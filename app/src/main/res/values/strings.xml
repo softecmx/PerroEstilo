@@ -320,6 +320,16 @@
     <string name="agregaTalla">Agregar talla</string>
     <string name="buscaModelo">Buscar modelo</string>
 
+    <!--Categoria-->
+    <string name="escCategor">Escoja la categoría</string>
+    <string name="nomCategor">Nombre de la categoría</string>
+    <string name="dirigido">Dirigido al público de:</string>
+    <string name="humano">Humano</string>
+    <string name="mascota">Mascota</string>
+    <string name="descCategor">Descripción de la categoría</string>
+    <string name="descCate">Descripción de la categoría (Opcional)</string>
+
+
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>

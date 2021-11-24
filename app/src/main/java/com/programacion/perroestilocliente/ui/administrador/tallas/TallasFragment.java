@@ -17,24 +17,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.modelo.Tallas;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class TallasFragment extends Fragment {
 
     private TallasViewModel mViewModel;
 
     private Button btnPopCerrar;
+    private Button btnPopAgregar;
+
+    private EditText etTalla;
+    private EditText etMedidas;
     View root;
     private ListView listView;
     private ListAdapter customAdapter;
     com.google.android.material.floatingactionbutton.FloatingActionButton fBtnAgregar;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
+    private ArrayList<Tallas> ListaTallas = new ArrayList<Tallas>();
 
     public static TallasFragment newInstance() {
         return new TallasFragment();
@@ -48,23 +68,36 @@ public class TallasFragment extends Fragment {
         // Inflate the layout for this fragment
         this.listView = root.findViewById(R.id.listTallas);
         this.fBtnAgregar=root.findViewById(R.id.fButtonAddTallas);
-
-        ArrayList<ElementListView> arrayList = new ArrayList<>();
-        arrayList.add(new ElementListView("Juan Alvarez", "8776443"));
-        arrayList.add(new ElementListView("Jose Alvarez", "8757396"));
-        arrayList.add(new ElementListView("Monica Perez", "7342679"));
-        arrayList.add(new ElementListView("Ricardo Huertas", "8747634"));
-        arrayList.add(new ElementListView("Veronica De La Luz", "84753567"));
-        arrayList.add(new ElementListView("Gerardo Fuentes", "245543"));
-        arrayList.add(new ElementListView("Sebastian Torres", "6436709"));
-
-        this.customAdapter = new ListAdapter(getActivity(), arrayList);
-        this.listView.setAdapter(customAdapter);
+        iniciaFirebase();
+        listarDatos();
 
         registerForContextMenu(listView);
         fBtnAgregar.setOnClickListener(view -> createDialogAgregar());
-
         return root;
+    }
+    public void listarDatos(){
+        databaseReference.child("Tallas").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<ElementListView> arrayList = new ArrayList<>();
+                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                    Tallas p = objSnapshot.getValue(Tallas.class);
+                    arrayList.add(new ElementListView(p.getTallas(),p.getMedidas(),p.getIdTalla(), p.getEstadoLogico()));
+                    customAdapter = new ListAdapter(getActivity(), arrayList);
+                    listView.setAdapter(customAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void iniciaFirebase(){
+        FirebaseApp.initializeApp(getContext());
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
     @Override
@@ -120,23 +153,47 @@ public class TallasFragment extends Fragment {
 
         androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
         final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_agregar_veterinario, null);
-        btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnAddCancelar);
+        btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnTallaCancelar);
+        btnPopAgregar = (Button) aboutPop.findViewById(R.id.btnAddTalla);
+        etTalla = (EditText) aboutPop.findViewById(R.id.etATtalla);
+        etMedidas = (EditText) aboutPop.findViewById(R.id.etATmedidas);
 
 
         dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
         dialog.show();
         btnPopCerrar.setOnClickListener(view -> dialog.dismiss());
+        btnPopAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String talla = (etTalla).getText().toString();
+                String medida = (etMedidas).getText().toString();
+                if (talla.equals("") || medida.equals("")){
+                    mostarToast("Datos no validos!",5,false);
+                }else{
+                    Tallas tal = new Tallas();
+                    tal.setTallas(talla);
+                    tal.setMedidas(medida);
+                    tal.setEstadoLogico("1");
+                    tal.setIdTalla(UUID.randomUUID().toString());
+                    databaseReference.child("Tallas").child(tal.getIdTalla()).setValue(tal);
+                    mostarToast("Datos registrado!",1,false);
+                    etTalla.setText("");
+                    etMedidas.setText("");
+                    dialog.dismiss();
+                }
+            }
+        });
     }
 
     private void createDialogEditar(String veterinario) {
 
         androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-       // final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_editar_veterinario, null);
-       // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnEditCancelar);
+        // final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_editar_veterinario, null);
+        // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnEditCancelar);
 
 
-    //    dialogBuilder.setView(aboutPop);
+        //    dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
         dialog.show();
         btnPopCerrar.setOnClickListener(view -> dialog.dismiss());
@@ -147,7 +204,7 @@ public class TallasFragment extends Fragment {
         //final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_eliminar_veterinario, null);
         //btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnDelCancelar);
 
-       // dialogBuilder.setView(aboutPop);
+        // dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
         dialog.show();
         btnPopCerrar.setOnClickListener(view -> dialog.dismiss());
@@ -155,11 +212,11 @@ public class TallasFragment extends Fragment {
     private void createDialogInformacion(String veterinario) {
 
         androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-    //    final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_consultar_veterinario, null);
-     //   btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnReadAceptar);
+        //    final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_consultar_veterinario, null);
+        //   btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnReadAceptar);
 
 
-      //  dialogBuilder.setView(aboutPop);
+        //  dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
         dialog.show();
         btnPopCerrar.setOnClickListener(view -> dialog.dismiss());
