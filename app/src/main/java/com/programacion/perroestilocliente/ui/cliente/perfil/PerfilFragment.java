@@ -36,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.FacebookSdk;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -104,7 +105,6 @@ public class PerfilFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
 
-
         cImgFoto = root.findViewById(R.id.imgPerfilFoto);
 
         fBtnFoto = root.findViewById(R.id.fBtnPerfilFoto);
@@ -126,7 +126,7 @@ public class PerfilFragment extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                         Clientes usuario = objSnapshot.getValue(Clientes.class);
-                        username = usuario.getUsername() + " " + usuario.getApellidoPaterno();
+                        username = usuario.getNombreCliente() + " " + usuario.getApellidoPaterno();
                         email = usuario.getEmail();
                         phone = usuario.getTelefono();
 
@@ -141,6 +141,7 @@ public class PerfilFragment extends Fragment {
                             }
                         } else if (usuario.getPassword().equals("Authenticacion por Facebook")) {
                             if (user.getPhotoUrl() != null) {
+
                                 //cImgFoto.setImageURI(user.getPhotoUrl());
                                 String pholoURL=user.getPhotoUrl().toString();
                                 pholoURL=pholoURL+"?type=large";
@@ -186,6 +187,57 @@ public class PerfilFragment extends Fragment {
                                     if (snapshot.exists()) {
                                         for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                                             Administrador usuario = objSnapshot.getValue(Administrador.class);
+                                            username = usuario.getNombreAdministrador() + " " + usuario.getApellidoPaterno();
+                                            email = usuario.getEmail();
+                                            phone = usuario.getTelefono();
+
+                                            if (usuario.getPassword().equals("Authenticacion por Google")) {
+                                                if (user.getPhotoUrl() != null) {
+                                                    //cImgFoto.setImageURI(user.getPhotoUrl());
+                                                    Picasso.get().load(user.getPhotoUrl())
+                                                            .error(R.drawable.img_user_exist)
+                                                            .into(cImgFoto);
+                                                } else {
+                                                    cImgFoto.setImageResource(R.drawable.img_user_exist);
+                                                }
+                                            } else if (usuario.getPassword().equals("Authenticacion por Facebook")) {
+                                                if (user.getPhotoUrl() != null) {
+
+                                                    //cImgFoto.setImageURI(user.getPhotoUrl());
+                                                    String pholoURL=user.getPhotoUrl().toString();
+                                                    pholoURL=pholoURL+"?type=large";
+                                                    Picasso.get().load(pholoURL)
+                                                            .error(R.drawable.img_user_exist)
+                                                            .into(cImgFoto);
+                                                } else {
+                                                    cImgFoto.setImageResource(R.drawable.img_user_exist);
+                                                }
+                                            } else {
+                                                if (usuario.getFotoPerfil().isEmpty()) {
+                                                    cImgFoto.setImageResource(R.drawable.img_user_exist);
+                                                } else {
+                                                    if (getActivity() != null) {
+                                                        storageReference.child(usuario.getFotoPerfil()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                            @Override
+                                                            public void onSuccess(Uri uri) {
+                                                                Glide.with(getContext()).load(uri).into(cImgFoto);
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                mostarToast(e.getCause() + "", 3, false);
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            }
+                                            arrayList.clear();
+                                            arrayList.add(new ElementListView("Nombre", username, true, R.drawable.ic_person_black_24dp));
+                                            arrayList.add(new ElementListView("Email", email, false, R.drawable.ic_email_black_24dp));
+                                            arrayList.add(new ElementListView("Teléfono", phone, true, R.drawable.ic_phone_black_24dp));
+                                            customAdapter = new ListAdapter(getActivity(), arrayList);
+                                            listView.setAdapter(customAdapter);
+
                                         }
                                     }else{
                                         if (user.getDisplayName() != null) {
