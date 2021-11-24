@@ -3,11 +3,14 @@ package com.programacion.perroestilocliente.ui.administrador.tallas;
 public class ElementListView {
 
 
-    private String talla, medidas;
+    private String talla, medidas,id,status;
 
-    public ElementListView(String talla, String medidas) {
+
+    public ElementListView(String talla, String medidas, String id, String status) {
         this.talla = talla;
         this.medidas = medidas;
+        this.id = id;
+        this.status = status;
     }
 
     public String getTalla() {
@@ -24,5 +27,21 @@ public class ElementListView {
 
     public void setMedidas(String medidas) {
         this.medidas = medidas;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
