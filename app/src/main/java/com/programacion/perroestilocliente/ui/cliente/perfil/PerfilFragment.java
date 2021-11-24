@@ -232,9 +232,9 @@ public class PerfilFragment extends Fragment {
                                                 }
                                             }
                                             arrayList.clear();
-                                            arrayList.add(new ElementListView("Nombre", username, true, R.drawable.ic_person_black_24dp));
+                                            arrayList.add(new ElementListView("Nombre", username, false, R.drawable.ic_person_black_24dp));
                                             arrayList.add(new ElementListView("Email", email, false, R.drawable.ic_email_black_24dp));
-                                            arrayList.add(new ElementListView("Teléfono", phone, true, R.drawable.ic_phone_black_24dp));
+                                            arrayList.add(new ElementListView("Teléfono", phone, false, R.drawable.ic_phone_black_24dp));
                                             customAdapter = new ListAdapter(getActivity(), arrayList);
                                             listView.setAdapter(customAdapter);
 
