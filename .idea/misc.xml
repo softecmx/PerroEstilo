@@ -19,6 +19,9 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2671875" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable/ic_navigation_black_24dp.xml" value="0.18125" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2671875" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable/ic_pets_black_24dp.xml" value="0.21923076923076923" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable/ic_pets_grey_24dp.xml" value="0.21923076923076923" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable/ic_pets_pink_24dp.xml" value="0.21923076923076923" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable/ic_round_format_quote_24.xml" value="0.1984375" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/activity_loggin.xml" value="0.25" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/activity_main.xml" value="0.25104166666666666" />
@@ -42,6 +45,9 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_agregar_producto_pedido.xml" value="0.25104166666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_agregar_productos.xml" value="0.25" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_buscar_direccion.xml" value="0.25104166666666666" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_categorias_hijas.xml" value="0.20598290598290597" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_consultar_categorias.xml" value="0.20598290598290597" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_consultar_matchs.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_consultar_modelos.xml" value="0.18229166666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_editar_direccion.xml" value="0.25104166666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_home_cliente.xml" value="0.18229166666666666" />
@@ -49,6 +55,7 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_modificar_pagos_pendientes.xml" value="0.14957264957264957" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_pag_reconstruccion.xml" value="0.18229166666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_pagos_pendientes.xml" value="0.14957264957264957" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_perfil.xml" value="0.33" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_salir.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_sobre_nosotros.xml" value="0.2" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_ver_envios.xml" value="0.14957264957264957" />
