@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
@@ -118,10 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 3000);
 
-         */
-        Intent intentAdmin = new Intent(MainActivity.this, NavAdministradorActivity.class);
-        startActivity(intentAdmin);
-        finish();
+
     }
 
     public void mostarToast(String txt, int estatus, boolean corto) {

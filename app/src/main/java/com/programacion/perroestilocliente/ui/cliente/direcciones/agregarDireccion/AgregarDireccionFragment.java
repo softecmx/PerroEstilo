@@ -139,7 +139,8 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
         gMap.addMarker(new MarkerOptions().position(new LatLng(19.116620, -99.525949)).title("Marcador"));
-
+        gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(19.116620, -99.525949)));
+        gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         //gMap.addMarker(new MarkerOptions().position(new LatLng(0,0)).title("Marcador2"));
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)

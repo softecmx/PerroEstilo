@@ -72,12 +72,13 @@ public class HomeClienteFragment extends Fragment {
         colorsForSix.add(R.color.flat_orange_1);
 
         HashMap<Integer, String> map = new HashMap<>();
+        map.put(0,"Semper eget");
         map.put(1,"Lorem ipsum");
         map.put(2,"Cum sociis");
         map.put(3,"Euismod lacinia");
         map.put(4,"Tincidunt ornare");
         map.put(5,"Pellentesque elit");
-        map.put(0,"Semper eget");
+
         HashMap<Integer, String> map2 = new HashMap<>();
         map2.put(0, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
         map2.put(1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
@@ -100,12 +101,16 @@ public class HomeClienteFragment extends Fragment {
             public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull CarouselItem item, int position) {
                 // Convierte el enlace a la clase de enlace de vista devuelta del método onCreateViewHolder ().
                 ItemCustomFixedSizeLayout4Binding currentBinding = (ItemCustomFixedSizeLayout4Binding) binding;
+try{
+    int currentColor = ResourcesCompat.getColor(getResources(), colorsForSix.get(position), null);
+    currentBinding.card.setCardBackgroundColor(currentColor);
 
-                int currentColor = ResourcesCompat.getColor(getResources(), colorsForSix.get(position), null);
-                currentBinding.card.setCardBackgroundColor(currentColor);
+    currentBinding.tvCaption.setText("-"+map.get(position));
+    currentBinding.tvBody.setText(map2.get(position));
+}catch (Exception e){
 
-                currentBinding.tvCaption.setText("-"+map.get(position));
-                currentBinding.tvBody.setText(map2.get(position));
+}
+
             }
 
             @Override
@@ -140,4 +145,34 @@ public class HomeClienteFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
 }
