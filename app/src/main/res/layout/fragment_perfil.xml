@@ -23,7 +23,7 @@
             <!--  app:civ_border_color="@color/primaryColor"
                 app:civ_border_width="4dp"-->
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgCuentaFoto"
+                android:id="@+id/imgPerfilFoto"
                 android:layout_width="197dp"
                 android:layout_height="162dp"
                 android:layout_gravity="center"
@@ -35,14 +35,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fBtnCuentaFoto"
+                android:id="@+id/fBtnPerfilFoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:src="@drawable/ic_menu_camera"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imgCuentaFoto"
+                app:layout_constraintEnd_toEndOf="@+id/imgPerfilFoto"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -78,11 +78,11 @@
         <FrameLayout
             android:id="@+id/fragmenDatos"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="wrap_content">
             <ListView
-                android:id="@+id/listView"
+                android:id="@+id/listViewCuenta"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:divider="@color/blue_100"
                 android:dividerHeight="0.5dp"
                 android:scrollbars="none" />
@@ -164,17 +164,19 @@
          </LinearLayout>
         -->
         <Button
+            android:id="@+id/btnPerfilCambiarPass"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:text="Cambiar contraseña"
             app:strokeColor="@color/primaryColor" />
 
         <Button
+            android:id="@+id/btnPerfilEliminarCuenta"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="Eliminar cuenta"
             android:textColor="@color/danger"
             app:strokeColor="@color/danger" />
