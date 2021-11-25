@@ -5,48 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LogginActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imgLoggLogo"
-            android:layout_marginTop="70dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:layout_marginTop="70dp"
             android:src="@drawable/logo"
-            android:transitionName="logoImageTrans"
-            />
+            android:transitionName="logoImageTrans" />
 
         <TextView
             android:id="@+id/txtLoggBienvida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txtBienvenida"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/txtBienvenida"
             android:textColor="@color/primaryLightColor"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:transitionName="textTrans"
-            />
+            android:transitionName="textTrans" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundMode="outline"
             android:layout_marginTop="40dp"
+            android:transitionName="emailTrans"
+            app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:endIconMode="clear_text"
-            android:transitionName="emailTrans"
             app:startIconDrawable="@drawable/ic_person_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -63,14 +62,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundMode="outline"
             android:layout_marginTop="20dp"
+            android:transitionName="passTrans"
+            app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:passwordToggleEnabled="true"
-            android:transitionName="passTrans"
             app:startIconDrawable="@drawable/ic_vpn_key_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -86,11 +85,11 @@
             android:id="@+id/txtLogOlviContra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/txtOlvidasteContras"
-            android:focusable="true"
-            android:clickable="true"
             android:layout_gravity="end"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/txtOlvidasteContras"
             android:textColor="@color/grey"
 
             />
@@ -103,36 +102,53 @@
             android:text="@string/txtInicioSession"
             android:transitionName="butttonTrans" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txtAunNoTienesCuenta" />
+
+            <TextView
+                android:id="@+id/txtLogRegistrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/txtCrearCuenta"
+                android:textColor="@color/primaryDarkColor"
+                android:textStyle="bold"
+                android:transitionName="iniciaSessionTrans" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/flat_grey_dark_1" />
+
         <com.google.android.gms.common.SignInButton
             android:id="@+id/logginGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="5dp"/>
 
-            />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/logginFacebook"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="25dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txtAunNoTienesCuenta"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtLogRegistrarse"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="30dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:textColor="@color/primaryDarkColor"
-                android:text="@string/txtCrearCuenta"
-                android:transitionName="iniciaSessionTrans"
-                android:textStyle="bold"/>
-        </LinearLayout>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="4dp"
+            android:padding="2dp" />
+
 
     </LinearLayout>
 </ScrollView>

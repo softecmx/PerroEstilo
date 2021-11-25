@@ -17,7 +17,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
@@ -118,10 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 3000);
 
-         */
-        Intent intentAdmin = new Intent(MainActivity.this, NavAdministradorActivity.class);
-        startActivity(intentAdmin);
-        finish();
+
     }
 
     public void mostarToast(String txt, int estatus, boolean corto) {
