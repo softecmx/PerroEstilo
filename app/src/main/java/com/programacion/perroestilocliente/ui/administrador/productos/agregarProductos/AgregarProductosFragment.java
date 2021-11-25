@@ -149,28 +149,8 @@ public class AgregarProductosFragment extends Fragment {
                 disenio.getText().toString().equals("") || talla.getText().toString().equals("")||img.equals("")){
             CustomToast.mostarToast("Faltan datos por agregar",2,false,root,getLayoutInflater(),getContext());
         }else {
-            databaseReference.child("Categorias").orderByChild("idCategorias").equalTo(categoria.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Productos prod = new Productos(UUID.randomUUID().toString(), categoria.getText().toString(), disenio.getText().toString(), talla.getText().toString(), precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", "1", stock.getText().toString(), "1", img);
-                    System.out.println(categoria.getText().toString()+"  categoria");
-                    Categorias c=null;
-                    for (DataSnapshot objSnapshot: snapshot.getChildren()){
-                        c = objSnapshot.getValue(Categorias.class);
-                    }
-                    if (c!=null){
-                        if (c.getArr()==null){
-                            c.setArr(new ArrayList<Productos>());
-                        }
-                        c.getArr().add(prod);
-                        databaseReference.child("Categorias").child(c.getIdCategorias()).setValue(c);
-                    }
-                    Toast.makeText(getContext(), "Datos registrado!", Toast.LENGTH_SHORT).show();
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
+            Productos prod = new Productos(UUID.randomUUID().toString(), categoria.getText().toString(), disenio.getText().toString(), talla.getText().toString(), precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", "1", stock.getText().toString(), "1", img);
+            databaseReference.child("Productos").child(prod.getIdProducto()).setValue(prod);
             limpiar();
         }
     }
