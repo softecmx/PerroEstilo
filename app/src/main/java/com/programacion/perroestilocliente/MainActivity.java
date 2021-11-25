@@ -17,7 +17,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
@@ -70,94 +72,95 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
-                if (user != null && account != null) {
-                    //checar el nivel de usuario
-                    Query queryAdmin = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(user.getEmail());
-                    queryAdmin.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                Intent intentAdmin = new Intent(MainActivity.this, NavAdministradorActivity.class);
-                                startActivity(intentAdmin);
-                            } else {
-                                Query queryClientes = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
-                                queryAdmin.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()) {
-                                            Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
-                                            startActivity(intentCliente);
-                                        } else {
-                                            Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
-                                            startActivity(intentCliente);
-                                            mostarToast("Error de autenticación",3,true);
-                                        }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
-                            }
-                        }
+                if (user != null) {
+                   Query queryAdmin = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(user.getEmail());
+                   queryAdmin.addValueEventListener(new ValueEventListener() {
+                       @Override
+                       public void onDataChange(@NonNull DataSnapshot snapshot) {
+                           if (snapshot.exists()) {
+                               Intent intentAdmin = new Intent(MainActivity.this, NavAdministradorActivity.class);
+                               startActivity(intentAdmin);
+                               finish();
+                           } else {
+                               Query queryClientes = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
+                               queryClientes.addValueEventListener(new ValueEventListener() {
+                                   @Override
+                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                       if (snapshot.exists()) {
+                                           Intent intentCliente = new Intent(MainActivity.this, NavClienteActivity.class);
+                                           startActivity(intentCliente);
+                                           finish();
+                                       } else {
+                                           Intent intentCliente = new Intent(MainActivity.this, LogginActivity.class);
+                                           startActivity(intentCliente);
+                                           finish();
+                                       }
+                                   }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                                   @Override
+                                   public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                                   }
+                               });
+                           }
+                       }
 
+                       @Override
+                       public void onCancelled(@NonNull DatabaseError error) {
 
-                    ///
-
-                } else {
-                    Intent intent = new Intent(MainActivity.this, NavClienteActivity.class);
+                       }
+                   });
+               }else {
+                    Intent intent = new Intent(MainActivity.this, LogginActivity.class);
                     startActivity(intent);
+                    finish();
                 }
-                finish();
             }
         }, 3000);
+
+
     }
+
     public void mostarToast(String txt, int estatus, boolean corto) {
         LayoutInflater inflater = getLayoutInflater();
 
         View layout = null;
 
-        if(estatus==0){
+        if (estatus == 0) {
             //Default
             layout = inflater.inflate(R.layout.custom_toast_info,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==1){
+        } else if (estatus == 1) {
             //Success
             layout = inflater.inflate(R.layout.custom_toast_success,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==2) {
+        } else if (estatus == 2) {
             //Warning
             layout = inflater.inflate(R.layout.custom_toast_warning,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==3){
+        } else if (estatus == 3) {
             //Error
             layout = inflater.inflate(R.layout.custom_toast_error,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else if(estatus==4){
+        } else if (estatus == 4) {
             //Falla de red
             layout = inflater.inflate(R.layout.custom_toast_red,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else if(estatus==5){
+        } else if (estatus == 5) {
             //Falla de red
             layout = inflater.inflate(R.layout.custom_toast_sin_data,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else{
+        } else {
             //Informacion
             layout = inflater.inflate(R.layout.custom_toast_info,
                     (ViewGroup) findViewById(R.id.layout_base));
@@ -167,9 +170,11 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(txt);
         Toast toast = new Toast(this);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 50);
-        if(corto){
-            toast.setDuration(Toast.LENGTH_SHORT);}else{
-            toast.setDuration(Toast.LENGTH_LONG);}
+        if (corto) {
+            toast.setDuration(Toast.LENGTH_SHORT);
+        } else {
+            toast.setDuration(Toast.LENGTH_LONG);
+        }
         toast.setView(layout);
         toast.show();
     }

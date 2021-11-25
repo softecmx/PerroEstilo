@@ -320,6 +320,16 @@
     <string name="agregaTalla">Agregar talla</string>
     <string name="buscaModelo">Buscar modelo</string>
 
+    <!--Categoria-->
+    <string name="escCategor">Escoja la categoría</string>
+    <string name="nomCategor">Nombre de la categoría</string>
+    <string name="dirigido">Dirigido al público de:</string>
+    <string name="humano">Humano</string>
+    <string name="mascota">Mascota</string>
+    <string name="descCategor">Descripción de la categoría</string>
+    <string name="descCate">Descripción de la categoría (Opcional)</string>
+
+
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
@@ -510,8 +520,9 @@
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
-
-
+    <string name="txtUser1Git">\@ansual</string>
+    <string name="txtUser2Git">\@estetipo</string>
+    <string name="txtUser3Git">\@kevinsanchez-cat</string>
     <string name="txtpagosPendientes">Pagos pendientes</string>
     <string name="bus_pedido_pago">Buscar venta</string>
 
@@ -543,11 +554,12 @@
 
     <!--Tallas-->
     <string name="mediana">Mediana</string>
-
-
-
-
-
-
+    <string name="txtSobreNosotros">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et est metus. Aliquam interdum ante nunc, a euismod nisi faucibus nec. Praesent consequat, mi hendrerit pretium porttitor, mauris est hendrerit nulla, sed cursus diam orci vel neque. Sed finibus purus vitae nunc rutrum venenatis. Donec volutpat ultrices enim, vel maximus lectus pulvinar eu. Phasellus consectetur congue massa, in lacinia risus lacinia nec. In hac habitasse platea dictumst. Suspendisse dolor ligula, tempus non lacus non, porta vulputate lorem. Nam posuere erat ligula, id lacinia nisi volutpat gravida. Etiam quis vehicula tellus. Sed dictum nibh sapien, sed feugiat tellus venenatis eget.</string>
+    <string name="txtMision">Morbi Ut id volutpat mauris, ac vehicula nibh. Pellentesque tempus mauris at rutrum tempor. Vestibulum fringilla odio vitae varius lacinia. Duis at lectus porttitor, efficitur purus rhoncus, viverra massa. In nec tellus ipsum. Pellentesque dapibus sem et nunc ultrices dignissim. Nunc vehicula venenatis eros.</string>
+    <string name="txtVision">Vestibulum ligula nisi, dapibus et erat ac, volutpat venenatis velit. Nunc dui lectus, imperdiet at est eu, consectetur rhoncus libero. Integer sed sollicitudin lacus. Mauris ornare nibh non tempor convallis.</string>
+    <string name="txtSiguenosRedSocial">Siguenos en nuestras redes sociales</string>
+    <string name="facebook_app_id">959929477953395</string> <string name="fb_login_protocol_scheme">fb959929477953395</string>
+    <string name="txtConfirmacionSalir">¿Seguro que quieres cerrar sessión?</string>
+    <string name="txtRegresar">Regresar</string>
 
 </resources>

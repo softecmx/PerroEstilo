@@ -40,7 +40,7 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         TextView txtInformacion = convertView.findViewById(R.id.txtMedidasTalla);
 
         txtCampo.setText(arrayList.get(position).getTalla());
-        txtInformacion.setText("Ced. Prof. : "+arrayList.get(position).getMedidas());
+        txtInformacion.setText("Medidas : "+arrayList.get(position).getMedidas());
 
         return convertView;
     }
