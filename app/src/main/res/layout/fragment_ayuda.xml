@@ -26,8 +26,9 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:backgroundTint="@color/green"
-        android:drawableLeft="@drawable/whats"
+        android:drawableLeft="@drawable/outline_whatsapp_24"
         android:drawablePadding="4dp"
+        android:drawableTint="@color/white"
         android:text="@string/txtPreguntarPorWhatsApp" />
 </LinearLayout>
 

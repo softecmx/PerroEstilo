@@ -560,5 +560,12 @@
 
     <!--Tallas-->
     <string name="mediana">Mediana</string>
+    <string name="txtSobreNosotros">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et est metus. Aliquam interdum ante nunc, a euismod nisi faucibus nec. Praesent consequat, mi hendrerit pretium porttitor, mauris est hendrerit nulla, sed cursus diam orci vel neque. Sed finibus purus vitae nunc rutrum venenatis. Donec volutpat ultrices enim, vel maximus lectus pulvinar eu. Phasellus consectetur congue massa, in lacinia risus lacinia nec. In hac habitasse platea dictumst. Suspendisse dolor ligula, tempus non lacus non, porta vulputate lorem. Nam posuere erat ligula, id lacinia nisi volutpat gravida. Etiam quis vehicula tellus. Sed dictum nibh sapien, sed feugiat tellus venenatis eget.</string>
+    <string name="txtMision">Morbi Ut id volutpat mauris, ac vehicula nibh. Pellentesque tempus mauris at rutrum tempor. Vestibulum fringilla odio vitae varius lacinia. Duis at lectus porttitor, efficitur purus rhoncus, viverra massa. In nec tellus ipsum. Pellentesque dapibus sem et nunc ultrices dignissim. Nunc vehicula venenatis eros.</string>
+    <string name="txtVision">Vestibulum ligula nisi, dapibus et erat ac, volutpat venenatis velit. Nunc dui lectus, imperdiet at est eu, consectetur rhoncus libero. Integer sed sollicitudin lacus. Mauris ornare nibh non tempor convallis.</string>
+    <string name="txtSiguenosRedSocial">Siguenos en nuestras redes sociales</string>
+    <string name="facebook_app_id">959929477953395</string> <string name="fb_login_protocol_scheme">fb959929477953395</string>
+    <string name="txtConfirmacionSalir">¿Seguro que quieres cerrar sessión?</string>
+    <string name="txtRegresar">Regresar</string>
 
 </resources>

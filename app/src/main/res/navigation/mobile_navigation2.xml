@@ -44,9 +44,9 @@
 
     <fragment
         android:id="@+id/nav_mis_direcciones"
-        android:name="com.programacion.perroestilocliente.ui.cliente.direcciones.misDirecciones.MisDireccionesFragment"
+        android:name="com.programacion.perroestilocliente.ui.cliente.direcciones.agregarDireccion.AgregarDireccionFragment"
         android:label="@string/menu_mis_direcciones"
-        tools:layout="@layout/fragment_mis_direcciones" />
+        tools:layout="@layout/fragment_agregar_direccion" />
 
     <fragment
         android:id="@+id/nav_pedidos"
@@ -90,5 +90,10 @@
         android:name="com.programacion.perroestilocliente.ui.ajustes.AjustesFragment"
         android:label="@string/menu_ajustes"
         tools:layout="@layout/fragment_ajustes" />
+    <fragment
+        android:id="@+id/nav_salir"
+        android:name="com.programacion.perroestilocliente.ui.cliente.salir.SalirFragment"
+        android:label="@string/menu_salir"
+        tools:layout="@layout/fragment_salir" />
 
 </navigation>

@@ -131,12 +131,21 @@
                 android:hint="@string/txtReferencias"
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapViewAddDirUbicacion"
+<!--
+        <fragment
+            android:id="@+id/frame1"
+            android:name="com.programacion.perroestilocliente.MapsFragment"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="250dp"
+            />
+        -->
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -167,5 +176,7 @@
                 android:layout_weight="1"
                 android:text="@string/txtCancelar" />
         </LinearLayout>
+
+
     </LinearLayout>
 </ScrollView>
