@@ -5,6 +5,7 @@
  */
 package com.programacion.perroestilocliente.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class Categorias {
     private String descripcion;
     private String estadoLogico;
     private String tipoPublico;
+    private ArrayList<Productos> arr;
 
 
     public Categorias() {
@@ -29,6 +31,14 @@ public class Categorias {
         this.descripcion = descripcion;
         this.estadoLogico = estadoLogico;
         this.tipoPublico = tipoPublico;
+    }
+
+    public ArrayList<Productos> getArr() {
+        return arr;
+    }
+
+    public void setArr(ArrayList<Productos> arr) {
+        this.arr = arr;
     }
 
     public String getTipoPublico() {

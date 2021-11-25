@@ -14,7 +14,6 @@ import java.util.List;
 public class Productos {
 
     private String idProducto;
-    private String claveProducto;
     private String idCategoria;
     private String disenio;
     private String talla;
@@ -27,11 +26,9 @@ public class Productos {
     private String stock;
     private String estadoLogico;
     private String imgFoto;
-    private List<Galerias> lstGalerias;
 
-    public Productos(String idProducto, String claveProducto, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto, List<Galerias> lstGalerias) {
+    public Productos(String idProducto, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
         this.idProducto = idProducto;
-        this.claveProducto = claveProducto;
         this.idCategoria = idCategoria;
         this.disenio = disenio;
         this.talla = talla;
@@ -44,7 +41,6 @@ public class Productos {
         this.stock = stock;
         this.estadoLogico = estadoLogico;
         this.imgFoto = imgFoto;
-        this.lstGalerias = lstGalerias;
     }
 
     public String getRaiting() {
@@ -79,28 +75,12 @@ public class Productos {
         this.imgFoto = imgFoto;
     }
 
-    public List<Galerias> getLstGalerias() {
-        return lstGalerias;
-    }
-
-    public void setLstGalerias(List<Galerias> lstGalerias) {
-        this.lstGalerias = lstGalerias;
-    }
-
     public String getIdProducto() {
         return idProducto;
     }
 
     public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
-    }
-
-    public String getClaveProducto() {
-        return claveProducto;
-    }
-
-    public void setClaveProducto(String claveProducto) {
-        this.claveProducto = claveProducto;
     }
 
     public String getIdCategoria() {
