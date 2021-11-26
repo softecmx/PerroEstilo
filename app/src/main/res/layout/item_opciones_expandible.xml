@@ -2,10 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
     android:background="@drawable/gradient"
-    android:orientation="horizontal"
+    android:gravity="center"
+    android:orientation="vertical"
     android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/ilistEdit"
@@ -19,7 +24,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_edit_black_24dp" />
+                android:src="@drawable/ic_edit_location_black_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,7 +45,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_delete_black_24dp" />
+                android:src="@drawable/ic_location_off_black_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,12 +66,13 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_info_black_24dp" />
+                android:src="@drawable/ic_location_on_black_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Info"
                 android:textColor="@color/black" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
