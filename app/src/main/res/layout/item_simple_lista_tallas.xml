@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/txtNombreTalla"
+                    android:id="@+id/txtNombreTallaSimple"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -28,7 +28,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/txtMedidasTalla"
+                    android:id="@+id/txtMedidasTallaSimple"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -36,27 +36,7 @@
                     android:textSize="12sp"
                     android:layout_alignParentLeft="true" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true">
-                <Button
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:drawableBottom="@drawable/ic_edit_black_24dp"
-                    android:drawableTint="?attr/colorPrimary"
-                    android:layout_gravity="end"
-                    android:id="@+id/ibtnLTedita"
-                    android:background="@android:color/transparent"/>
-                <Button
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:drawableBottom="@drawable/ic_delete_black_24dp"
-                    android:drawableTint="?attr/colorPrimary"
-                    android:layout_gravity="end"
-                    android:id="@+id/ibtnLTelimina"
-                    android:background="@android:color/transparent"/>
-            </LinearLayout>
+
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

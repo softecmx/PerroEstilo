@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Tallas;
 
@@ -150,14 +151,13 @@ public class TallasFragment extends Fragment {
     private androidx.appcompat.app.AlertDialog dialog;
 
     private void createDialogAgregar() {
-
         androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
         final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_agregar_veterinario, null);
+
         btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnTallaCancelar);
         btnPopAgregar = (Button) aboutPop.findViewById(R.id.btnAddTalla);
         etTalla = (EditText) aboutPop.findViewById(R.id.etATtalla);
         etMedidas = (EditText) aboutPop.findViewById(R.id.etATmedidas);
-
 
         dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
@@ -169,7 +169,7 @@ public class TallasFragment extends Fragment {
                 String talla = (etTalla).getText().toString();
                 String medida = (etMedidas).getText().toString();
                 if (talla.equals("") || medida.equals("")){
-                    mostarToast("Datos no validos!",5,false);
+                    mostarToast("Faltan datos",2,false);
                 }else{
                     Tallas tal = new Tallas();
                     tal.setTallas(talla);
