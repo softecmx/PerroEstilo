@@ -48,7 +48,7 @@
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carruselInicio"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="280dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
             app:autoPlay="true"
@@ -74,6 +74,63 @@
             android:id="@+id/reciclerViewHomeCategorias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/txtProductosNuevos"
+            android:textColor="@color/gray_800"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reciclerViewHomeNuevosProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/txtNuestraGaleri"
+            android:textColor="@color/gray_800"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carrucelGaleria"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="16dp"
+            android:translationZ="8dp"
+            app:autoPlay="true"
+            app:autoPlayDelay="4000"
+            app:carouselGravity="CENTER"
+            app:carouselPaddingBottom="8dp"
+            app:carouselPaddingTop="8dp"
+            app:carouselType="SHOWCASE"
+            app:imageScaleType="centerCrop"
+            app:scaleOnScroll="true"
+            app:scalingFactor=".25"
+            app:showBottomShadow="false"
+            app:showCaption="false"
+            app:showIndicator="false"
+            app:showNavigationButtons="false"
+            app:showTopShadow="false"  />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/txtMejoresComentarios"
+            android:textColor="@color/gray_800"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carruselComentarios"
             android:layout_width="match_parent"
@@ -87,7 +144,8 @@
             app:showCaption="false"
             app:showIndicator="false"
             app:showNavigationButtons="false"
-            app:showTopShadow="false"/>
+            app:showTopShadow="false"
+            android:layout_marginBottom="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

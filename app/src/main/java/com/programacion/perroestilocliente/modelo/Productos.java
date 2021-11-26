@@ -14,6 +14,8 @@ import java.util.List;
 public class Productos {
 
     private String idProducto;
+    private  String nombrProducto;
+
     private String idCategoria;
     private String disenio;
     private String talla;
@@ -26,6 +28,9 @@ public class Productos {
     private String stock;
     private String estadoLogico;
     private String imgFoto;
+
+    public Productos() {
+    }
 
     public Productos(String idProducto, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
         this.idProducto = idProducto;
@@ -41,6 +46,31 @@ public class Productos {
         this.stock = stock;
         this.estadoLogico = estadoLogico;
         this.imgFoto = imgFoto;
+    }
+
+    public Productos(String idProducto, String nombrProducto, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
+        this.idProducto = idProducto;
+        this.nombrProducto = nombrProducto;
+        this.idCategoria = idCategoria;
+        this.disenio = disenio;
+        this.talla = talla;
+        this.precioVenta = precioVenta;
+        this.costo = costo;
+        this.descuento = descuento;
+        this.fechaCreacion = fechaCreacion;
+        this.raiting = raiting;
+        this.estatusStock = estatusStock;
+        this.stock = stock;
+        this.estadoLogico = estadoLogico;
+        this.imgFoto = imgFoto;
+    }
+
+    public String getNombrProducto() {
+        return nombrProducto;
+    }
+
+    public void setNombrProducto(String nombrProducto) {
+        this.nombrProducto = nombrProducto;
     }
 
     public String getRaiting() {

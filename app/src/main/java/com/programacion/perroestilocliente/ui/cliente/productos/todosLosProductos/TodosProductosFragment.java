@@ -41,12 +41,12 @@ public class TodosProductosFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-       // if (isLinear) {
+        // if (isLinear) {
 
-            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
-                    StaggeredGridLayoutManager.VERTICAL));
-            recyclerView.setAdapter(adapter);
-            isLinear = false;
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
+        isLinear = false;
        /* } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
             recyclerView.setAdapter(adapter);
@@ -74,15 +74,15 @@ public class TodosProductosFragment extends Fragment {
     private ArrayList<Producto> getListaCoche() {
         ArrayList<Producto> arrayListProductos = new ArrayList<>();
 
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
         return arrayListProductos;
     }
 

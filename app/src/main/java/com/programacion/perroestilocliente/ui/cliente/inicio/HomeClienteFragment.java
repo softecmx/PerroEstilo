@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewbinding.ViewBinding;
 
 import android.view.LayoutInflater;
@@ -17,6 +20,8 @@ import android.widget.ViewFlipper;
 
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.databinding.ItemCustomFixedSizeLayout4Binding;
+import com.programacion.perroestilocliente.modelo.Categorias;
+import com.programacion.perroestilocliente.modelo.Productos;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
@@ -30,16 +35,26 @@ import java.util.List;
 public class HomeClienteFragment extends Fragment {
 
     private HomeClienteViewModel mViewModel;
+    View root;
+    ViewFlipper viewFlipper;
 
     ImageCarousel carousel;
     List<CarouselItem> list = new ArrayList<>();
-    View root;
+
+    ImageCarousel carouselGaleria;
+    List<CarouselItem> listGaleria = new ArrayList<>();
 
     ImageCarousel carouselComentarios;
-    ViewFlipper viewFlipper;
-
     List<CarouselItem> listComentarios = new ArrayList<>();
 
+    androidx.recyclerview.widget.RecyclerView recyclerViewCategorias;
+    androidx.recyclerview.widget.RecyclerView reciclerViewHomeNuevosProductos;
+
+    List<Categorias> lstCategorias;
+    ListAdapterCategorias listAdapterCateforias;
+
+    ArrayList<Productos> arrayListProductos = new ArrayList<>();
+    private ReciclerViewAdapterProductos adapterProductos;
     public static HomeClienteFragment newInstance() {
         return new HomeClienteFragment();
     }
@@ -48,7 +63,6 @@ public class HomeClienteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home_cliente, container, false);
-
 
         //====================================================================
         carousel = root.findViewById(R.id.carruselInicio);
@@ -59,34 +73,44 @@ public class HomeClienteFragment extends Fragment {
         list.add(new CarouselItem(R.drawable.img_carrucel_admin5));
 
         carousel.setData(list);
+
+        //=====================================================================
+        carouselGaleria = root.findViewById(R.id.carrucelGaleria);
+        listGaleria.add(new CarouselItem(R.drawable.img_galeria1));
+        listGaleria.add(new CarouselItem(R.drawable.img_galeria2));
+        listGaleria.add(new CarouselItem(R.drawable.img_galeria3));
+        listGaleria.add(new CarouselItem(R.drawable.img_galeria4));
+        listGaleria.add(new CarouselItem(R.drawable.img_galeria5));
+
+        carouselGaleria.setData(listGaleria);
+
         //=====================================================================
 
         carouselComentarios = root.findViewById(R.id.carruselComentarios);
 
         List<Integer> colorsForSix = new ArrayList<>();
-        colorsForSix.add(R.color.flat_awesome_green_1);
-        colorsForSix.add(R.color.flat_green_1);
-        colorsForSix.add(R.color.flat_blue_1);
-        colorsForSix.add(R.color.flat_pink_1);
-        colorsForSix.add(R.color.flat_yellow_1);
-        colorsForSix.add(R.color.flat_orange_1);
+        colorsForSix.add(R.color.flat_grey_normal_1);
+        colorsForSix.add(R.color.flat_grey_normal_1);
+        colorsForSix.add(R.color.flat_grey_normal_1);
+        colorsForSix.add(R.color.flat_grey_normal_1);
+        colorsForSix.add(R.color.flat_grey_normal_1);
+        colorsForSix.add(R.color.flat_grey_normal_1);
 
         HashMap<Integer, String> map = new HashMap<>();
-        map.put(0,"Semper eget");
-        map.put(1,"Lorem ipsum");
-        map.put(2,"Cum sociis");
-        map.put(3,"Euismod lacinia");
-        map.put(4,"Tincidunt ornare");
-        map.put(5,"Pellentesque elit");
+        map.put(0, "Juan Perez");
+        map.put(1, "Monica Juarez");
+        map.put(2, "Cum sociis");
+        map.put(3, "Euismod lacinia");
+        map.put(4, "Tincidunt ornare");
+        map.put(5, "Pellentesque elit");
 
         HashMap<Integer, String> map2 = new HashMap<>();
-        map2.put(0, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
-        map2.put(1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
-        map2.put(2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
-        map2.put(3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
+        map2.put(0, "Los mejores precios, la mejor calidad.");
+        map2.put(1, "Me han gustado los diseños. Estan padrisísimos");
+        map2.put(2, "Ahora mi perrita tiene a ser más feliz con lo que lleva puesto.");
+        map2.put(3, "Estoy feliz de encontrar una tienda en la que sus productos se ajusten a la medida de los clietnes");
         map2.put(4, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
         map2.put(5, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.");
-
 
 
         carouselComentarios.setCarouselListener(new CarouselListener() {
@@ -101,15 +125,15 @@ public class HomeClienteFragment extends Fragment {
             public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull CarouselItem item, int position) {
                 // Convierte el enlace a la clase de enlace de vista devuelta del método onCreateViewHolder ().
                 ItemCustomFixedSizeLayout4Binding currentBinding = (ItemCustomFixedSizeLayout4Binding) binding;
-try{
-    int currentColor = ResourcesCompat.getColor(getResources(), colorsForSix.get(position), null);
-    currentBinding.card.setCardBackgroundColor(currentColor);
+                try {
+                    int currentColor = ResourcesCompat.getColor(getResources(), colorsForSix.get(position), null);
+                    currentBinding.card.setCardBackgroundColor(currentColor);
 
-    currentBinding.tvCaption.setText("-"+map.get(position));
-    currentBinding.tvBody.setText(map2.get(position));
-}catch (Exception e){
+                    currentBinding.tvCaption.setText("-" + map.get(position));
+                    currentBinding.tvBody.setText(map2.get(position));
+                } catch (Exception e) {
 
-}
+                }
 
             }
 
@@ -133,6 +157,56 @@ try{
         carouselComentarios.setData(listComentarios);
 
         //=============================================================================
+
+        recyclerViewCategorias = root.findViewById(R.id.reciclerViewHomeCategorias);
+        recyclerViewCategorias.setLayoutManager(new GridLayoutManager(recyclerViewCategorias.getContext(), 1,
+                GridLayoutManager.HORIZONTAL, false));
+        lstCategorias=new ArrayList<>();
+        Categorias cat1=new Categorias();
+        cat1.setNombreCategoria("Nola");
+
+        Categorias cat2=new Categorias();
+        cat2.setNombreCategoria("Nola");
+        Categorias cat3=new Categorias();
+        cat3.setNombreCategoria("Nola");
+        Categorias cat4=new Categorias();
+        cat4.setNombreCategoria("Nola");
+
+
+        lstCategorias.add(cat1);
+        lstCategorias.add(cat2);
+        lstCategorias.add(cat3);
+        lstCategorias.add(cat4);
+        lstCategorias.add(cat4);
+        lstCategorias.add(cat4);
+        lstCategorias.add(cat4);
+
+        listAdapterCateforias=new ListAdapterCategorias(lstCategorias,root.getContext());
+        recyclerViewCategorias.setHasFixedSize(true);
+        //recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        recyclerViewCategorias.setAdapter(listAdapterCateforias);
+
+        //===========================================================================================
+        reciclerViewHomeNuevosProductos = root.findViewById(R.id.reciclerViewHomeNuevosProductos);
+        Productos producto=new Productos();
+        producto.setNombrProducto("Nolasas");
+        Productos producto2=new Productos();
+        producto2.setNombrProducto("Nolasas");
+
+        arrayListProductos.add(producto);
+        arrayListProductos.add(producto2);
+        arrayListProductos.add(producto2);
+        arrayListProductos.add(producto2);
+        arrayListProductos.add(producto2);
+        arrayListProductos.add(producto2);
+        arrayListProductos.add(producto2);
+        adapterProductos = new ReciclerViewAdapterProductos(root.getContext(), arrayListProductos);
+
+        reciclerViewHomeNuevosProductos.setLayoutManager(new GridLayoutManager(reciclerViewHomeNuevosProductos.getContext(), 1,
+                GridLayoutManager.HORIZONTAL, false));
+       /* reciclerViewHomeNuevosProductos.setLayoutManager(new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL));*/
+        reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
 
         return root;
 
