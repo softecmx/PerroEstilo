@@ -484,7 +484,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
-    <string name="bienvenidaAdmin">¡Bienvenida Rousse!</string>
+    <string name="bienvenidaAdmin">Bienvenida</string>
     <string name="title_inicio_Admin">Inicio</string>
     <string name="cantidadInicioAPedidos">10,293</string>
     <string name="txtInicioAPedidos">Pedidos</string>
@@ -530,7 +530,7 @@
     <string name="txtstatusPendiente">Pendiente por confirmar</string>
     <string name="pago">$$$$</string>
     <string name="txtlimitePago">Limite del </string>
-    <string name="fechaLimite">00/00/000</string>
+    <string name="fechaLimite">00/00/0000</string>
     <string name="btnconfirmarPago">CONFIRMAR PAGO Y PREPARAR PEDIDO</string>
     <string name="txtstatusPreparacion">En preparación</string>
     <string name="txtstatusCamino">En camino</string>
@@ -543,17 +543,33 @@
     <string name="instagram">Instagram </string>
     <string name="tiktok">TikTok </string>
 
+    <!--AGREGAR PEDIDO ADMIN-->
+    <string name="txtBuscarUsuarioNuevoPedido">Nombre del cliente: </string>
+    <string name="txtAddCarito">Agregar al carrito de:  </string>
+    <string name="txtBuscarPedido">Buscar pedido por no. serie  </string>
+    <string name="txtPagoPendiente">PAGO PENDIENTE </string>
+    <string name="txtLimiteFechaPago">Fecha limite de pago  </string>
+    <string name="txtPreparandoPedido">PREPARANDO PEDIDO </string>
+    <string name="txtFechaEstimada">Estimado para el  </string>
+    <string name="txtEnCamino">EN CAMINO </string>
+    <string name="txtEntregado">ENTREGADO EL  </string>
+    <string name="txtEnviarPedido">ENVIAR PEDIDO  </string>
+    <string name="txtImprimirGuia">Imprimir guía de envío </string>
+    <string name="txtConfirmarEntrega">Confirmar entrega</string>
+    <string name="txtContactarCliente">Contactar al cliente</string>
     <!--CLIENTES LEALES-->
     <string name="txtNuevoClienteLeal">Ingresar usuaio/ nombre del cliente</string>
     <!--PRODUCTOS-->
     <string name="monioCorbatin">Moño corbatin</string>
-
-
     <!--MODELOS-->
     <string name="modeloAnaranjado">Anaranjado</string>
-
     <!--Tallas-->
     <string name="mediana">Mediana</string>
+    <!--INVENTARIO-->
+    <string name="txtcodigoInventario">Codigo del producto</string>
+    <string name="txtModificarStock">Ingresar stock:</string>
+    <string name="txtModificarStatusStock">Cambiar status :</string>
+
     <string name="txtSobreNosotros">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et est metus. Aliquam interdum ante nunc, a euismod nisi faucibus nec. Praesent consequat, mi hendrerit pretium porttitor, mauris est hendrerit nulla, sed cursus diam orci vel neque. Sed finibus purus vitae nunc rutrum venenatis. Donec volutpat ultrices enim, vel maximus lectus pulvinar eu. Phasellus consectetur congue massa, in lacinia risus lacinia nec. In hac habitasse platea dictumst. Suspendisse dolor ligula, tempus non lacus non, porta vulputate lorem. Nam posuere erat ligula, id lacinia nisi volutpat gravida. Etiam quis vehicula tellus. Sed dictum nibh sapien, sed feugiat tellus venenatis eget.</string>
     <string name="txtMision">Morbi Ut id volutpat mauris, ac vehicula nibh. Pellentesque tempus mauris at rutrum tempor. Vestibulum fringilla odio vitae varius lacinia. Duis at lectus porttitor, efficitur purus rhoncus, viverra massa. In nec tellus ipsum. Pellentesque dapibus sem et nunc ultrices dignissim. Nunc vehicula venenatis eros.</string>
     <string name="txtVision">Vestibulum ligula nisi, dapibus et erat ac, volutpat venenatis velit. Nunc dui lectus, imperdiet at est eu, consectetur rhoncus libero. Integer sed sollicitudin lacus. Mauris ornare nibh non tempor convallis.</string>

@@ -4,12 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.administrador.cuenta.CuentaFragment">
+    tools:context=".ui.administrador.cuenta.CuentaFragment"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,9 +34,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/imgCuetaAdmin"
                 android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/imgCuetaAdmin"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/txtNombreUsuarioCuentaAdmin"
                     android:layout_width="wrap_content"
@@ -50,41 +54,30 @@
                     android:text="@string/email"
                     android:textColor="@color/black" />
             </LinearLayout>
-            <ImageView
-                android:id="@+id/imgSiguiente"
+            <ImageButton
+                android:id="@+id/imgbtnSiguienteCuentaAdmin"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="350dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_navigate_next_black_24dp"/>
+                android:backgroundTint="@color/white"
+                app:srcCompat="@drawable/ic_navigate_next_black_24dp"/>
         </RelativeLayout>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/gray_300"
-            android:elevation="2dp"
-            app:cardCornerRadius="8dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="320dp"
                     android:layout_margin="3dp"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:layout_marginTop="15dp">
                     <ListView
+                        android:id="@+id/listOpcionesCuentaAdmin"
+                        android:layout_marginTop="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                     </ListView>
 
                 </FrameLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 </ScrollView>
