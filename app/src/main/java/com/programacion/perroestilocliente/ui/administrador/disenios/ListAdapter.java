@@ -74,11 +74,7 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     private androidx.appcompat.app.AlertDialog dialog;
     String id="";
 
-    private static final int COD_SELECCIONA = 10;
-    private static final int COD_FOTO = 20;
-    public static final int REQUEST_PERMISSION_CAMERA = 100;
 
-    private Uri photoURI;
 
     public ListAdapter(Activity activity, ArrayList<ElementListView> arrayList,LayoutInflater layoutInflater,Context context,View root) {
            super(activity, R.layout.item_lista_tallas, arrayList);
