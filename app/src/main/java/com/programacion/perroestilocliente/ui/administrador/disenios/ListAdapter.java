@@ -72,6 +72,7 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     private AutoCompleteTextView listaPop;
     com.google.android.material.floatingactionbutton.FloatingActionButton fbPopFoto;
     private androidx.appcompat.app.AlertDialog dialog;
+    String id="";
 
     private static final int COD_SELECCIONA = 10;
     private static final int COD_FOTO = 20;
@@ -140,18 +141,19 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         ivPopImg =(ImageView) aboutPop.findViewById(R.id.imgAddDisenioFoto);
         listaPop =(AutoCompleteTextView) aboutPop.findViewById(R.id.spAdisenioEt);
         fbPopFoto =  aboutPop.findViewById(R.id.fBtnAddDisenioFoto);
+        img = arrayList.get(position).getImagen();
 
         etPopNombre.setText(arrayList.get(position).getDisenio());
-        cargaImagen(ivPopImg,arrayList.get(position).getImagen());
+        cargaImagen(ivPopImg,img);
+
 
         dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
         dialog.show();
-
+        id = arrayList.get(position).getIdModelo();
         fbPopFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
         btnPopCerrar.setOnClickListener(view -> dialog.dismiss());
@@ -166,9 +168,9 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
                     disenio.setDisenio(etPopNombre.getText().toString());
                     disenio.setImagen(img);
                     disenio.setEstadoLogico("1");
-                    disenio.setIdModelo(UUID.randomUUID().toString());
-                    databaseReference.child("Disenios").child(disenio.getIdModelo()).setValue(disenio);
-                    Toast.makeText(getContext(), "Datos registrado!", Toast.LENGTH_SHORT).show();
+                    disenio.setIdModelo(id);
+                    databaseReference.child("Disenios").child(id).setValue(disenio);
+                    Toast.makeText(getContext(), "Datos modificados!", Toast.LENGTH_SHORT).show();
 
                     etPopNombre.setText("");
                     listaPop.setText("");
@@ -180,7 +182,10 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         });
     }
     public void elimina(int position){
+        databaseReference.child("Disenios").child(arrayList.get(position).getIdModelo()).removeValue();
+        Toast.makeText(context,"Dato eliminado",Toast.LENGTH_SHORT).show();
 
+        //CustomToast.mostarToast("Dato eliminado!",1,false,root,layoutInflater,context);
     }
     private void cargaImagen(ImageView ivFoto, String img) {
         storageReference.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -191,16 +196,8 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                CustomToast.mostarToast("Ups! Ha ocurrido un erro al recuperar la imagen\n" + e.getCause(), 3, false,root,layoutInflater,context);
+                Toast.makeText(context,"Ups! Ha ocurrido un erro al recuperar la imagen\n" + e.getCause(),Toast.LENGTH_SHORT).show();
             }
         });
-
-    }
-
-
-    private String extension(Uri photoUri) {
-        ContentResolver cr = getContext().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(cr.getType(photoUri));
     }
 }
