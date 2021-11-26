@@ -9,16 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/menu_clientes"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textSize="24dp"
-            android:textColor="@color/titulos"/>
-
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
         <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -54,35 +47,17 @@
                 android:contentDescription="@string/txtDescripcion"
                 app:srcCompat="@drawable/ic_add_box_black_24dp" />
         </LinearLayout>
-        <com.google.android.material.card.MaterialCardView
+        <FrameLayout
+            android:id="@+id/flClientesFrame"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/flat_pink_1"
-            android:elevation="4dp"
-            app:cardCornerRadius="8dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
 
-            <LinearLayout
+            <ListView
+                android:id="@+id/listClientes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical">
+                android:layout_height="match_parent"/>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="320dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/white">
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        />
-                </FrameLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
     </LinearLayout>
-
 </ScrollView>

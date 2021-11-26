@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,20 +18,38 @@
             android:textSize="24dp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
-        <ImageView
-            android:id="@+id/imgLealtadCliente"
-            android:layout_width="125dp"
-            android:layout_height="115dp"
-            android:layout_gravity="center"
-            android:src="@drawable/img_user_exist"/>
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_favorite_black_24dp"
-            android:backgroundTint="@color/auxiliar"
-            android:layout_gravity="center"
-            android:layout_marginTop="-25dp"
-            android:layout_marginEnd="-40dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="214dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="13dp">
+
+            <!--  app:civ_border_color="@color/primaryColor"
+                app:civ_border_width="4dp"-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPhotoModificalLealtad"
+                android:layout_width="197dp"
+                android:layout_height="162dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/txtDescImg"
+                android:src="@drawable/img_user_exist"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fBtnPerfilFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:src="@drawable/ic_favorite_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imgPhotoModificalLealtad"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/txtNombreUsuarioLealtad"
             android:layout_width="wrap_content"
@@ -80,11 +99,13 @@
                 android:id="@+id/btnAceptarCambioLealtad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_margin="20dp"
                 android:text="@string/aceptar"
                 android:textSize="20dp"/>
             <Button
                 android:id="@+id/btnCancelarCambioLealtad"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
