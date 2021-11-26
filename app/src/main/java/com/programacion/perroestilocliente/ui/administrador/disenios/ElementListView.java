@@ -1,28 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.programacion.perroestilocliente.modelo;
+package com.programacion.perroestilocliente.ui.administrador.disenios;
 
-import java.util.List;
 
-/**
- *
- * @author por_s
- */
-public class Disenios {
+public class ElementListView {
+
 
     private String idModelo;
     private String disenio;
     private String estadoLogico;
     private String imagen;
 
-    public Disenios() {
-    }
-
-
-    public Disenios(String idModelo, String disenio, String estadoLogico, String imagen, List<Etiquetas> lstEtiquetas) {
+    public ElementListView(String idModelo, String disenio, String estadoLogico, String imagen) {
         this.idModelo = idModelo;
         this.disenio = disenio;
         this.estadoLogico = estadoLogico;
@@ -61,4 +48,7 @@ public class Disenios {
         this.imagen = imagen;
     }
 
+    public String toString(){
+        return getIdModelo();
+    }
 }
