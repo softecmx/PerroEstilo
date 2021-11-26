@@ -71,7 +71,7 @@ public class AgregarProductosFragment extends Fragment
     private ImageView ivImagen;
     private com.google.android.material.floatingactionbutton.FloatingActionButton fbFoto;
     private AutoCompleteTextView categoria, disenio, talla,spinAgProdStat;
-    private EditText descripcion,costo,precio,decuento,stock;
+    private EditText descripcion,costo,precio,decuento,stock,nombre;
     private Button agregar,limpia;
     View root;
 
@@ -127,6 +127,8 @@ public class AgregarProductosFragment extends Fragment
         ivImagen = root.findViewById(R.id.imgAddProdFoto);
         fbFoto = root.findViewById(R.id.fBtnAddProdFoto);
 
+        nombre = root.findViewById(R.id.etAgregaProductoNombre);
+
         categoria  = root.findViewById(R.id.spinAPcategoria);
         disenio = root.findViewById(R.id.spinAPdisenio);
         talla = root.findViewById(R.id.spinAPtalla);
@@ -160,12 +162,12 @@ public class AgregarProductosFragment extends Fragment
         });
     }
     public void valida(){
-        if (descripcion.getText().toString().equals("") || costo.getText().toString().equals("")||precio.getText().toString().equals("")||
+        if (nombre.getText().toString().equals("")||descripcion.getText().toString().equals("") || costo.getText().toString().equals("")||precio.getText().toString().equals("")||
                 decuento.getText().toString().equals("") || stock.getText().toString().equals("") || categoria.getText().toString().equals("")||
                 disenio.getText().toString().equals("") || talla.getText().toString().equals("")||img.equals("")||spinAgProdStat.getText().toString().equals("")){
             CustomToast.mostarToast("Faltan datos por agregar",2,false,root,getLayoutInflater(),getContext());
         }else {
-            Productos prod = new Productos(UUID.randomUUID().toString(), categoria.getText().toString(), disenio.getText().toString(), talla.getText().toString(), precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", spinAgProdStat.getText().toString(), stock.getText().toString(), "1", img);
+            Productos prod = new Productos(UUID.randomUUID().toString(),nombre.getText().toString(), categoria.getText().toString(), disenio.getText().toString(), talla.getText().toString(), precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", spinAgProdStat.getText().toString(), stock.getText().toString(), "1", img);
             databaseReference.child("Productos").child(prod.getIdProducto()).setValue(prod);
             CustomToast.mostarToast("Datos registrados!",1,false,root,getLayoutInflater(),getContext());
             limpiar();
@@ -333,7 +335,7 @@ public class AgregarProductosFragment extends Fragment
                 for (DataSnapshot objSnapshot: snapshot.getChildren()){
                     Disenios p = objSnapshot.getValue(Disenios.class);
                     arrayList2.add(new com.programacion.perroestilocliente.ui.administrador.disenios.ElementListView(p.getIdModelo(), p.getDisenio(), p.getEstadoLogico(), p.getImagen()));
-                    customAdapterDisenio = new com.programacion.perroestilocliente.ui.administrador.disenios.ListAdapterSimple (getActivity(), arrayList2);
+                    customAdapterDisenio = new com.programacion.perroestilocliente.ui.administrador.disenios.ListAdapterSimple (getActivity(), arrayList2,getContext());
                     disenio.setAdapter(customAdapterDisenio);
                 }
             }
