@@ -329,6 +329,12 @@
     <string name="descCategor">Descripción de la categoría</string>
     <string name="descCate">Descripción de la categoría (Opcional)</string>
 
+    <!--Diseños-->
+    <string name="buscDiseño">Buscar diseño</string>
+    <string name="nomDisenio">Nombre del diseño</string>
+    <string name="etiquAsoc">Etiquetas asociadas</string>
+    <string name="agEtiq">Agregar etiqeta</string>
+
 
 
     <!-- Messages Preferences -->

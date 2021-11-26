@@ -44,4 +44,7 @@ public class ElementListView {
     public void setStatus(String status) {
         this.status = status;
     }
+    public String toString(){
+        return getId();
+    }
 }
