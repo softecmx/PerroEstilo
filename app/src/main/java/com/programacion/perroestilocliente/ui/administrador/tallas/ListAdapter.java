@@ -72,14 +72,14 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         btnLisElim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vistaEliminar(position);
             }
         });
 
         btnLisModif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                vistaEditar(position);
             }
         });
 
