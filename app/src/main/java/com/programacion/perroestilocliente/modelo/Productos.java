@@ -14,6 +14,7 @@ import java.util.List;
 public class Productos {
 
     private String idProducto;
+    private  String nombrProducto;
     private String nombre;
     private String idCategoria;
     private String disenio;
@@ -32,6 +33,7 @@ public class Productos {
     }
 
     public Productos(String idProducto, String nombre, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
+
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.idCategoria = idCategoria;
@@ -48,12 +50,37 @@ public class Productos {
         this.imgFoto = imgFoto;
     }
 
+    public Productos(String idProducto, String nombrProducto, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
+        this.idProducto = idProducto;
+        this.nombrProducto = nombrProducto;
+        this.idCategoria = idCategoria;
+        this.disenio = disenio;
+        this.talla = talla;
+        this.precioVenta = precioVenta;
+        this.costo = costo;
+        this.descuento = descuento;
+        this.fechaCreacion = fechaCreacion;
+        this.raiting = raiting;
+        this.estatusStock = estatusStock;
+        this.stock = stock;
+        this.estadoLogico = estadoLogico;
+        this.imgFoto = imgFoto;
+    }
+
+    public String getNombrProducto() {
+        return nombrProducto;
+    }
+
+    public void setNombrProducto(String nombrProducto) {
+        this.nombrProducto = nombrProducto;
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+
     }
 
     public String getRaiting() {

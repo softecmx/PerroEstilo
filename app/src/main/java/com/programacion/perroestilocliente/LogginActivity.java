@@ -182,6 +182,9 @@ public class LogginActivity extends AppCompatActivity {
     }
 
     private void handleFacebookToken(AccessToken accessToken) {
+        signInButton.setEnabled(false);
+        logginButton.setEnabled(false);
+        btnLoggin.setEnabled(false);
         Log.d(TAG, "handleFacebookToken" + accessToken);
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -285,6 +288,9 @@ public class LogginActivity extends AppCompatActivity {
                     Log.d(TAG, "Sign in with credential: failure", task.getException());
                     mostarToast("Autenticación fallida", 3, false);
                   //  updateUI(null);
+                    signInButton.setEnabled(true);
+                    logginButton.setEnabled(true);
+                    btnLoggin.setEnabled(true);
                 }
             }
         });
@@ -326,6 +332,9 @@ public class LogginActivity extends AppCompatActivity {
     }
 
     public void firebaseAuthWithGoogle(String idToken) {
+        signInButton.setEnabled(false);
+        logginButton.setEnabled(false);
+        btnLoggin.setEnabled(false);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(
@@ -425,7 +434,9 @@ public class LogginActivity extends AppCompatActivity {
 
                                 } else {
                                     mostarToast("Falló conexión con Google", 3, true);
-
+                                    signInButton.setEnabled(true);
+                                    logginButton.setEnabled(true);
+                                    btnLoggin.setEnabled(true);
                                 }
                             }
                         }
@@ -439,6 +450,9 @@ public class LogginActivity extends AppCompatActivity {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
+        signInButton.setEnabled(false);
+        logginButton.setEnabled(false);
+        btnLoggin.setEnabled(false);
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -466,6 +480,9 @@ public class LogginActivity extends AppCompatActivity {
                                         } else {
                                             mostarToast("Usuario no autorizado", 2, true);
                                             mAuth.signOut();
+                                            signInButton.setEnabled(true);
+                                            logginButton.setEnabled(true);
+                                            btnLoggin.setEnabled(true);
                                         }
                                     }
 
@@ -485,6 +502,9 @@ public class LogginActivity extends AppCompatActivity {
 
                 } else {
                     mostarToast("Datos incorrectos", 2, true);
+                    signInButton.setEnabled(true);
+                    logginButton.setEnabled(true);
+                    btnLoggin.setEnabled(true);
                 }
             }
         });
