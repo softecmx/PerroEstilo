@@ -75,12 +75,12 @@ public class HomeAdminFragment extends Fragment {
                 for (DataSnapshot objSnapshot: snapshot.getChildren()){
                     u = objSnapshot.getValue(Usuarios.class);
                     pedidos= objSnapshot.getValue(OrdenesCliente.class);
-                    produ= objSnapshot.getValue(Productos.class);
+                    //produ= objSnapshot.getValue(Productos.class);
                     persona= objSnapshot.getValue(Persona.class);
                 }
                 if (u!=null){
                     nombre.setText("!Bienvenida " + u.getUsername()+" !");
-                    stock.setText("Productos con pocas existencias... "+produ.getStock());
+                    //stock.setText("Productos con pocas existencias... "+produ.getStock());
                 }
             }
             @Override
