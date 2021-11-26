@@ -2,19 +2,24 @@ package com.programacion.perroestilocliente.ui.cliente.productos.todosLosProduct
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 
 import com.bumptech.glide.Glide;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
 
 import java.util.ArrayList;
 
@@ -22,10 +27,13 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
 
     private Context context;
     private ArrayList<Producto> listaProductos;
-
-    public RViewAdapter(Context context, ArrayList<Producto> listaProductos) {
+    FragmentManager fragmentManager;
+    FragmentContainerView container;
+    public RViewAdapter(Context context, ArrayList<Producto> listaProductos, FragmentManager fragmentManager) {
         this.context = context;
         this.listaProductos = listaProductos;
+        this.fragmentManager=fragmentManager;
+        this.container=container;
     }
 
     @NonNull
@@ -46,8 +54,14 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Position: " +
-                        holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                VerProductoTiendaFragment newFragment1= new VerProductoTiendaFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
 

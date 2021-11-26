@@ -44,9 +44,9 @@
 
     <fragment
         android:id="@+id/nav_mis_direcciones"
-        android:name="com.programacion.perroestilocliente.ui.cliente.direcciones.agregarDireccion.AgregarDireccionFragment"
+        android:name="com.programacion.perroestilocliente.ui.cliente.direcciones.misDirecciones.MisDireccionesFragment"
         android:label="@string/menu_mis_direcciones"
-        tools:layout="@layout/fragment_agregar_direccion" />
+        tools:layout="@layout/fragment_mis_direcciones" />
 
     <fragment
         android:id="@+id/nav_pedidos"

@@ -1,5 +1,6 @@
 package com.programacion.perroestilocliente.ui.cliente.productos.todosLosProductos;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -37,7 +38,10 @@ public class TodosProductosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_todos_productos, container, false);
-        init();
+        this.recyclerView = root.findViewById(R.id.recViewTodosProductos);
+        this.layoutManager = new LinearLayoutManager(root.getContext());
+        FragmentManager fragmentManager = getFragmentManager();
+        this.adapter = new RViewAdapter(root.getContext(), getListaCoche(),fragmentManager);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
@@ -64,11 +68,6 @@ public class TodosProductosFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    private void init() {
-        this.recyclerView = root.findViewById(R.id.recViewTodosProductos);
-        this.layoutManager = new LinearLayoutManager(root.getContext());
-        this.adapter = new RViewAdapter(root.getContext(), getListaCoche());
-    }
 
 
     private ArrayList<Producto> getListaCoche() {
