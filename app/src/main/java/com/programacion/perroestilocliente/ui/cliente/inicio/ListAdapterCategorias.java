@@ -47,10 +47,12 @@ public class ListAdapterCategorias extends RecyclerView.Adapter<ListAdapterCateg
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.bindData(mData.get(position));
-        holder.cv.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition));
+       // holder.cv.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              //  System.out.println("Hola");
+
 
             }
         });
