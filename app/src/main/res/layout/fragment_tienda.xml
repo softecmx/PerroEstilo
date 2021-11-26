@@ -9,8 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -117,6 +115,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:gravity="center"
             android:text="@string/txtCategorias"
             android:textColor="@color/gray_800"
@@ -126,12 +127,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/auxiliar"
                 android:elevation="4dp"
@@ -202,6 +204,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="25dp"
             android:layout_weight="1"
             android:backgroundTint="@color/ingigo_200"
             android:elevation="4dp"
@@ -237,6 +241,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="16dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/flat_grey_light_1"
@@ -247,6 +253,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
+
                 android:orientation="vertical">
 
                     <TextView
@@ -265,9 +272,10 @@
                     android:layout_height="320dp"
                     android:layout_margin="3dp"
                     android:background="@color/white">
+
                     <ListView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="327dp" />
                 </FrameLayout>
                 <TextView
                     android:layout_width="match_parent"
@@ -282,6 +290,8 @@
         </com.google.android.material.card.MaterialCardView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:backgroundTint="@color/flat_grey_light_1"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -334,6 +344,8 @@
             android:id="@+id/reciclerViewHomeNuevosProductos"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"/>
 

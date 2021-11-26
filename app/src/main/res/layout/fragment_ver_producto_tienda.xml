@@ -1,183 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:layout_marginLeft="15dp"
-      android:layout_marginRight="15dp">
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/txtNombreProducto"
-          android:textColor="@color/black"
-          android:textStyle="bold"
-          android:textSize="28sp"
-          android:layout_marginTop="15dp"
-          />
-      <RatingBar
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:rating="4"
-          android:layout_marginLeft="13dp"
-          android:numStars="5"
-          android:scaleY="1.4"
-          android:scaleX="1.4"
-          style="?android:attr/ratingBarStyleSmall"
-          android:theme="@style/RatingBar.Yellow"
-          android:layout_marginTop="5dp"
-          />
-      <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="220dp"
-          android:layout_marginTop="15dp"
-          android:src="@drawable/monio_corbatin_anaranjado"
-          />
-      <TextView
-          android:layout_marginTop="15dp"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/precio"
-          android:textSize="18sp"
-          android:textColor="@color/black"/>
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:background="@color/flat_awesome_green_1"
-          android:padding="2dp"
-          android:layout_marginTop="5dp"
-          android:text="@string/descuento"/>
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal">
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/tall"
-              android:textColor="@color/black"
-              android:layout_gravity="center_vertical"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="35dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
 
-          <com.google.android.material.textfield.TextInputLayout
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-              <AutoCompleteTextView
-                  android:id="@+id/spinAddDirMuncipio"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:hint="@string/txtEscogerTalla"
-                  android:inputType="none" />
-          </com.google.android.material.textfield.TextInputLayout>
-      </LinearLayout>
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:layout_marginTop="10dp">
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/txtCantidad"
-              android:textColor="@color/black"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="15dp"
-              android:layout_gravity="center_vertical"/>
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  >
-                  <Button
-                      android:layout_weight="1"
-                      android:layout_width="64dp"
-                      android:layout_height="match_parent"
-                      android:backgroundTint="@color/flat_grey_dark_1"
-                      android:drawableLeft="@drawable/ic_remove_black_24dp"
-                      android:drawableTint="@color/white"/>
-                  <com.google.android.material.textfield.TextInputLayout
-                      android:layout_weight="1"
-                      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      app:boxBackgroundMode="outline">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/txtNombreProducto"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-                      <com.google.android.material.textfield.TextInputEditText
-                          android:id="@+id/editAddDirCodPostal"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:text="1"
-                          android:inputType="number" />
-                  </com.google.android.material.textfield.TextInputLayout>
-                  <Button
-                      android:layout_weight="1"
-                      android:layout_width="64dp"
-                      android:layout_height="match_parent"
-                      android:backgroundTint="@color/flat_grey_dark_1"
-                      android:drawableLeft="@drawable/ic_add_black_24dp"
-                      android:drawableTint="@color/white"/>
-              </LinearLayout>
-      </LinearLayout>
-      <Button
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/txtComprarAhora"
-          android:layout_marginTop="10dp"/>
-      <Button
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/txtAgregarCarrito"/>
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2dp"
-          android:background="@color/flat_grey_dark_1"
-          />
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/txtDetallesProducto"
-          android:textColor="@color/black"
-          android:textSize="18sp"
-          android:textStyle="bold"/>
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2dp"
-          android:background="@color/flat_grey_dark_1"
-          />
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/txtDescripcion"
-          android:textColor="@color/black"
-          android:textSize="18sp"
-          android:textStyle="bold"/>
-      <TableLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+        <RatingBar
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="5dp"
+            android:numStars="5"
+            android:rating="4"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:theme="@style/RatingBar.Yellow" />
 
-      </TableLayout>
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/txtDescripcion"
-          android:textColor="@color/black"
-          android:textSize="14sp"/>
-      <Button
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:backgroundTint="@color/green"
-          android:drawableLeft="@drawable/outline_whatsapp_24"
-          android:drawablePadding="4dp"
-          android:drawableTint="@color/white"
-          android:text="@string/txtPreguntarPorWhatsApp" />
-  </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/monio_corbatin_anaranjado" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/precio"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/flat_awesome_green_1"
+            android:padding="2dp"
+            android:text="@string/descuento"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="35dp"
+                android:text="@string/tall"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinAddDirMuncipio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txtEscogerTalla"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:text="@string/txtCantidad"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/flat_grey_dark_1"
+                    android:drawableLeft="@drawable/ic_remove_black_24dp"
+                    android:drawableTint="@color/white" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editAddDirCodPostal"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="1"
+                    android:inputType="number"
+                    android:text="1" />
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/flat_grey_dark_1"
+                    android:drawableLeft="@drawable/ic_add_black_24dp"
+                    android:drawableTint="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/txtComprarAhora" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtAgregarCarrito"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/flat_grey_dark_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtDetallesProducto"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+            <TableRow
+                android:background="@color/green">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtModelo"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="13sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtModelo"
+                    android:textColor="@color/white"
+                    android:padding="10sp"
+                    android:textSize="13sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    />
+            </TableRow>
+
+        </TableLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/flat_grey_dark_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtDescripcion"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TableLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtDescripcion"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:drawableLeft="@drawable/outline_whatsapp_24"
+            android:drawablePadding="4dp"
+            android:drawableTint="@color/white"
+            android:text="@string/txtPreguntarPorWhatsApp" />
+    </LinearLayout>
 </ScrollView>

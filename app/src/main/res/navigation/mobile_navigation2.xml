@@ -38,9 +38,9 @@
 
     <fragment
         android:id="@+id/nav_mis_kits"
-        android:name="com.programacion.perroestilocliente.ui.cliente.kits.buscarMisKits.BuscarMiKitFragment"
+        android:name="com.programacion.perroestilocliente.ui.cliente.kits.misKits.MisKitsFragment"
         android:label="@string/menu_mis_kits"
-        tools:layout="@layout/fragment_ver_kit" />
+        tools:layout="@layout/fragment_mis_kits" />
 
     <fragment
         android:id="@+id/nav_mis_direcciones"

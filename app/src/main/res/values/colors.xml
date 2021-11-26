@@ -13,8 +13,8 @@
 
 
     <color name="primaryColor">@color/pink_300</color>
-    <color name="primaryLightColor">@color/pink_200</color>
-    <color name="primaryDarkColor">@color/pink_200</color>
+    <color name="primaryLightColor">@color/pink_300</color>
+    <color name="primaryDarkColor">@color/pink_400</color>
     <color name="secondaryColor">#A168F1</color>
     <color name="secondaryLightColor">#CD65DF</color>
     <color name="secondaryDarkColor">#DA6BED</color>
