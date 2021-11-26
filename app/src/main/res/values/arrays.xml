@@ -2570,6 +2570,12 @@
         <item>Trancoso</item>
         <item>Santa María de la Paz</item>
     </string-array>
+    <string-array name="estatus_producto">
+        <item>Pocas existencias</item>
+        <item>En existencias</item>
+        <item>Agotado</item>
+        <item>Descontinuado</item>
+    </string-array>
     <!-- Reply Preference -->
     <string-array name="reply_entries">
         <item>Reply</item>
@@ -2579,5 +2585,11 @@
     <string-array name="reply_values">
         <item>reply</item>
         <item>reply_all</item>
+    </string-array>
+    <!-- ESTATUS -->
+    <string-array name="Status">
+        <item>En existencias</item>
+        <item>Pocas existencias</item>
+        <item>Agotado</item>
     </string-array>
 </resources>
