@@ -332,6 +332,7 @@
     <!--Diseños-->
     <string name="buscDiseño">Buscar diseño</string>
     <string name="nomDisenio">Nombre del diseño</string>
+    <string name="nomProd">Nombre del producto</string>
     <string name="etiquAsoc">Etiquetas asociadas</string>
     <string name="agEtiq">Agregar etiqeta</string>
 
