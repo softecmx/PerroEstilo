@@ -2586,4 +2586,10 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+    <!-- ESTATUS -->
+    <string-array name="Status">
+        <item>En existencias</item>
+        <item>Pocas existencias</item>
+        <item>Agotado</item>
+    </string-array>
 </resources>
