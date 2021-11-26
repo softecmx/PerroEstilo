@@ -107,6 +107,7 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
             public void onClick(View v) {
                 String talla = (etTalla).getText().toString();
                 String medida = (etMedidas).getText().toString();
+                String id = arrayList.get(position).getId();
                 if (talla.equals("") || medida.equals("")) {
                     CustomToast.mostarToast("Faltan datos", 2, false, root, layoutInflater, context);
                 } else {
@@ -114,6 +115,7 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
                     tal.setTallas(talla);
                     tal.setMedidas(medida);
                     tal.setEstadoLogico("1");
+                    tal.setIdTalla(id);
                     databaseReference.child("Tallas").child(arrayList.get(position).getId()).setValue(tal);
                     CustomToast.mostarToast("Datos registrado!", 1, false, root, layoutInflater, context);
                     etTalla.setText("");
@@ -125,7 +127,7 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     }
 
     public void vistaEliminar(int position){
-        databaseReference.child("Tallas").child(arrayList.get(position).getId()).removeValue();
+        databaseReference.child("Tallas").child(arrayList.get(position).getId().toString()).removeValue();
+        CustomToast.mostarToast("Dato Eliminado!",1,false,root,layoutInflater,context);
     }
-
 }

@@ -57,8 +57,6 @@ public class TallasFragment extends Fragment{
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-
-
     Tallas tallaSelected;
 
     private ArrayList<Tallas> ListaTallas = new ArrayList<Tallas>();
