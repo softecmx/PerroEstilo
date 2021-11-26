@@ -3,6 +3,7 @@ package com.programacion.perroestilocliente.ui.administrador.tallas;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -35,10 +36,11 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Tallas;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-public class TallasFragment extends Fragment {
+public class TallasFragment extends Fragment{
 
     private TallasViewModel mViewModel;
 
@@ -54,6 +56,10 @@ public class TallasFragment extends Fragment {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+
+
+    Tallas tallaSelected;
 
     private ArrayList<Tallas> ListaTallas = new ArrayList<Tallas>();
 
@@ -72,8 +78,8 @@ public class TallasFragment extends Fragment {
         iniciaFirebase();
         listarDatos();
 
-        registerForContextMenu(listView);
         fBtnAgregar.setOnClickListener(view -> createDialogAgregar());
+
         return root;
     }
     public void listarDatos(){
@@ -84,7 +90,7 @@ public class TallasFragment extends Fragment {
                 for (DataSnapshot objSnapshot: snapshot.getChildren()){
                     Tallas p = objSnapshot.getValue(Tallas.class);
                     arrayList.add(new ElementListView(p.getTallas(),p.getMedidas(),p.getIdTalla(), p.getEstadoLogico()));
-                    customAdapter = new ListAdapter(getActivity(), arrayList);
+                    customAdapter = new ListAdapter(getActivity(), arrayList,getLayoutInflater(),getContext(),root);
                     listView.setAdapter(customAdapter);
                 }
             }
