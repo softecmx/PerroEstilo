@@ -50,7 +50,7 @@ public class EliminarCategoriaFragment extends Fragment {
     public static EliminarCategoriaFragment newInstance() {
         return new EliminarCategoriaFragment();
     }
-
+    Categorias c;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class EliminarCategoriaFragment extends Fragment {
             databaseReference.child("Categorias").orderByChild("idCategorias").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener(){
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot){
-                    Categorias c=null;
+                    c=null;
                     for (DataSnapshot objSnapshot: snapshot.getChildren()){
                         c = objSnapshot.getValue(Categorias.class);
                     }
@@ -153,7 +153,8 @@ public class EliminarCategoriaFragment extends Fragment {
     }
     public void elimina(){
         if (bnd!=0){
-            databaseReference.child("Categorias").child(id.getText().toString()).removeValue();
+            c.setEstadoLogico("0");
+            databaseReference.child("Categorias").child(c.getIdCategorias()).setValue(c);
             limpia();
             CustomToast.mostarToast("Elemento eliminado",1,false,root,getLayoutInflater(),getContext());
             bnd=0;

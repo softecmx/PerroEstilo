@@ -37,13 +37,17 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.modelo.Categorias;
 import com.programacion.perroestilocliente.modelo.Disenios;
 
 import java.io.ByteArrayOutputStream;
@@ -73,7 +77,7 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     com.google.android.material.floatingactionbutton.FloatingActionButton fbPopFoto;
     private androidx.appcompat.app.AlertDialog dialog;
     String id="";
-
+    Disenios c;
 
 
     public ListAdapter(Activity activity, ArrayList<ElementListView> arrayList,LayoutInflater layoutInflater,Context context,View root) {
@@ -178,10 +182,25 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         });
     }
     public void elimina(int position){
-        databaseReference.child("Disenios").child(arrayList.get(position).getIdModelo()).removeValue();
-        Toast.makeText(context,"Dato eliminado",Toast.LENGTH_SHORT).show();
-
-        //CustomToast.mostarToast("Dato eliminado!",1,false,root,layoutInflater,context);
+        databaseReference.child("Disenios").orderByChild("idModelo").equalTo(arrayList.get(position).getIdModelo()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                c=null;
+                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                    c = objSnapshot.getValue(Disenios.class);
+                }
+                if (c!=null){
+                    c.setEstadoLogico("0");
+                    databaseReference.child("Disenios").child(c.getIdModelo()).setValue(c);
+                    Toast.makeText(context,"Dato eliminado",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,"Dato NO encontrado",Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
     private void cargaImagen(ImageView ivFoto, String img) {
         storageReference.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

@@ -449,11 +449,13 @@
         <entry key="app/src/main/res/layout/fragment_buscar_match.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_buscar_mi_kit.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_buscar_productos.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_buscar_productos_administrador.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_consultar_disenios.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_consultar_productos.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_editar_categoria.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_editar_kit.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_editar_modelo.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_editar_productos.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_eliminar_categoria.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_eliminar_match.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_eliminar_modelo.xml" value="0.1" />

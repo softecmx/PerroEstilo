@@ -167,7 +167,7 @@ public class AgregarProductosFragment extends Fragment
                 disenio.getText().toString().equals("") || talla.getText().toString().equals("")||img.equals("")||spinAgProdStat.getText().toString().equals("")){
             CustomToast.mostarToast("Faltan datos por agregar",2,false,root,getLayoutInflater(),getContext());
         }else {
-            Productos prod = new Productos(UUID.randomUUID().toString(),nombre.getText().toString(), categoria.getText().toString(), disenio.getText().toString(), talla.getText().toString(), precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", spinAgProdStat.getText().toString(), stock.getText().toString(), "1", img);
+            Productos prod = new Productos(UUID.randomUUID().toString(),nombre.getText().toString(), categoria.getText().toString(), disenio.getText().toString(), talla.getText().toString(), precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", spinAgProdStat.getText().toString(), stock.getText().toString(), "1", img,descripcion.getText().toString());
             databaseReference.child("Productos").child(prod.getIdProducto()).setValue(prod);
             CustomToast.mostarToast("Datos registrados!",1,false,root,getLayoutInflater(),getContext());
             limpiar();

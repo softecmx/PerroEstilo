@@ -27,11 +27,12 @@ public class Productos {
     private String stock;
     private String estadoLogico;
     private String imgFoto;
+    private String descripcion;
 
     public Productos() {
     }
 
-    public Productos(String idProducto, String nombre, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
+    public Productos(String idProducto, String nombre, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto,String descripcion) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.idCategoria = idCategoria;
@@ -46,6 +47,15 @@ public class Productos {
         this.stock = stock;
         this.estadoLogico = estadoLogico;
         this.imgFoto = imgFoto;
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getNombre() {
