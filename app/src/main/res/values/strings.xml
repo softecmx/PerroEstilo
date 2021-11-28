@@ -584,5 +584,6 @@
     <string name="facebook_app_id">959929477953395</string> <string name="fb_login_protocol_scheme">fb959929477953395</string>
     <string name="txtConfirmacionSalir">¿Seguro que quieres cerrar sessión?</string>
     <string name="txtRegresar">Regresar</string>
+    <string name="txtPublico">Tipo</string>
 
 </resources>

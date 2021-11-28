@@ -1,7 +1,5 @@
 package com.programacion.perroestilocliente.ui.cliente.mainCliente;
 
-import android.content.ClipData;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,12 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.programacion.perroestilocliente.LogginActivity;
-import com.programacion.perroestilocliente.NavAdministradorActivity;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
 
@@ -55,7 +48,7 @@ public class NavClienteActivity extends AppCompatActivity {
                 R.id.nav_politicas,R.id.nav_ajustes,R.id.nav_salir)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_nav_cliente);
+        NavController navController = Navigation.findNavController(this, R.id.container_cliente);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -80,7 +73,7 @@ public class NavClienteActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_nav_cliente);
+        NavController navController = Navigation.findNavController(this, R.id.container_cliente);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }

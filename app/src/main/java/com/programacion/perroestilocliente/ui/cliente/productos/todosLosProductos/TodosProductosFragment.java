@@ -1,5 +1,6 @@
 package com.programacion.perroestilocliente.ui.cliente.productos.todosLosProductos;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -37,16 +38,19 @@ public class TodosProductosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_todos_productos, container, false);
-        init();
+        this.recyclerView = root.findViewById(R.id.recViewTodosProductos);
+        this.layoutManager = new LinearLayoutManager(root.getContext());
+        FragmentManager fragmentManager = getFragmentManager();
+        this.adapter = new RViewAdapter(root.getContext(), getListaCoche(),fragmentManager);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-       // if (isLinear) {
+        // if (isLinear) {
 
-            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
-                    StaggeredGridLayoutManager.VERTICAL));
-            recyclerView.setAdapter(adapter);
-            isLinear = false;
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
+        isLinear = false;
        /* } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
             recyclerView.setAdapter(adapter);
@@ -64,25 +68,20 @@ public class TodosProductosFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    private void init() {
-        this.recyclerView = root.findViewById(R.id.recViewTodosProductos);
-        this.layoutManager = new LinearLayoutManager(root.getContext());
-        this.adapter = new RViewAdapter(root.getContext(), getListaCoche());
-    }
 
 
     private ArrayList<Producto> getListaCoche() {
         ArrayList<Producto> arrayListProductos = new ArrayList<>();
 
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
-        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1",true,true,"200","0","4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
+        arrayListProductos.add(new Producto(R.drawable.monio_corbatin_anaranjado, "McLaren P1", true, true, "200", "0", "4.5"));
         return arrayListProductos;
     }
 

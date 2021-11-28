@@ -1,9 +1,12 @@
 package com.programacion.perroestilocliente.ui.administrador.cuenta;
 
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -96,9 +99,15 @@ public class CuentaFragment extends Fragment {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CuentaFragment cf= new CuentaFragment();
-                //FragmentManager fragmentManager = getFragmentManager();
-                //fragmentManager.beginTransaction().replace(R.layout.fragment_perfil_administrador).getClass();
+                com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment cf= new com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment();
+                Bundle args = new Bundle();
+                cf.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, cf);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
         return root;

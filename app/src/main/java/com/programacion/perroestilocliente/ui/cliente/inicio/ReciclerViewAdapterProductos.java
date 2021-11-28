@@ -1,39 +1,31 @@
-package com.programacion.perroestilocliente.ui.cliente.productos.todosLosProductos;
+package com.programacion.perroestilocliente.ui.cliente.inicio;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 
 import com.bumptech.glide.Glide;
 import com.programacion.perroestilocliente.R;
-import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
+import com.programacion.perroestilocliente.modelo.Productos;
 
 import java.util.ArrayList;
 
-public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHolder> {
+public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerViewAdapterProductos.DataObjectHolder> {
 
     private Context context;
-    private ArrayList<Producto> listaProductos;
-    FragmentManager fragmentManager;
-    FragmentContainerView container;
-    public RViewAdapter(Context context, ArrayList<Producto> listaProductos, FragmentManager fragmentManager) {
+    private ArrayList<Productos> listaProductos;
+
+    public ReciclerViewAdapterProductos(Context context, ArrayList<Productos> listaProductos) {
         this.context = context;
         this.listaProductos = listaProductos;
-        this.fragmentManager=fragmentManager;
-        this.container=container;
     }
 
     @NonNull
@@ -47,21 +39,15 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
 
-        holder.txtNombre.setText(listaProductos.get(position).getNombreProducto());
+        holder.txtNombre.setText(listaProductos.get(position).getNombrProducto());
         holder.txtDescuento.setPaintFlags(holder.txtDescuento.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-        Glide.with(context).load(listaProductos.get(position).getImg()).into(holder.img);
+      //  Glide.with(context).load(listaProductos.get(position).getImgFoto()).into(holder.img);
 
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VerProductoTiendaFragment newFragment1= new VerProductoTiendaFragment();
-                Bundle args = new Bundle();
-                newFragment1.setArguments(args);
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-
+                Toast.makeText(v.getContext(), "Position: " +
+                        holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
             }
         });
 
