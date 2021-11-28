@@ -119,7 +119,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:gravity="center"
-            android:text="@string/txtCategorias"
+            android:text="@string/txtCatalogo"
             android:textColor="@color/gray_800"
             android:textSize="32sp"
             android:textStyle="bold" />
