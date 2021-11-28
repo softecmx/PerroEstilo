@@ -42,14 +42,16 @@
             android:src="@drawable/monio_corbatin_anaranjado" />
 
         <TextView
+            android:id="@+id/txtVerProdPrecio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/precio"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
 
         <TextView
+            android:id="@+id/txtVerProdDescuento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -78,7 +80,7 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
-                    android:id="@+id/spinAddDirMuncipio"
+                    android:id="@+id/spinVerProdTalla"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/txtEscogerTalla"
@@ -107,6 +109,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnVerProdMenos"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -115,7 +118,7 @@
                     android:drawableTint="@color/white" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editAddDirCodPostal"
+                    android:id="@+id/editCantidad"
                     android:layout_width="50dp"
                     android:gravity="center"
                     android:layout_height="wrap_content"
@@ -126,6 +129,7 @@
                     android:text="1" />
 
                 <Button
+                    android:id="@+id/btnVerProdMas"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -137,12 +141,14 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnVerProdComprarAhora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/txtComprarAhora" />
 
         <Button
+            android:id="@+id/btnVerProdAgregarCar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtAgregarCarrito"
@@ -212,6 +218,7 @@
         </TableLayout>
 
         <TextView
+            android:id="@+id/txtVerProdDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtDescripcion"
@@ -219,6 +226,7 @@
             android:textSize="14sp" />
 
         <Button
+            android:id="@+id/btnVerProdPreguntar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
