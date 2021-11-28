@@ -3,30 +3,39 @@ package com.programacion.perroestilocliente.ui.cliente.mainCliente;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
-import com.programacion.perroestilocliente.R;
-import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.navigation.NavigationView;
+import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.bd.Item;
+import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NavClienteActivity extends AppCompatActivity {
 
+
+    private static ArrayList<Item> lstCarrito;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavClienteBinding binding;
+    private androidx.appcompat.app.AlertDialog dialog;
+    private Button btnPopCerrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +60,14 @@ public class NavClienteActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.container_cliente);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
+        lstCarrito=new ArrayList<>();
 
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId() == R.id.menu_carrito){
-
+                miCarrito();
             return true;
         }
 
@@ -76,6 +85,38 @@ public class NavClienteActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.container_cliente);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+
+    private void miCarrito() {
+
+        androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(NavClienteActivity.this);
+        final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_mi_carrito, null);
+       // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
+        TextView txtTotal=aboutPop.findViewById(R.id.txtDCarritoTotal);
+        TextView txtProductos=aboutPop.findViewById(R.id.txtDCarritoAunSinComprar);
+        if(lstCarrito.isEmpty()){
+            txtTotal.setText("$0.0");
+            txtProductos.setVisibility(View.VISIBLE);
+        }else{
+            txtTotal.setText("$10.0");
+            txtProductos.setVisibility(View.GONE);
+        }
+
+        dialogBuilder.setView(aboutPop);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+
+
+      /*  btnPopCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+*/
+        //cerrar
     }
     public void mostarToast(String txt, int estatus, boolean corto) {
         LayoutInflater inflater = getLayoutInflater();
@@ -131,4 +172,6 @@ public class NavClienteActivity extends AppCompatActivity {
         toast.setView(layout);
         toast.show();
     }
+
+
 }

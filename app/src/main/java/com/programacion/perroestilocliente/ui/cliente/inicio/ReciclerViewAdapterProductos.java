@@ -34,7 +34,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
     private Context context;
     FragmentManager fragmentManager;
     private ArrayList<Productos> listaProductos;
-
+    private String id;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
 
     public ReciclerViewAdapterProductos(Context context, ArrayList<Productos> listaProductos, FragmentManager fragmentManager) {
@@ -55,7 +55,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
 
         holder.txtNombre.setText(listaProductos.get(position).getNombre());
-
+        id = listaProductos.get(position).getIdProducto();
         String raiting = listaProductos.get(position).getRaiting();
         float raitingStar = 0;
         if (raiting.isEmpty()) {
@@ -107,6 +107,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
             public void onClick(View v) {
                 VerProductoTiendaFragment newFragment1= new VerProductoTiendaFragment();
                 Bundle args = new Bundle();
+                args.putString("idProducto", id);
                 newFragment1.setArguments(args);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_cliente, newFragment1);
