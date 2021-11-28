@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,12 +37,14 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
     private ArrayList<Productos> listaProductos;
     FragmentManager fragmentManager;
     FragmentContainerView container;
+    private String id;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
+
     public RViewAdapter(Context context, ArrayList<Productos> listaProductos, FragmentManager fragmentManager) {
         this.context = context;
         this.listaProductos = listaProductos;
-        this.fragmentManager=fragmentManager;
-        this.container=container;
+        this.fragmentManager = fragmentManager;
+        this.container = container;
     }
 
     @NonNull
@@ -57,7 +58,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
         holder.txtNombre.setText(listaProductos.get(position).getNombre());
-
+        id = listaProductos.get(position).getIdProducto();
         String raiting = listaProductos.get(position).getRaiting();
         float raitingStar = 0;
         if (raiting.isEmpty()) {
@@ -74,12 +75,12 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
         } else {
             holder.txtOferta.setVisibility(View.VISIBLE);
             holder.txtDescuento.setVisibility(View.VISIBLE);
-            float descuento=Float.parseFloat(listaProductos.get(position).getDescuento());
+            float descuento = Float.parseFloat(listaProductos.get(position).getDescuento());
 
-            float precio=Float.parseFloat(listaProductos.get(position).getPrecioVenta());
-            float descuentoReal=(descuento*precio)/100;
-            float precioActual=precio-descuentoReal;
-            float redondeo=Math.round(precioActual);
+            float precio = Float.parseFloat(listaProductos.get(position).getPrecioVenta());
+            float descuentoReal = (descuento * precio) / 100;
+            float precioActual = precio - descuentoReal;
+            float redondeo = Math.round(precioActual);
             holder.txtDescuento.setPaintFlags(holder.txtDescuento.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.txtDescuento.setText("$" + listaProductos.get(position).getPrecioVenta());
             holder.txtPrecio.setText("$" + redondeo);
@@ -107,8 +108,10 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
         holder.btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VerProductoTiendaFragment newFragment1= new VerProductoTiendaFragment();
+
+                VerProductoTiendaFragment newFragment1 = new VerProductoTiendaFragment();
                 Bundle args = new Bundle();
+                args.putString("idProducto", id);
                 newFragment1.setArguments(args);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_cliente, newFragment1);
