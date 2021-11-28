@@ -124,7 +124,6 @@ public class BuscarProductosFragment extends Fragment {
                     }
                     if (c != null) {
                         tvNombre.setText(c.getNombre());
-                        tvTalla.setText(c.getTalla());
                         tvCosto.setText(c.getCosto());
                         tvPrecio.setText(c.getPrecioVenta());
                         tvDescuento.setText(c.getDescuento());
@@ -226,7 +225,7 @@ public class BuscarProductosFragment extends Fragment {
                                 break;
                         }
                     } else {
-                        CustomToast.mostarToast("Dato no encontrado 1", 3, false, root, getLayoutInflater(), getContext());
+                        CustomToast.mostarToast("Dato no encontrado", 3, false, root, getLayoutInflater(), getContext());
                     }
                 }
 

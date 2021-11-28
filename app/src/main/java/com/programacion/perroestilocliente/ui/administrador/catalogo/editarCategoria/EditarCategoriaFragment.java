@@ -51,6 +51,8 @@ public class EditarCategoriaFragment extends Fragment{
     DatabaseReference databaseReference;
     ArrayList<ElementListView> arrayList;
 
+    String cat="";
+
     public static EditarCategoriaFragment newInstance() {
         return new EditarCategoriaFragment();
     }
@@ -59,14 +61,14 @@ public class EditarCategoriaFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root =inflater.inflate(R.layout.fragment_editar_categoria, container, false);
-        id = root.findViewById(R.id.spnECatID);
-        etNombre = root.findViewById(R.id.etECatNom);
-        etDesc = root.findViewById(R.id.etECatDesc);
-        rbHumano = root.findViewById(R.id.radioECatHumano);
-        rbMascota = root.findViewById(R.id.radioECatMascota);
-        modificar = root.findViewById(R.id.btnECatModifica);
-        limpiar = root.findViewById(R.id.btnECatLimpiar);
-        search = root.findViewById(R.id.btnECatbusca);
+        id = root.findViewById(R.id.spnEditarCatID);
+        etNombre = root.findViewById(R.id.etEditaCatNom);
+        etDesc = root.findViewById(R.id.etEditaCatDesc);
+        rbHumano = root.findViewById(R.id.radioEditaCatHumano);
+        rbMascota = root.findViewById(R.id.radioEditaCatMascota);
+        modificar = root.findViewById(R.id.btnEditaCatModifica);
+        limpiar = root.findViewById(R.id.btnEditaCatLimpiar);
+        search = root.findViewById(R.id.btnEditarCatbusca);
 
         iniciaFirebase();
         llenarSpn();
@@ -89,9 +91,16 @@ public class EditarCategoriaFragment extends Fragment{
                 limpiar();
             }
         });
+        id.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cat = customAdapter.getItem(position).getId();
+            }
+        });
         return root;
     }
     public void limpiar(){
+        cat="";
         bnd=0;
         id.setText("");
         etNombre.setText("");
@@ -121,7 +130,7 @@ public class EditarCategoriaFragment extends Fragment{
                 }else {
                     cat.setTipoPublico("Mascotas");
                 }
-                cat.setIdCategorias(id.getText().toString());
+                cat.setIdCategorias(this.cat);
                 cat.setEstadoLogico("1");
                 databaseReference.child("Categorias").child(cat.getIdCategorias()).setValue(cat);
                 CustomToast.mostarToast("Dato modificado!",1,false,root,getLayoutInflater(),getContext());
@@ -134,7 +143,7 @@ public class EditarCategoriaFragment extends Fragment{
 
     public void busca(){
         AutoCompleteTextView idACTV = id;
-        String id = this.id.getText().toString();
+        String id = cat;
         if (id.equals("")){
             CustomToast.mostarToast("Seleccione un dato",3,false,root,getLayoutInflater(),getContext());
         }else{
@@ -151,7 +160,7 @@ public class EditarCategoriaFragment extends Fragment{
                         if (c.getTipoPublico().equals("Mascotas")){
                             rbHumano.setChecked(false);
                             rbMascota.setChecked(true);
-                        }else{
+                        }else if (c.getTipoPublico().equals("Humanos")){
                             rbHumano.setChecked(true);
                             rbMascota.setChecked(false);
                         }

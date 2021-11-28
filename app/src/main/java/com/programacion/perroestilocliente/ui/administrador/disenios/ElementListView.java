@@ -49,6 +49,6 @@ public class ElementListView {
     }
 
     public String toString(){
-        return getIdModelo();
+        return getDisenio();
     }
 }

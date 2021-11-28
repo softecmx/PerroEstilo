@@ -31,6 +31,7 @@ import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Categorias;
 import com.programacion.perroestilocliente.modelo.Disenios;
+import com.programacion.perroestilocliente.modelo.Productos;
 import com.programacion.perroestilocliente.modelo.Tallas;
 
 import java.util.ArrayList;
@@ -156,8 +157,8 @@ public class ListAdapterSimple extends ArrayAdapter<ElementListView> {
                 star5.setImageResource(R.drawable.ic_star_black_24dp);
                 break;
         }
-        descuento.setText(arrayList.get(position).getDescuento());
-        precio.setText(arrayList.get(position).getPrecioVenta());
+        descuento.setText("Descuento: "+arrayList.get(position).getDescuento()+"%");
+        precio.setText("Precio: $"+arrayList.get(position).getPrecioVenta());
         return convertView;
     }
     private void cargaImagen(ImageView ivFoto, String img) {
@@ -174,5 +175,8 @@ public class ListAdapterSimple extends ArrayAdapter<ElementListView> {
         });
     }
 
+    public ElementListView getItem(int index) {
+        return arrayList.get(index);
+    }
 
 }

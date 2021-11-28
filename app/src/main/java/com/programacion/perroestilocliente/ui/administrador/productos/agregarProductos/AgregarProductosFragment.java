@@ -66,7 +66,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class AgregarProductosFragment extends Fragment
-        implements View.OnClickListener, AdapterView.OnItemSelectedListener{
+        implements View.OnClickListener, AdapterView.OnItemClickListener{
 
     private ImageView ivImagen;
     private com.google.android.material.floatingactionbutton.FloatingActionButton fbFoto;
@@ -94,7 +94,7 @@ public class AgregarProductosFragment extends Fragment
     ArrayList<com.programacion.perroestilocliente.ui.administrador.disenios.ElementListView> arrayList2;
     ArrayList<com.programacion.perroestilocliente.ui.administrador.tallas.ElementListView> arrayList3;
 
-    String img = "";
+    String img = "",idCat="",idDis="",idTal="";
 
     private AgregarProductosViewModel mViewModel;
 
@@ -110,6 +110,7 @@ public class AgregarProductosFragment extends Fragment
         iniciaFirebase();
         llenaSpn();
         listar();
+        listener();
 
         return root;
     }
@@ -120,7 +121,7 @@ public class AgregarProductosFragment extends Fragment
         spinAgProdStat = root.findViewById(R.id.spinAgProdEstatus);
         spinAgProdStat.setAdapter(generoAdapter);
 
-        spinAgProdStat.setOnItemSelectedListener(this);
+        spinAgProdStat.setOnItemClickListener(this);
     }
 
     public void cargar(){
@@ -163,11 +164,11 @@ public class AgregarProductosFragment extends Fragment
     }
     public void valida(){
         if (nombre.getText().toString().equals("")||descripcion.getText().toString().equals("") || costo.getText().toString().equals("")||precio.getText().toString().equals("")||
-                decuento.getText().toString().equals("") || stock.getText().toString().equals("") || categoria.getText().toString().equals("")||
-                disenio.getText().toString().equals("") || talla.getText().toString().equals("")||img.equals("")||spinAgProdStat.getText().toString().equals("")){
+                decuento.getText().toString().equals("") || stock.getText().toString().equals("") ||
+                img.equals("")||spinAgProdStat.getText().toString().equals("")||idCat.equals("")||idDis.equals("")||idTal.equals("")){
             CustomToast.mostarToast("Faltan datos por agregar",2,false,root,getLayoutInflater(),getContext());
         }else {
-            Productos prod = new Productos(UUID.randomUUID().toString(),nombre.getText().toString(), categoria.getText().toString(), disenio.getText().toString(), talla.getText().toString(), precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", spinAgProdStat.getText().toString(), stock.getText().toString(), "1", img,descripcion.getText().toString());
+            Productos prod = new Productos(UUID.randomUUID().toString(),nombre.getText().toString(), idCat, idDis, idTal, precio.getText().toString(), costo.getText().toString(), decuento.getText().toString(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), "0", spinAgProdStat.getText().toString(), stock.getText().toString(), "1", img,descripcion.getText().toString());
             databaseReference.child("Productos").child(prod.getIdProducto()).setValue(prod);
             CustomToast.mostarToast("Datos registrados!",1,false,root,getLayoutInflater(),getContext());
             limpiar();
@@ -297,6 +298,7 @@ public class AgregarProductosFragment extends Fragment
     }
     public void limpiar(){
         img="";
+        nombre.setText("");
         ivImagen.setImageResource(R.drawable.no_image);
         categoria.setText("");
         disenio.setText("");
@@ -307,6 +309,9 @@ public class AgregarProductosFragment extends Fragment
         precio.setText("");
         decuento.setText("");
         stock.setText("");
+        idCat="";
+        idDis="";
+        idTal="";
     }
     public void listar(){
         databaseReference.child("Categorias").orderByChild("estadoLogico").equalTo("1").addListenerForSingleValueEvent(new ValueEventListener(){
@@ -377,19 +382,31 @@ public class AgregarProductosFragment extends Fragment
         mViewModel = new ViewModelProvider(this).get(AgregarProductosViewModel.class);
         // TODO: Use the ViewModel
     }
-
             @Override
             public void onClick(View v) {
-
             }
-
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    }
+    public void listener(){
+        categoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                idCat=customAdapter.getItem(position).getId();
             }
-
+        });
+        disenio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                idDis=customAdapterDisenio.getItem(position).getIdModelo();
             }
-        }
+        });
+        talla.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                idTal=customAdapterTalla.getItem(position).getId();
+            }
+        });
+
+    }
+}
