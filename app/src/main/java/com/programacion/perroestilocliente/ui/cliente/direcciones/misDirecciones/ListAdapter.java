@@ -40,7 +40,7 @@ public class ListAdapter extends ArrayAdapter<Direcciones> {
         TextView txtCampo= convertView.findViewById(R.id.txtDireccion);
         String direccion=arrayList.get(position).getEntidadFederativa()+", "+arrayList.get(position).getMunicipio()
                 +", "+arrayList.get(position).getLocalidad()
-                +". Calle Ext. "+arrayList.get(position).getCalleYNumeroExterno()+" y Calle Int. "
+                +". Calle Ext: "+arrayList.get(position).getCalleYNumeroExterno()+" y Calle Int: "
                 +arrayList.get(position).getCalleYNumeroInterno();
         txtCampo.setText(direccion);
 

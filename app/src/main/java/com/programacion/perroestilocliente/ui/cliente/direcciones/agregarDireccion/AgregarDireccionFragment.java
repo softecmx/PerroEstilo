@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -90,7 +92,8 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
     private FirebaseUser user;
-
+    private LocationManager locationManager;
+    public static int REQUEST_PERMISSION = 1;
     /*
     Modificar la ruta
 
@@ -265,6 +268,8 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
         initGoogleMap(savedInstanceState);
         client = LocationServices.getFusedLocationProviderClient(getActivity());
 
+
+
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,8 +281,7 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
                 String calleExt=txtCalleExterior.getText().toString();
                 String calleInt=txtCalleInterior.getText().toString();
                 String ref=txtReferencias.getText().toString();
-                getCurrentLocation();
-
+                //getCurrentLocation();
                 Direcciones direccion=new Direcciones();
                 direccion.setIdDireccion(UUID.randomUUID().toString());
                 direccion.setEntidadFederativa(estado);
@@ -292,6 +296,7 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
                 coordenadas.setLongitud(String.valueOf(txtLongitud));
                 direccion.setCoordenadas(coordenadas);
                 direccion.setIdUser(user.getUid());
+
 
                 databaseReference.child("Direcciones").child(direccion.getIdDireccion()).setValue(direccion).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -400,6 +405,34 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
         mapView.onLowMemory();
     }
 
+    private void activaGPS() {
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
+        dialogo.setMessage("Es necesario activar el GPS, ¿Desea hacerlo ahora?");
+        dialogo.setCancelable(false);
+        dialogo.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        });
+        dialogo.setNegativeButton("No", null);
+        dialogo.show();
+    }
+
+
+    private void getUbicacion() {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION);
+        } else {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                txtLatitud = Float.parseFloat(String.valueOf(location.getLatitude()));
+                txtLongitud = Float.parseFloat(String.valueOf(location.getLongitude()));
+            }
+        }
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
@@ -414,6 +447,23 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
                 != PackageManager.PERMISSION_GRANTED) {
 
             return;
+        }
+
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            activaGPS();
+        } else {
+            getUbicacion();
+
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                txtLatitud=Float.parseFloat(String.valueOf(location.getLatitude()));
+                txtLongitud=Float.parseFloat(String.valueOf(location.getLongitude()));
+                gMap.clear();
+                gMap.addMarker(new MarkerOptions().position(new LatLng(txtLatitud, txtLongitud)).title("Mi ubicación"));
+                gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(txtLatitud, txtLongitud)));
+                gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+            }
         }
         gMap.setMyLocationEnabled(true);
     }
