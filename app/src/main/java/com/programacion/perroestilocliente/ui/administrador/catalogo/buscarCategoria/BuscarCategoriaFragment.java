@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class BuscarCategoriaFragment extends Fragment {
     DatabaseReference databaseReference;
     ArrayList<ElementListView> arrayList;
     private SpnAdapterCategoria customAdapter;
+    String cat="";
 
     public static BuscarCategoriaFragment newInstance() {
         return new BuscarCategoriaFragment();
@@ -59,7 +61,12 @@ public class BuscarCategoriaFragment extends Fragment {
 
         iniciaFirebase();
         llenarSpn();
-
+        id.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cat=customAdapter.getItem(position).getId();
+            }
+        });
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +101,7 @@ public class BuscarCategoriaFragment extends Fragment {
     }
     public void valida(){
         AutoCompleteTextView idACTV = id;
-        String id = this.id.getText().toString();
+        String id = cat;
         if (id.equals("")){
             CustomToast.mostarToast("Seleccione un dato",3,false,root,getLayoutInflater(),getContext());
         }else{

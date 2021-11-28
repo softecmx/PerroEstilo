@@ -97,7 +97,7 @@ public class ConsultarProductosFragment extends Fragment {
                 ArrayList<ElementListView> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot: snapshot.getChildren()){
                     Productos p = objSnapshot.getValue(Productos.class);
-                    arrayList.add(new ElementListView(p.getIdProducto(),p.getNombre(), p.getIdCategoria(), p.getDisenio(), p.getTalla(), p.getPrecioVenta(), p.getCosto(), p.getDescuento(), p.getFechaCreacion(), p.getRaiting(), p.getEstatusStock(), p.getStock(), p.getEstadoLogico(),p.getImgFoto()));
+                    arrayList.add(new ElementListView(p.getIdProducto(),p.getNombre(), p.getIdCategoria(), p.getDisenio(), p.getTalla(), p.getPrecioVenta(), p.getCosto(), p.getDescuento(), p.getFechaCreacion(), p.getRaiting(), p.getEstatusStock(), p.getStock(), p.getEstadoLogico(),p.getImgFoto(),p.getDescripcion()));
                     customAdapter = new ListAdapterSimple(getActivity(), arrayList,getContext());
                     lista.setAdapter(customAdapter);
                 }

@@ -45,6 +45,6 @@ public class ElementListView {
         this.status = status;
     }
     public String toString(){
-        return getId();
+        return getTalla();
     }
 }

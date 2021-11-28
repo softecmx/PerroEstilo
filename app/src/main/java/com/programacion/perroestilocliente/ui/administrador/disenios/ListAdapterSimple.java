@@ -86,6 +86,8 @@ public class ListAdapterSimple extends ArrayAdapter<ElementListView> {
             }
         });
     }
-
+    public ElementListView getItem(int index) {
+        return arrayList.get(index);
+    }
 
 }

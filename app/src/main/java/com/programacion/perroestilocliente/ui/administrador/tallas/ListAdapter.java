@@ -9,15 +9,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.modelo.Disenios;
 import com.programacion.perroestilocliente.modelo.Tallas;
 
 import java.util.ArrayList;
@@ -127,7 +132,24 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     }
 
     public void vistaEliminar(int position){
-        databaseReference.child("Tallas").child(arrayList.get(position).getId().toString()).removeValue();
-        CustomToast.mostarToast("Dato Eliminado!",1,false,root,layoutInflater,context);
+        databaseReference.child("Tallas").orderByChild("idTalla").equalTo(arrayList.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Tallas c=null;
+                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                    c = objSnapshot.getValue(Tallas.class);
+                }
+                if (c!=null){
+                    c.setEstadoLogico("0");
+                    databaseReference.child("Tallas").child(c.getIdTalla()).setValue(c);
+                    Toast.makeText(context,"Dato eliminado",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,"Dato NO encontrado",Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }

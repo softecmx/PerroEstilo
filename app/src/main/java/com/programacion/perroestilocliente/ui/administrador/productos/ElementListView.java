@@ -17,8 +17,9 @@ public class ElementListView {
     private String stock;
     private String estadoLogico;
     private String imgFoto;
+    private String descripcion;
 
-    public ElementListView(String idProducto, String nombre, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
+    public ElementListView(String idProducto, String nombre, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto,String descripcion) {
         this.idProducto = idProducto;
         this.idCategoria = idCategoria;
         this.disenio = disenio;
@@ -33,6 +34,7 @@ public class ElementListView {
         this.estadoLogico = estadoLogico;
         this.imgFoto = imgFoto;
         this.nombre=nombre;
+        this.descripcion = descripcion;
     }
 
     public String getIdProducto() {
