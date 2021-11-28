@@ -44,6 +44,8 @@ public class ListAdapterSimple extends ArrayAdapter<ElementListView> {
 
         return convertView;
     }
-
+    public ElementListView getItem(int index) {
+        return arrayList.get(index);
+    }
 
 }
