@@ -33,13 +33,13 @@
                 android:layout_marginTop="15dp"
                 android:text="Gracias por tu compra"
                 android:gravity="center"
-                android:textColor="@color/flat_awesome_green_2"
-                android:textSize="18sp"
+                android:textColor="@color/flat_grey_dark_1"
+                android:textSize="28sp"
                 android:textStyle="bold" />
         </LinearLayout>
           <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-              android:backgroundTint="#6B0067FF"
+              android:backgroundTint="#94FFA1E7"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Detalle de compra"
-                    android:background="#923498DB"
+                    android:background="#94FFA1E7"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -136,7 +136,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Detalle de entrega"
-                    android:background="#923498DB"
+                    android:background="#94FFA1E7"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -150,12 +150,12 @@
                         android:layout_height="wrap_content"
                         android:text="Estimado para el  "
                         android:paddingLeft="10dp"
-                        android:textColor="@color/flat_blue_1"
+                        android:textColor="@color/pink_400"
                         android:textStyle="bold"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/flat_blue_2"
+                        android:textColor="@color/pink_400"
                         android:text="18/10/2021"/>
                 </LinearLayout>
                 <LinearLayout
@@ -208,6 +208,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/btnComprarAhoraConfirmar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
