@@ -41,7 +41,11 @@
         android:name="com.programacion.perroestilocliente.ui.cliente.kits.misKits.MisKitsFragment"
         android:label="@string/menu_mis_kits"
         tools:layout="@layout/fragment_mis_kits" />
-
+    <fragment
+        android:id="@+id/nav_mi_carrito"
+        android:name="com.programacion.perroestilocliente.ui.cliente.carrito.miCarrito.MiCarritoFragment"
+        android:label="@string/menu_mi_carrito"
+        tools:layout="@layout/fragment_mi_carrito" />
     <fragment
         android:id="@+id/nav_mis_direcciones"
         android:name="com.programacion.perroestilocliente.ui.cliente.direcciones.misDirecciones.MisDireccionesFragment"

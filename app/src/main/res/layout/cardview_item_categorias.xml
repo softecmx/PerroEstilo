@@ -4,10 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
-    android:background="@color/primaryDarkColor"
     android:elevation="4dp"
-    android:id="@+id/cardCategoriaCatalogo"
-    app:cardCornerRadius="4dp">
+    android:id="@+id/cardCategoriaCatalogo">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,6 +17,7 @@
             android:id="@+id/imgViewCardCategoria"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:layout_gravity="center"
             android:src="@drawable/logo" />
 
         <TextView

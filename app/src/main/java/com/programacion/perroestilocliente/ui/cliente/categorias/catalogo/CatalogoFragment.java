@@ -38,6 +38,7 @@ public class CatalogoFragment extends Fragment {
     AutoCompleteTextView spinCatalogoCategorias;
     List<Categorias> lstCategorias = new ArrayList<>();
     HashMap<String, Categorias> hashCategorias = new HashMap<>();
+    ListAdapterCategorias listAdapterCateforias;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -64,6 +65,7 @@ public class CatalogoFragment extends Fragment {
                     //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
                     Categorias categoria = objSnapshot.getValue(Categorias.class);
                     lstCategorias.add(categoria);
+
                 }
             }
 

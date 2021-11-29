@@ -6,6 +6,8 @@ public class Item {
     private String producto;
     private int cantidad;
     private  String idUsuario;
+    private float precio;
+    private String img;
 
     public String getIdUsuario() {
         return idUsuario;
@@ -17,6 +19,22 @@ public class Item {
 
     public String getProducto() {
         return producto;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public void setProducto(String producto) {
