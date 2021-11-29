@@ -60,6 +60,8 @@ public class ConsultarProductosFragment extends Fragment {
     private ClipboardManager myClipboard;
     private ClipData myClip;
 
+    ArrayList<ElementListView> arrayList;
+
     public static ConsultarProductosFragment newInstance() {
         return new ConsultarProductosFragment();
     }
@@ -87,6 +89,23 @@ public class ConsultarProductosFragment extends Fragment {
                 CustomToast.mostarToast("ID copiado!",1,false,root,getLayoutInflater(),getContext());
             }
         });
+        ibtnconsProdbsc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etId.getText().toString().equals("")){
+                    CustomToast.mostarToast("Ingrese un dato",2,false,root,getLayoutInflater(),getContext());
+                }else{
+                    ArrayList<ElementListView> arrayBusca = new ArrayList<>();
+                    for (int i = 0;i<arrayList.size();i++){
+                        if (arrayList.get(i).getNombre().toUpperCase().equals(etId.getText().toString().toUpperCase())){
+                            arrayBusca.add(arrayList.get(i));
+                        }
+                    }
+                    customAdapter = new ListAdapterSimple(getActivity(), arrayBusca,getContext());
+                    lista.setAdapter(customAdapter);
+                }
+            }
+        });
         return root;
     }
 
@@ -94,7 +113,7 @@ public class ConsultarProductosFragment extends Fragment {
         databaseReference.child("Productos").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListView> arrayList = new ArrayList<>();
+                arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot: snapshot.getChildren()){
                     Productos p = objSnapshot.getValue(Productos.class);
                     arrayList.add(new ElementListView(p.getIdProducto(),p.getNombre(), p.getIdCategoria(), p.getDisenio(), p.getTalla(), p.getPrecioVenta(), p.getCosto(), p.getDescuento(), p.getFechaCreacion(), p.getRaiting(), p.getEstatusStock(), p.getStock(), p.getEstadoLogico(),p.getImgFoto(),p.getDescripcion()));

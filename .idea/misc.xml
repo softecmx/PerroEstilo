@@ -56,6 +56,7 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/custom_toast_warning.xml" value="0.16510416666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_agregar_veterinario.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_consultar_veterinario.xml" value="0.20598290598290597" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_mi_carrito.xml" value="0.2" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_mi_carrito.xml" value="0.33" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_modificar_lealtad.xml" value="0.10854700854700855" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_agregar_categorias.xml" value="0.20598290598290597" />
@@ -70,6 +71,8 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_buscar_direccion.xml" value="0.25104166666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_catalogo.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_categorias_hijas.xml" value="0.20598290598290597" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_comprar_ahora.xml" value="0.14957264957264957" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_confirmar_compra.xml" value="0.15128205128205127" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_comprar_ahora.xml" value="0.33" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_confirmar_compra.xml" value="0.25" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_consultar_categorias.xml" value="0.20598290598290597" />
@@ -125,6 +128,7 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_tallas.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_tienda_producto.xml" value="0.1" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_opciones_expandible.xml" value="0.20598290598290597" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_prod_lista_carrito.xml" value="0.1" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_prod_lista_carrito.xml" value="0.25" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_simple_lista_disenio.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_simple_lista_tallas.xml" value="0.20598290598290597" />
@@ -420,6 +424,7 @@
         <entry key="app/src/main/res/layout/custom_toast_info.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/custom_toast_sin_data.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/dialog_agregar_veterinario.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/dialog_categorias.xml" value="0.15760869565217392" />
         <entry key="app/src/main/res/layout/dialog_disenio.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/dialog_modificar_lealtad.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/element_lista_tallas.xml" value="0.1921875" />
@@ -433,11 +438,16 @@
         <entry key="app/src/main/res/layout/fragment_buscar_match.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_buscar_mi_kit.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_buscar_productos.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_catalogo.xml" value="0.15579710144927536" />
+        <entry key="app/src/main/res/layout/fragment_categorias_hijas.xml" value="0.15579710144927536" />
+        <entry key="app/src/main/res/layout/fragment_consultar_categorias.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_consultar_disenios.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/fragment_consultar_matchs.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_consultar_productos.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_editar_categoria.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_eliminar_categoria.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/fragment_eliminar_match.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home_cliente.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_tallas.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_lista_disenio.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_lista_producto.xml" value="0.5" />
