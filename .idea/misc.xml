@@ -55,6 +55,7 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_agregar_veterinario.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_consultar_veterinario.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_mi_carrito.xml" value="0.2" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/dialog_modificar_lealtad.xml" value="0.10854700854700855" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_agregar_categorias.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_agregar_direccion.xml" value="0.22" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/fragment_agregar_modelo.xml" value="0.25104166666666666" />
@@ -117,7 +118,9 @@
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_cuenta.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_direcciones.xml" value="0.25" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_disenio.xml" value="0.20598290598290597" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_producto.xml" value="0.5" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_tallas.xml" value="0.20598290598290597" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_lista_tienda_producto.xml" value="0.33" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_opciones_expandible.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_simple_lista_disenio.xml" value="0.20598290598290597" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/layout/item_simple_lista_tallas.xml" value="0.20598290598290597" />

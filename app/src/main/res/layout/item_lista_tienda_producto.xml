@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imgItemProdFoto"
+        android:layout_width="70dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        app:srcCompat="@drawable/logo" />
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_toEndOf="@+id/imgItemProdFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtItemProdNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="Código del diseño"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtItemProdPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:maxLines="1"
+            android:text="$$$$"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/linear1">
+        <RatingBar
+            android:id="@+id/raitingBarItemProd"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:rating="4"
+            android:layout_marginLeft="15dp"
+            android:numStars="5"
+            style="?android:attr/ratingBarStyleSmall"
+            android:theme="@style/RatingBar.Yellow"
+            />
+    </LinearLayout>
+</RelativeLayout>

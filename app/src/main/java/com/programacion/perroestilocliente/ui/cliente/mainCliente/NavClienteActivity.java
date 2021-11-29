@@ -109,6 +109,7 @@ public class NavClienteActivity extends AppCompatActivity {
         // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
         TextView txtTotal = aboutPop.findViewById(R.id.txtDCarritoTotal);
         TextView txtProductos = aboutPop.findViewById(R.id.txtDCarritoAunSinComprar);
+        androidx.recyclerview.widget.RecyclerView reciclerViewMiCarritoProductos=aboutPop.findViewById(R.id.reciclerViewMiCarritoProductos);
         if (lstCarrito.isEmpty()) {
             txtTotal.setText("$0.0");
             txtProductos.setVisibility(View.VISIBLE);

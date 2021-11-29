@@ -24,6 +24,7 @@
             android:textStyle="bold" />
 
         <RatingBar
+            android:id="@+id/raitingBarVerProd"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,19 +37,34 @@
             android:theme="@style/RatingBar.Yellow" />
 
         <ImageView
+            android:id="@+id/imgVerProd"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="15dp"
             android:src="@drawable/monio_corbatin_anaranjado" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/txtVerProdPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/precio"
+        android:textColor="@color/black"
+        android:textSize="28sp" />
+    <TextView
+        android:layout_marginLeft="25dp"
+        android:id="@+id/txtVerProdPrecioAntiguo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/precio"
+        android:textColor="@color/flat_grey_normal_2"
+        android:textSize="24sp" />
+</LinearLayout>
 
-        <TextView
-            android:id="@+id/txtVerProdPrecio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/precio"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/txtVerProdDescuento"
@@ -118,7 +134,7 @@
                     android:drawableTint="@color/white" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editCantidad"
+                    android:id="@+id/editVerProdCantidad"
                     android:layout_width="50dp"
                     android:gravity="center"
                     android:layout_height="wrap_content"
@@ -157,6 +173,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/flat_grey_dark_1" />
 
         <TextView
@@ -164,13 +182,17 @@
             android:layout_height="wrap_content"
             android:text="@string/txtDetallesProducto"
             android:textColor="@color/black"
+            android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TableLayout
+            android:id="@+id/tableLayoutVerProd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
             <TableRow
                 android:background="@color/green">
                 <TextView
@@ -207,15 +229,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtDescripcion"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TableLayout>
 
         <TextView
             android:id="@+id/txtVerProdDesc"
@@ -223,7 +242,9 @@
             android:layout_height="wrap_content"
             android:text="@string/txtDescripcion"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
         <Button
             android:id="@+id/btnVerProdPreguntar"

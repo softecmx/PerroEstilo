@@ -75,6 +75,7 @@
                 android:padding="10dp">
 
                 <Button
+                    android:id="@+id/btnTiendaOfertas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -86,6 +87,7 @@
                     android:text="@string/txtOfertas" />
 
                 <Button
+                    android:id="@+id/btnTiendaModa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -97,6 +99,7 @@
                     android:text="@string/txtModa" />
 
                 <Button
+                    android:id="@+id/btnTiendaKITS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -127,11 +130,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewCatMasc"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -165,6 +169,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewCatHumanos"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
@@ -201,11 +206,13 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewCatMaths"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:backgroundTint="@color/ingigo_200"
             android:elevation="4dp"
@@ -247,7 +254,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/flat_grey_light_1"
             android:elevation="4dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -274,10 +281,11 @@
                     android:background="@color/white">
 
                     <ListView
+                        android:id="@+id/lstTiendaProductosModa"
                         android:layout_width="match_parent"
                         android:layout_height="327dp" />
                 </FrameLayout>
-                <TextView
+              <!--  <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/txtVerMas"
@@ -285,10 +293,11 @@
                     android:padding="2dp"
                     android:textStyle="bold"
                     android:textColor="@color/flat_grey_dark_1"
-                    />
+                    />-->
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewTiendaTemporada"
             android:layout_width="match_parent"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
@@ -312,15 +321,6 @@
                         android:textSize="18sp"
                         android:layout_marginLeft="15dp"
                         android:text="@string/txtTemporada"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="15dp"
-                        android:textColor="@color/flat_awesome_green_1"
-                        android:textSize="18sp"
-                        android:text="@string/txtVerMas"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -341,7 +341,7 @@
             android:textSize="32sp"
             android:textStyle="bold" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reciclerViewHomeNuevosProductos"
+            android:id="@+id/reciclerViewTiendaProductos"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"

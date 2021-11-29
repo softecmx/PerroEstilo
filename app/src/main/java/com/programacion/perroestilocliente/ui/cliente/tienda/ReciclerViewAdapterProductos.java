@@ -1,4 +1,4 @@
-package com.programacion.perroestilocliente.ui.cliente.inicio;
+package com.programacion.perroestilocliente.ui.cliente.tienda;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -34,7 +34,6 @@ import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.modelo.Productos;
-import com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity;
 import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
 
 import java.util.ArrayList;
