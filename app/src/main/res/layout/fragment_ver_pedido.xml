@@ -5,117 +5,203 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.pedidos.verDetallePedido.VerPedidoFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/txtordenPedido"
-            android:textColor="@color/titulos"
-            android:textSize="24dp" />
-        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="En camino"
+            android:textSize="18sp"
+            android:textColor="@color/flat_yellow_2"
+            android:textStyle="bold"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray_100"
-            android:elevation="4dp"
-            app:cardCornerRadius="8dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/white">
-                </FrameLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/flat_pink_1"
-            android:elevation="4dp"
-            app:cardCornerRadius="8dp">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estimado para el  "
+                android:textColor="@color/flat_grey_dark_2"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/flat_grey_dark_1"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="18/10/2021"/>
+        </LinearLayout>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="true"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/textItemDetalleCompra"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:padding="8dp"
-                    android:text="@string/txtDetalleCompra"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Orden: "
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9876567834"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No.Serie: "
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9876567834DSDFS"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detalle de compra"
+                    android:background="@color/flat_grey_light_1"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    />
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="320dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/white">
+                    android:layout_height="wrap_content">
                     <ListView
+                        android:id="@+id/lstViewComprarAhoraCarrito"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <!--Lista_detalle_venta-->
-                    </ListView>
-
+                        android:layout_height="200dp"/>
                 </FrameLayout>
+
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/flat_pink_1"
-            android:elevation="4dp"
-            app:cardCornerRadius="8dp">
-
+            android:layout_marginTop="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="true"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/textItemDetalleEntrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:padding="8dp"
-                    android:text="@string/txtDetalleEntrega"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-                <FrameLayout
+                    android:text="Detalle de entrega"
+                    android:background="@color/flat_grey_light_1"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="320dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/white">
-                    <!--Fragment_detalle_envio-->
-                </FrameLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Retira: "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contacto "/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Telefono: "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="19876532 "/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dirección: "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Direccion  "/>
+                </LinearLayout>
+
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-        <FrameLayout
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnComprarAhoraConfirmar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="3dp"
-            android:background="@color/white">
-            <!--Botones-->
-        </FrameLayout>
+            android:layout_height="wrap_content"
+            android:text="@string/txtImportarTicket " />
+
     </LinearLayout>
+
 </ScrollView>

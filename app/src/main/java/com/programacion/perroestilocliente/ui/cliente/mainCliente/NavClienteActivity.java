@@ -19,7 +19,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +27,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,10 +34,8 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
 import com.programacion.perroestilocliente.modelo.Productos;
-import com.programacion.perroestilocliente.ui.cliente.inicio.ReciclerViewAdapterProductos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class NavClienteActivity extends AppCompatActivity {
@@ -73,7 +69,7 @@ public class NavClienteActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_ajustes, R.id.nav_ayuda, R.id.nav_categoria, R.id.nav_producto, R.id.nav_kits,
                 R.id.nav_mis_kits, R.id.nav_pedidos, R.id.nav_mi_cuenta, R.id.nav_mis_direcciones, R.id.nav_tienda,
                 R.id.nav_sobre_nosotros, R.id.nav_acerca_app,
-                R.id.nav_politicas, R.id.nav_ajustes, R.id.nav_salir)
+                R.id.nav_politicas, R.id.nav_ajustes, R.id.nav_salir,R.id.nav_mi_carrito)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.container_cliente);
@@ -125,7 +121,7 @@ public class NavClienteActivity extends AppCompatActivity {
 
         ListView reciclerViewMiCarritoProductos = aboutPop.findViewById(R.id.lstViewMiCarritoProductos);
         ArrayList<Item> arrayListItems = new ArrayList<>();
-
+        float[] total = {0};
         databaseReference.child("Carrito/" + user.getUid() + "/Items").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -135,11 +131,11 @@ public class NavClienteActivity extends AppCompatActivity {
                         //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
                         Item item = objSnapshot.getValue(Item.class);
                         arrayListItems.add(item);
-                        ListAdapterCarrito adapterProductos = new ListAdapterCarrito(NavClienteActivity.this,arrayListItems);
+                        ListAdapterCarrito adapterProductos = new ListAdapterCarrito(NavClienteActivity.this, arrayListItems);
                         reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
-                        System.out.println(item.getProducto()+"  "+item.getCantidad());
-                        float total = 0;
-                        txtTotal.setText("$" + total);
+                        System.out.println(item.getProducto() + "  " + item.getCantidad());
+                        total[0] = total[0] +(item.getPrecio()*item.getCantidad());
+                        txtTotal.setText("$" + total[0]);
                         txtProductos.setVisibility(View.GONE);
                     }
                 } else {
