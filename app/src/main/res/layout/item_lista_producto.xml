@@ -32,26 +32,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="Código del diseño"
                         android:textColor="@color/primaryDarkColor"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         />
                     <TextView
-                        android:id="@+id/tvListProdDisenio"
+                        android:id="@+id/tvListaProductoDisenio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="Diseño"
                         android:textSize="12sp"
                         android:layout_alignParentLeft="true"
                         />
                     <TextView
-                        android:id="@+id/tvListProdTalla"
+                        android:id="@+id/tvListaProductoTalla"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="Talla"
                         android:textSize="12sp"
                         android:layout_alignParentLeft="true"
                         />
