@@ -46,8 +46,6 @@ public class ListAdapterSimple extends ArrayAdapter<ElementListView> {
     private FirebaseUser user;
     private String img="";
     private Context context;
-    TextView diseño;
-    TextView talla;
 
     public ListAdapterSimple(Activity activity, ArrayList<ElementListView> arrayList,Context context) {
         super(activity, R.layout.item_lista_producto, arrayList);
@@ -75,8 +73,8 @@ public class ListAdapterSimple extends ArrayAdapter<ElementListView> {
         }
         ImageView foto = convertView.findViewById(R.id.ivListProdImg);
         TextView codigo= convertView.findViewById(R.id.tvListProdCod);
-        diseño = convertView.findViewById(R.id.tvListProdDisenio);
-        talla = convertView.findViewById(R.id.tvListProdTalla);
+        TextView diseño = convertView.findViewById(R.id.tvListaProductoDisenio);
+        TextView talla = convertView.findViewById(R.id.tvListaProductoTalla);
         ImageView star1= convertView.findViewById(R.id.ivLisProdStar1);
         ImageView star2= convertView.findViewById(R.id.ivLisProdStar2);
         ImageView star3= convertView.findViewById(R.id.ivLisProdStar3);
