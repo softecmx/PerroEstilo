@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,18 +19,24 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
 import com.programacion.perroestilocliente.modelo.Productos;
+import com.programacion.perroestilocliente.ui.cliente.inicio.ReciclerViewAdapterProductos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +47,10 @@ public class NavClienteActivity extends AppCompatActivity {
 
     public static ArrayList<Item> lstCarrito;
 
-    public  static String id="";
-    public  static String nombre="";
-    public  static String precio="";
-    public  static String img="";
+    public static String id = "";
+    public static String nombre = "";
+    public static String precio = "";
+    public static String img = "";
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavClienteBinding binding;
     private androidx.appcompat.app.AlertDialog dialog;
@@ -103,24 +110,49 @@ public class NavClienteActivity extends AppCompatActivity {
 
 
     private void miCarrito() {
-
+        FirebaseDatabase firebaseDatabase;
+        DatabaseReference databaseReference;
+        StorageReference storageReference;
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        storageReference = FirebaseStorage.getInstance().getReference("Productos");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(NavClienteActivity.this);
         final View aboutPop = getLayoutInflater().inflate(R.layout.dialog_mi_carrito, null);
         // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
         TextView txtTotal = aboutPop.findViewById(R.id.txtDCarritoTotal);
         TextView txtProductos = aboutPop.findViewById(R.id.txtDCarritoAunSinComprar);
-        androidx.recyclerview.widget.RecyclerView reciclerViewMiCarritoProductos=aboutPop.findViewById(R.id.reciclerViewMiCarritoProductos);
-        if (lstCarrito.isEmpty()) {
-            txtTotal.setText("$0.0");
-            txtProductos.setVisibility(View.VISIBLE);
-        } else {
-            float cantidad=0;
-            float total=0;
 
+        ListView reciclerViewMiCarritoProductos = aboutPop.findViewById(R.id.lstViewMiCarritoProductos);
+        ArrayList<Item> arrayListItems = new ArrayList<>();
 
-            txtTotal.setText("$"+total);
-            txtProductos.setVisibility(View.GONE);
-        }
+        databaseReference.child("Carrito/" + user.getUid() + "/Items").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayListItems.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                        //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
+                        Item item = objSnapshot.getValue(Item.class);
+                        arrayListItems.add(item);
+                        ListAdapterCarrito adapterProductos = new ListAdapterCarrito(NavClienteActivity.this,arrayListItems);
+                        reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                        System.out.println(item.getProducto()+"  "+item.getCantidad());
+                        float total = 0;
+                        txtTotal.setText("$" + total);
+                        txtProductos.setVisibility(View.GONE);
+                    }
+                } else {
+                    txtTotal.setText("$0.0");
+                    txtProductos.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
 
         dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();

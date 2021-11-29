@@ -60,17 +60,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="15dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reciclerViewMiCarritoProductos"
+            <ListView
+                android:id="@+id/lstViewMiCarritoProductos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
+                android:layout_height="100dp" />
+
 
         <Button
             android:id="@+id/btnDMiCarritoContinuar"
