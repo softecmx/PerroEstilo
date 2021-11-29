@@ -1,23 +1,26 @@
 package com.programacion.perroestilocliente.ui.cliente.inicio;
 
-import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.viewbinding.ViewBinding;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.viewbinding.ViewBinding;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.databinding.ItemCustomFixedSizeLayout4Binding;
 import com.programacion.perroestilocliente.modelo.Categorias;
@@ -50,11 +53,20 @@ public class HomeClienteFragment extends Fragment {
     androidx.recyclerview.widget.RecyclerView recyclerViewCategorias;
     androidx.recyclerview.widget.RecyclerView reciclerViewHomeNuevosProductos;
 
-    List<Categorias> lstCategorias;
+    List<Categorias> lstCategorias = new ArrayList<>();
     ListAdapterCategorias listAdapterCateforias;
+    HashMap<String, Categorias> hashCategorias = new HashMap<>();
+
 
     ArrayList<Productos> arrayListProductos = new ArrayList<>();
     private ReciclerViewAdapterProductos adapterProductos;
+    HashMap<String, Productos> hashProductos = new HashMap<>();
+    //Firebase
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
+
+
     public static HomeClienteFragment newInstance() {
         return new HomeClienteFragment();
     }
@@ -64,6 +76,7 @@ public class HomeClienteFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home_cliente, container, false);
 
+        iniciarFirebase();
         //====================================================================
         carousel = root.findViewById(R.id.carruselInicio);
         list.add(new CarouselItem(R.drawable.img_carrucel_admin1));
@@ -161,52 +174,54 @@ public class HomeClienteFragment extends Fragment {
         recyclerViewCategorias = root.findViewById(R.id.reciclerViewHomeCategorias);
         recyclerViewCategorias.setLayoutManager(new GridLayoutManager(recyclerViewCategorias.getContext(), 1,
                 GridLayoutManager.HORIZONTAL, false));
-        lstCategorias=new ArrayList<>();
-        Categorias cat1=new Categorias();
-        cat1.setNombreCategoria("Nola");
 
-        Categorias cat2=new Categorias();
-        cat2.setNombreCategoria("Nola");
-        Categorias cat3=new Categorias();
-        cat3.setNombreCategoria("Nola");
-        Categorias cat4=new Categorias();
-        cat4.setNombreCategoria("Nola");
+        databaseReference.child("Categorias").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lstCategorias.clear();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
+                    Categorias categoria = objSnapshot.getValue(Categorias.class);
+                    lstCategorias.add(categoria);
+                    listAdapterCateforias = new ListAdapterCategorias(lstCategorias, root.getContext());
+                    recyclerViewCategorias.setHasFixedSize(true);
+                    //recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(root.getContext()));
+                    recyclerViewCategorias.setAdapter(listAdapterCateforias);
+                }
+            }
 
-
-        lstCategorias.add(cat1);
-        lstCategorias.add(cat2);
-        lstCategorias.add(cat3);
-        lstCategorias.add(cat4);
-        lstCategorias.add(cat4);
-        lstCategorias.add(cat4);
-        lstCategorias.add(cat4);
-
-        listAdapterCateforias=new ListAdapterCategorias(lstCategorias,root.getContext());
-        recyclerViewCategorias.setHasFixedSize(true);
-        //recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(root.getContext()));
-        recyclerViewCategorias.setAdapter(listAdapterCateforias);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         //===========================================================================================
         reciclerViewHomeNuevosProductos = root.findViewById(R.id.reciclerViewHomeNuevosProductos);
-        Productos producto=new Productos();
-        producto.setNombrProducto("Nolasas");
-        Productos producto2=new Productos();
-        producto2.setNombrProducto("Nolasas");
 
-        arrayListProductos.add(producto);
-        arrayListProductos.add(producto2);
-        arrayListProductos.add(producto2);
-        arrayListProductos.add(producto2);
-        arrayListProductos.add(producto2);
-        arrayListProductos.add(producto2);
-        arrayListProductos.add(producto2);
-        adapterProductos = new ReciclerViewAdapterProductos(root.getContext(), arrayListProductos);
+        databaseReference.child("Productos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayListProductos.clear();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
+                    Productos productos = objSnapshot.getValue(Productos.class);
+                    arrayListProductos.add(productos);
+                    adapterProductos = new ReciclerViewAdapterProductos(root.getContext(), arrayListProductos,getFragmentManager());
 
-        reciclerViewHomeNuevosProductos.setLayoutManager(new GridLayoutManager(reciclerViewHomeNuevosProductos.getContext(), 1,
-                GridLayoutManager.HORIZONTAL, false));
+                    reciclerViewHomeNuevosProductos.setLayoutManager(new GridLayoutManager(reciclerViewHomeNuevosProductos.getContext(), 1,
+                            GridLayoutManager.HORIZONTAL, false));
        /* reciclerViewHomeNuevosProductos.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));*/
-        reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
+                    reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
 
         return root;
 
@@ -248,5 +263,12 @@ public class HomeClienteFragment extends Fragment {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+    }
+
+
+    private void iniciarFirebase() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        storageReference = FirebaseStorage.getInstance().getReference("Productos");
     }
 }

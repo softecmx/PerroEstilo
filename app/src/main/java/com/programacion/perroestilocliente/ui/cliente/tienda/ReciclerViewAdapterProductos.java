@@ -1,4 +1,4 @@
-package com.programacion.perroestilocliente.ui.cliente.productos.todosLosProductos;
+package com.programacion.perroestilocliente.ui.cliente.tienda;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -14,37 +14,42 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.modelo.Productos;
 import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
 
 import java.util.ArrayList;
 
-public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHolder> {
+public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerViewAdapterProductos.DataObjectHolder> {
 
     private Context context;
-    private ArrayList<Productos> listaProductos;
     FragmentManager fragmentManager;
-    FragmentContainerView container;
+    private ArrayList<Productos> listaProductos;
     private String id;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
 
-    public RViewAdapter(Context context, ArrayList<Productos> listaProductos, FragmentManager fragmentManager) {
+    public ReciclerViewAdapterProductos(Context context, ArrayList<Productos> listaProductos, FragmentManager fragmentManager) {
         this.context = context;
         this.listaProductos = listaProductos;
         this.fragmentManager = fragmentManager;
-        this.container = container;
     }
 
     @NonNull
@@ -57,8 +62,10 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
 
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
+
         holder.txtNombre.setText(listaProductos.get(position).getNombre());
         id = listaProductos.get(position).getIdProducto();
+        System.out.println(listaProductos.get(position).getIdProducto()+" RECICLER VIEW");
         String raiting = listaProductos.get(position).getRaiting();
         float raitingStar = 0;
         if (raiting.isEmpty()) {
@@ -101,25 +108,67 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
         holder.btnAgregarCarrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Position: " +
-                        holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                Query findCarrito = ref.child("Carrito/"+user.getUid()+"/Items").orderByChild("idProducto").equalTo(id);
+                findCarrito.addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                                        Item item= objSnapshot.getValue(Item.class);
+                                        Item nvoItem=new Item();
+                                        nvoItem.setIdUsuario(user.getUid());
+                                        nvoItem.setProducto(id);
+                                        nvoItem.setCantidad(item.getCantidad()+1);
+                                        System.out.println(ref);
+                                        ref.child("Carrito/"+user.getUid()+"/Items").child(item.getIdUsuario()).setValue(nvoItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                            }
+                                        });
+                                    }
+                                }else{
+                                    Item item=new Item();
+                                    item.setProducto(id);
+                                    item.setIdUsuario(user.getUid());
+                                    item.setCantidad(1);
+                                    ref.child("Carrito/"+user.getUid()+"/Items").child(item.getProducto()).setValue(item).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
             }
         });
         holder.btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 VerProductoTiendaFragment newFragment1 = new VerProductoTiendaFragment();
                 Bundle args = new Bundle();
                 args.putString("idProducto", id);
                 newFragment1.setArguments(args);
+                System.out.println(id+" HOME PRODUCTOS");
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_cliente, newFragment1);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
-
     }
 
     @Override
@@ -137,6 +186,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
         private RatingBar ratingBar;
         private Button btnVer;
         private Button btnAgregarCarrito;
+
 
         public DataObjectHolder(@NonNull View itemView) {
             super(itemView);

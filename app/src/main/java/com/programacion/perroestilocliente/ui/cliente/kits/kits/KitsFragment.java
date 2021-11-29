@@ -1,4 +1,4 @@
-package com.programacion.perroestilocliente.ui.cliente.productos.verProducto;
+package com.programacion.perroestilocliente.ui.cliente.kits.kits;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,28 +14,24 @@ import android.view.ViewGroup;
 
 import com.programacion.perroestilocliente.R;
 
-public class VerProductoFragment extends Fragment {
+public class KitsFragment extends Fragment {
 
-    private VerProductoViewModel mViewModel;
+    private KitsViewModel mViewModel;
 
-    public static VerProductoFragment newInstance() {
-        return new VerProductoFragment();
+    public static KitsFragment newInstance() {
+        return new KitsFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-
                              @Nullable Bundle savedInstanceState) {
-        View root=inflater.inflate(R.layout.fragment_ver_producto, container, false);
-
-
-        return root;
+        return inflater.inflate(R.layout.fragment_kits, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(VerProductoViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(KitsViewModel.class);
         // TODO: Use the ViewModel
     }
 

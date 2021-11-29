@@ -1,4 +1,4 @@
-package com.programacion.perroestilocliente.ui.cliente.productos.todosLosProductos;
+package com.programacion.perroestilocliente.ui.cliente.tienda;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,7 +30,7 @@ import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTiend
 
 import java.util.ArrayList;
 
-public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHolder> {
+public class ReciclerViewAdapterProdModa extends RecyclerView.Adapter<ReciclerViewAdapterProdModa.DataObjectHolder> {
 
     private Context context;
     private ArrayList<Productos> listaProductos;
@@ -40,7 +39,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
     private String id;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
 
-    public RViewAdapter(Context context, ArrayList<Productos> listaProductos, FragmentManager fragmentManager) {
+    public ReciclerViewAdapterProdModa(Context context, ArrayList<Productos> listaProductos, FragmentManager fragmentManager) {
         this.context = context;
         this.listaProductos = listaProductos;
         this.fragmentManager = fragmentManager;
@@ -51,7 +50,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
     @Override
     public DataObjectHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
-                R.layout.cardview_producto_tienda, viewGroup, false);
+                R.layout.item_lista_tienda_producto, viewGroup, false);
         return new DataObjectHolder(view);
     }
 

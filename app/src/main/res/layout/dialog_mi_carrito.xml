@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cliente.carrito.miCarrito.MiCarritoFragment">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,21 +39,21 @@
                         android:id="@+id/txtDCarritoTotalA"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_toStartOf="@+id/txtFCarritoTotal"
                         android:layout_weight="1"
                         android:text="@string/txtTotal"
                         android:textAlignment="textEnd"
                         android:textColor="@color/flat_grey_dark_2"
                         android:textSize="18sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toStartOf="@+id/txtDCarritoTotal"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtFCarritoTotal"
+                        android:id="@+id/txtDCarritoTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
                         android:layout_weight="1"
                         android:paddingLeft="10dp"
                         android:text="@string/txtTotal"
@@ -65,7 +63,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/txtFCarritoAunSinComprar"
+                    android:id="@+id/txtDCarritoAunSinComprar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -80,17 +78,6 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/frameMiCarrito"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ListView
-                android:id="@+id/lstViewFragMiCarritoProductos"
-                android:layout_width="match_parent"
-                android:layout_height="390dp" />
-        </FrameLayout>
-
-        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -99,29 +86,42 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <ListView
+                    android:id="@+id/lstViewMiCarritoProductos"
+                    android:layout_width="match_parent"
+                    android:layout_height="402dp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <Button
-                    android:id="@+id/btnFMiCarritoContinuar"
+                    android:id="@+id/btnDMiCarritoContinuar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/flat_awesome_green_1"
                     android:text="@string/txtContinuarComprando" />
 
                 <Button
-                    android:id="@+id/btnFMiCarritoComprarAhora"
-                    android:layout_width="match_parent"
+                    android:id="@+id/btnDMiCarritoComprarAhora"
+                   android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/flat_blue_2"
                     android:text="@string/txtComprarAhora" />
-
                 <Button
-                    android:id="@+id/btnFMiCarritoEditarCarrito"
+                    android:id="@+id/btnDMiCarritoEditarCarrito"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:text="@string/txtEditarCarrito"
                     android:backgroundTint="@color/flat_grey_dark_2"
-                    android:text="@string/txtEditarCarrito" />
+                    android:layout_marginBottom="10dp"/>
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
-
 </ScrollView>
