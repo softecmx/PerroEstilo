@@ -585,6 +585,6 @@
     <string name="txtConfirmacionSalir">¿Seguro que quieres cerrar sessión?</string>
     <string name="txtRegresar">Regresar</string>
     <string name="txtPublico">Tipo</string>
-    <string name="txtCatalogo">Catalogo</string>
+    <string name="txtCatalogo">Catálogo</string>
 
 </resources>

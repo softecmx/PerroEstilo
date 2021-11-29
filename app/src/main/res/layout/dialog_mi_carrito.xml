@@ -2,76 +2,83 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp">
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtMiCarrito"
+            android:layout_marginTop="15dp"
             android:gravity="center"
+            android:text="@string/txtMiCarrito"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:layout_marginTop="15dp"/>
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="138dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/txtTotal"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:textSize="18sp"
                 android:textAlignment="textEnd"
-                android:textColor="@color/flat_green_2"/>
+                android:textColor="@color/flat_grey_dark_2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/txtDCarritoTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txtTotal"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/flat_green_2"/>
+                android:layout_weight="1"
+                android:text="@string/txtTotal"
+                android:textColor="@color/flat_green_2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
-            android:layout_weight="1"
             android:id="@+id/txtDCarritoAunSinComprar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tu carrito esta vacío..."
-            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:text="Tu carrito esta vacío..."
+            android:textColor="@color/flat_grey_dark_2"
             android:textSize="18sp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/flat_grey_dark_2"/>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reciclerViewMiCarritoProductos"
+            android:textStyle="bold" />
+
+
+            <ListView
+                android:id="@+id/lstViewMiCarritoProductos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </FrameLayout>
+                android:layout_height="100dp" />
+
+
         <Button
             android:id="@+id/btnDMiCarritoContinuar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtContinuarComprando"/>
+            android:text="@string/txtContinuarComprando" />
+
         <Button
             android:id="@+id/btnDMiCarritoComprarAhora"
-            android:layout_width="match_parent"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtComprarAhora"/>
+            android:layout_marginBottom="10dp"
+            android:text="@string/txtComprarAhora" />
     </LinearLayout>
 </ScrollView>
