@@ -2,6 +2,8 @@ package com.programacion.perroestilocliente.ui.cliente.direcciones.verDireccion;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -54,6 +56,10 @@ import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Direcciones;
 import com.programacion.perroestilocliente.modelo.GeoPoint;
+import com.programacion.perroestilocliente.ui.cliente.comprar.comprarAhora.ComprarAhoraFragment;
+import com.programacion.perroestilocliente.ui.cliente.comprar.confirmarCompra.ConfirmarCompraFragment;
+import com.programacion.perroestilocliente.ui.cliente.direcciones.editarDireccion.EditarDireccionFragment;
+import com.programacion.perroestilocliente.ui.cliente.direcciones.misDirecciones.MisDireccionesFragment;
 
 public class VerDireccionFragment extends Fragment implements OnMapReadyCallback {
 
@@ -161,6 +167,47 @@ public class VerDireccionFragment extends Fragment implements OnMapReadyCallback
             }
         });
 
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference.child("Direcciones").child(id).removeValue();
+                MisDireccionesFragment newFragment1 = new MisDireccionesFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditarDireccionFragment newFragment1 = new EditarDireccionFragment();
+                Bundle args = new Bundle();
+                args.putString("idDireccion",id);
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MisDireccionesFragment newFragment1 = new MisDireccionesFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         return root;
     }
 
