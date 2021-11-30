@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import java.util.ArrayList;
 public class SpnAdapterCategoria extends ArrayAdapter<ElementListView>  {
-
     private Activity activity;
     private ArrayList<ElementListView> arrayList;
 
@@ -49,3 +48,4 @@ public class SpnAdapterCategoria extends ArrayAdapter<ElementListView>  {
         return arrayList.get(index);
     }
 }
+
