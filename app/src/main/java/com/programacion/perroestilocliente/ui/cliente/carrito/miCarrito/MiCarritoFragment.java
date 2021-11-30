@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +36,8 @@ public class MiCarritoFragment extends Fragment {
     private MiCarritoViewModel mViewModel;
     View root;
     float total;
+    Button btnContinuarComprando;
+    Button btnComprarAhora;
 
     public static MiCarritoFragment newInstance() {
         return new MiCarritoFragment();

@@ -64,13 +64,28 @@ public class ListAdapterCarrito extends ArrayAdapter<Item> {
 
         ImageView imgCarrito = convertView.findViewById(R.id.imgCarritoFoto);
         TextView txtNombreProductoCarrito = convertView.findViewById(R.id.txtCarritoNombre);
-      //  TextView txtCarritoModelo = convertView.findViewById(R.id.txtCarritoModelo);
-      //  TextView txtCarritoTalla = convertView.findViewById(R.id.txtCarritoTalla);
+        //  TextView txtCarritoModelo = convertView.findViewById(R.id.txtCarritoModelo);
+        //  TextView txtCarritoTalla = convertView.findViewById(R.id.txtCarritoTalla);
         TextView txtCarritoCandidad = convertView.findViewById(R.id.txtCarritoCandidad);
         TextView txtCarritoSubtotal = convertView.findViewById(R.id.txtCarritoSubtotal);
         TextView txtCarritoPrecioUnitario = convertView.findViewById(R.id.txtCarritoPrecioUnitario);
 
-        txtCarritoCandidad.setText("Cantidad: "+arrayList.get(position).getCantidad());
+
+        txtCarritoPrecioUnitario.setText("$" + arrayList.get(position).getPrecio());
+        txtCarritoSubtotal.setText("Subtotal: $"+String.valueOf(arrayList.get(position).getPrecio()*arrayList.get(position).getCantidad()));
+        storageReference.child(arrayList.get(position).getImg()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getContext()).load(uri).into(imgCarrito);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Ha ocurrido un error al leer la imagen", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        txtCarritoCandidad.setText("Cantidad: " + arrayList.get(position).getCantidad());
         databaseReference.child("Productos").orderByChild("idProducto").equalTo(arrayList.get(position).getProducto()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -79,22 +94,6 @@ public class ListAdapterCarrito extends ArrayAdapter<Item> {
                         //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
                         Productos item = objSnapshot.getValue(Productos.class);
                         txtNombreProductoCarrito.setText(item.getNombre());
-                     //   txtCarritoModelo.setText("Diseño: "+ item.getDisenio());
-                     //   txtCarritoTalla.setText("Talla: "+item.getTalla());
-                        Float subtotaal=Float.parseFloat(item.getPrecioVenta())*arrayList.get(position).getCantidad();
-                        txtCarritoSubtotal.setText("Subtotal: $"+subtotaal);
-                        txtCarritoPrecioUnitario.setText("$"+item.getPrecioVenta());
-                        storageReference.child(item.getImgFoto()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(getContext()).load(uri).into(imgCarrito);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Ha ocurrido un error al leer la imagen", Toast.LENGTH_SHORT).show();
-                            }
-                        });
                     }
                 } else {
 
@@ -105,7 +104,6 @@ public class ListAdapterCarrito extends ArrayAdapter<Item> {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
 
 
         return convertView;
