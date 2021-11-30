@@ -64,6 +64,7 @@
                 android:id="@+id/etACatDesc"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
+                android:gravity="start"
                 android:hint="@string/descCate"
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>

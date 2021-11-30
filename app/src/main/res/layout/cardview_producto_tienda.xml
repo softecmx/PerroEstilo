@@ -38,7 +38,7 @@
                 android:text="OFERTA"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/flat_grey_dark_2"
+                android:background="@color/flat_grey_light_1"
                 android:padding="5dp"
                 android:textColor="@color/primaryDarkColor"
                 android:textStyle="bold"/>

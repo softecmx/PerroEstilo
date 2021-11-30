@@ -29,7 +29,7 @@
         android:name="com.programacion.perroestilocliente.ui.cliente.productos.todosLosProductos.TodosProductosFragment"
         android:label="@string/menu_producto"
         tools:layout="@layout/fragment_todos_productos" />
-
+<!--
     <fragment
         android:id="@+id/nav_kits"
         android:name="com.programacion.perroestilocliente.ui.cliente.kits.kits.KitsFragment"
@@ -41,6 +41,7 @@
         android:name="com.programacion.perroestilocliente.ui.cliente.kits.misKits.MisKitsFragment"
         android:label="@string/menu_mis_kits"
         tools:layout="@layout/fragment_mis_kits" />
+        -->
     <fragment
         android:id="@+id/nav_mi_carrito"
         android:name="com.programacion.perroestilocliente.ui.cliente.carrito.miCarrito.MiCarritoFragment"

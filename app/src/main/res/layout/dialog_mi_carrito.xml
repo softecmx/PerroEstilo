@@ -89,7 +89,7 @@
                 <ListView
                     android:id="@+id/lstViewMiCarritoProductos"
                     android:layout_width="match_parent"
-                    android:layout_height="402dp" />
+                    android:layout_height="430dp" />
             </LinearLayout>
         </FrameLayout>
 
@@ -100,27 +100,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
+                <Button
+                    android:id="@+id/btnDMiCarritoComprarAhora"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtComprarAhora" />
                 <Button
                     android:id="@+id/btnDMiCarritoContinuar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/flat_awesome_green_1"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="@string/txtContinuarComprando" />
 
-                <Button
-                    android:id="@+id/btnDMiCarritoComprarAhora"
-                   android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/flat_blue_2"
-                    android:text="@string/txtComprarAhora" />
-                <Button
-                    android:id="@+id/btnDMiCarritoEditarCarrito"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtEditarCarrito"
-                    android:backgroundTint="@color/flat_grey_dark_2"
-                    android:layout_marginBottom="10dp"/>
+
+                <!--
+                                <Button
+                                    android:id="@+id/btnFMiCarritoEditarCarrito"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:backgroundTint="@color/flat_grey_dark_2"
+                                    android:text="@string/txtEditarCarrito" />
+                                -->
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

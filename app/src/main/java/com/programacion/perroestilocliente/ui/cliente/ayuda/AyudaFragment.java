@@ -42,15 +42,25 @@ public class AyudaFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent setIntent=new Intent();
+
+                try {
+                    Intent setIntent=new Intent();
                /* setIntent.setAction(Intent.ACTION_SEND);
                 setIntent.putExtra(Intent.EXTRA_TEXT,"Holas mensaje");
                 setIntent.setType("text/plain");
                 setIntent.setPackage("com.whatsapp");*/
-                setIntent.setAction(Intent.ACTION_VIEW);
-                String uri="whatsapp://send?phone="+52+"7131037910"+"&text="+"Hola, vengo de la aplicación y necesito ayuda...";
-                setIntent.setData(Uri.parse(uri));
-                startActivity(setIntent);
+                    setIntent.setAction(Intent.ACTION_VIEW);
+                    String uri="whatsapp://send?phone="+52+"7131037910"+"&text="+"Hola, vengo de la aplicación y necesito ayuda...";
+                    setIntent.setData(Uri.parse(uri));
+                    startActivity(setIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    ex.printStackTrace();
+
+                    Snackbar.make(getView(), "El dispositivo no tiene instalado WhatsApp", Snackbar.LENGTH_LONG)
+                            .show();
+                }
+
+
 
             }
         });

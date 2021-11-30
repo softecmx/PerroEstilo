@@ -71,7 +71,7 @@ public class ListAdapterCategorias extends RecyclerView.Adapter<ListAdapterCateg
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemNombre = itemView.findViewById(R.id.txtCardCategoriaNombre);
-            itemImagen=itemView.findViewById(R.id.imgViewCardCategoria);
+          //  itemImagen=itemView.findViewById(R.id.imgViewCardCategoria);
             cv=itemView.findViewById(R.id.cardCategoriaCatalogo);
         }
 
