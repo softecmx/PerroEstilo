@@ -143,8 +143,7 @@ public class EliminarProductosFragment extends Fragment {
     }
     public void eliminar(){
         if (enc==1){
-            c.setEstadoLogico("0");
-            databaseReference.child("Productos").child(c.getIdProducto()).setValue(c);
+            databaseReference.child("Productos").child(c.getIdProducto()).removeValue();
             CustomToast.mostarToast("Dato eliminado!",1,false,root,getLayoutInflater(),getContext());
             limpiar();
         }else{
