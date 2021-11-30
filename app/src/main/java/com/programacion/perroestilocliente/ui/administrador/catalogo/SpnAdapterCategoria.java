@@ -40,9 +40,12 @@ public class SpnAdapterCategoria extends ArrayAdapter<ElementListView>  {
         TextView txtInformacion = convertView.findViewById(R.id.txtDescCategoria);
 
         txtCampo.setText(arrayList.get(position).getNombre());
-        txtInformacion.setText(arrayList.get(position).getDesc());
+        txtInformacion.setText(arrayList.get(position).getTipo());
 
         return convertView;
+    }
+    public ElementListView getItem(int index) {
+        return arrayList.get(index);
     }
 }
 

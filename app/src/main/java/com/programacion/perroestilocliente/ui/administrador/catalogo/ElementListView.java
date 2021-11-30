@@ -51,6 +51,6 @@ public class ElementListView {
         this.desc = desc;
     }
     public String toString(){
-        return getId();
+        return getNombre();
     }
 }

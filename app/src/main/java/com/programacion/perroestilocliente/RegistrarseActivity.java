@@ -143,6 +143,7 @@ public class RegistrarseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (valida()) {
+                    btnRegistar.setEnabled(false);
                     validarExistencia();
                 }
             }
@@ -251,6 +252,7 @@ public class RegistrarseActivity extends AppCompatActivity {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 if (snapshot.exists()) {
                                                     mostarToast("La cuenta ya existe, inicie sessión", 0, true);
+                                                    btnRegistar.setEnabled(true);
                                                 } else {
                                                     if (editEmail.getText().toString().trim().contains("@perroestilo.com.mx")) {
                                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -389,6 +391,7 @@ public class RegistrarseActivity extends AppCompatActivity {
 
                                 } else {
                                     mostarToast("Ups! Ha ocurrido un error al registrar. Intentelo de nuevo", 3, true);
+                                    btnRegistar.setEnabled(true);
                                 }
                             }
                         }

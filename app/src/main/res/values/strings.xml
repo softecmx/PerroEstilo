@@ -332,6 +332,7 @@
     <!--Diseños-->
     <string name="buscDiseño">Buscar diseño</string>
     <string name="nomDisenio">Nombre del diseño</string>
+    <string name="nomProd">Nombre del producto</string>
     <string name="etiquAsoc">Etiquetas asociadas</string>
     <string name="agEtiq">Agregar etiqeta</string>
 
@@ -583,5 +584,21 @@
     <string name="facebook_app_id">959929477953395</string> <string name="fb_login_protocol_scheme">fb959929477953395</string>
     <string name="txtConfirmacionSalir">¿Seguro que quieres cerrar sessión?</string>
     <string name="txtRegresar">Regresar</string>
+    <string name="txtPublico">Tipo</string>
+    <string name="txtCatalogo">Catálogo</string>
+    <string name="txtEditarCarrito">Editar carrito</string>
+    <string name="txtInstruccion1">1. Realiza la siguiente transferencia</string>
+    <string name="txtFechaEmision">Fecha de emisión: </string>
+    <string name="txtFechaEmision1">8/10/2020</string>
+    <string name="txtFechaLimite">Fecha límite de pago: </string>
+    <string name="txtClave1">Clave:</string>
+    <string name="txtNoTarjeta">No. Tarjeta: </string>
+    <string name="txtTarjeta">98176257823464</string>
+    <string name="txtImportePagar">Importe a pagar: </string>
+    <string name="txtTotal2">$ 1000 MX</string>
+    <string name="txtConceptoTrans">Perro Estilo, No. Orden del pedido: 20012</string>
+    <string name="txtConceptoPagar">Concepto de transferencia: </string>
+    <string name="txtInstruccion2">2. Tu pedido ya se encuentra en <b>Mis Pedidos</b> ahora puedes consultarlo</string>
+    <string name="menu_mi_carrito">Mi carrito</string>
 
 </resources>

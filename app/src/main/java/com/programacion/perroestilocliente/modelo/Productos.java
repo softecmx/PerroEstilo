@@ -14,7 +14,8 @@ import java.util.List;
 public class Productos {
 
     private String idProducto;
-    //private String nombre;
+    private  String nombrProducto;
+    private String nombre;
     private String idCategoria;
     private String disenio;
     private String talla;
@@ -27,13 +28,16 @@ public class Productos {
     private String stock;
     private String estadoLogico;
     private String imgFoto;
+    private String descripcion;
 
     public Productos() {
     }
 
-    public Productos(String idProducto, String nombre, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto) {
+
+    public Productos(String idProducto, String nombre, String idCategoria, String disenio, String talla, String precioVenta, String costo, String descuento, String fechaCreacion, String raiting, String estatusStock, String stock, String estadoLogico, String imgFoto,String descripcion) {
+
         this.idProducto = idProducto;
-       // this.nombre = nombre;
+        this.nombre = nombre;
         this.idCategoria = idCategoria;
         this.disenio = disenio;
         this.talla = talla;
@@ -46,6 +50,63 @@ public class Productos {
         this.stock = stock;
         this.estadoLogico = estadoLogico;
         this.imgFoto = imgFoto;
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getNombrProducto() {
+        return nombrProducto;
+    }
+
+    public void setNombrProducto(String nombrProducto) {
+        this.nombrProducto = nombrProducto;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+
+    }
+
+    public String getRaiting() {
+        return raiting;
+    }
+
+    public void setRaiting(String raiting) {
+        this.raiting = raiting;
+    }
+
+    public String getEstatusStock() {
+        return estatusStock;
+    }
+
+    public void setEstatusStock(String estatusStock) {
+        this.estatusStock = estatusStock;
+    }
+
+    public String getEstadoLogico() {
+        return estadoLogico;
+    }
+
+    public void setEstadoLogico(String estadoLogico) {
+        this.estadoLogico = estadoLogico;
+    }
+
+    public String getImgFoto() {
+        return imgFoto;
+    }
+
+    public void setImgFoto(String imgFoto) {
+        this.imgFoto = imgFoto;
     }
 
     public String getIdProducto() {
@@ -55,10 +116,6 @@ public class Productos {
     public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
-
-    //public String getNombre() {return nombre;}
-
-   // public void setNombre(String nombre) {this.nombre = nombre;}
 
     public String getIdCategoria() {
         return idCategoria;
@@ -116,43 +173,11 @@ public class Productos {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public String getRaiting() {
-        return raiting;
-    }
-
-    public void setRaiting(String raiting) {
-        this.raiting = raiting;
-    }
-
-    public String getEstatusStock() {
-        return estatusStock;
-    }
-
-    public void setEstatusStock(String estatusStock) {
-        this.estatusStock = estatusStock;
-    }
-
     public String getStock() {
         return stock;
     }
 
     public void setStock(String stock) {
         this.stock = stock;
-    }
-
-    public String getEstadoLogico() {
-        return estadoLogico;
-    }
-
-    public void setEstadoLogico(String estadoLogico) {
-        this.estadoLogico = estadoLogico;
-    }
-
-    public String getImgFoto() {
-        return imgFoto;
-    }
-
-    public void setImgFoto(String imgFoto) {
-        this.imgFoto = imgFoto;
     }
 }
