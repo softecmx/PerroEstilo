@@ -8,6 +8,7 @@ public class Item {
     private  String idUsuario;
     private float precio;
     private String img;
+    private String talla;
 
     public String getIdUsuario() {
         return idUsuario;
@@ -47,5 +48,13 @@ public class Item {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
     }
 }

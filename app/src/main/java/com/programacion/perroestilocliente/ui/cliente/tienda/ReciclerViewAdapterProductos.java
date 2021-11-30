@@ -39,7 +39,7 @@ import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTiend
 import java.util.ArrayList;
 
 public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerViewAdapterProductos.DataObjectHolder> {
-    float redondeo=0;
+    float redondeo = 0;
     private Context context;
     FragmentManager fragmentManager;
     private ArrayList<Productos> listaProductos;
@@ -117,6 +117,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
                                     nvoItem.setIdUsuario(user.getUid());
                                     nvoItem.setProducto(id);
                                     nvoItem.setImg(item.getImg());
+                                    nvoItem.setTalla(item.getTalla());
                                     nvoItem.setPrecio(item.getPrecio());
                                     assert item != null;
                                     nvoItem.setCantidad(item.getCantidad() + 1);
@@ -129,7 +130,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
                                 item.setProducto(id);
                                 item.setIdUsuario(user.getUid());
                                 item.setCantidad(1);
-
+                                item.setTalla(listaProductos.get(holder.getAdapterPosition()).getTalla());
                                 float descuento = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getDescuento());
 
                                 float precio = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getPrecioVenta());

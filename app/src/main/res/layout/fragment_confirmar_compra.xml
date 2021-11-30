@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     tools:context=".ui.cliente.comprar.confirmarCompra.ConfirmarCompraFragment">
 
     <LinearLayout
@@ -212,6 +213,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/txtInstruccion2"
             android:textColor="@color/flat_grey_dark_2"
             android:textSize="18sp"
@@ -227,6 +229,7 @@
             android:id="@+id/btnVerMisPedidosCompra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/txtVerEnMisPedidos" />
 
     </LinearLayout>

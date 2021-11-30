@@ -118,6 +118,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
                                     nvoItem.setIdUsuario(user.getUid());
                                     nvoItem.setProducto(id);
                                     nvoItem.setImg(item.getImg());
+                                    nvoItem.setTalla(item.getTalla());
                                     nvoItem.setPrecio(item.getPrecio());
                                     assert item != null;
                                     nvoItem.setCantidad(item.getCantidad() + 1);
@@ -130,7 +131,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
                                 item.setProducto(id);
                                 item.setIdUsuario(user.getUid());
                                 item.setCantidad(1);
-
+                                item.setTalla(listaProductos.get(holder.getAdapterPosition()).getTalla());
                                 float descuento = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getDescuento());
 
                                 float precio = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getPrecioVenta());
