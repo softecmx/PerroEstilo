@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Direcciones;
 import com.programacion.perroestilocliente.ui.cliente.direcciones.agregarDireccion.AgregarDireccionFragment;
+import com.programacion.perroestilocliente.ui.cliente.direcciones.verDireccion.VerDireccionFragment;
 
 import java.util.ArrayList;
 
@@ -58,15 +59,20 @@ public class MisDireccionesFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        this.listMisDirecciones.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        this.listMisDirecciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-               /* if (i == 0) {
-                    ElementListView itemAtPosition = (ElementListView) listView.getItemAtPosition(0);
-                    // mostarToast("Editar nombre: " + itemAtPosition.getInformacion(), 0, true);
-                    createDialogCambiarNombre();
-                } */
-                return false;
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Direcciones direcciones= (Direcciones) listMisDirecciones.getItemAtPosition(i);
+                VerDireccionFragment newFragment1 = new VerDireccionFragment();
+                Bundle args = new Bundle();
+                args.putString("idDireccion",direcciones.getIdDireccion());
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

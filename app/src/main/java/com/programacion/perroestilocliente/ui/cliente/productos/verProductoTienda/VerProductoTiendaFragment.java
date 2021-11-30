@@ -120,7 +120,7 @@ public class VerProductoTiendaFragment extends Fragment {
                        ratingBar.setRating(raitingStar);
 
                         if (productos.getDescuento().equals("") || productos.getDescuento().equals("0")) {
-                            txtPrecio.setVisibility(View.GONE);
+                            txtdescuento.setVisibility(View.GONE);
                             txtPrecio.setText("$" + productos.getPrecioVenta());
                         } else {
                             txtdescuento.setVisibility(View.VISIBLE);

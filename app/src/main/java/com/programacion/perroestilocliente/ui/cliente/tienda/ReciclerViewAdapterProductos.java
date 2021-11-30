@@ -39,7 +39,7 @@ import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTiend
 import java.util.ArrayList;
 
 public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerViewAdapterProductos.DataObjectHolder> {
-
+    float redondeo=0;
     private Context context;
     FragmentManager fragmentManager;
     private ArrayList<Productos> listaProductos;
@@ -87,7 +87,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
             float precio = Float.parseFloat(listaProductos.get(position).getPrecioVenta());
             float descuentoReal = (descuento * precio) / 100;
             float precioActual = precio - descuentoReal;
-            float redondeo = Math.round(precioActual);
+            redondeo = Math.round(precioActual);
             holder.txtDescuento.setPaintFlags(holder.txtDescuento.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.txtDescuento.setText("$" + listaProductos.get(position).getPrecioVenta());
             holder.txtPrecio.setText("$" + redondeo);
@@ -140,6 +140,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
                                     item.setProducto(id);
                                     item.setIdUsuario(user.getUid());
                                     item.setCantidad(1);
+                                    item.setPrecio(redondeo);
                                     ref.child("Carrito/"+user.getUid()+"/Items").child(item.getProducto()).setValue(item).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {

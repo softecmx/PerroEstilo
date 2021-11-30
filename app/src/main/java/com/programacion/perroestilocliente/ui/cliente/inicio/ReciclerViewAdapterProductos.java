@@ -62,10 +62,12 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
 
-        holder.txtNombre.setText(listaProductos.get(position).getNombre());
-        id = listaProductos.get(position).getIdProducto();
-        System.out.println(listaProductos.get(position).getIdProducto() + " RECICLER VIEW");
-        String raiting = listaProductos.get(position).getRaiting();
+        Glide.with(context).load(listaProductos.get(position).getIdProducto()).into(holder.img);
+
+        holder.txtNombre.setText(listaProductos.get( holder.getAdapterPosition()).getNombre());
+        id = listaProductos.get( holder.getAdapterPosition()).getIdProducto();
+        System.out.println(listaProductos.get( holder.getAdapterPosition()).getIdProducto() + " RECICLER VIEW");
+        String raiting = listaProductos.get( holder.getAdapterPosition()).getRaiting();
         float raitingStar;
         if (raiting.isEmpty()) {
             raitingStar = 0;
@@ -145,12 +147,32 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
                         }
                     });
         });
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VerProductoTiendaFragment newFragment1 = new VerProductoTiendaFragment();
+                Bundle args = new Bundle();
+                id = listaProductos.get( holder.getAdapterPosition()).getIdProducto();
+                args.putString("idProducto", id);
+                newFragment1.setArguments(args);
+                System.out.println(holder.getAdapterPosition() + " HOME PRODUCTOS");
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                Toast.makeText(v.getContext(), "Position: " +
+                        holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            }
+        });
         holder.btnVer.setOnClickListener(v -> {
             VerProductoTiendaFragment newFragment1 = new VerProductoTiendaFragment();
             Bundle args = new Bundle();
+            id = listaProductos.get( holder.getAdapterPosition()).getIdProducto();
             args.putString("idProducto", id);
             newFragment1.setArguments(args);
-            System.out.println(id + " HOME PRODUCTOS");
+            System.out.println(holder.getAdapterPosition() + " HOME PRODUCTOS");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_cliente, newFragment1);
             fragmentTransaction.addToBackStack(null);
