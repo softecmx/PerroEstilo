@@ -1,5 +1,7 @@
 package com.programacion.perroestilocliente.ui.cliente.carrito.miCarrito;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -26,8 +28,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
+import com.programacion.perroestilocliente.ui.cliente.comprar.comprarAhora.ComprarAhoraFragment;
 import com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito;
 import com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity;
+import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
+import com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment;
 
 import java.util.ArrayList;
 
@@ -58,7 +63,8 @@ public class MiCarritoFragment extends Fragment {
         // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
         TextView txtTotal = root.findViewById(R.id.txtFCarritoTotal);
         TextView txtProductos = root.findViewById(R.id.txtFCarritoAunSinComprar);
-
+        btnComprarAhora=root.findViewById(R.id.btnFMiCarritoComprarAhora);
+        btnContinuarComprando=root.findViewById(R.id.btnFMiCarritoContinuar);
         ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewFragMiCarritoProductos);
         ArrayList<Item> arrayListItems = new ArrayList<>();
         total = 0;
@@ -69,14 +75,19 @@ public class MiCarritoFragment extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                         //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
-                        Item item = objSnapshot.getValue(Item.class);
-                        arrayListItems.add(item);
-                        ListAdapterCarrito adapterProductos = new ListAdapterCarrito(getActivity(), arrayListItems);
-                        reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
-                        System.out.println(item.getProducto() + "  " + item.getCantidad());
-                        total = total + (item.getPrecio() * item.getCantidad());
-                        txtTotal.setText("$" + total);
-                        txtProductos.setVisibility(View.GONE);
+                        try {
+                            Item item = objSnapshot.getValue(Item.class);
+                            arrayListItems.add(item);
+                            ListAdapterCarrito adapterProductos = new ListAdapterCarrito(getActivity(), arrayListItems);
+                            reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                            System.out.println(item.getProducto() + "  " + item.getCantidad());
+                            total = total + (item.getPrecio() * item.getCantidad());
+                            txtTotal.setText("$" + total);
+                            txtProductos.setVisibility(View.GONE);
+                        }catch (Exception e){
+
+                        }
+
                     }
                 } else {
                     txtTotal.setText("$0.0");
@@ -89,6 +100,33 @@ public class MiCarritoFragment extends Fragment {
             }
         });
 
+        btnComprarAhora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ComprarAhoraFragment newFragment1 = new ComprarAhoraFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager=getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        btnContinuarComprando.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TiendaFragment newFragment1 = new TiendaFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager=getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         return root;
     }
 

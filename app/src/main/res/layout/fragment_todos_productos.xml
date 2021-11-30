@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="?attr/colorOnPrimary"
     tools:context=".ui.cliente.productos.todosLosProductos.TodosProductosFragment">
 
     <androidx.recyclerview.widget.RecyclerView

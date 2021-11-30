@@ -11,13 +11,14 @@
         android:layout_height="wrap_content"
         android:elevation="4dp"
         android:layout_margin="10dp"
-        android:backgroundTint="#75FFA1E7"
+
         app:cardCornerRadius="10dp"
         >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="#75FFA1E7"
             android:padding="10dp">
             <!--
                     <ImageView
