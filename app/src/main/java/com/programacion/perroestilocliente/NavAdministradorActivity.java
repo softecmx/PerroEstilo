@@ -414,13 +414,12 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 break;
                             case "Salir":
                                 FirebaseUser userj=FirebaseAuth.getInstance().getCurrentUser();
-                                //mostarToast("usuario: "+userj,1,false);
                                 FirebaseAuth.getInstance().signOut();
                                 mostarToast("Sessión terminada exitosamente",1,true);
                                 startActivity(new Intent(NavAdministradorActivity.this, LogginActivity.class));
                                 finish();
                                 FirebaseUser userk=FirebaseAuth.getInstance().getCurrentUser();
-                             //   mostarToast("usuario: "+userk,5,false);
+
 
                                 break;
                         }
