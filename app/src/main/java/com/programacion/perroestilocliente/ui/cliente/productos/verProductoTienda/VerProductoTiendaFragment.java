@@ -100,7 +100,7 @@ public class VerProductoTiendaFragment extends Fragment {
                         storageReference.child(productos.getImgFoto()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Glide.with(getContext()).load(uri).into(img);
+                                Glide.with(root).load(uri).into(img);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -121,6 +121,7 @@ public class VerProductoTiendaFragment extends Fragment {
 
                         if (productos.getDescuento().equals("") || productos.getDescuento().equals("0")) {
                             txtdescuento.setVisibility(View.GONE);
+                            txtPrecioAntiguo.setVisibility(View.GONE);
                             txtPrecio.setText("$" + productos.getPrecioVenta());
                         } else {
                             txtdescuento.setVisibility(View.VISIBLE);
@@ -150,6 +151,7 @@ public class VerProductoTiendaFragment extends Fragment {
 
             }
         });
+
         return root;
     }
 
