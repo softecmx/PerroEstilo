@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="@color/auxiliar"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+            <ImageView
+                android:id="@+id/imgDetalleVenta"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:src="@drawable/no_image"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/imgDetalleVenta"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtNombreProductoDetVenta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtNombreProducto"
+                    android:textColor="@color/gray_100"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtModeloProductoDetVenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtModelo"
+                        android:textColor="@color/gray_100"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTallaProductoDetVenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="100dp"
+                        android:layout_toEndOf="@+id/txtModeloProductoDetVenta"
+                        android:text="@string/adminAPtalla"
+                        android:textColor="@color/gray_100"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/txtCantidadProductoDetVenta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtCantidad"
+                    android:textStyle="bold"
+                    android:textSize="17dp"
+                    android:textColor="@color/gray_100"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/txtSubtotalProductoDetVenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtSubtotal"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/gray_100"/>
+                    <TextView
+                        android:id="@+id/valorSubtotalProductoDC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/txtSubtotalProductoDetVenta"
+                        android:textStyle="normal"
+                        android:text="@string/pago"
+                        android:textColor="@color/gray_100"
+                        android:textSize="17dp"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
