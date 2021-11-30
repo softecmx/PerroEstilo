@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.cliente.inicio.HomeClienteFragment"
     android:fillViewport="true">
@@ -10,41 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="0dp"
-                android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:boxBackgroundMode="outline"
-                    app:startIconDrawable="@drawable/ic_search_black_24dp"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:endIconMode="clear_text">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editBuscConsultarID"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Buscar"
-                        android:inputType="text" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-        </LinearLayout>
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carruselInicio"
             android:layout_width="match_parent"
@@ -215,3 +182,41 @@
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+    <!--
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginRight="10dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginBottom="0dp"
+                  android:orientation="horizontal">
+
+                  <com.google.android.material.textfield.TextInputLayout
+                      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      app:boxBackgroundMode="outline"
+                      app:startIconDrawable="@drawable/ic_search_black_24dp"
+                      app:boxCornerRadiusBottomEnd="10dp"
+                      app:boxCornerRadiusBottomStart="10dp"
+                      app:boxCornerRadiusTopEnd="10dp"
+                      app:boxCornerRadiusTopStart="10dp"
+                      app:endIconMode="clear_text">
+
+                      <com.google.android.material.textfield.TextInputEditText
+                          android:id="@+id/editBuscConsultarID"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:hint="Buscar"
+                          android:inputType="text" />
+                  </com.google.android.material.textfield.TextInputLayout>
+              </LinearLayout>
+          </LinearLayout>
+          -->

@@ -14,6 +14,7 @@
         android:layout_marginTop="15dp"
         android:elevation="4dp">
         <TextView
+            android:id="@+id/txtCuentaAdmin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/nav_header_title"
@@ -23,7 +24,8 @@
             android:textStyle="bold"/>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
             <ImageView
                 android:id="@+id/imgCuetaAdmin"
@@ -65,20 +67,33 @@
                 app:srcCompat="@drawable/ic_navigate_next_black_24dp" />
         </RelativeLayout>
 
-                <FrameLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="439dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:id="@+id/flOpcionesFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <ListView
+                    android:id="@+id/listOpciones"
                     android:layout_width="match_parent"
-                    android:layout_height="320dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/white"
-                    android:layout_marginTop="15dp">
-                    <ListView
-                        android:id="@+id/listOpcionesCuentaAdmin"
-                        android:layout_marginTop="15dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    </ListView>
+                    android:layout_height="wrap_content" />
 
-                </FrameLayout>
+            </FrameLayout>
+        </LinearLayout>
 
+        <!--<LinearLayout
+            android:id="@+id/llReemplazarPerfilAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:orientation="vertical"></LinearLayout>-->
     </LinearLayout>
 </ScrollView>

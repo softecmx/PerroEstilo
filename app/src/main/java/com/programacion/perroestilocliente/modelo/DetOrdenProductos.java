@@ -17,19 +17,34 @@ public class DetOrdenProductos {
     private String medidas;
     private String calificacion;
     private String modelos;
-    private Productos producto;
-
+    private String idProducto;
+    private String idOrdenCliente;
+    private String imgFoto;
     public DetOrdenProductos() {
     }
 
-    public DetOrdenProductos(String idDetOrdenProducto, String cantidad, String subtotal, String medidas, String calificacion, String modelos, Productos producto) {
-        this.idDetOrdenProducto = idDetOrdenProducto;
-        this.cantidad = cantidad;
-        this.subtotal = subtotal;
-        this.medidas = medidas;
-        this.calificacion = calificacion;
-        this.modelos = modelos;
-        this.producto = producto;
+    public String getImgFoto() {
+        return imgFoto;
+    }
+
+    public void setImgFoto(String imgFoto) {
+        this.imgFoto = imgFoto;
+    }
+
+    public String getIdOrdenCliente() {
+        return idOrdenCliente;
+    }
+
+    public String getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(String idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public void setIdOrdenCliente(String idOrdenCliente) {
+        this.idOrdenCliente = idOrdenCliente;
     }
 
     public String getModelos() {
@@ -38,14 +53,6 @@ public class DetOrdenProductos {
 
     public void setModelos(String modelos) {
         this.modelos = modelos;
-    }
-
-    public Productos getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Productos producto) {
-        this.producto = producto;
     }
 
     public String getIdDetOrdenProducto() {

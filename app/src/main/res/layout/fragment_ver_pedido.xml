@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.pedidos.verDetallePedido.VerPedidoFragment">
 
@@ -200,7 +201,7 @@
             android:id="@+id/btnComprarAhoraConfirmar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtImportarTicket " />
+            android:text="@string/txtImportarTicket" />
 
     </LinearLayout>
 

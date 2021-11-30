@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.clientes.VerClientesFragment">
 
@@ -47,16 +48,17 @@
                 android:contentDescription="@string/txtDescripcion"
                 app:srcCompat="@drawable/ic_add_box_black_24dp" />
         </LinearLayout>
+
         <FrameLayout
             android:id="@+id/flClientesFrame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="507dp"
             android:layout_marginTop="10dp">
 
             <ListView
                 android:id="@+id/listClientes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </FrameLayout>
     </LinearLayout>
