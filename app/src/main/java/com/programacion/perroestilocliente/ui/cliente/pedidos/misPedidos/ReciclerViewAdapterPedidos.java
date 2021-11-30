@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,7 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
 import com.programacion.perroestilocliente.modelo.Productos;
+import com.programacion.perroestilocliente.ui.cliente.pedidos.estadoPedido.EstadoPedidoFragment;
 import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
 
 import java.util.ArrayList;
@@ -61,6 +63,35 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
 
+        if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Pago pendiente")){
+            holder.txtStatus.setText("Pago pendiente");
+            holder.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.danger));
+
+        }else if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Preparando pedido")){
+            holder.txtStatus.setText("Preparando");
+            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_orange_2));
+        }else if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("En camino")){
+            holder.txtStatus.setText("En camino");
+            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_yellow_1));
+        }else if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Entregado")){
+            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_green_1));
+            holder.txtStatus.setText("Entregado");
+        }
+        holder.txtNoOrden.setText(listaPedidos.get(holder.getPosition()).getNoSerie());
+      //  holder.txtStatus
+        holder.txtFechaOrden.setText(listaPedidos.get(holder.getPosition()).getFechaOrden());
+        holder.btnVer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EstadoPedidoFragment newFragment1 = new EstadoPedidoFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
     }
 
@@ -72,14 +103,21 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
     public class DataObjectHolder extends RecyclerView.ViewHolder {
 
         private ImageView img;
-        private TextView txtNombre;
+        private TextView txtNoOrden;
         private Button btnVer;
+        private TextView txtFechaOrden;
+        private TextView txtTotal;
+        private TextView txtStatus;
 
 
         public DataObjectHolder(@NonNull View itemView) {
             super(itemView);
-          //  this.img = itemView.findViewById(R.id.imgCardProductoTienda);
-
+           this.img = itemView.findViewById(R.id.imgItemPedido);
+           this.txtFechaOrden=itemView.findViewById(R.id.txtItemPedidoFecha);
+           this.btnVer=itemView.findViewById(R.id.btnPedidoVerCompra);
+           this.txtTotal=itemView.findViewById(R.id.txtItemPedidoTotal);
+           this.txtNoOrden=itemView.findViewById(R.id.txtItemPedidoNoSerie);
+           this.txtStatus=itemView.findViewById(R.id.txtItemPedidoStatus);
         }
     }
 

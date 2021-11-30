@@ -15,7 +15,8 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -24,8 +25,8 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp">
 
-            <AutoCompleteTextView
-                android:id="@+id/spinAddDirEstado"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/spinEditDirEstado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtEstado"
@@ -33,7 +34,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxCornerRadiusBottomEnd="10dp"
@@ -41,8 +42,8 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp">
 
-            <AutoCompleteTextView
-                android:id="@+id/spinAddDirMuncipio"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/spinEditDirMuncipio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtMunicipio"
@@ -61,7 +62,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editAddDirLocalidad"
+                android:id="@+id/editEditDirLocalidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtLocalidad"
@@ -80,7 +81,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editAddDirCodPostal"
+                android:id="@+id/editEditDirCodPostal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtCodigoPostal"
@@ -99,7 +100,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editAddDirCalleExt"
+                android:id="@+id/editEditDirCalleExt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtCalleExterior"
@@ -118,7 +119,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editAddDirCalleInt"
+                android:id="@+id/editEditDirCalleInt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtCalleInterior"
@@ -137,7 +138,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editAddDirReferencias"
+                android:id="@+id/editEditDirReferencias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtReferencias"
@@ -145,7 +146,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
+            android:id="@+id/mapViewEditDir"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginTop="10dp"
@@ -159,23 +160,15 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnAddDirActualizaLimpiar"
-                style="?android:attr/buttonBarNeutralButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/txtLimpiar" />
-
-            <Button
-                android:id="@+id/btnAddDirActualizaGuardar"
+                android:id="@+id/btnEditDirActualizaGuardar"
                 style="?android:attr/buttonBarPositiveButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/txtAgregar" />
+                android:text="@string/txtEditar" />
 
             <Button
-                android:id="@+id/btnAddDirActualizaCancelar"
+                android:id="@+id/btnEditDirActualizaCancelar"
                 style="?android:attr/buttonBarNegativeButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
