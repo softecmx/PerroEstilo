@@ -33,6 +33,7 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
 import com.programacion.perroestilocliente.modelo.Productos;
+import com.programacion.perroestilocliente.ui.cliente.pedidos.estadoPedido.EstadoPedidoFragment;
 import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
 
 import java.util.ArrayList;
@@ -82,7 +83,13 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
         holder.btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                EstadoPedidoFragment newFragment1 = new EstadoPedidoFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
