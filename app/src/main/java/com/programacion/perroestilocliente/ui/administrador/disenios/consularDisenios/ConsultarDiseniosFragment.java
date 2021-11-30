@@ -141,7 +141,7 @@ public class ConsultarDiseniosFragment extends Fragment {
         }
     }
     public void listarElementos(){
-        databaseReference.child("Disenios").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Disenios").orderByChild("estadoLogico").equalTo("1").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayList = new ArrayList<>();

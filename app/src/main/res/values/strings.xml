@@ -308,7 +308,7 @@
     <string name="nomkit">Nombre del kit</string>
     <string name="confirmar">Confirmar</string>
     <string name="atras">Atrás</string>
-    <string name="escogeDisenio">\nEscoge el diseño</string>
+    <string name="escogeDisenio">Escoge el diseño</string>
     <string name="pEstim">Precio estimado $$$</string>
     <string name="precio">Precio</string>
     <string name="creaKit">Crear Kit</string>
