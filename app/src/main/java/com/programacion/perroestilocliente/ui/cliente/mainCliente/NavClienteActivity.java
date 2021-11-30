@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,6 +36,8 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
 import com.programacion.perroestilocliente.modelo.Productos;
+import com.programacion.perroestilocliente.ui.cliente.comprar.comprarAhora.ComprarAhoraFragment;
+import com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment;
 
 import java.util.ArrayList;
 
@@ -66,10 +70,9 @@ public class NavClienteActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_ajustes, R.id.nav_ayuda, R.id.nav_categoria, R.id.nav_producto, R.id.nav_kits,
-                R.id.nav_mis_kits, R.id.nav_pedidos, R.id.nav_mi_cuenta, R.id.nav_mis_direcciones, R.id.nav_tienda,
+                R.id.nav_home, R.id.nav_ajustes, R.id.nav_ayuda, R.id.nav_categoria, R.id.nav_producto, R.id.nav_pedidos, R.id.nav_mi_cuenta, R.id.nav_mis_direcciones, R.id.nav_tienda,
                 R.id.nav_sobre_nosotros, R.id.nav_acerca_app,
-                R.id.nav_politicas, R.id.nav_ajustes, R.id.nav_salir,R.id.nav_mi_carrito)
+                R.id.nav_politicas, R.id.nav_ajustes, R.id.nav_salir, R.id.nav_mi_carrito)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.container_cliente);
@@ -104,7 +107,8 @@ public class NavClienteActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-
+    float total = 0;
+    Button btnComprarAhora;
     private void miCarrito() {
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
@@ -118,10 +122,12 @@ public class NavClienteActivity extends AppCompatActivity {
         // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
         TextView txtTotal = aboutPop.findViewById(R.id.txtDCarritoTotal);
         TextView txtProductos = aboutPop.findViewById(R.id.txtDCarritoAunSinComprar);
+        btnComprarAhora= aboutPop.findViewById(R.id.btnDMiCarritoComprarAhora);
+        Button btnContunuarComprando = aboutPop.findViewById(R.id.btnDMiCarritoContinuar);
 
         ListView reciclerViewMiCarritoProductos = aboutPop.findViewById(R.id.lstViewMiCarritoProductos);
         ArrayList<Item> arrayListItems = new ArrayList<>();
-        float[] total = {0};
+        total = 0;
         databaseReference.child("Carrito/" + user.getUid() + "/Items").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -133,14 +139,14 @@ public class NavClienteActivity extends AppCompatActivity {
                         arrayListItems.add(item);
                         ListAdapterCarrito adapterProductos = new ListAdapterCarrito(NavClienteActivity.this, arrayListItems);
                         reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
-                        System.out.println(item.getProducto() + "  " + item.getCantidad());
-                        total[0] = total[0] +(item.getPrecio()*item.getCantidad());
-                        txtTotal.setText("$" + total[0]);
+                        total = total + (item.getPrecio() * item.getCantidad());
+                        txtTotal.setText("$" + total);
                         txtProductos.setVisibility(View.GONE);
                     }
                 } else {
                     txtTotal.setText("$0.0");
                     txtProductos.setVisibility(View.VISIBLE);
+                    btnComprarAhora.setVisibility(View.GONE);
                 }
             }
 
@@ -153,19 +159,42 @@ public class NavClienteActivity extends AppCompatActivity {
         dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
         dialog.show();
+        btnComprarAhora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                remplaza();
+                dialog.dismiss();
 
-
+            }
+        });
+        btnContunuarComprando.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
       /*  btnPopCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+
             }
         });
 */
         //cerrar
     }
 
+    private void remplaza(){
+        ComprarAhoraFragment newFragment1 = new ComprarAhoraFragment();
+        Bundle args = new Bundle();
+        newFragment1.setArguments(args);
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
     private static Productos productos = null;
 
     public void mostarToast(String txt, int estatus, boolean corto) {

@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author por_s
  */
-public class OrdenesCliente {
+public class OrdenesCliente extends Direcciones{
 
     private String inOrden;
     private Direcciones direccionEnvio;

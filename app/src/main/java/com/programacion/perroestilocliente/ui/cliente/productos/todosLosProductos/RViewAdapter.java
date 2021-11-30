@@ -23,9 +23,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.modelo.Productos;
 import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
 
@@ -57,10 +66,12 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
 
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
-        holder.txtNombre.setText(listaProductos.get(position).getNombre());
-        id = listaProductos.get(position).getIdProducto();
-        String raiting = listaProductos.get(position).getRaiting();
-        float raitingStar = 0;
+
+        holder.txtNombre.setText(listaProductos.get(holder.getAdapterPosition()).getNombre());
+        id = listaProductos.get(holder.getAdapterPosition()).getIdProducto();
+        // System.out.println(listaProductos.get( holder.getAdapterPosition()).getIdProducto() + " RECICLER VIEW");
+        String raiting = listaProductos.get(holder.getAdapterPosition()).getRaiting();
+        float raitingStar;
         if (raiting.isEmpty()) {
             raitingStar = 0;
         } else {
@@ -68,58 +79,93 @@ public class RViewAdapter extends RecyclerView.Adapter<RViewAdapter.DataObjectHo
         }
         holder.ratingBar.setRating(raitingStar);
 
-        if (listaProductos.get(position).getDescuento().equals("") || listaProductos.get(position).getDescuento().equals("0")) {
+        if (listaProductos.get(position).getDescuento().equals("") || listaProductos.get(holder.getAdapterPosition()).getDescuento().equals("0")) {
             holder.txtDescuento.setVisibility(View.GONE);
             holder.txtOferta.setVisibility(View.GONE);
-            holder.txtPrecio.setText("$" + listaProductos.get(position).getPrecioVenta());
+            holder.txtPrecio.setText("$" + listaProductos.get(holder.getAdapterPosition()).getPrecioVenta());
         } else {
             holder.txtOferta.setVisibility(View.VISIBLE);
             holder.txtDescuento.setVisibility(View.VISIBLE);
-            float descuento = Float.parseFloat(listaProductos.get(position).getDescuento());
+            float descuento = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getDescuento());
 
-            float precio = Float.parseFloat(listaProductos.get(position).getPrecioVenta());
+            float precio = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getPrecioVenta());
             float descuentoReal = (descuento * precio) / 100;
             float precioActual = precio - descuentoReal;
             float redondeo = Math.round(precioActual);
             holder.txtDescuento.setPaintFlags(holder.txtDescuento.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.txtDescuento.setText("$" + listaProductos.get(position).getPrecioVenta());
+            holder.txtDescuento.setText("$" + listaProductos.get(holder.getAdapterPosition()).getPrecioVenta());
             holder.txtPrecio.setText("$" + redondeo);
         }
 
         //  Glide.with(context).load(listaProductos.get(position).getImgFoto()).into(holder.img);
-        storageReference.child(listaProductos.get(position).getImgFoto()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri).into(holder.img);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Ha ocurrido un error al leer la imagen", Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.btnAgregarCarrito.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Position: " +
-                        holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.btnVer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        storageReference.child(listaProductos.get(holder.getAdapterPosition()).getImgFoto()).getDownloadUrl().addOnSuccessListener(uri -> Glide.with(context).load(uri).into(holder.img)).addOnFailureListener(e -> Toast.makeText(context, "Ha ocurrido un error al leer la imagen", Toast.LENGTH_SHORT).show());
 
-                VerProductoTiendaFragment newFragment1 = new VerProductoTiendaFragment();
-                Bundle args = new Bundle();
-                args.putString("idProducto", id);
-                newFragment1.setArguments(args);
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
+        holder.btnAgregarCarrito.setOnClickListener(v -> {
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference ref = database.getReference();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            id = listaProductos.get(holder.getAdapterPosition()).getIdProducto();
+            assert user != null;
+            Query findCarrito = ref.child(String.format("Carrito/%s/Items", user.getUid())).orderByChild("producto").equalTo(id);
+            findCarrito.addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                                    Item item = objSnapshot.getValue(Item.class);
+                                    Item nvoItem = new Item();
+                                    nvoItem.setIdUsuario(user.getUid());
+                                    nvoItem.setProducto(id);
+                                    nvoItem.setImg(item.getImg());
+                                    nvoItem.setTalla(item.getTalla());
+                                    nvoItem.setPrecio(item.getPrecio());
+                                    assert item != null;
+                                    nvoItem.setCantidad(item.getCantidad() + 1);
+                                    ref.child("Carrito/" + user.getUid() + "/Items").child(item.getProducto()).setValue(nvoItem).addOnSuccessListener(aVoid -> {
+                                    }).addOnFailureListener(e -> {
+                                    });
+                                }
+                            } else {
+                                Item item = new Item();
+                                item.setProducto(id);
+                                item.setIdUsuario(user.getUid());
+                                item.setCantidad(1);
+                                item.setTalla(listaProductos.get(holder.getAdapterPosition()).getTalla());
+                                float descuento = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getDescuento());
+
+                                float precio = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getPrecioVenta());
+                                float descuentoReal = (descuento * precio) / 100;
+                                float precioActual = precio - descuentoReal;
+                                float redondeo = Math.round(precioActual);
+
+                                item.setPrecio(redondeo);
+                                item.setImg(listaProductos.get(holder.getAdapterPosition()).getImgFoto());
+                                ref.child("Carrito/" + user.getUid() + "/Items").child(item.getProducto()).setValue(item).addOnSuccessListener(aVoid -> {
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
         });
 
+
+        holder.btnVer.setOnClickListener(v -> {
+            VerProductoTiendaFragment newFragment1 = new VerProductoTiendaFragment();
+            Bundle args = new Bundle();
+            id = listaProductos.get(holder.getAdapterPosition()).getIdProducto();
+            args.putString("idProducto", id);
+            newFragment1.setArguments(args);
+            System.out.println(holder.getAdapterPosition() + " HOME PRODUCTOS");
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
     }
 
     @Override

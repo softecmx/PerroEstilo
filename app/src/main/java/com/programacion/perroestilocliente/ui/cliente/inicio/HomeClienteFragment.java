@@ -222,7 +222,6 @@ public class HomeClienteFragment extends Fragment {
         });
 
 
-
         return root;
 
     }

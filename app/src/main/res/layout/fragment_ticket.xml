@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     tools:context=".ui.cliente.productos.ticket.TicketFragment">
 
     <LinearLayout
@@ -209,7 +210,7 @@
 
         <Button
             android:layout_marginTop="10dp"
-            android:id="@+id/btnComprarAhoraConfirmar"
+            android:id="@+id/btnTicketMisPedidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtVerEnMisPedidos" />
