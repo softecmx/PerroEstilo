@@ -12,12 +12,12 @@
     <color name="auxiliar">#FFA1E7</color>
 
 
-    <color name="primaryColor">@color/pink_300</color>
+    <color name="primaryColor">@color/pink_100</color>
     <color name="primaryLightColor">@color/pink_200</color>
     <color name="primaryDarkColor">@color/pink_200</color>
-    <color name="secondaryColor">#A168F1</color>
-    <color name="secondaryLightColor">#CD65DF</color>
-    <color name="secondaryDarkColor">#DA6BED</color>
+    <color name="secondaryColor">@color/cianVariante</color>
+    <color name="secondaryLightColor">@color/celeste</color>
+    <color name="secondaryDarkColor">#B702EFFF</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
 

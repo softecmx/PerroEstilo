@@ -115,7 +115,8 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
                                     nvoItem.setIdUsuario(user.getUid());
                                     nvoItem.setProducto(id);
                                     nvoItem.setImg(item.getImg());
-                                   nvoItem.setPrecio(item.getPrecio());
+                                    item.setTalla(item.getTalla());
+                                    nvoItem.setPrecio(item.getPrecio());
                                     assert item != null;
                                     nvoItem.setCantidad(item.getCantidad() + 1);
                                     ref.child("Carrito/" + user.getUid() + "/Items").child(item.getProducto()).setValue(nvoItem).addOnSuccessListener(aVoid -> {
@@ -127,7 +128,7 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
                                 item.setProducto(id);
                                 item.setIdUsuario(user.getUid());
                                 item.setCantidad(1);
-
+                                item.setTalla(listaProductos.get(holder.getAdapterPosition()).getTalla());
                                 float descuento = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getDescuento());
 
                                 float precio = Float.parseFloat(listaProductos.get(holder.getAdapterPosition()).getPrecioVenta());

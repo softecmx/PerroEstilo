@@ -146,6 +146,7 @@ public class NavClienteActivity extends AppCompatActivity {
                 } else {
                     txtTotal.setText("$0.0");
                     txtProductos.setVisibility(View.VISIBLE);
+                    btnComprarAhora.setVisibility(View.GONE);
                 }
             }
 

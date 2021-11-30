@@ -90,6 +90,7 @@ public class MiCarritoFragment extends Fragment {
 
                     }
                 } else {
+                    btnComprarAhora.setVisibility(View.GONE);
                     txtTotal.setText("$0.0");
                     txtProductos.setVisibility(View.VISIBLE);
                 }
@@ -103,7 +104,7 @@ public class MiCarritoFragment extends Fragment {
         btnComprarAhora.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(total>0){
                 ComprarAhoraFragment newFragment1 = new ComprarAhoraFragment();
                 Bundle args = new Bundle();
                 newFragment1.setArguments(args);
@@ -111,7 +112,7 @@ public class MiCarritoFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_cliente, newFragment1);
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();}
             }
         });
         btnContinuarComprando.setOnClickListener(new View.OnClickListener() {
