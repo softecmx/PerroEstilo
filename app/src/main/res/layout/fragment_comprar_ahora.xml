@@ -190,6 +190,7 @@
                       android:textStyle="bold" />
 
                   <TextView
+                      android:id="@+id/txtCompAhEstado"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
@@ -210,6 +211,7 @@
                       android:textStyle="bold" />
 
                   <TextView
+                      android:id="@+id/txtCompAhMunicipio"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
@@ -230,7 +232,7 @@
                       android:textStyle="bold" />
 
                   <TextView
-                      android:id="@+id/textElimID"
+                      android:id="@+id/txtCompAhLocalidad"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
@@ -250,6 +252,7 @@
                       android:textStyle="bold" />
 
                   <TextView
+                      android:id="@+id/txtCompAhCodPostal"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
@@ -265,6 +268,7 @@
                   android:textStyle="bold" />
 
               <TextView
+                  android:id="@+id/txtCompAhCalleExt"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
@@ -279,6 +283,7 @@
                   android:textStyle="bold" />
 
               <TextView
+                  android:id="@+id/txtCompAhCalleInt"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
@@ -293,6 +298,7 @@
                   android:textStyle="bold" />
 
               <TextView
+                  android:id="@+id/txtCompAhReferencias"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"

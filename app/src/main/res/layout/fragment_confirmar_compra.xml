@@ -60,7 +60,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtFechaEmisionCompra"
+                        android:id="@+id/txtConfCompraFechaEmisionCompra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -86,7 +86,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtFechaLimiteCompra"
+                        android:id="@+id/txtConfirmarCompraFechaLimiteCompra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -176,7 +176,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtTotalPagarCompra"
+                        android:id="@+id/txtConfirmarCompraTotalPagarCompra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
