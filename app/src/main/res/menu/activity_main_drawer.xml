@@ -22,7 +22,7 @@
             android:id="@+id/nav_producto"
             android:icon="@drawable/outline_sell_24"
             android:title="@string/menu_producto" />
-
+<!--
         <item
             android:id="@+id/nav_kits"
             android:icon="@drawable/outline_category_24"
@@ -31,7 +31,7 @@
         <item
             android:id="@+id/nav_mis_kits"
             android:icon="@drawable/ic_loyalty_black_24dp"
-            android:title="@string/menu_mis_kits" />
+            android:title="@string/menu_mis_kits" />-->
         <item
             android:id="@+id/nav_mi_carrito"
             android:icon="@drawable/ic_shopping_cart_black_24dp"

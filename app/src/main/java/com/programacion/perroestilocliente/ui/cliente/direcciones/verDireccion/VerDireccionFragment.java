@@ -16,7 +16,9 @@ import com.programacion.perroestilocliente.R;
 
 public class VerDireccionFragment extends Fragment {
 
+
     private VerDireccionViewModel mViewModel;
+    View root;
 
     public static VerDireccionFragment newInstance() {
         return new VerDireccionFragment();
@@ -25,7 +27,12 @@ public class VerDireccionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_ver_direccion, container, false);
+        root = inflater.inflate(R.layout.fragment_ver_direccion, container, false);
+        Bundle bound = getArguments();
+        String id = bound.getString("idDireccion");
+        System.out.println(id + " VER direccion");
+
+        return root;
     }
 
     @Override
