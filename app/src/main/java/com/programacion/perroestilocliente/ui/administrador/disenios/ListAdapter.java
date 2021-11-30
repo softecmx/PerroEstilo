@@ -78,8 +78,6 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     private Button btnPopAgregar;
     private EditText etPopNombre;
     private ImageView ivPopImg;
-    private AutoCompleteTextView listaPop;
-    com.google.android.material.floatingactionbutton.FloatingActionButton fbPopFoto;
     private androidx.appcompat.app.AlertDialog dialog;
     String id="";
     Disenios c;
@@ -145,13 +143,12 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     }
     public void edita(int position){
         androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-        final View aboutPop = layoutInflater.inflate(R.layout.dialog_disenio, null);
+        final View aboutPop = layoutInflater.inflate(R.layout.dialog_disenio_edita, null);
 
-        btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnAgrDisenioCancelar);
-        btnPopAgregar = (Button) aboutPop.findViewById(R.id.btnAgrDisenioAceptar);
-        etPopNombre = (EditText) aboutPop.findViewById(R.id.etADisenioNom);
-        ivPopImg =(ImageView) aboutPop.findViewById(R.id.imgAddDisenioFoto);
-        fbPopFoto =  aboutPop.findViewById(R.id.fBtnAddDisenioFoto);
+        btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnEditaDialogDisenioCancelar);
+        btnPopAgregar = (Button) aboutPop.findViewById(R.id.btnEditaDialogDisenioAceptar);
+        etPopNombre = (EditText) aboutPop.findViewById(R.id.etEditaDialogDisenioNom);
+        ivPopImg =(ImageView) aboutPop.findViewById(R.id.imgEditaDialogDisenioFoto);
         img = arrayList.get(position).getImagen();
 
         etPopNombre.setText(arrayList.get(position).getDisenio());
@@ -179,7 +176,6 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
                     Toast.makeText(getContext(), "Datos modificados!", Toast.LENGTH_SHORT).show();
 
                     etPopNombre.setText("");
-                    listaPop.setText("");
                     ivPopImg.setImageResource(R.drawable.no_image);
                     img = "";
                     dialog.dismiss();
