@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,12 +23,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Disenios;
 import com.programacion.perroestilocliente.modelo.Productos;
@@ -36,8 +40,10 @@ import com.programacion.perroestilocliente.ui.administrador.catalogo.SpnAdapterC
 import com.programacion.perroestilocliente.ui.administrador.tallas.ListAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class InventarioFragment extends Fragment {
+public class InventarioFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     private TextView txtCodigo, txtProducto, txtModelo, txtTalla, txtStock,txtStatus;
     private Spinner spnStatus;
@@ -52,6 +58,7 @@ public class InventarioFragment extends Fragment {
     private ListView listView;
     private ListAdapterInventario customAdapter;
     private androidx.appcompat.app.AlertDialog dialog;
+    private AutoCompleteTextView spnModStatus;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -69,12 +76,16 @@ public class InventarioFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_inventario, container, false);
 
+
         listView = root.findViewById(R.id.listInventario);
         btnBuscar = root.findViewById(R.id.ibtnBuscarProductosInventario);
+        imgbtnMas = root.findViewById(R.id.imgbtnMasStock);
+        imgbtnMenos = root.findViewById(R.id.imgbtnMenosStock);
         iniciaFirebase();
         listarDatos();
         modificarStock();
         registerForContextMenu(listView);
+
         return root;
     }
 
@@ -86,6 +97,7 @@ public class InventarioFragment extends Fragment {
                 ArrayList<ElementListViewInventario> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Productos p = objSnapshot.getValue(Productos.class);
+
 
                     databaseReference.child("Disenios").orderByChild("idModelo").equalTo(p.getDisenio()).addValueEventListener(new ValueEventListener() {
                         @Override
@@ -99,12 +111,15 @@ public class InventarioFragment extends Fragment {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                            Tallas t = objSnapshot.getValue(Tallas.class);
-                                            tallas = t.getTallas();
-                                            /*p.getNombre()*/
-                                            arrayList.add(new ElementListViewInventario(p.getIdProducto() ,"", disenio, tallas, p.getEstatusStock(), p.getStock()));
-                                            customAdapter = new ListAdapterInventario(getActivity(), arrayList);
-                                            listView.setAdapter(customAdapter);
+                                            try {
+                                                Tallas t = objSnapshot.getValue(Tallas.class);
+                                                tallas = t.getTallas();
+                                                arrayList.add(new ElementListViewInventario(p.getIdProducto() ,p.getNombre(), disenio, tallas, p.getEstatusStock(), p.getStock()));
+                                                customAdapter = new ListAdapterInventario(getActivity(), arrayList);
+                                                listView.setAdapter(customAdapter);
+                                            }catch (Exception e){
+
+                                            }
                                         }
                                     }
 
@@ -136,6 +151,12 @@ public class InventarioFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
+    private void llenarSpn(){
+        ArrayAdapter<CharSequence> generoAdapter;
+        generoAdapter= ArrayAdapter.createFromResource(getContext(),R.array.estatus_producto, android.R.layout.simple_spinner_item);
+        spnModStatus.setAdapter(generoAdapter);
+        spnModStatus.setOnItemClickListener(this);
+    }
     private void modificarStock() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -154,9 +175,10 @@ public class InventarioFragment extends Fragment {
                 txtProducto= (TextView) aboutPop.findViewById(R.id.txtProductoModificarStock);
                 txtModelo= (TextView) aboutPop.findViewById(R.id.txtModeloModificarStock);
                 txtTalla= (TextView) aboutPop.findViewById(R.id.txtTallaModificarStock);
-                spnStatus= (Spinner) aboutPop.findViewById(R.id.spnStatusModificarStock);
+                spnModStatus=aboutPop.findViewById(R.id.spnStatusModificarStock);
+                llenarSpn();
                 txtStock= (TextView) aboutPop.findViewById(R.id.txtCantidadStock);
-                ArrayList<String> statusAdapter;
+               // ArrayList<String> statusAdapter;
                // statusAdapter=ArrayAdapter.createFromResource(getContext(),R.array.Status, android.R.layout.simple_spinner_item);
                // spnEstado= new SpnAdapterEstadoStock(getActivity(),statusAdapter);
 
@@ -167,19 +189,70 @@ public class InventarioFragment extends Fragment {
                     }
                 });
 
+
                 dialogBuilder.setView(aboutPop);
                 dialog = dialogBuilder.create();
                 txtCodigo.setText(vistaElement.getCodigo());
                 txtProducto.setText(vistaElement.getProducto());
                 txtModelo.setText(vistaElement.getModelo());
                 txtTalla.setText(vistaElement.getTalla());
-               // spnStatus.setSelection(getStatus());
+                spnModStatus.setText(vistaElement.getStatus());
+
+                llenarSpn();
                 txtStock.setText(vistaElement.getStock());
+
+                imgbtnMenos.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        restarStock();
+                    }
+                });
+                imgbtnMas.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sumarStock();
+                    }
+                });
+               btnAceptar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String, Object> encenderMap = new HashMap<>();
+                        encenderMap.put("Productos/"+txtCodigo.getText()+"/stock",txtStock.getText());
+                        databaseReference.updateChildren(encenderMap).toString();
+                       // Toast.makeText(getContext(), "Inventario Actualizado", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 dialog.show();
             }
         });
 
 
+    }
+    private void sumarStock(){
+        int valorstokres=Integer.parseInt(txtStock.getText().toString()) +1;
+        txtStock.setText(valorstokres + "");
+            if (Integer.parseInt(txtStock.getText().toString())==1){
+                spnModStatus.setText("Pocas existencias");
+            } else {
+                    spnModStatus.setText("En existencias");
+            }
+
+    }
+    private void restarStock(){
+        if(Integer.parseInt(txtStock.getText().toString())>0)
+        {
+            int valorstokres=Integer.parseInt(txtStock.getText().toString()) -1;
+            txtStock.setText(valorstokres + "");
+            if (Integer.parseInt(txtStock.getText().toString())==1){
+                spnModStatus.setText("Pocas existencias");
+            }else if (Integer.parseInt(txtStock.getText().toString())==0){
+                //spnModStatus.setSelection(obtenerPosicion(spnstatus,sts));
+                spnModStatus.setText("Agotado");
+            }
+        }else if (Integer.parseInt(txtStock.getText().toString())==0){
+            //spnModStatus.setSelection(obtenerPosicion(spnstatus,sts));
+            spnModStatus.setText("Agotado");
+        }
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -188,4 +261,8 @@ public class InventarioFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }

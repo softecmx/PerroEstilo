@@ -2582,11 +2582,5 @@
         <item>Mascotas</item>
         <item>Humanos</item>
     </string-array>
-    <!-- ESTATUS -->
-    <string-array name="Status">
-        <item>En existencias</item>
-        <item>Pocas existencias</item>
-        <item>Descontinuado</item>
-        <item>Agotado</item>
-    </string-array>
+
 </resources>

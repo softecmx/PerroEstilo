@@ -51,13 +51,13 @@
         <FrameLayout
             android:id="@+id/flInvetarioFrame"
             android:layout_width="match_parent"
-            android:layout_height="507dp"
+            android:layout_height="550dp"
             android:layout_marginTop="10dp">
 
             <ListView
                 android:id="@+id/listInventario"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
         </FrameLayout>
     </LinearLayout>

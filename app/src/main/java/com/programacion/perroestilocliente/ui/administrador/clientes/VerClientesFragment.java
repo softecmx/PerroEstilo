@@ -58,12 +58,12 @@ public class VerClientesFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         root= inflater.inflate(R.layout.fragment_ver_clientes, container, false);
         listView = root.findViewById(R.id.listClientes);
-        txtNombre= root.findViewById(R.id.txtNombreUsuarioLealtadLista);
-        txtStatus= root.findViewById(R.id.txtStatusUsuarioLealtadLista);
-        imgbtnLealtad=root.findViewById(R.id.imgbtnLealtad);
         imgbtnBuscar = root.findViewById(R.id.ibtnAgregarClienteLeal);
 
-
+        root= inflater.inflate(R.layout.item_lista_clientes_lealtad, container, false);
+        txtNombre= root.findViewById(R.id.txtNombreUsuarioLealtadLista);
+        txtStatus= root.findViewById(R.id.txtStatusUsuarioLealtad);
+        imgbtnLealtad=root.findViewById(R.id.imgbtnLealtad);
 
         iniciaFirebase();
         listarDatos();
@@ -72,44 +72,26 @@ public class VerClientesFragment extends Fragment {
     }
     public void listarDatos() {
 /*
-        databaseReference.child("Usuarios").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Usuarios/Clientes").orderByChild("username").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<ElementListViewClientes> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    Clientes c = objSnapshot.getValue(Clientes.class);
-                    //Lealtad si/no
-                    databaseReference.child("Clientes").orderByChild("idModelo").equalTo(c.getDisenio()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                Disenios d = objSnapshot.getValue(Disenios.class);
-                                disenio = d.getDisenio();
+                    Clientes cl = objSnapshot.getValue(Clientes.class);
 
-                                            arrayList.add(new ElementListViewInventario(p.getIdProducto(), p.getNombre(), disenio, tallas, p.getEstatusStock(), p.getStock()));
-                                            customAdapter = new ListAdapterInventario(getActivity(), arrayList);
-                                            listView.setAdapter(customAdapter);
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-
-
+                    arrayList.add(new ElementListViewClientes(cl.getIdUsuario(),cl.getEstatus(),cl.getNombreCliente(),cl.getApellidoPaterno(),cl.getEmail(),cl.getTelefono()));
+                    customAdapter = new ListAdapterClientes(getActivity(), arrayList);
+                    listView.setAdapter(customAdapter);
                 }
-            }
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });*/
+        });
+*/
+
     }
     public void iniciaFirebase() {
         FirebaseApp.initializeApp(getContext());
