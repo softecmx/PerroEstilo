@@ -43,8 +43,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,9 +55,13 @@ import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Disenios;
 import com.programacion.perroestilocliente.modelo.Tallas;
+import com.programacion.perroestilocliente.ui.administrador.disenios.ElementListView;
+import com.programacion.perroestilocliente.ui.administrador.disenios.ListAdapter;
+import com.programacion.perroestilocliente.ui.administrador.productos.ListAdapterSimple;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -89,6 +96,8 @@ public class ConsultarDiseniosFragment extends Fragment {
     private ListView listView;
     private androidx.appcompat.app.AlertDialog dialog;
     com.google.android.material.floatingactionbutton.FloatingActionButton fBtnAgregar;
+    private ListAdapter customAdapter;
+    ArrayList<ElementListView> arrayList;
 
     String img="";
 
@@ -107,13 +116,51 @@ public class ConsultarDiseniosFragment extends Fragment {
 
         iniciaFirebase();
 
+        listarElementos();
+
         registerForContextMenu(listView);
         fBtnAgregar.setOnClickListener(view -> createDialogAgregar());
-
+        busca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                busca();
+            }
+        });
         return root;
     }
+    public void busca(){
+        if (etNombre.getText().toString().equals("")){
+            Toast.makeText(getContext(),"Ingrese un dato",Toast.LENGTH_SHORT).show();
+        }else{
+            ArrayList<ElementListView> arrayBusca = new ArrayList<>();
+            for (int i = 0;i<arrayList.size();i++){
+                if (arrayList.get(i).getDisenio().toUpperCase().equals(etNombre.getText().toString().toUpperCase())){
+                    arrayBusca.add(arrayList.get(i));
+                }
+            }
+            customAdapter = new ListAdapter(getActivity(), arrayBusca,getLayoutInflater(),getContext(),root);
+            listView.setAdapter(customAdapter);
+        }
+    }
+    public void listarElementos(){
+        databaseReference.child("Disenios").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList = new ArrayList<>();
+                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                    Disenios p = objSnapshot.getValue(Disenios.class);
+                    arrayList.add(new ElementListView(p.getIdModelo(),p.getDisenio(),p.getEstadoLogico(), p.getImagen()));
+                    customAdapter = new ListAdapter(getActivity(), arrayList,getLayoutInflater(),getContext(),root);
+                    listView.setAdapter(customAdapter);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
 
 
     public void createDialogAgregar(){

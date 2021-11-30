@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
-            android:text="POLÍTICA DE PRIVACIDAD PARA LA APLICACIÓN MOVIL (MASCOTAPP)"
+            android:text="POLÍTICA DE PRIVACIDAD PARA LA APLICACIÓN MOVIL (Perro Estilo)"
             android:textColor="@color/primaryDarkColor"
             android:gravity="center"
             android:textStyle="bold"

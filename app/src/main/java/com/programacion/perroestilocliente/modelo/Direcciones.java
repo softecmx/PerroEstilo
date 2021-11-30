@@ -20,6 +20,7 @@ public class Direcciones {
     private String referencia;
     private GeoPoint coordenadas;
     private String codigoPostal;
+    private String idUser;
 
     public Direcciones() {
     }
@@ -34,6 +35,14 @@ public class Direcciones {
         this.referencia = referencia;
         this.coordenadas = coordenadas;
         this.codigoPostal = codigoPostal;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getIdDireccion() {

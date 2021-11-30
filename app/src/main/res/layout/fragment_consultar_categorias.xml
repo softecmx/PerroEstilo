@@ -5,9 +5,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment">
 
-    <TextView
+    <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:id="@+id/flConsCat">
+
+            <ListView
+                android:id="@+id/listConsultaCategorias"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </FrameLayout>
+    </LinearLayout>
 
 </FrameLayout>

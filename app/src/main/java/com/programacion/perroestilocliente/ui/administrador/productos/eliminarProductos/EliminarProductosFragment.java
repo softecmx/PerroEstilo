@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
@@ -51,7 +52,9 @@ import com.google.firebase.storage.UploadTask;
 import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Categorias;
+import com.programacion.perroestilocliente.modelo.Disenios;
 import com.programacion.perroestilocliente.modelo.Productos;
+import com.programacion.perroestilocliente.modelo.Tallas;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -62,18 +65,17 @@ public class EliminarProductosFragment extends Fragment {
     private EliminarProductosViewModel mViewModel;
     View root;
 
-    TextView tvRaiting,tvCategoria,tvDiseño,tvTalla,tvCosto,tvPrecio,tvDescuento,tvStock,tvEstatus,tvModelo,tvDescripción,tvCodigo;
+    TextView tvCategoria,tvDiseño,tvTalla,tvCosto,tvPrecio,tvDescuento,tvStock,tvEstatus,tvDescripción,tvCodigo,tvNombre;
     Button btnEliminar,btnLimpia;
-    com.google.android.material.floatingactionbutton.FloatingActionButton fbCamara;
     ImageButton busca;
     ImageView ivImagen;
     EditText etId;
 
-    private static final int COD_SELECCIONA = 10;
-    private static final int COD_FOTO = 20;
-    public static final int REQUEST_PERMISSION_CAMERA = 100;
-
-    private Uri photoURI;
+    ImageView star1;
+    ImageView star2;
+    ImageView star3;
+    ImageView star4;
+    ImageView star5;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -83,7 +85,10 @@ public class EliminarProductosFragment extends Fragment {
     public static EliminarProductosFragment newInstance() {
         return new EliminarProductosFragment();
     }
-    String img="";
+    int enc=1;
+    String id="";
+
+    Productos c = new Productos();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -95,7 +100,6 @@ public class EliminarProductosFragment extends Fragment {
     }
     public void carga(){
         etId=root.findViewById(R.id.etElimProdid);
-        tvRaiting=root.findViewById(R.id.etElimProdRaiting);
         tvCategoria=root.findViewById(R.id.etElimProdCategoria);
         tvDiseño=root.findViewById(R.id.etElimProdDisenio);
         tvTalla=root.findViewById(R.id.etElimProdTalla);
@@ -105,23 +109,23 @@ public class EliminarProductosFragment extends Fragment {
         tvStock=root.findViewById(R.id.etElimProdStock);
         tvEstatus=root.findViewById(R.id.etElimProdEstatus);
         tvCodigo=root.findViewById(R.id.etElimProdCodigo);
-        tvModelo=root.findViewById(R.id.etElimProdModelo);
         tvDescripción=root.findViewById(R.id.etElimProdDescripcion);
         btnEliminar=root.findViewById(R.id.btnElimProductelimina);
         btnLimpia=root.findViewById(R.id.btnElimProductLimpia);
-        fbCamara=root.findViewById(R.id.fBtnElimProdfoto);
         busca=root.findViewById(R.id.ibtnElimProdbsc);
         ivImagen = root.findViewById(R.id.imgElimProdfoto);
+        tvNombre = root.findViewById(R.id.etElimProdNombre);
+
+        star1=root.findViewById(R.id.ivElimProdStar1);
+        star2=root.findViewById(R.id.ivElimProdStar2);
+        star3=root.findViewById(R.id.ivElimProdStar3);
+        star4=root.findViewById(R.id.ivElimProdStar4);
+        star5=root.findViewById(R.id.ivElimProdStar5);
+
         busca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 buscar();
-            }
-        });
-        fbCamara.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
         btnEliminar.setOnClickListener(new View.OnClickListener() {
@@ -138,40 +142,152 @@ public class EliminarProductosFragment extends Fragment {
         });
     }
     public void eliminar(){
-
+        if (enc==1){
+            c.setEstadoLogico("0");
+            databaseReference.child("Productos").child(c.getIdProducto()).setValue(c);
+            CustomToast.mostarToast("Dato eliminado!",1,false,root,getLayoutInflater(),getContext());
+            limpiar();
+        }else{
+            CustomToast.mostarToast("Seleccione un registro",2,false,root,getLayoutInflater(),getContext());
+        }
     }
     public void limpiar(){
-
+        tvNombre.setText("");
+        tvCategoria.setText("");
+        tvDiseño.setText("");
+        tvTalla.setText("");
+        tvCosto.setText("");
+        tvPrecio.setText("");
+        tvDescuento.setText("");
+        tvStock.setText("");
+        tvEstatus.setText("");
+        tvCodigo.setText("");
+        tvDescripción.setText("");
+        etId.setText("");
+        ivImagen.setImageResource(R.drawable.no_image);
+        etId.setEnabled(true);
+        enc=0;
     }
     public void buscar(){
-        String id = etId.getText().toString();
+        id = etId.getText().toString();
         if (id.equals("")){
             CustomToast.mostarToast("Elija un dato",2,false,root,getLayoutInflater(),getContext());
         }else{
-            databaseReference.child("Productos").orderByChild("iIdProducto").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener(){
+            databaseReference.child("Productos").orderByChild("idProducto").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener(){
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot){
-                    Productos c=null;
+                    c=null;
                     for (DataSnapshot objSnapshot: snapshot.getChildren()){
                         c = objSnapshot.getValue(Productos.class);
                     }
                     if (c!=null){
-                       /* tvNombre.setText(c.getNombreCategoria());
-                        tvDesc.setText(c.getDescripcion());
-                        tvPublico.setText(c.getTipoPublico());
-                        CustomToast.mostarToast("Dato encontrado!",1,true,root,getLayoutInflater(),getContext());
-                        bnd=1;
-                        search.setEnabled(false);
-                        idACTV.setEnabled(false);
-                        idACTV.setAdapter(null);
+                        enc=1;
+                        tvNombre.setText(c.getNombre());
+                        tvTalla.setText(c.getTalla());
+                        tvCosto.setText(c.getCosto());
+                        tvPrecio.setText(c.getPrecioVenta());
+                        tvDescuento.setText(c.getDescuento());
+                        tvStock.setText(c.getStock());
+                        tvEstatus.setText(c.getEstatusStock());
+                        tvCodigo.setText(c.getIdProducto());
+                        tvDescripción.setText(c.getDescripcion());
+                        cargaImagen(ivImagen,c.getImgFoto());
+                        etId.setEnabled(false);
+
+                        databaseReference.child("Disenios").orderByChild("idModelo").equalTo(c.getDisenio()).addListenerForSingleValueEvent(new ValueEventListener(){
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot){
+                                Disenios c=null;
+                                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                                    c = objSnapshot.getValue(Disenios.class);
+                                }
+                                if (c!=null){
+                                    tvDiseño.setText(c.getDisenio());
+                                }else{
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error){
+
+                            }
+                        });
+                        databaseReference.child("Tallas").orderByChild("idTalla").equalTo(c.getTalla()).addListenerForSingleValueEvent(new ValueEventListener(){
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot){
+                                Tallas c=null;
+                                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                                    c = objSnapshot.getValue(Tallas.class);
+                                }
+                                if (c!=null){
+                                    tvTalla.setText(c.getTallas());
+                                }else{
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error){
+
+                            }
+                        });
+                        databaseReference.child("Categorias").orderByChild("idCategorias").equalTo(c.getIdCategoria()).addListenerForSingleValueEvent(new ValueEventListener(){
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot){
+                                Categorias c=null;
+                                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                                    c = objSnapshot.getValue(Categorias.class);
+                                }
+                                if (c!=null){
+                                    tvCategoria.setText(c.getNombreCategoria());
+                                }else{
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error){
+
+                            }
+                        });
+                        float estrella = Float.parseFloat(c.getRaiting());
+                        estrella = (float) Math.round(estrella);
+                        String est=""+estrella;
+                        System.out.println(est+" promedio");
+                        switch (est){
+                            case "0":
+                                break;
+                            case "1.0":
+                                star1.setImageResource(R.drawable.ic_star_black_24dp);
+                                break;
+                            case "2.0":
+                                star1.setImageResource(R.drawable.ic_star_black_24dp);
+                                star2.setImageResource(R.drawable.ic_star_black_24dp);
+                                break;
+                            case "3.0":
+                                star1.setImageResource(R.drawable.ic_star_black_24dp);
+                                star2.setImageResource(R.drawable.ic_star_black_24dp);
+                                star3.setImageResource(R.drawable.ic_star_black_24dp);
+                                break;
+                            case "4.0":
+                                star1.setImageResource(R.drawable.ic_star_black_24dp);
+                                star2.setImageResource(R.drawable.ic_star_black_24dp);
+                                star3.setImageResource(R.drawable.ic_star_black_24dp);
+                                star4.setImageResource(R.drawable.ic_star_black_24dp);
+                                break;
+                            case "5.0":
+                                star1.setImageResource(R.drawable.ic_star_black_24dp);
+                                star2.setImageResource(R.drawable.ic_star_black_24dp);
+                                star3.setImageResource(R.drawable.ic_star_black_24dp);
+                                star4.setImageResource(R.drawable.ic_star_black_24dp);
+                                star5.setImageResource(R.drawable.ic_star_black_24dp);
+                                break;
+                        }
                     }else{
-                        CustomToast.mostarToast("Dato NO encontrado!",3,false,root,getLayoutInflater(),getContext());
-                        bnd=0;*/
+                        enc=0;
+                        CustomToast.mostarToast("Dato no encontrado 1",3,false,root,getLayoutInflater(),getContext());
                     }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error){
-
                 }
             });
         }
@@ -183,133 +299,24 @@ public class EliminarProductosFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
-    private void abrirCamera() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                startActivityForResult(intent, COD_FOTO);
-            }
-        } else {
-            ActivityCompat.requestPermissions(
-                    getActivity(),
-                    new String[]{Manifest.permission.CAMERA},
-                    REQUEST_PERMISSION_CAMERA
-            );
-        }
-    }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case COD_SELECCIONA:
-                if(data!=null){
-                    Uri miPath = data.getData();
-                    ivImagen.setImageURI(miPath);
-                    String[] projection = {MediaStore.Images.Media.DATA};
-
-                    Cursor cursor = getContext().getContentResolver().query(miPath, projection, null, null, null);
-                    cursor.moveToFirst();
-
-                    int columnIndex = cursor.getColumnIndex(projection[0]);
-                    String paths = cursor.getString(columnIndex);
-                    cursor.close();
-                    img = paths;
-                    photoURI=miPath;
-                    img = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + "." + extension(photoURI);
-                    cargaArchivo();
-                    // bitmap = BitmapFactory.decodeFile(path);
-                    //  imgProducto.setImageBitmap(bitmap);
-                }
-
-                break;
-            case COD_FOTO:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                    Matrix matrix = new Matrix();
-                    matrix.postRotate(90);
-                    Bitmap imageBitmapNuevo = Bitmap.createBitmap(imageBitmap, 0, 0, imageBitmap.getWidth(), imageBitmap.getHeight(), matrix, true);
-
-                    String tituliImge = "IMG_" + System.currentTimeMillis();
-                    String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), imageBitmapNuevo, tituliImge, "Foto de la app de mascotas");
-                    //muestra la imagen
-                    photoURI = Uri.parse(path);
-
-                    ivImagen.setImageBitmap(imageBitmapNuevo);
-                    //img = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pictures" + "/" + tituliImge + ".jpg";
-
-                    img = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + "." + extension(photoURI);
-                    cargaArchivo();
-                }
-                break;
-        }
-    }
-    private String extension(Uri photoUri) {
-        ContentResolver cr = getContext().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(cr.getType(photoUri));
-    }
-    private void cargaArchivo() {
-        img = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + "." + extension(photoURI);
-        ///////
-        try {
-            ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-            if (networkInfo != null && networkInfo.isConnected()) {
-                StorageReference ref = storageReference.child(img);
-                System.out.println(ref.toString());
-                ref.putFile(photoURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(getContext(),"Imagen cargada exitosamente",Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(),"Algo salio mal al cargar el archivo\n"+e.getCause(),Toast.LENGTH_LONG).show();
-                    }
-                });
-            } else {
-                StorageReference ref = storageReference.child(img);
-                ref.putFile(photoURI);
-                Toast.makeText(getContext(),"Imagen cargada exitosamente\nEstado: sin conexión",Toast.LENGTH_SHORT).show();
-            }
-        }catch (Exception e){
-
-        }
-
-    }
-    public void mostrarDialogOpciones() {
-        CharSequence[] opciones = {"Tomar foto", "Elegir de galeria", "Cancelar"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Elige una opción");
-        builder.setItems(opciones, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar foto")) {
-                    abrirCamera();
-                    //  Toast.makeText(getContext(), "Cargar camara...", Toast.LENGTH_SHORT).show();
-                } else if (opciones[i].equals("Elegir de galeria")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK,
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/");
-                    startActivityForResult(Intent.createChooser(intent, "Seleccione"), COD_SELECCIONA);
-                } else {
-                    dialogInterface.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(EliminarProductosViewModel.class);
         // TODO: Use the ViewModel
     }
-
+    private void cargaImagen(ImageView ivFoto, String img) {
+        storageReference.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getContext()).load(uri).into(ivFoto);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(),"Ups! Ha ocurrido un erro al recuperar la imagen\n" + e.getCause(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

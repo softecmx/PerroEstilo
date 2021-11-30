@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -44,13 +45,14 @@ public class EliminarCategoriaFragment extends Fragment {
     DatabaseReference databaseReference;
     ArrayList<ElementListView> arrayList;
     private SpnAdapterCategoria customAdapter;
+    String cat="";
 
     private EliminarCategoriaViewModel mViewModel;
 
     public static EliminarCategoriaFragment newInstance() {
         return new EliminarCategoriaFragment();
     }
-
+    Categorias c;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -64,6 +66,12 @@ public class EliminarCategoriaFragment extends Fragment {
         limpia = root.findViewById(R.id.btnElimCatLimpia);
         iniciaFirebase();
         llenarSpn();
+        id.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cat=customAdapter.getItem(position).getId();
+            }
+        });
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,14 +118,14 @@ public class EliminarCategoriaFragment extends Fragment {
     }
     public void valida(){
         AutoCompleteTextView idACTV = id;
-        String id = this.id.getText().toString();
+        String id = cat;
         if (id.equals("")){
             CustomToast.mostarToast("Seleccione un dato",3,false,root,getLayoutInflater(),getContext());
         }else{
             databaseReference.child("Categorias").orderByChild("idCategorias").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener(){
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot){
-                    Categorias c=null;
+                    c=null;
                     for (DataSnapshot objSnapshot: snapshot.getChildren()){
                         c = objSnapshot.getValue(Categorias.class);
                     }
@@ -143,6 +151,7 @@ public class EliminarCategoriaFragment extends Fragment {
         }
     }
     public void limpia(){
+        cat="";
         tvDesc.setText("");
         tvNombre.setText("");
         tvPublico.setText("");
@@ -153,10 +162,11 @@ public class EliminarCategoriaFragment extends Fragment {
     }
     public void elimina(){
         if (bnd!=0){
-            databaseReference.child("Categorias").child(id.getText().toString()).removeValue();
-            limpia();
+            c.setEstadoLogico("0");
+            databaseReference.child("Categorias").child(c.getIdCategorias()).setValue(c);
             CustomToast.mostarToast("Elemento eliminado",1,false,root,getLayoutInflater(),getContext());
             bnd=0;
+            limpia();
         }
     }
 
