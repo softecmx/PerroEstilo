@@ -28,7 +28,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/txtStatusUsuarioLealtad"
+                    android:id="@+id/txtStatusUsuarioLealtadLista"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -44,7 +44,7 @@
                     android:id="@+id/imgbtnLealtad"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_favorite_black_24dp"
+                    android:src="@drawable/ic_favorite_border_black_24dp"
                     android:layout_gravity="end"
                     android:backgroundTint="@color/auxiliar"/>
             </LinearLayout>

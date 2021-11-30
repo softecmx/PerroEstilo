@@ -20,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,8 +41,11 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Administrador;
 import com.programacion.perroestilocliente.modelo.Categorias;
 import com.programacion.perroestilocliente.modelo.Clientes;
+import com.programacion.perroestilocliente.modelo.Tallas;
 import com.programacion.perroestilocliente.modelo.Usuarios;
-import com.programacion.perroestilocliente.ui.cliente.perfil.ElementListView;
+import com.programacion.perroestilocliente.ui.administrador.perfil.PerfilAdministradorFragment;
+import com.programacion.perroestilocliente.ui.administrador.tallas.ElementListView;
+import com.programacion.perroestilocliente.ui.administrador.tallas.ListAdapter;
 
 import java.util.ArrayList;
 
@@ -48,19 +53,19 @@ import java.util.ArrayList;
 public class CuentaFragment extends Fragment {
 
     private TextView nombre,correo;
-    private ImageButton siguiente;
+    ImageButton siguiente;
     private ImageView perfil;
+    LinearLayout remplazar;
     View root;
+    ListView lista_opciones;
+    private ListAdapter customAdapter;
     //Fisebase
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
 
-    String username = "";
-    String email = "";
-
     private CuentaViewModel mViewModel;
-
+    private ArrayList<Opciones> ListaOpciones = new ArrayList<Opciones>();
     public static CuentaFragment newInstance() {
         return new CuentaFragment();
     }
@@ -68,15 +73,19 @@ public class CuentaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root=inflater.inflate(R.layout.fragment_cuenta, container, false);
+        View vista=inflater.inflate(R.layout.fragment_cuenta, container, false);
+        siguiente=vista.findViewById(R.id.imgbtnSiguienteCuentaAdmin);
+        //remplazar= vista.findViewById(R.id.llAdminCuenta);
+
+        //this.lista_opciones=root.findViewById(R.id.listOpciones);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
-        perfil = root.findViewById(R.id.imgCuetaAdmin);
-        nombre=root.findViewById(R.id.txtNombreUsuarioCuentaAdmin);
-        correo=root.findViewById(R.id.txtEmailCuentaAdmin);
+        perfil = vista.findViewById(R.id.imgCuetaAdmin);
+        nombre=vista.findViewById(R.id.txtNombreUsuarioCuentaAdmin);
+        correo=vista.findViewById(R.id.txtEmailCuentaAdmin);
         databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo("admin@perroestilo.com.mx").addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
@@ -95,23 +104,18 @@ public class CuentaFragment extends Fragment {
 
             }
         });
-        siguiente=root.findViewById(R.id.imgbtnSiguienteCuentaAdmin);
-        siguiente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment cf= new com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment();
-                Bundle args = new Bundle();
-                cf.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, cf);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+
+        return vista;
+        }
+    public void listarDatos(){
+        Opciones opc= new Opciones();
+        ArrayList<ElementListView> arrayList = new ArrayList<>();
+//                    arrayList.add(new ElementListViewInventario(opc.getInfo(),opc.getAyuda(),opc.getApp(),opc.getPoliticas(),opc.getAjustes(),opc.getCerrar()));
+                    customAdapter = new ListAdapter(getActivity(), arrayList);
+                    lista_opciones.setAdapter(customAdapter);
 
             }
-        });
-        return root;
-        }
+
     public void iniciaFirebase(){
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();

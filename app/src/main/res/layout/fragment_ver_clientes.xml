@@ -47,16 +47,17 @@
                 android:contentDescription="@string/txtDescripcion"
                 app:srcCompat="@drawable/ic_add_box_black_24dp" />
         </LinearLayout>
+
         <FrameLayout
             android:id="@+id/flClientesFrame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="507dp"
             android:layout_marginTop="10dp">
 
             <ListView
                 android:id="@+id/listClientes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </FrameLayout>
     </LinearLayout>
