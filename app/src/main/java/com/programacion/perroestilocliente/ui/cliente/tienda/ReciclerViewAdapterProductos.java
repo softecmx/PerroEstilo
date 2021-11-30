@@ -159,7 +159,6 @@ public class ReciclerViewAdapterProductos extends RecyclerView.Adapter<ReciclerV
             id = listaProductos.get(holder.getAdapterPosition()).getIdProducto();
             args.putString("idProducto", id);
             newFragment1.setArguments(args);
-            System.out.println(holder.getAdapterPosition() + " HOME PRODUCTOS");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_cliente, newFragment1);
             fragmentTransaction.addToBackStack(null);
