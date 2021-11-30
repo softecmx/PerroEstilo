@@ -89,7 +89,7 @@
                 <ListView
                     android:id="@+id/lstViewMiCarritoProductos"
                     android:layout_width="match_parent"
-                    android:layout_height="402dp" />
+                    android:layout_height="430dp" />
             </LinearLayout>
         </FrameLayout>
 

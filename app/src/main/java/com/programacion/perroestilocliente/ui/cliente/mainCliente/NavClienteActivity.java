@@ -117,6 +117,8 @@ public class NavClienteActivity extends AppCompatActivity {
         // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
         TextView txtTotal = aboutPop.findViewById(R.id.txtDCarritoTotal);
         TextView txtProductos = aboutPop.findViewById(R.id.txtDCarritoAunSinComprar);
+        Button btnComprarAhora;
+        Button btnContunuarComprando;
 
         ListView reciclerViewMiCarritoProductos = aboutPop.findViewById(R.id.lstViewMiCarritoProductos);
         ArrayList<Item> arrayListItems = new ArrayList<>();

@@ -87,7 +87,7 @@
             <ListView
                 android:id="@+id/lstViewFragMiCarritoProductos"
                 android:layout_width="match_parent"
-                android:layout_height="390dp" />
+                android:layout_height="430dp" />
         </FrameLayout>
 
         <FrameLayout
