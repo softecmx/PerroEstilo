@@ -35,7 +35,7 @@
             android:id="@+id/txtStatusPagoPendiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txtPagoPendiente"
+            android:text="@string/status"
             android:textColor="@color/red"
             android:textSize="20dp"
             android:textStyle="bold" />
