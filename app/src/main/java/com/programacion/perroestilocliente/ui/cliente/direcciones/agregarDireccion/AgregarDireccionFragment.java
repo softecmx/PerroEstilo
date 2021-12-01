@@ -2,6 +2,8 @@ package com.programacion.perroestilocliente.ui.cliente.direcciones.agregarDirecc
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -61,6 +63,7 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Direcciones;
 import com.programacion.perroestilocliente.modelo.GeoPoint;
 import com.programacion.perroestilocliente.ui.cliente.direcciones.misDirecciones.ListAdapter;
+import com.programacion.perroestilocliente.ui.cliente.direcciones.misDirecciones.MisDireccionesFragment;
 
 import java.util.UUID;
 
@@ -301,7 +304,7 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
                 databaseReference.child("Direcciones").child(direccion.getIdDireccion()).setValue(direccion).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                       // limpiar();
+                       limpiar();
                         CustomToast.mostarToast("Direccion registrada!",1,true,root,getLayoutInflater(),getContext());
 
                     }
@@ -311,13 +314,20 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MisDireccionesFragment newFragment1 = new MisDireccionesFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         btnLimpiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                limpiar();
             }
         });
 
@@ -342,7 +352,132 @@ public class AgregarDireccionFragment extends Fragment implements OnMapReadyCall
         }
     }
 
+    public void limpiar() {
+        txtReferencias.setText("");
+        txtLocalidad.setText("");
+        txtCalleInterior.setText("");
+        txtCalleExterior.setText("");
+        txtCodigoPostal.setText("");
+        txtMunicipio.setText("");
+        txtEstado.setText("");
+        ArrayAdapter<CharSequence> spnEstado, spnMunicipio;
+        spnEstado = ArrayAdapter.createFromResource(getContext(), R.array.estados, R.layout.spinner_item_model);
+        spnMunicipio = ArrayAdapter.createFromResource(getContext(), R.array.opc0, R.layout.spinner_item_model);
+        txtEstado.setAdapter(spnEstado);
+        txtMunicipio.setAdapter(spnMunicipio);
 
+        txtEstado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc0, R.layout.spinner_item_model);
+                    case 1:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc1, R.layout.spinner_item_model);
+                        break;
+                    case 2:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc2, R.layout.spinner_item_model);
+                        break;
+                    case 3:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc3, R.layout.spinner_item_model);
+                        break;
+                    case 4:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc4, R.layout.spinner_item_model);
+                        break;
+                    case 5:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc5, R.layout.spinner_item_model);
+                        break;
+                    case 6:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc6, R.layout.spinner_item_model);
+                        break;
+                    case 7:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc7, R.layout.spinner_item_model);
+                        break;
+                    case 8:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc8, R.layout.spinner_item_model);
+                        break;
+                    case 9:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc9, R.layout.spinner_item_model);
+                        break;
+                    case 10:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc10, R.layout.spinner_item_model);
+                        break;
+                    case 11:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc11, R.layout.spinner_item_model);
+                        break;
+                    case 12:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc12, R.layout.spinner_item_model);
+                        break;
+                    case 13:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc13, R.layout.spinner_item_model);
+                        break;
+                    case 14:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc14, R.layout.spinner_item_model);
+                        break;
+                    case 15:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc15, R.layout.spinner_item_model);
+                        break;
+                    case 16:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc16, R.layout.spinner_item_model);
+                        break;
+                    case 17:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc17, R.layout.spinner_item_model);
+                        break;
+                    case 18:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc18, R.layout.spinner_item_model);
+                        break;
+                    case 19:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc19, R.layout.spinner_item_model);
+                        break;
+                    case 20:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc20, R.layout.spinner_item_model);
+                        break;
+                    case 21:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc21, R.layout.spinner_item_model);
+                        break;
+                    case 22:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc22, R.layout.spinner_item_model);
+                        break;
+                    case 23:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc23, R.layout.spinner_item_model);
+                        break;
+                    case 24:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc24, R.layout.spinner_item_model);
+                        break;
+                    case 25:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc25, R.layout.spinner_item_model);
+                        break;
+                    case 26:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc26, R.layout.spinner_item_model);
+                        break;
+                    case 27:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc27, R.layout.spinner_item_model);
+                        break;
+                    case 28:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc28, R.layout.spinner_item_model);
+                        break;
+                    case 29:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc29, R.layout.spinner_item_model);
+                        break;
+                    case 30:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc30, R.layout.spinner_item_model);
+                        break;
+                    case 31:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc31, R.layout.spinner_item_model);
+                        break;
+                    case 32:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc32, R.layout.spinner_item_model);
+                        break;
+
+                    default:
+                        municipioAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opc0, R.layout.spinner_item_model);
+                        break;
+                }
+                txtMunicipio.setAdapter(municipioAdapter);
+            }
+        });
+
+    }
     private void initGoogleMap(Bundle savedInstanceState) {
 
         Bundle mapViewBundle = null;
