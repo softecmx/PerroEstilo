@@ -20,6 +20,11 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.MisPedidosFragment;
 import com.programacion.perroestilocliente.ui.cliente.productos.ticket.TicketFragment;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class ConfirmarCompraFragment extends Fragment {
 
     private ConfirmarCompraViewModel mViewModel;
@@ -55,17 +60,13 @@ public class ConfirmarCompraFragment extends Fragment {
         concepto = root.findViewById(R.id.txtConceptoTransCompra);
 
         fechaEmision.setText(fechaPedido);
-        String []fecha=fechaPedido.split("/");
-        String anio=fecha[2];
-        String mes=fecha[1];
-        String dia=fecha[0];
+        Date dt=new Date();
+        Calendar c=Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE,3);
+        DateFormat formateadorFechaCorta = DateFormat.getDateInstance(DateFormat.SHORT);
 
-        int anioF=Integer.parseInt(anio);
-        int mesF=Integer.parseInt(mes);
-        int diaF=Integer.parseInt(dia);
-
-        String fechaLimit=(dia+3)+"/"+mes+"/"+anio;
-        fechaLimite.setText(fechaLimit);
+        fechaLimite.setText(formateadorFechaCorta.format(c.getTime()));
         total.setText("$"+totalApagar+" MX");
         concepto.setText("Perro estilo. No. Pedido: "+idOrden);
 

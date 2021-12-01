@@ -63,28 +63,30 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
 
-        if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Pago pendiente")){
+        if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Pago pendiente")) {
             holder.txtStatus.setText("Pago pendiente");
-            holder.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.danger));
+            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.danger));
 
-        }else if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Preparando pedido")){
+        } else if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Preparando pedido")) {
             holder.txtStatus.setText("Preparando");
             holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_orange_2));
-        }else if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("En camino")){
+        } else if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("En camino")) {
             holder.txtStatus.setText("En camino");
             holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_yellow_1));
-        }else if(listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Entregado")){
+        } else if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Entregado")) {
             holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_green_1));
             holder.txtStatus.setText("Entregado");
         }
-        holder.txtNoOrden.setText(listaPedidos.get(holder.getPosition()).getNoSerie());
-      //  holder.txtStatus
+        holder.txtNoOrden.setText(listaPedidos.get(holder.getPosition()).getInOrden());
+        //  holder.txtStatus
+        holder.txtTotal.setText("$"+listaPedidos.get(holder.getPosition()).getTotal()+" MX");
         holder.txtFechaOrden.setText(listaPedidos.get(holder.getPosition()).getFechaOrden());
         holder.btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EstadoPedidoFragment newFragment1 = new EstadoPedidoFragment();
                 Bundle args = new Bundle();
+                args.putString("idOrden",listaPedidos.get(holder.getPosition()).getInOrden());
                 newFragment1.setArguments(args);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_cliente, newFragment1);
@@ -112,12 +114,12 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
 
         public DataObjectHolder(@NonNull View itemView) {
             super(itemView);
-           this.img = itemView.findViewById(R.id.imgItemPedido);
-           this.txtFechaOrden=itemView.findViewById(R.id.txtItemPedidoFecha);
-           this.btnVer=itemView.findViewById(R.id.btnPedidoVerCompra);
-           this.txtTotal=itemView.findViewById(R.id.txtItemPedidoTotal);
-           this.txtNoOrden=itemView.findViewById(R.id.txtItemPedidoNoSerie);
-           this.txtStatus=itemView.findViewById(R.id.txtItemPedidoStatus);
+            this.img = itemView.findViewById(R.id.imgItemPedido);
+            this.txtFechaOrden = itemView.findViewById(R.id.txtItemPedidoFecha);
+            this.btnVer = itemView.findViewById(R.id.btnPedidoVerCompra);
+            this.txtTotal = itemView.findViewById(R.id.txtItemPedidoTotal);
+            this.txtNoOrden = itemView.findViewById(R.id.txtItemPedidoNoSerie);
+            this.txtStatus = itemView.findViewById(R.id.txtItemPedidoStatus);
         }
     }
 

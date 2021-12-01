@@ -239,6 +239,11 @@ public class ComprarAhoraFragment extends Fragment {
                 noSerie2+=toChar[i];
             }
         }
+        float total=0;
+        for (int i=0;i<arrayListItems.size();i++){
+            total=total+(arrayListItems.get(i).getCantidad()*arrayListItems.get(i).getPrecio());
+        }
+
         noSerie1=noSerie2.substring(0,12).toUpperCase();
         String noConfirm="0";
         OrdenesCliente ordenCliente=new OrdenesCliente();
@@ -261,6 +266,7 @@ public class ComprarAhoraFragment extends Fragment {
         direccionEnvio.setCalleYNumeroInterno(txtCalleInterior.getText().toString());
         direccionEnvio.setReferencia(txtReferencias.getText().toString());
         ordenCliente.setDireccionEnvio(direccionEnvio);
+        ordenCliente.setTotal(total);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
 
@@ -272,16 +278,14 @@ public class ComprarAhoraFragment extends Fragment {
             detOrdenProd.setIdOrdenCliente(ordenCliente.getInOrden());
             detOrdenProd.setIdProducto(arrayListItems.get(i).getProducto());
             detOrdenProd.setImgFoto(arrayListItems.get(i).getImg());
-            detOrdenProd.setCantidad(arrayListItems.get(i).getCantidad()+"");
+            detOrdenProd.setCantidad(arrayListItems.get(i).getCantidad());
+            detOrdenProd.setPrecioUnitario(arrayListItems.get(i).getPrecio());
             detOrdenProd.setSubtotal((arrayListItems.get(i).getCantidad()*arrayListItems.get(i).getPrecio())+"");
             detOrdenProd.setMedidas(arrayListItems.get(i).getTalla());
             detOrdenProd.setCalificacion("0");
             ref.child("DetalleOrdenesCliente/"+ordenCliente.getInOrden()).child(detOrdenProd.getIdDetOrdenProducto()).setValue(detOrdenProd);
         }
-        float total=0;
-        for (int i=0;i<arrayListItems.size();i++){
-            total=total+(arrayListItems.get(i).getCantidad()*arrayListItems.get(i).getPrecio());
-        }
+
         ref.child("Carrito").child(user.getUid()).removeValue();
         ConfirmarCompraFragment newFragment1 = new ConfirmarCompraFragment();
         Bundle args = new Bundle();

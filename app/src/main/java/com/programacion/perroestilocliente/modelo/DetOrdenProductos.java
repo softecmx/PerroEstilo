@@ -12,7 +12,7 @@ package com.programacion.perroestilocliente.modelo;
 public class DetOrdenProductos {
 
     private String idDetOrdenProducto;
-    private String cantidad;
+    private int cantidad;
     private String subtotal;
     private String medidas;
     private String calificacion;
@@ -20,7 +20,16 @@ public class DetOrdenProductos {
     private String idProducto;
     private String idOrdenCliente;
     private String imgFoto;
+    private  float precioUnitario;
     public DetOrdenProductos() {
+    }
+
+    public float getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(float precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     public String getImgFoto() {
@@ -63,11 +72,11 @@ public class DetOrdenProductos {
         this.idDetOrdenProducto = idDetOrdenProducto;
     }
 
-    public String getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
