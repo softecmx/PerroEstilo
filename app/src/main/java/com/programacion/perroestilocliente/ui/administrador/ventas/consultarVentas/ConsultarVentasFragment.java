@@ -11,12 +11,29 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.programacion.perroestilocliente.R;
 
 public class ConsultarVentasFragment extends Fragment {
-
+    private TextView txtFecha, noVentas, canTotalVentas;
     private ConsultarVentasViewModel mViewModel;
+    private ImageButton btnBuscar;
+
+    View root;
+    private ListView listView;
+    private ListAdapterVentas customAdapter;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
+    String fecha = "";
+    String ventas = "";
+    String statusOrden = "";
 
     public static ConsultarVentasFragment newInstance() {
         return new ConsultarVentasFragment();

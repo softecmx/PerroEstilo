@@ -90,8 +90,8 @@ public class VerClientesFragment extends Fragment {
 
             }
         });
-*/
 
+*/
     }
     public void iniciaFirebase() {
         FirebaseApp.initializeApp(getContext());

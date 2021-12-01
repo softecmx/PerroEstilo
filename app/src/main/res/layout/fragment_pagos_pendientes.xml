@@ -38,7 +38,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageButton
-                android:id="@+id/ibtnBPbsc"
+                android:id="@+id/ibtnBuscarPagoPendiente"
                 android:layout_width="109dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
