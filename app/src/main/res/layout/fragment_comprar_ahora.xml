@@ -28,6 +28,7 @@
                 android:text="@string/txtTotalAPagar"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:layout_marginRight="10dp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/txtComprarAhoraTotalPagar"

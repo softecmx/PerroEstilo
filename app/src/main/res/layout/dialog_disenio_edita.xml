@@ -23,7 +23,7 @@
             app:boxCornerRadiusTopStart="10dp"
             app:endIconMode="clear_text">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etADisenioNom"
+                android:id="@+id/etEditaDialogDisenioNom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/nomDisenio"
@@ -35,7 +35,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="13dp">
             <ImageView
-                android:id="@+id/imgAddDisenioFoto"
+                android:id="@+id/imgEditaDialogDisenioFoto"
                 android:layout_width="197dp"
                 android:layout_height="162dp"
                 android:layout_gravity="center"
@@ -48,17 +48,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fBtnAddDisenioFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:clickable="true"
-                android:src="@drawable/ic_camera_alt_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imgAddDisenioFoto"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -68,7 +58,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnAgrDisenioAceptar"
+                android:id="@+id/btnEditaDialogDisenioAceptar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -76,7 +66,7 @@
                 android:backgroundTint="@color/flat_grey_dark_2"
                 android:text="@string/txtAceptar" />
             <Button
-                android:id="@+id/btnAgrDisenioCancelar"
+                android:id="@+id/btnEditaDialogDisenioCancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

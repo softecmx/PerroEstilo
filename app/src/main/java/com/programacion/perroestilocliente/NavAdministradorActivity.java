@@ -184,13 +184,26 @@ public class NavAdministradorActivity extends AppCompatActivity
             childList.put(menuModel, childModelsList);
         }
 
-
-        menuModel = new MenuModel("Diseños", true, false, "",R.drawable.ic_baseline_style_24); //Menu of Android Tutorial. No sub menus
+        //
+        childModelsList = new ArrayList<>();
+        menuModel = new MenuModel("Diseños", true, true, "",R.drawable.ic_baseline_style_24); //Menu of Python Tutorials
         headerList.add(menuModel);
+        childModel = new MenuModel("Agregar diseños", false, false, "",R.drawable.ic_add_black_24dp);
+        childModelsList.add(childModel);
 
-        if (!menuModel.hasChildren) {
-            childList.put(childModel, null);
+        childModel = new MenuModel("Modificar diseños", false, false, "",R.drawable.ic_edit_black_24dp);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Consultar diseños", false, false, "",R.drawable.ic_list_black_24dp);
+        childModelsList.add(childModel);
+
+        childModel = new MenuModel("Eliminar diseños", false, false, "",R.drawable.ic_delete_forever_black_24dp);
+        childModelsList.add(childModel);
+
+        if (menuModel.hasChildren) {
+            childList.put(menuModel, childModelsList);
         }
+        //
 
         menuModel = new MenuModel("Tallas", true, false, "",R.drawable.ic_baseline_straighten_24); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
@@ -215,28 +228,6 @@ public class NavAdministradorActivity extends AppCompatActivity
         childModelsList.add(childModel);
 
         childModel = new MenuModel("Eliminar productos", false, false, "",R.drawable.ic_delete_forever_black_24dp);
-        childModelsList.add(childModel);
-
-        if (menuModel.hasChildren) {
-            childList.put(menuModel, childModelsList);
-        }
-
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Kits", true, true, "",0); //Menu of Python Tutorials
-        headerList.add(menuModel);
-        childModel = new MenuModel("Crear kits", false, false, "",R.drawable.ic_add_black_24dp);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Modificar kits", false, false, "",R.drawable.ic_edit_black_24dp);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Buscar kits", false, false, "",R.drawable.ic_search_black_24dp);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Consultar kits", false, false, "",R.drawable.ic_list_black_24dp);
-        childModelsList.add(childModel);
-
-        childModel = new MenuModel("Eliminar kits", false, false, "",R.drawable.ic_delete_forever_black_24dp);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
@@ -401,26 +392,14 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 transaction.commit();
                                 toolbar.setTitle("Ajustes");
                                 break;
-
-                            case "Diseños":
-                                com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment frag3= new com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment();
-                                args = new Bundle();
-                                frag3.setArguments(args);
-                                transaction = getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.container, frag3);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
-                                toolbar.setTitle("Diseños");
-                                break;
                             case "Salir":
                                 FirebaseUser userj=FirebaseAuth.getInstance().getCurrentUser();
-                                mostarToast("usuario: "+userj,1,false);
                                 FirebaseAuth.getInstance().signOut();
                                 mostarToast("Sessión terminada exitosamente",1,true);
                                 startActivity(new Intent(NavAdministradorActivity.this, LogginActivity.class));
                                 finish();
                                 FirebaseUser userk=FirebaseAuth.getInstance().getCurrentUser();
-                                mostarToast("usuario: "+userk,5,false);
+
 
                                 break;
                         }
@@ -679,11 +658,49 @@ public class NavAdministradorActivity extends AppCompatActivity
                             transaction.commit();
                             toolbar.setTitle("Consultar pagos");
                             break;
+                        case "Agregar diseños":
+                            com.programacion.perroestilocliente.ui.administrador.disenios.crearDisenio.CrearDiseniosFragment newFragment24=new com.programacion.perroestilocliente.ui.administrador.disenios.crearDisenio.CrearDiseniosFragment();
+                            args = new Bundle();
+                            newFragment24.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment24);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            toolbar.setTitle("Agregar diseños");
+                            break;
+                        case "Modificar diseños":
+                            com.programacion.perroestilocliente.ui.administrador.disenios.editarDisenio.EditarDiseniosFragment newFragment25=new com.programacion.perroestilocliente.ui.administrador.disenios.editarDisenio.EditarDiseniosFragment();
+                            args = new Bundle();
+                            newFragment25.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment25);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            toolbar.setTitle("Modificar diseños");
+                            break;
+                        case "Consultar diseños":
+                            com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment newFragment26=new com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment();
+                            args = new Bundle();
+                            newFragment26.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment26);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            toolbar.setTitle("Consultar diseños");
+                            break;
+                        case "Eliminar diseños":
+                            com.programacion.perroestilocliente.ui.administrador.disenios.eliminarDisenio.EliminarDiseniosFragment newFragment27=new com.programacion.perroestilocliente.ui.administrador.disenios.eliminarDisenio.EliminarDiseniosFragment();
+                            args = new Bundle();
+                            newFragment27.setArguments(args);
+                            transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment27);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                            toolbar.setTitle("Eliminar diseños");
+                            break;
                     }
                     onBackPressed();
                 }
-
-
                 return false;
             }
         });

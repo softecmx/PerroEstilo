@@ -1,8 +1,10 @@
 package com.programacion.perroestilocliente.ui.administrador.disenios;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,6 +37,7 @@ import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,6 +52,8 @@ import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Categorias;
 import com.programacion.perroestilocliente.modelo.Disenios;
+import com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment;
+import com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -73,11 +78,10 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     private Button btnPopAgregar;
     private EditText etPopNombre;
     private ImageView ivPopImg;
-    private AutoCompleteTextView listaPop;
-    com.google.android.material.floatingactionbutton.FloatingActionButton fbPopFoto;
     private androidx.appcompat.app.AlertDialog dialog;
     String id="";
     Disenios c;
+
 
 
     public ListAdapter(Activity activity, ArrayList<ElementListView> arrayList,LayoutInflater layoutInflater,Context context,View root) {
@@ -96,6 +100,12 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Disenios");
     }
+
+    private static final int COD_SELECCIONA = 10;
+    private static final int COD_FOTO = 20;
+    public static final int REQUEST_PERMISSION_CAMERA = 100;
+
+    private Uri photoURI;
 
     @NonNull
     @Override
@@ -133,14 +143,12 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
     }
     public void edita(int position){
         androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-        final View aboutPop = layoutInflater.inflate(R.layout.dialog_disenio, null);
+        final View aboutPop = layoutInflater.inflate(R.layout.dialog_disenio_edita, null);
 
-        btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnAgrDisenioCancelar);
-        btnPopAgregar = (Button) aboutPop.findViewById(R.id.btnAgrDisenioAceptar);
-        etPopNombre = (EditText) aboutPop.findViewById(R.id.etADisenioNom);
-        ivPopImg =(ImageView) aboutPop.findViewById(R.id.imgAddDisenioFoto);
-        listaPop =(AutoCompleteTextView) aboutPop.findViewById(R.id.spAdisenioEt);
-        fbPopFoto =  aboutPop.findViewById(R.id.fBtnAddDisenioFoto);
+        btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnEditaDialogDisenioCancelar);
+        btnPopAgregar = (Button) aboutPop.findViewById(R.id.btnEditaDialogDisenioAceptar);
+        etPopNombre = (EditText) aboutPop.findViewById(R.id.etEditaDialogDisenioNom);
+        ivPopImg =(ImageView) aboutPop.findViewById(R.id.imgEditaDialogDisenioFoto);
         img = arrayList.get(position).getImagen();
 
         etPopNombre.setText(arrayList.get(position).getDisenio());
@@ -151,11 +159,6 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
         dialog = dialogBuilder.create();
         dialog.show();
         id = arrayList.get(position).getIdModelo();
-        fbPopFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
         btnPopCerrar.setOnClickListener(view -> dialog.dismiss());
         btnPopAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +176,6 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
                     Toast.makeText(getContext(), "Datos modificados!", Toast.LENGTH_SHORT).show();
 
                     etPopNombre.setText("");
-                    listaPop.setText("");
                     ivPopImg.setImageResource(R.drawable.no_image);
                     img = "";
                     dialog.dismiss();
@@ -202,6 +204,8 @@ public class ListAdapter extends ArrayAdapter<ElementListView> {
             }
         });
     }
+
+
     private void cargaImagen(ImageView ivFoto, String img) {
         storageReference.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

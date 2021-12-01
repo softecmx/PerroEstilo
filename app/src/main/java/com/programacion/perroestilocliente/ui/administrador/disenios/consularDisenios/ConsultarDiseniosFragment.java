@@ -86,8 +86,6 @@ public class ConsultarDiseniosFragment extends Fragment {
     private Button btnPopAgregar;
     private EditText etPopNombre;
     private ImageView ivPopImg;
-    private AutoCompleteTextView listaPop;
-    private ImageButton btnPopEtiq;
     com.google.android.material.floatingactionbutton.FloatingActionButton fbPopFoto;
 
     private ImageButton busca;
@@ -143,7 +141,7 @@ public class ConsultarDiseniosFragment extends Fragment {
         }
     }
     public void listarElementos(){
-        databaseReference.child("Disenios").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Disenios").orderByChild("estadoLogico").equalTo("1").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayList = new ArrayList<>();
@@ -171,8 +169,6 @@ public class ConsultarDiseniosFragment extends Fragment {
         btnPopAgregar = (Button) aboutPop.findViewById(R.id.btnAgrDisenioAceptar);
         etPopNombre = (EditText) aboutPop.findViewById(R.id.etADisenioNom);
         ivPopImg =(ImageView) aboutPop.findViewById(R.id.imgAddDisenioFoto);
-        listaPop =(AutoCompleteTextView) aboutPop.findViewById(R.id.spAdisenioEt);
-        btnPopEtiq = aboutPop.findViewById(R.id.btnADisenioET);
         fbPopFoto =  aboutPop.findViewById(R.id.fBtnAddDisenioFoto);
 
         dialogBuilder.setView(aboutPop);
@@ -202,7 +198,6 @@ public class ConsultarDiseniosFragment extends Fragment {
                     Toast.makeText(getContext(), "Datos registrado!", Toast.LENGTH_SHORT).show();
 
                     etPopNombre.setText("");
-                    listaPop.setText("");
                     ivPopImg.setImageResource(R.drawable.no_image);
                     img = "";
                     dialog.dismiss();

@@ -83,10 +83,14 @@ public class MisDireccionesFragment extends Fragment {
                 arrayList.clear();
 
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    if(getActivity()!=null){
                     Direcciones direccion = objSnapshot.getValue(Direcciones.class);
                     arrayList.add(direccion);
                     customAdapter = new ListAdapter(getActivity(), arrayList);
                     listMisDirecciones.setAdapter(customAdapter);
+                    }else{
+                        queryMascota.removeEventListener(this);
+                    }
                 }
 
             }
