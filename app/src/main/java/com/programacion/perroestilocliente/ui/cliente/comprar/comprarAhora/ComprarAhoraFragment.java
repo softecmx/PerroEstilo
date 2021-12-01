@@ -73,7 +73,7 @@ public class ComprarAhoraFragment extends Fragment {
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    String idCliente="";
     private ComprarAhoraViewModel mViewModel;
     View root;
 
@@ -114,7 +114,7 @@ public class ComprarAhoraFragment extends Fragment {
                                 if (snapshot.exists()) {
                                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                                         Clientes usuario = objSnapshot.getValue(Clientes.class);
-
+                                        idCliente=usuario.getIdUsuario();
                                         txtNombre.setText(usuario.getNombreCliente());
                                         txtApellidos.setText(usuario.getApellidoPaterno());
                                         txtTelefono.setText(usuario.getTelefono());
@@ -226,7 +226,7 @@ public class ComprarAhoraFragment extends Fragment {
     public void realizarPedido(){
 
         String fechaPedido=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        String idCliente=user.getUid();
+
         String idOrden= (UUID.randomUUID().toString()).subSequence(0,10).toString().toUpperCase();
         String estatus="Pago pendiente";
         String noSerie1=UUID.randomUUID().toString();
@@ -270,7 +270,7 @@ public class ComprarAhoraFragment extends Fragment {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
 
-        ref.child("OrdenesCliente/"+user.getUid()).child(ordenCliente.getInOrden()).setValue(ordenCliente);
+        ref.child("OrdenesCliente/"+idCliente).child(ordenCliente.getInOrden()).setValue(ordenCliente);
 
         for (int i=0; i<arrayListItems.size();i++){
             DetOrdenProductos detOrdenProd=new DetOrdenProductos();

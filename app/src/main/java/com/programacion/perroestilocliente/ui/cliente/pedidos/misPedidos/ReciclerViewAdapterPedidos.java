@@ -63,20 +63,7 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
     @Override
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
 
-        if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Pago pendiente")) {
-            holder.txtStatus.setText("Pago pendiente");
-            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.danger));
 
-        } else if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Preparando pedido")) {
-            holder.txtStatus.setText("Preparando");
-            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_orange_2));
-        } else if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("En camino")) {
-            holder.txtStatus.setText("En camino");
-            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_yellow_1));
-        } else if (listaPedidos.get(holder.getPosition()).getEstatusOrden().equals("Entregado")) {
-            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_green_1));
-            holder.txtStatus.setText("Entregado");
-        }
         holder.txtNoOrden.setText(listaPedidos.get(holder.getPosition()).getInOrden());
         //  holder.txtStatus
         holder.txtTotal.setText("$"+listaPedidos.get(holder.getPosition()).getTotal()+" MX");
@@ -95,6 +82,29 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
             }
         });
 
+        switch (listaPedidos.get(holder.getPosition()).getEstatusOrden().toString()) {
+            case "Pago pendiente":
+                holder.txtStatus.setText("Pago pendiente");
+                holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.danger));
+
+                break;
+            case "Preparando pedido":
+                holder.txtStatus.setText("Preparando");
+                holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_orange_2));
+                break;
+            case "En camino":
+                holder.txtStatus.setText("En camino");
+                holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_yellow_1));
+                break;
+            case "Entregado":
+                holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_green_1));
+                holder.txtStatus.setText("Entregado");
+                break;
+            default:
+                holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.red));
+                holder.txtStatus.setText("Pago Pendiente");
+                break;
+        }
     }
 
     @Override
