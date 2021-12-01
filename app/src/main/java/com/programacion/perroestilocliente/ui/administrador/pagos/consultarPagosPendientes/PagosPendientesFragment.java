@@ -47,9 +47,9 @@ public class PagosPendientesFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    String idOrden = "";
+    String inOrden = "";
     String total = "";
-    String statusOrden = "";
+    String estatusOrden = "";
 
     public static PagosPendientesFragment newInstance() {
         return new PagosPendientesFragment();
@@ -70,68 +70,16 @@ public class PagosPendientesFragment extends Fragment {
     }
     public void listarDatos() {
 
-        databaseReference.child("DetalleOrdenesCliente").orderByChild("idOrdenCliente").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("OrdenesCliente").orderByChild("idCliente").orderByChild("inOrden").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<ElementListViewPagosPendientes> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) { //Subtotales de cada orden
-
-                    if(snapshot.exists()){
-                        DetOrdenProductos dop = snapshot.getValue(DetOrdenProductos.class);
-                        String idOrdenCliente =dop.getIdOrdenCliente();
-                        String idDetOrdenProducto  =dop.getIdDetOrdenProducto();
-
-                        String subtotal =dop.getSubtotal();
-                        Log.i(subtotal,"subtotal: ");
-                    }
-                    else Toast.makeText(getContext(), "no se encontro datos", Toast.LENGTH_SHORT).show();
-
-/*
-                    databaseReference.child("OrdenesCliente").child("idOrdenCliente").orderByChild("idCliente").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                OrdenesCliente oc = objSnapshot.getValue(OrdenesCliente.class);
-                                String estatusOrden=oc.getEstatusOrden();
-
-                                idOrden=oc.getInOrden();
-                                statusOrden=oc.getEstatusOrden();
-                                total= dop.getSubtotal();
-                                arrayList.add(new ElementListViewPagosPendientes( statusOrden,Integer.parseInt(total),Integer.parseInt(idOrden)));
-                                customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayList);
-                                listView.setAdapter(customAdapter);
-                                arrayList.add(new ElementListViewPagosPendientes( estatusOrden,Integer.parseInt(subtotal),Integer.parseInt(idDetOrdenProducto)));
-                                customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayList);
-                                listView.setAdapter(customAdapter);
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });*/
+                        OrdenesCliente oc = snapshot.getValue(OrdenesCliente.class);
+                        inOrden =oc.getInOrden();
+                        estatusOrden  =oc.getEstatusOrden();
+                        //total =oc.getTotal()
                 }
-/*
-
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    OrdenesCliente oc = objSnapshot.getValue(OrdenesCliente.class);
-                    databaseReference.child("OrdenesCliente").orderByChild("inOrden").equalTo(oc.getInOrden()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                DetOrdenProductos dop = objSnapshot.getValue(DetOrdenProductos.class);
-                                idOrden=oc.getInOrden();
-                                statusOrden=oc.getEstatusOrden();
-                                total= dop.getSubtotal();
-                                arrayList.add(new ElementListViewPagosPendientes( statusOrden,Integer.parseInt(total),Integer.parseInt(idOrden)));
-                                customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayList);
-                                listView.setAdapter(customAdapter);
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-                }*/
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
