@@ -20,10 +20,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
 
 import java.util.ArrayList;
@@ -54,26 +56,43 @@ public class MisPedidosFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         reciclerViewOrdenes=root.findViewById(R.id.listMisPedidos);
-
-        databaseReference.child("OrdenesCliente/"+user.getUid()).addValueEventListener(new ValueEventListener() {
+        final String[] idCliente = {""};
+        Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
+        queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                arrayListOrdenes.clear();
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
-                    OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
-                    arrayListOrdenes.add(orden);
-                    System.out.println("PEDIDO");
-                    adapterOrdenes = new ReciclerViewAdapterPedidos(root.getContext(), arrayListOrdenes, getFragmentManager());
-                    reciclerViewOrdenes.setLayoutManager(new LinearLayoutManager(getContext()));
-                    reciclerViewOrdenes.setAdapter(adapterOrdenes);
+                if (snapshot.exists()) {
+                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                        Clientes usuario = objSnapshot.getValue(Clientes.class);
+                        idCliente[0] =usuario.getIdUsuario();
+                        databaseReference.child("OrdenesCliente/"+ idCliente[0]).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                arrayListOrdenes.clear();
+                                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                                    //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
+                                    OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
+                                    arrayListOrdenes.add(orden);
+                                    adapterOrdenes = new ReciclerViewAdapterPedidos(root.getContext(), arrayListOrdenes, getFragmentManager());
+                                    reciclerViewOrdenes.setLayoutManager(new LinearLayoutManager(getContext()));
+                                    reciclerViewOrdenes.setAdapter(adapterOrdenes);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                    }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
 
         return root;
     }

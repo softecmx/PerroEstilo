@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
+    android:fillViewport="true"
     tools:context=".ui.cliente.pedidos.estadoPedido.EstadoPedidoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:orientation="vertical">
@@ -30,6 +32,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/txtEstPedEstatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Estatus"
@@ -39,6 +42,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="@color/flat_awesome_green_1"/>
         <TextView
+            android:id="@+id/txtEstPedFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Proximamente"
@@ -68,6 +72,7 @@
                         android:textColor="@color/black"
                         />
                     <TextView
+                        android:id="@+id/txtEstPedNoOrden"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -90,6 +95,7 @@
                         android:textColor="@color/black"
                         />
                     <TextView
+                        android:id="@+id/txtEstPedNoSerie"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -123,11 +129,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ListView
-                        android:id="@+id/lstViewComprarAhoraCarrito"
+                        android:id="@+id/lstViewEstPedDet"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"/>
+                        android:layout_height="226dp"/>
                 </FrameLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/flat_grey_light_1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total: "
+                        android:padding="10dp"
+                        android:gravity="end"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:id="@+id/txtEstPedTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$$$$"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -150,7 +179,22 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     />
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pedido hecho el:  "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txtEstPedFechaEstimada"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18/10/2021"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,6 +206,7 @@
                         android:paddingLeft="10dp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/txtEstPedContacto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contacto "/>
@@ -177,6 +222,7 @@
                         android:paddingLeft="10dp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/txtEstPedTelefono"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="19876532 "/>
@@ -193,6 +239,7 @@
                         android:paddingLeft="10dp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/txtEstPedDireccion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Direccion  "/>
@@ -203,13 +250,13 @@
 
         <Button
             android:layout_marginTop="10dp"
-            android:id="@+id/btnTicketMisPedidos"
+            android:id="@+id/btnEstPedMisPedidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtVerEnMisPedidos" />
         <Button
             android:layout_marginTop="10dp"
-            android:id="@+id/btnVerReferencia"
+            android:id="@+id/btnEstPedVerReferencia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ver referencia" />

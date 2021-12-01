@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class OrdenesCliente extends Direcciones{
 
+    private float total;
     private String inOrden;
     private Direcciones direccionEnvio;
     private String estatusOrden;
@@ -47,6 +48,14 @@ public class OrdenesCliente extends Direcciones{
         this.lstOrdenesKit = lstOrdenesKit;
         this.lstOrdenesProductos = lstOrdenesProductos;
         this.idCliente = idCliente;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 
     public String getIdCliente() {
