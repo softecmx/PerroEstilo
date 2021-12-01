@@ -11,12 +11,32 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.ListAdapterPagosPendientes;
+import com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesViewModel;
 
 public class ConsultarVentasFragment extends Fragment {
+    private TextView txtFecha, noVentas, canTotalVentas;
+    private PagosPendientesViewModel mViewModel;
+    private ImageButton btnBuscar;
 
-    private ConsultarVentasViewModel mViewModel;
+    View root;
+    private ListView listView;
+    private ListAdapterVentas customAdapter;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
+    String fecha = "";
+    String ventas = "";
+    String statusOrden = "";
+   // private ConsultarVentasViewModel mViewModel;
 
     public static ConsultarVentasFragment newInstance() {
         return new ConsultarVentasFragment();
@@ -31,7 +51,7 @@ public class ConsultarVentasFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ConsultarVentasViewModel.class);
+        //mViewModel = new ViewModelProvider(this).get(ConsultarVentasViewModel.class);
         // TODO: Use the ViewModel
     }
 

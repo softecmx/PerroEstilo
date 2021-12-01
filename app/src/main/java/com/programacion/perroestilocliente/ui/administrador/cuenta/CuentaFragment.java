@@ -110,7 +110,7 @@ public class CuentaFragment extends Fragment {
     public void listarDatos(){
         Opciones opc= new Opciones();
         ArrayList<ElementListView> arrayList = new ArrayList<>();
-//                    arrayList.add(new ElementListViewInventario(opc.getInfo(),opc.getAyuda(),opc.getApp(),opc.getPoliticas(),opc.getAjustes(),opc.getCerrar()));
+//                    arrayList.add(new ElementListViewPagosPendientes(opc.getInfo(),opc.getAyuda(),opc.getApp(),opc.getPoliticas(),opc.getAjustes(),opc.getCerrar()));
                     //customAdapter = new ListAdapter(getActivity(), arrayList);
                    // lista_opciones.setAdapter(customAdapter);
 

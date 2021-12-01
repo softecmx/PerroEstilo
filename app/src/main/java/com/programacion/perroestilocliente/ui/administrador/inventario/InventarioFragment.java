@@ -97,8 +97,6 @@ public class InventarioFragment extends Fragment implements AdapterView.OnItemCl
                 ArrayList<ElementListViewInventario> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Productos p = objSnapshot.getValue(Productos.class);
-
-
                     databaseReference.child("Disenios").orderByChild("idModelo").equalTo(p.getDisenio()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -213,15 +211,8 @@ public class InventarioFragment extends Fragment implements AdapterView.OnItemCl
                         sumarStock();
                     }
                 });
-               btnAceptar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Map<String, Object> encenderMap = new HashMap<>();
-                        encenderMap.put("Productos/"+txtCodigo.getText()+"/stock",txtStock.getText());
-                        databaseReference.updateChildren(encenderMap).toString();
-                       // Toast.makeText(getContext(), "Inventario Actualizado", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+
                 dialog.show();
             }
         });
