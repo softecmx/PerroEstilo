@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnPrimary"
+    android:fillViewport="true"
     tools:context=".ui.cliente.pedidos.estadoPedido.EstadoPedidoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:orientation="vertical">
@@ -130,7 +131,7 @@
                     <ListView
                         android:id="@+id/lstViewEstPedDet"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"/>
+                        android:layout_height="226dp"/>
                 </FrameLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -185,11 +186,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Estimado para el  "
+                        android:text="Pedido hecho el:  "
                         android:paddingLeft="10dp"
                         android:textStyle="bold"/>
                     <TextView
-                        android:id="@+id/txtTicketFechaEstimada"
+                        android:id="@+id/txtEstPedFechaEstimada"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="18/10/2021"/>

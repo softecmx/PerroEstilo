@@ -1,5 +1,6 @@
 package com.programacion.perroestilocliente.ui.cliente.pedidos.estadoPedido;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -44,6 +45,7 @@ public class EstadoPedidoFragment extends Fragment {
     Button btnVerReferencia;
     View root;
     String idOrden;
+    String status="";
     TextView txtOrden;
     TextView txtSerie;
     TextView txtFechaEstimada;
@@ -52,6 +54,9 @@ public class EstadoPedidoFragment extends Fragment {
     TextView txtDireccion;
     TextView txtFechaPedido;
     TextView txtTotal;
+    TextView txtStatus;
+    String fechaEst;
+    String fechaEntrega;
     float total;
 
     private EstadoPedidoViewModel mViewModel;
@@ -65,23 +70,25 @@ public class EstadoPedidoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         root= inflater.inflate(R.layout.fragment_estado_pedido, container, false);
                 Bundle args = getArguments();
-        idOrden = args.getString("noOrden");
-        btnVerMisPedidos = root.findViewById(R.id.btnTicketMisPedidos);
+        idOrden = args.getString("idOrden");
+        btnVerMisPedidos = root.findViewById(R.id.btnEstPedMisPedidos);
+        btnVerReferencia=root.findViewById(R.id.btnEstPedVerReferencia);
+        txtOrden = root.findViewById(R.id.txtEstPedNoOrden);
+        txtSerie = root.findViewById(R.id.txtEstPedNoSerie);
+        txtFechaEstimada = root.findViewById(R.id.txtEstPedFecha);
+        txtContacto = root.findViewById(R.id.txtEstPedContacto);
+        txtTelefono = root.findViewById(R.id.txtEstPedTelefono);
+        txtDireccion = root.findViewById(R.id.txtEstPedDireccion);
+        txtFechaPedido = root.findViewById(R.id.txtEstPedFechaEstimada);
+        txtTotal = root.findViewById(R.id.txtEstPedTotal);
+        txtStatus=root.findViewById(R.id.txtEstPedEstatus);
 
-        txtOrden = root.findViewById(R.id.txtTicketOrden);
-        txtSerie = root.findViewById(R.id.txtTicketSerie);
-        txtFechaEstimada = root.findViewById(R.id.txtTicketFechaEstimada);
-        txtContacto = root.findViewById(R.id.txtTicketContacto);
-        txtTelefono = root.findViewById(R.id.txtTicketTelefono);
-        txtDireccion = root.findViewById(R.id.txtTicketDireccion);
-        txtFechaPedido = root.findViewById(R.id.txtTicketFechaPedido);
-        txtTotal = root.findViewById(R.id.txtTicketTotal);
         FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= firebaseDatabase.getReference();
         StorageReference storageReference= FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewTicketCarrito);
+        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
         ArrayList<DetOrdenProductos> arrayListItems = new ArrayList<>();
         total = 0;
         databaseReference.child("OrdenesCliente/" + user.getUid())
@@ -110,7 +117,24 @@ public class EstadoPedidoFragment extends Fragment {
                                 c.add(Calendar.DATE,7);
                                 DateFormat formateadorFechaCorta = DateFormat.getDateInstance(DateFormat.SHORT);
                                 txtFechaEstimada.setText(formateadorFechaCorta.format(c.getTime()));
+                                status=ordenesCliente.getEstatusOrden();
+                                fechaEntrega=ordenesCliente.getFechaEntrega();
+                                fechaEst=ordenesCliente.getFechaOrden();
+                                if(status.equals("Pago pendiente")){
+                                    txtFechaEstimada.setText("Proximaemente" );
+                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.danger));
+                                }else if(status.equals("Preparando pedido")){
+                                    txtFechaEstimada.setText("Proximaemente");
+                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_orange_2));
+                                }else  if(status.equals("En camino")){
+                                    txtFechaEstimada.setText("Proximaemente ");
+                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_yellow_1));
+                                }else if(status.equals("Entregado")){
+                                    txtFechaEstimada.setText("Entregado el "+ fechaEntrega);
+                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_green_1));
+                                }
 
+                                txtStatus.setText(status);
                             }
                         }
                     }
@@ -118,6 +142,7 @@ public class EstadoPedidoFragment extends Fragment {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
+
 
         databaseReference.child("DetalleOrdenesCliente/" + idOrden)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
