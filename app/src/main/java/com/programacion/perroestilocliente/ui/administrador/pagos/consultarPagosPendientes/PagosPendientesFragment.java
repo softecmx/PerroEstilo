@@ -78,7 +78,10 @@ public class PagosPendientesFragment extends Fragment {
                         OrdenesCliente oc = snapshot.getValue(OrdenesCliente.class);
                         inOrden =oc.getInOrden();
                         estatusOrden  =oc.getEstatusOrden();
-                        //total =oc.getTotal()
+                        //total =oc.getTotal();
+                    arrayList.add(new ElementListViewPagosPendientes(inOrden ,Integer.parseInt(estatusOrden),Integer.parseInt(total)));
+                    customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayList);
+                    listView.setAdapter(customAdapter);
                 }
             }
             @Override
