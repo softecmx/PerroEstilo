@@ -24,10 +24,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.DetOrdenProductos;
 import com.programacion.perroestilocliente.modelo.Direcciones;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
@@ -45,7 +47,7 @@ public class EstadoPedidoFragment extends Fragment {
     Button btnVerReferencia;
     View root;
     String idOrden;
-    String status="";
+    String status = "";
     TextView txtOrden;
     TextView txtSerie;
     TextView txtFechaEstimada;
@@ -58,7 +60,7 @@ public class EstadoPedidoFragment extends Fragment {
     String fechaEst;
     String fechaEntrega;
     float total;
-
+    String idCliente;
     private EstadoPedidoViewModel mViewModel;
 
     public static EstadoPedidoFragment newInstance() {
@@ -68,11 +70,11 @@ public class EstadoPedidoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root= inflater.inflate(R.layout.fragment_estado_pedido, container, false);
-                Bundle args = getArguments();
+        root = inflater.inflate(R.layout.fragment_estado_pedido, container, false);
+        Bundle args = getArguments();
         idOrden = args.getString("idOrden");
         btnVerMisPedidos = root.findViewById(R.id.btnEstPedMisPedidos);
-        btnVerReferencia=root.findViewById(R.id.btnEstPedVerReferencia);
+        btnVerReferencia = root.findViewById(R.id.btnEstPedVerReferencia);
         txtOrden = root.findViewById(R.id.txtEstPedNoOrden);
         txtSerie = root.findViewById(R.id.txtEstPedNoSerie);
         txtFechaEstimada = root.findViewById(R.id.txtEstPedFecha);
@@ -81,95 +83,116 @@ public class EstadoPedidoFragment extends Fragment {
         txtDireccion = root.findViewById(R.id.txtEstPedDireccion);
         txtFechaPedido = root.findViewById(R.id.txtEstPedFechaEstimada);
         txtTotal = root.findViewById(R.id.txtEstPedTotal);
-        txtStatus=root.findViewById(R.id.txtEstPedEstatus);
-
-        FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference= firebaseDatabase.getReference();
-        StorageReference storageReference= FirebaseStorage.getInstance().getReference("Productos");
+        txtStatus = root.findViewById(R.id.txtEstPedEstatus);
+        idCliente = "";
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
         ArrayList<DetOrdenProductos> arrayListItems = new ArrayList<>();
         total = 0;
-        databaseReference.child("OrdenesCliente/" + user.getUid())
-                .orderByChild("inOrden").equalTo(idOrden)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+        Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
+        queryCliente.addListenerForSingleValueEvent(
+                new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        arrayListItems.clear();
                         if (snapshot.exists()) {
                             for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                OrdenesCliente ordenesCliente=objSnapshot.getValue(OrdenesCliente.class);
-                                txtOrden.setText(ordenesCliente.getInOrden());
-                                txtSerie.setText(ordenesCliente.getNoSerie());
-                                txtFechaPedido.setText(ordenesCliente.getFechaOrden());
-                                txtTelefono.setText(ordenesCliente.getTelefonoContacto());
-                                txtContacto.setText(ordenesCliente.getNombreContacto()+ordenesCliente.getApPContacto());
-                                Direcciones direccionEnvio=ordenesCliente.getDireccionEnvio();
-                                String dir=direccionEnvio.getEntidadFederativa()+", "+direccionEnvio.getMunicipio()+", "+
-                                        direccionEnvio.getLocalidad()+". CP: "+direccionEnvio.getCodigoPostal()
-                                        +". Calle Externa: "+direccionEnvio.getCalleYNumeroExterno()+
-                                        ". Calle Interna: "+ direccionEnvio.getCalleYNumeroInterno()+". Con referencias: "+direccionEnvio.getReferencia();
-                                txtDireccion.setText(dir);
-                                Date dt=new Date();
-                                Calendar c=Calendar.getInstance();
-                                c.setTime(dt);
-                                c.add(Calendar.DATE,7);
-                                DateFormat formateadorFechaCorta = DateFormat.getDateInstance(DateFormat.SHORT);
-                                txtFechaEstimada.setText(formateadorFechaCorta.format(c.getTime()));
-                                status=ordenesCliente.getEstatusOrden();
-                                fechaEntrega=ordenesCliente.getFechaEntrega();
-                                fechaEst=ordenesCliente.getFechaOrden();
-                                if(status.equals("Pago pendiente")){
-                                    txtFechaEstimada.setText("Proximaemente" );
-                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.danger));
-                                }else if(status.equals("Preparando pedido")){
-                                    txtFechaEstimada.setText("Proximaemente");
-                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_orange_2));
-                                }else  if(status.equals("En camino")){
-                                    txtFechaEstimada.setText("Proximaemente ");
-                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_yellow_1));
-                                }else if(status.equals("Entregado")){
-                                    txtFechaEstimada.setText("Entregado el "+ fechaEntrega);
-                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_green_1));
-                                }
+                                Clientes usuario = objSnapshot.getValue(Clientes.class);
+                                idCliente = usuario.getIdUsuario();
+                                databaseReference.child("OrdenesCliente/" + idCliente)
+                                        .orderByChild("inOrden").equalTo(idOrden)
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                arrayListItems.clear();
+                                                if (snapshot.exists()) {
+                                                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                                                        OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);
+                                                        txtOrden.setText(ordenesCliente.getInOrden());
+                                                        txtSerie.setText(ordenesCliente.getNoSerie());
+                                                        txtFechaPedido.setText(ordenesCliente.getFechaOrden());
+                                                        txtTelefono.setText(ordenesCliente.getTelefonoContacto());
+                                                        txtContacto.setText(ordenesCliente.getNombreContacto() + ordenesCliente.getApPContacto());
+                                                        Direcciones direccionEnvio = ordenesCliente.getDireccionEnvio();
+                                                        String dir = direccionEnvio.getEntidadFederativa() + ", " + direccionEnvio.getMunicipio() + ", " +
+                                                                direccionEnvio.getLocalidad() + ". CP: " + direccionEnvio.getCodigoPostal()
+                                                                + ". Calle Externa: " + direccionEnvio.getCalleYNumeroExterno() +
+                                                                ". Calle Interna: " + direccionEnvio.getCalleYNumeroInterno() + ". Con referencias: " + direccionEnvio.getReferencia();
+                                                        txtDireccion.setText(dir);
+                                                        Date dt = new Date();
+                                                        Calendar c = Calendar.getInstance();
+                                                        c.setTime(dt);
+                                                        c.add(Calendar.DATE, 7);
+                                                        DateFormat formateadorFechaCorta = DateFormat.getDateInstance(DateFormat.SHORT);
+                                                        txtFechaEstimada.setText(formateadorFechaCorta.format(c.getTime()));
+                                                        status = ordenesCliente.getEstatusOrden();
+                                                        fechaEntrega = ordenesCliente.getFechaEntrega();
+                                                        fechaEst = ordenesCliente.getFechaOrden();
+                                                        if (status.equals("Pago pendiente")) {
+                                                            txtFechaEstimada.setText("Proximamente");
+                                                            txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.danger));
+                                                        } else if (status.equals("Preparando pedido")) {
+                                                            txtFechaEstimada.setText("Proximamente");
+                                                            txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_orange_2));
+                                                        } else if (status.equals("En camino")) {
+                                                            txtFechaEstimada.setText("Proximamente ");
+                                                            txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_yellow_1));
+                                                        } else if (status.equals("Entregado")) {
+                                                            txtFechaEstimada.setText("Entregado el " + fechaEntrega);
+                                                            txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_green_1));
+                                                        }
 
-                                txtStatus.setText(status);
+                                                        txtStatus.setText(status);
+
+                                                        databaseReference.child("DetalleOrdenesCliente/" + idOrden)
+                                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                        arrayListItems.clear();
+                                                                        if (snapshot.exists()) {
+                                                                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+
+                                                                                try {
+                                                                                    DetOrdenProductos ordenesCliente = objSnapshot.getValue(DetOrdenProductos.class);
+                                                                                    arrayListItems.add(ordenesCliente);
+                                                                                    ListAdapterTicket adapterProductos = new ListAdapterTicket(getActivity(), arrayListItems);
+                                                                                    reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                                                                                    total = total + (ordenesCliente.getPrecioUnitario() * ordenesCliente.getCantidad());
+                                                                                    txtTotal.setText("$" + total);
+                                                                                } catch (Exception e) {
+
+                                                                                }
+
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                                    }
+                                                                });
+
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                            }
+                                        });
+
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
 
-
-        databaseReference.child("DetalleOrdenesCliente/" + idOrden)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        arrayListItems.clear();
-                        if (snapshot.exists()) {
-                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-
-                                try {
-                                    DetOrdenProductos ordenesCliente=objSnapshot.getValue(DetOrdenProductos.class);
-                                    arrayListItems.add(ordenesCliente);
-                                    ListAdapterTicket adapterProductos = new ListAdapterTicket(getActivity(), arrayListItems);
-                                    reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
-                                    total = total + (ordenesCliente.getPrecioUnitario() * ordenesCliente.getCantidad());
-                                    txtTotal.setText("$" + total);
-                                }catch (Exception e){
-
-                                }
-
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
 
         btnVerMisPedidos.setOnClickListener(new View.OnClickListener() {
             @Override
