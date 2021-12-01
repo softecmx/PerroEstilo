@@ -91,7 +91,7 @@ public class TicketFragment extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                         OrdenesCliente ordenesCliente=objSnapshot.getValue(OrdenesCliente.class);
-                        txtOrden.setText(ordenesCliente.getNoSerie());
+                        txtOrden.setText(ordenesCliente.getInOrden());
                         txtSerie.setText(ordenesCliente.getNoSerie());
                         txtFechaPedido.setText(ordenesCliente.getFechaOrden());
                         txtTelefono.setText(ordenesCliente.getTelefonoContacto());

@@ -227,7 +227,7 @@ public class ComprarAhoraFragment extends Fragment {
 
         String fechaPedido=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         String idCliente=user.getUid();
-        String idOrden= (UUID.randomUUID().toString()).subSequence(0,10).toString();
+        String idOrden= (UUID.randomUUID().toString()).subSequence(0,10).toString().toUpperCase();
         String estatus="Pago pendiente";
         String noSerie1=UUID.randomUUID().toString();
         String noSerie2="";
@@ -274,8 +274,8 @@ public class ComprarAhoraFragment extends Fragment {
 
         for (int i=0; i<arrayListItems.size();i++){
             DetOrdenProductos detOrdenProd=new DetOrdenProductos();
-            detOrdenProd.setIdDetOrdenProducto(UUID.randomUUID().toString());
-            detOrdenProd.setIdOrdenCliente(ordenCliente.getInOrden());
+            detOrdenProd.setIdDetOrdenProducto(UUID.randomUUID().toString().toUpperCase());
+            detOrdenProd.setIdOrdenCliente(ordenCliente.getInOrden().toUpperCase());
             detOrdenProd.setIdProducto(arrayListItems.get(i).getProducto());
             detOrdenProd.setImgFoto(arrayListItems.get(i).getImg());
             detOrdenProd.setCantidad(arrayListItems.get(i).getCantidad());
