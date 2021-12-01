@@ -4,48 +4,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnPrimary"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.administrador.pedidos.verDetallePedido.VerPedidoFragment">
+    android:fillViewport="true"
+    tools:context=".ui.administrador.ventas.verDetalleVenta.VerDetalleVentaFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="En camino"
-            android:textSize="18sp"
-            android:textColor="@color/flat_yellow_2"
-            android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estimado para el  "
-                android:textColor="@color/flat_grey_dark_2"
+                android:layout_marginTop="15dp"
+                android:text="Orden del pedido"
+                android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/flat_grey_dark_1"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:text="18/10/2021"/>
+                android:textStyle="italic"
+                android:layout_gravity="center"/>
+
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txtStatusDetVenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estatus"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/flat_awesome_green_1"/>
+        <TextView
+            android:id="@+id/txtFechaDetVenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proximamente"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/flat_grey_normal_2"/>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:backgroundTint="#94FFFFFF"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,6 +73,7 @@
                         android:textColor="@color/black"
                         />
                     <TextView
+                        android:id="@+id/txtNoOrdenDetVenta"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -87,6 +96,7 @@
                         android:textColor="@color/black"
                         />
                     <TextView
+                        android:id="@+id/txtNoSerieDetVenta"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -120,11 +130,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ListView
-                        android:id="@+id/lstViewComprarVerPedido"
+                        android:id="@+id/lstViewDetalleCompraDetVenta"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"/>
+                        android:layout_height="226dp"/>
                 </FrameLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/flat_grey_light_1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total: "
+                        android:padding="10dp"
+                        android:gravity="end"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:id="@+id/txtTotalDetVenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$$$$"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -142,12 +175,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Detalle de entrega"
-                    android:background="@color/flat_grey_light_1"
+                    android:background="#94FFFFFF"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     />
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pedido hecho el:  "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txtFechaEstimadaDetVenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18/10/2021"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,6 +207,7 @@
                         android:paddingLeft="10dp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/txtContactoDetVenta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contacto "/>
@@ -174,6 +223,7 @@
                         android:paddingLeft="10dp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/txtTelefonoDetVenta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="19876532 "/>
@@ -181,6 +231,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
@@ -189,6 +240,7 @@
                         android:paddingLeft="10dp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/txtDireccionDetVenta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Direccion  "/>
@@ -196,13 +248,11 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
         <Button
-            android:id="@+id/btnComprarAhoraConfirmar"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnContactarDetalleVentas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtImportarTicket" />
-
+            android:text="@string/txtContactarCliente" />
     </LinearLayout>
-
 </ScrollView>

@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.programacion.perroestilocliente.R;
-import com.programacion.perroestilocliente.ui.administrador.inventario.ElementListViewInventario;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ public class ListAdapterPagosPendientes extends ArrayAdapter<ElementListViewPago
     private ArrayList<ElementListViewPagosPendientes> arrayList;
 
     public ListAdapterPagosPendientes(Activity activity, ArrayList<ElementListViewPagosPendientes> arrayList) {
-        super(activity, R.layout.item_lista_pedidos_pago_pendiente, arrayList);
+        super(activity, R.layout.item_lista_pagos, arrayList);
         this.activity = activity;
         this.arrayList = arrayList;
     }
@@ -34,7 +33,7 @@ public class ListAdapterPagosPendientes extends ArrayAdapter<ElementListViewPago
         if (convertView == null) {
             convertView =
                     LayoutInflater.from(getContext())
-                            .inflate(R.layout.item_lista_pedidos_pago_pendiente, parent, false);
+                            .inflate(R.layout.item_lista_pagos, parent, false);
         }
         TextView txtOrden= convertView.findViewById(R.id.txtNumeroOrdenPedidoPagoPendiente);
         TextView txtTotal = convertView.findViewById(R.id.txtTotalmnx);

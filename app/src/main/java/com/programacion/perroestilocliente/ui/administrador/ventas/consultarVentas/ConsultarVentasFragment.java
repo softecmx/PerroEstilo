@@ -42,7 +42,7 @@ public class ConsultarVentasFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_consultar_ventas, container, false);
+        return inflater.inflate(R.layout.fragment_ver_ventas, container, false);
     }
 
     @Override

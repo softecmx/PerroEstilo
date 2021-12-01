@@ -1,145 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorOnPrimary"
+    android:fillViewport="true"
     tools:context=".ui.administrador.envios.detalleEnvios.DetalleEnvioFragment">
-    <com.google.android.material.card.MaterialCardView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:elevation="5dp"
-        app:cardCornerRadius="10dp">
-        <RelativeLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Orden del pedido"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtStatusDetalleEnvio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estatus"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/flat_awesome_green_1"/>
+        <TextView
+            android:id="@+id/txtFechaDetalleEnvio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proximamente"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/flat_grey_normal_2"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:backgroundTint="#94FFFFFF"
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="10dp"
                 android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/txtNombreRetiraDetEntrega"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtPersonaRetira"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/valorNombrRetiraDE"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_toEndOf="@+id/txtNombreRetiraDetEntrega"
-                    android:text="@string/txtNombreContacto"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="normal" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/txtNombreDireccionDetEntrega"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtDireccionEntrega"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/valorDireccionRetiraDE"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_toEndOf="@+id/txtNombreDireccionDetEntrega"
-                    android:text="@string/txtMisDirecciones"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="normal" />
-            </RelativeLayout>
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/txtCorreoDetEntrega"
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/correo"
+                        android:text="Orden: "
+                        android:padding="10dp"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:textStyle="bold" />
+                        />
                     <TextView
-                        android:id="@+id/valorCorreoRetiraDE"
+                        android:id="@+id/txtNoOrdenDetalleEnvio"
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_toEndOf="@+id/txtCorreoDetEntrega"
-                        android:text="@string/txtCorreoUser"
+                        android:text="9876567834"
+                        android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:textStyle="normal" />
-                </RelativeLayout>
-                <RelativeLayout
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/txtContactoDetEntrega"
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txtContacto"
+                        android:text="No.Serie: "
+                        android:padding="10dp"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:textStyle="bold" />
+                        />
                     <TextView
-                        android:id="@+id/valorContactoRetiraDE"
+                        android:id="@+id/txtNoSerieDetalleEnvio"
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_toEndOf="@+id/txtContactoDetEntrega"
-                        android:text="@string/txtNombreContacto"
+                        android:text="9876567834DSDFS"
+                        android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:textStyle="normal" />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/txtTelefonoDetEntrega"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/txtTelefono"
-                        android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/valorTelefonoRetiraDE"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_toEndOf="@+id/txtTelefonoDetEntrega"
-                        android:text="@string/telefono"
-                        android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:textStyle="normal" />
-                </RelativeLayout>
+                        />
+                </LinearLayout>
+
             </LinearLayout>
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detalle de compra"
+                    android:background="@color/flat_grey_light_1"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ListView
+                        android:id="@+id/lstViewDetalleCompraDetEnvio"
+                        android:layout_width="match_parent"
+                        android:layout_height="226dp"/>
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/flat_grey_light_1"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total: "
+                        android:padding="10dp"
+                        android:gravity="end"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:id="@+id/txtTotalDetalleEnvio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$$$$"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
 
-</LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detalle de entrega"
+                    android:background="#94FFFFFF"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pedido hecho el:  "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txtFechaEstimadaDetEnvio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18/10/2021"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Retira: "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txtContactoDetEnvio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contacto "/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Telefono: "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txtTelefonoDetEnvio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="19876532 "/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dirección: "
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/txtDireccionDetEnvio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Direccion  "/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnConfirmarDetalleEnvio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtConfirmarEntrega" />
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnContactarDetalleEnvio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtContactarCliente" />
+
+    </LinearLayout>
+</ScrollView>

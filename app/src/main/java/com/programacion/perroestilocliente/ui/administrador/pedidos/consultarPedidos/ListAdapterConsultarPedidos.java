@@ -33,7 +33,7 @@ public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewCon
         if (convertView == null) {
             convertView =
                     LayoutInflater.from(getContext())
-                            .inflate(R.layout.item_lista_pedidos_pago_pendiente, parent, false);
+                            .inflate(R.layout.item_lista_pagos, parent, false);
         }
 
         TextView txtOrden= convertView.findViewById(R.id.txtNumeroOrdenPedidoPagoPendiente);
