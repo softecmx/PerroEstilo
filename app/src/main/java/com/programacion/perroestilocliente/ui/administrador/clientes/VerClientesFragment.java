@@ -75,12 +75,12 @@ public class VerClientesFragment extends Fragment {
         databaseReference.child("Usuarios/Clientes").orderByChild("username").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewClientes> arrayList = new ArrayList<>();
+                ArrayList<ElementListViewConsultarPedidos> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Clientes cl = objSnapshot.getValue(Clientes.class);
 
-                    arrayList.add(new ElementListViewClientes(cl.getIdUsuario(),cl.getEstatus(),cl.getNombreCliente(),cl.getApellidoPaterno(),cl.getEmail(),cl.getTelefono()));
-                    customAdapter = new ListAdapterClientes(getActivity(), arrayList);
+                    arrayList.add(new ElementListViewConsultarPedidos(cl.getIdUsuario(),cl.getEstatus(),cl.getNombreCliente(),cl.getApellidoPaterno(),cl.getEmail(),cl.getTelefono()));
+                    customAdapter = new ListAdapterConsultarPedidos(getActivity(), arrayList);
                     listView.setAdapter(customAdapter);
                 }
                 }

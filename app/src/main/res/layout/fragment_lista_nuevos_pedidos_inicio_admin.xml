@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/imgItemProdFotoInicioAdmin"
+        android:id="@+id/imgItemUsuarioFotoInicioAdmin"
         android:layout_width="70dp"
         android:layout_height="54dp"
         android:layout_alignParentStart="true"
@@ -17,29 +17,19 @@
         app:srcCompat="@drawable/logo" />
     <LinearLayout
         android:id="@+id/linear1"
-        android:layout_toEndOf="@+id/imgItemProdFotoInicioAdmin"
+        android:layout_toEndOf="@+id/imgItemUsuarioFotoInicioAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtItemProdNombreInicioAdmin"
+            android:id="@+id/txtItemPedidoInicioAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="Código del diseño"
-            android:textColor="@color/primaryDarkColor"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:text="Pedido del usuario..."
+            android:textSize="14sp"/>
 
-        <TextView
-            android:id="@+id/txtItemProdStockInicioAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:maxLines="1"
-            android:text="$$$$"
-            android:textSize="12sp" />
 
     </LinearLayout>
 </RelativeLayout>

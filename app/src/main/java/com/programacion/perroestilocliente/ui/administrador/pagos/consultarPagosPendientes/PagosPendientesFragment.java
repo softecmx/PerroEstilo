@@ -8,15 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -25,13 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.programacion.perroestilocliente.R;
-import com.programacion.perroestilocliente.modelo.DetOrdenProductos;
-import com.programacion.perroestilocliente.modelo.Disenios;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
-import com.programacion.perroestilocliente.modelo.Productos;
-import com.programacion.perroestilocliente.modelo.Tallas;
-import com.programacion.perroestilocliente.ui.administrador.inventario.ElementListViewInventario;
-import com.programacion.perroestilocliente.ui.administrador.inventario.ListAdapterInventario;
 
 import java.util.ArrayList;
 
@@ -58,7 +49,7 @@ public class PagosPendientesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root= inflater.inflate(R.layout.fragment_pagos_pendientes, container, false);
+        root= inflater.inflate(R.layout.fragment_ver_pagos, container, false);
         listView = root.findViewById(R.id.listPagosPendientes);
         btnBuscar = root.findViewById(R.id.ibtnBuscarPagoPendiente);
 

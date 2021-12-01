@@ -111,7 +111,7 @@ public class CuentaFragment extends Fragment {
         Opciones opc= new Opciones();
         ArrayList<ElementListView> arrayList = new ArrayList<>();
 //                    arrayList.add(new ElementListViewPagosPendientes(opc.getInfo(),opc.getAyuda(),opc.getApp(),opc.getPoliticas(),opc.getAjustes(),opc.getCerrar()));
-                    //customAdapter = new ListAdapter(getActivity(), arrayList);
+                    //customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList);
                    // lista_opciones.setAdapter(customAdapter);
 
             }

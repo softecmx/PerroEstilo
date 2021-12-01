@@ -1,4 +1,4 @@
-package com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes;
+package com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -14,13 +14,13 @@ import com.programacion.perroestilocliente.R;
 
 import java.util.ArrayList;
 
-public class ListAdapterPagosPendientes extends ArrayAdapter<ElementListViewPagosPendientes> {
+public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewConsultarPedidos> {
 
     private Activity activity;
-    private ArrayList<ElementListViewPagosPendientes> arrayList;
+    private ArrayList<ElementListViewConsultarPedidos> arrayList;
 
-    public ListAdapterPagosPendientes(Activity activity, ArrayList<ElementListViewPagosPendientes> arrayList) {
-        super(activity, R.layout.item_lista_pagos, arrayList);
+    public ListAdapterConsultarPedidos(Activity activity, ArrayList<ElementListViewConsultarPedidos> arrayList) {
+        super(activity, R.layout.item_lista_clientes_lealtad, arrayList);
         this.activity = activity;
         this.arrayList = arrayList;
     }
@@ -35,30 +35,17 @@ public class ListAdapterPagosPendientes extends ArrayAdapter<ElementListViewPago
                     LayoutInflater.from(getContext())
                             .inflate(R.layout.item_lista_pagos, parent, false);
         }
-        TextView txtOrden= convertView.findViewById(R.id.txtNumeroOrdenPedidoPagoPendiente);
-        TextView txtTotal = convertView.findViewById(R.id.txtTotalmnx);
-        TextView txtStatus = convertView.findViewById(R.id.txtStatusPagoPendiente);
 
-        txtOrden.setText("Orden: "+ arrayList.get(position).getOrden());
-        txtTotal.setText(arrayList.get(position).getTotal());
-        txtStatus.setText(arrayList.get(position).getStatusPago());
+        TextView txtOrden= convertView.findViewById(R.id.txtNumeroOrdenPedidoPagoPendiente);
+        TextView txtStatus = convertView.findViewById(R.id.txtStatusPagoPendiente);
+        TextView txtTotal= convertView.findViewById(R.id.txtTotalmnx);
+
+        txtOrden.setText(arrayList.get(position).getOrdenPedido());
+        txtStatus.setText("Estatus : "+arrayList.get(position).getStatusPedido());
+        txtTotal.setText(arrayList.get(position).getTotalPedido());
 
         return convertView;
     }
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
