@@ -94,7 +94,7 @@ public class EstadoPedidoFragment extends Fragment {
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-       // ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
+        // ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
         ArrayList<DetOrdenProductos> arrayListItems = new ArrayList<>();
         total = 0;
         reciclerViewPedidos = root.findViewById(R.id.reciclerViewEstPed);
@@ -142,7 +142,7 @@ public class EstadoPedidoFragment extends Fragment {
                                                             txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.danger));
                                                         } else if (status.equals("Preparando pedido")) {
                                                             txtFechaEstimada.setText("Proximamente");
-                                                            txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_orange_2));
+                                                            txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_orange_1));
                                                         } else if (status.equals("En camino")) {
                                                             txtFechaEstimada.setText("Proximamente ");
                                                             txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_yellow_1));
