@@ -90,7 +90,7 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
                 break;
             case "Preparando pedido":
                 holder.txtStatus.setText("Preparando");
-                holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_orange_2));
+                holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.flat_orange_1));
                 break;
             case "En camino":
                 holder.txtStatus.setText("En camino");
