@@ -62,8 +62,7 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
 
         txtNombre.setText(arrayList.get(position).getProducto());
         txtStock.setText(arrayList.get(position).getStock());
-        Toast.makeText(getContext(), "La imagen "+arrayList.get(position).getImgProducto(), Toast.LENGTH_SHORT).show();
-        cargaImagen(imgFoto,arrayList.get(position).getImgProducto());
+       cargaImagen(imgFoto,arrayList.get(position).getImgProducto());
 
         return convertView;
     }
@@ -71,7 +70,7 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
         storageReference.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri).into(ivFoto);
+                Glide.with(getContext()).load(uri).into(ivFoto);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

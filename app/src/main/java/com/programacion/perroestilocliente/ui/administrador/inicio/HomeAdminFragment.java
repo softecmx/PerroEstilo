@@ -140,16 +140,22 @@ public class HomeAdminFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+                int cont=0;
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     try {
                         Productos p = objSnapshot.getValue(Productos.class);
-                        arrayList.add(new ElementListViewInicioAdmin(p.getNombre() ,p.getStock(),p.getImgFoto()));
-                        customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList,getContext());
-                        listView.setAdapter(customAdapter);
+                        if(Integer.parseInt(p.getStock())<= 5){
+                            cont++;
+                            arrayList.add(new ElementListViewInicioAdmin(p.getNombre() ,p.getStock(),p.getImgFoto()));
+                            customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList,getContext());
+                            listView.setAdapter(customAdapter);
+                        }
                    }catch (Exception e){
                         Log.i("error",e.getMessage());
                     }
                 }
+                cantidadProductos.setText(cont);
+                pocosProductos.setText("Productos con poas existencias "+cont);
             }
 
             @Override
