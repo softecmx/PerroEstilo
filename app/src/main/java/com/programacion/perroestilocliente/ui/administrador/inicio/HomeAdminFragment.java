@@ -156,7 +156,7 @@ public class HomeAdminFragment extends Fragment {
                     }
                 }
 
-                pocosProductos.setText("Productos con poas existencias "+cont);
+                pocosProductos.setText("Productos con pocas existencias ("+cont+")");
             }
 
             @Override

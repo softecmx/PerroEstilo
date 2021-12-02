@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +33,6 @@ import com.programacion.perroestilocliente.modelo.DetOrdenProductos;
 import com.programacion.perroestilocliente.modelo.Direcciones;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.MisPedidosFragment;
-import com.programacion.perroestilocliente.ui.cliente.productos.ticket.ListAdapterTicket;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -61,6 +60,11 @@ public class EstadoPedidoFragment extends Fragment {
     float total;
     String idCliente;
     private EstadoPedidoViewModel mViewModel;
+
+
+    androidx.recyclerview.widget.RecyclerView reciclerViewPedidos;
+    private RVAdapterProdPedido adapterProductos;
+
 
     public static EstadoPedidoFragment newInstance() {
         return new EstadoPedidoFragment();
@@ -90,9 +94,11 @@ public class EstadoPedidoFragment extends Fragment {
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
+       // ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
         ArrayList<DetOrdenProductos> arrayListItems = new ArrayList<>();
         total = 0;
+        reciclerViewPedidos = root.findViewById(R.id.reciclerViewEstPed);
+
         Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
         queryCliente.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -147,6 +153,7 @@ public class EstadoPedidoFragment extends Fragment {
 
                                                         txtStatus.setText(status);
 
+                                                        ///
                                                         databaseReference.child("DetalleOrdenesCliente/" + idOrden)
                                                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                                                     @Override
@@ -156,10 +163,16 @@ public class EstadoPedidoFragment extends Fragment {
                                                                             for (DataSnapshot objSnapshot : snapshot.getChildren()) {
 
                                                                                 try {
+
+
                                                                                     DetOrdenProductos ordenesCliente = objSnapshot.getValue(DetOrdenProductos.class);
                                                                                     arrayListItems.add(ordenesCliente);
-                                                                                    ListAdapterTicket adapterProductos = new ListAdapterTicket(getActivity(), arrayListItems);
-                                                                                    reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                                                                                    // ListAdapterTicket adapterProductos = new ListAdapterTicket(getActivity(), arrayListItems);
+                                                                                    //  reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                                                                                    adapterProductos = new RVAdapterProdPedido(root.getContext(), arrayListItems, getFragmentManager());
+
+                                                                                    reciclerViewPedidos.setLayoutManager(new LinearLayoutManager(root.getContext()));
+                                                                                    reciclerViewPedidos.setAdapter(adapterProductos);
                                                                                     total = total + (ordenesCliente.getPrecioUnitario() * ordenesCliente.getCantidad());
                                                                                     txtTotal.setText("$" + total);
                                                                                 } catch (Exception e) {
@@ -174,7 +187,7 @@ public class EstadoPedidoFragment extends Fragment {
                                                                     public void onCancelled(@NonNull DatabaseError error) {
                                                                     }
                                                                 });
-
+                                                        ///
                                                     }
                                                 }
                                             }
@@ -213,6 +226,8 @@ public class EstadoPedidoFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+
         return root;
     }
 
@@ -223,10 +238,10 @@ public class EstadoPedidoFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    public  void mostrarReferencia(){
+    public void mostrarReferencia() {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_confirmar_compra, null);
-        Button btnCerrar=dialogView.findViewById(R.id.btnDialogCerrar);
+        Button btnCerrar = dialogView.findViewById(R.id.btnDialogCerrar);
         dialogo.setView(dialogView);
         AlertDialog dialog_elimAlertDialog = dialogo.create();
 
