@@ -344,17 +344,22 @@ public class VerDireccionFragment extends Fragment implements OnMapReadyCallback
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             activaGPS();
         } else {
-            getUbicacion();
+            try {
+                getUbicacion();
 
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (location != null) {
-                txtLatitud = Float.parseFloat(String.valueOf(location.getLatitude()));
-                txtLongitud = Float.parseFloat(String.valueOf(location.getLongitude()));
-                gMap.clear();
-                gMap.addMarker(new MarkerOptions().position(new LatLng(txtLatitud, txtLongitud)).title("Mi ubicación"));
-                gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(txtLatitud, txtLongitud)));
-                gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    txtLatitud = Float.parseFloat(String.valueOf(location.getLatitude()));
+                    txtLongitud = Float.parseFloat(String.valueOf(location.getLongitude()));
+                    gMap.clear();
+                    gMap.addMarker(new MarkerOptions().position(new LatLng(txtLatitud, txtLongitud)).title("Mi ubicación"));
+                    gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(txtLatitud, txtLongitud)));
+                    gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+                }
+            }catch (Exception e){
+
             }
+
         }
         gMap.setMyLocationEnabled(true);
     }
