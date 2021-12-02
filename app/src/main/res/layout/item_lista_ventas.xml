@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="15dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp">
-    <RelativeLayout
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <ImageView
-            android:id="@+id/orden"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_shopping_cart_black_24dp"
-            android:background="@color/auxiliar"
-            android:textSize="30dp"
-            android:gravity="left"
-            android:textStyle="bold"/>
+            android:id="@+id/imgCarritoVentas"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/cuadro"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_shopping_cart_black_24dp" />
 
         <TextView
-            android:id="@+id/txtNoOrdenPedido"
+            android:id="@+id/txtOrdenPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/txtordenPedido"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@+id/orden"
-            android:text="@string/txtordenPedido" />
+            android:textSize="18dp"
+            android:textStyle="bold" />
         <TextView
-            android:id="@+id/txtTotalOrdenPedido"
+            android:id="@+id/txtTotalPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
-            android:layout_toEndOf="@+id/txtNoOrdenPedido"
-            android:text="@string/txtTotal"/>
-
-    </RelativeLayout>
+            android:text="@string/txtTotalAPagar"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>
