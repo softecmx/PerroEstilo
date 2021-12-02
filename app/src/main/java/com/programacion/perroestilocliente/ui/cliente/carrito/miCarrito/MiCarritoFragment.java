@@ -71,7 +71,9 @@ public class MiCarritoFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayListItems.clear();
+                total=0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                         //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
                         try {
@@ -91,6 +93,10 @@ public class MiCarritoFragment extends Fragment {
                     btnComprarAhora.setVisibility(View.GONE);
                     txtTotal.setText("$0.0");
                     txtProductos.setVisibility(View.VISIBLE);
+                    arrayListItems.clear();
+                    com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito adapterProductos = new com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito(getActivity(), arrayListItems);
+                    reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                    txtTotal.setText("$" + total);
                 }
             }
 

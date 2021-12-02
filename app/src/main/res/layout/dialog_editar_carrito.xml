@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtVerProdNombre"
+            android:id="@+id/txtVerProdEditCarNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -23,7 +23,7 @@
             android:textSize="28sp"
             android:textStyle="bold" />
         <ImageView
-            android:id="@+id/imgVerProd"
+            android:id="@+id/imgVerEditCarProd"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="15dp"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/txtVerProdPrecio"
+                android:id="@+id/txtVerProdEditCarPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
-                    android:id="@+id/spinVerProdTalla"
+                    android:id="@+id/spinVerProdEditCarTalla"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/txtEscogerTalla"
@@ -92,7 +92,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnVerProdMenos"
+                    android:id="@+id/btnVerProdEditCarMenos"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -101,7 +101,7 @@
                     android:drawableTint="@color/white" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editVerProdCantidad"
+                    android:id="@+id/editVerProdEditCarCantidad"
                     android:layout_width="50dp"
                     android:gravity="center"
                     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                     android:text="1" />
 
                 <Button
-                    android:id="@+id/btnVerProdMas"
+                    android:id="@+id/btnVerProdEditCarMas"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -182,7 +182,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/txtVerProdDesc"
+            android:id="@+id/txtVerProdEditCarDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtDescripcion"
@@ -191,14 +191,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
         <Button
-            android:id="@+id/btnVerProdComprarAhora"
+            android:id="@+id/btnEditCarEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/txtEditar" />
 
         <Button
-            android:id="@+id/btnVerProdAgregarCar"
+            android:id="@+id/btnEditCarCancelar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtCancelar"

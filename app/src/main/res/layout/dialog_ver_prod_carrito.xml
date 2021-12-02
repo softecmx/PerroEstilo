@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtVerProdNombre"
+            android:id="@+id/txtVerProdCarNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -24,7 +24,7 @@
             android:textStyle="bold" />
 
         <RatingBar
-            android:id="@+id/raitingBarVerProd"
+            android:id="@+id/raitingBarVerCarProd"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:theme="@style/RatingBar.Yellow" />
 
         <ImageView
-            android:id="@+id/imgVerProd"
+            android:id="@+id/imgVerCarProd"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="15dp"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/txtVerProdPrecio"
+                android:id="@+id/txtVerProdCarPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -56,7 +56,7 @@
                 android:textSize="28sp" />
             <TextView
                 android:layout_marginLeft="25dp"
-                android:id="@+id/txtVerProdPrecioAntiguo"
+                android:id="@+id/txtVerProdPrecioCarAntiguo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -67,7 +67,7 @@
 
 
         <TextView
-            android:id="@+id/txtVerProdDescuento"
+            android:id="@+id/txtVerProdCarDescuento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -92,7 +92,7 @@
 
 
                 <TextView
-                    android:id="@+id/spinVerProdTalla"
+                    android:id="@+id/spinVerProdCarTalla"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/txtEscogerTalla"/>
@@ -114,7 +114,7 @@
                 android:textColor="@color/black" />
 
                 <TextView
-                    android:id="@+id/editVerProdCantidad"
+                    android:id="@+id/editVerProdCarCantidad"
                     android:layout_width="50dp"
                     android:gravity="center"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/txtVerProdDesc"
+            android:id="@+id/txtVerProdCarDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtDescripcion"
@@ -192,7 +192,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
         <Button
-            android:id="@+id/btnVerProdComprarAhora"
+            android:id="@+id/btnVerProdCarCerrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

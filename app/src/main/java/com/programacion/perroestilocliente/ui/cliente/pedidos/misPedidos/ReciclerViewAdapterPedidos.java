@@ -2,6 +2,7 @@ package com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -64,7 +67,7 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
     public void onBindViewHolder(@NonNull final DataObjectHolder holder, int position) {
 
 
-        holder.txtNoOrden.setText(listaPedidos.get(holder.getPosition()).getInOrden());
+        holder.txtNoOrden.setText("No. Orden: "+listaPedidos.get(holder.getPosition()).getInOrden());
         //  holder.txtStatus
         holder.txtTotal.setText("$"+listaPedidos.get(holder.getPosition()).getTotal()+" MX");
         holder.txtFechaOrden.setText(listaPedidos.get(holder.getPosition()).getFechaOrden());
@@ -114,7 +117,6 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
 
     public class DataObjectHolder extends RecyclerView.ViewHolder {
 
-        private ImageView img;
         private TextView txtNoOrden;
         private Button btnVer;
         private TextView txtFechaOrden;
@@ -124,7 +126,6 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
 
         public DataObjectHolder(@NonNull View itemView) {
             super(itemView);
-            this.img = itemView.findViewById(R.id.imgItemPedido);
             this.txtFechaOrden = itemView.findViewById(R.id.txtItemPedidoFecha);
             this.btnVer = itemView.findViewById(R.id.btnPedidoVerCompra);
             this.txtTotal = itemView.findViewById(R.id.txtItemPedidoTotal);
