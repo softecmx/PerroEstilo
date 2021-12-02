@@ -44,22 +44,12 @@ public class ListAdapterCarrito extends ArrayAdapter<Item> {
     View root;
     private Activity activity;
     private ArrayList<Item> arrayList;
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = firebaseDatabase.getReference();
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    ImageView imgCarrito;
-    TextView txtNombreProductoCarrito;
+
     //  TextView txtCarritoModelo = convertView.findViewById(R.id.txtCarritoModelo);
     //  TextView txtCarritoTalla = convertView.findViewById(R.id.txtCarritoTalla);
   //  Button btnEdit;
   //  Button btnQuitar;
     private androidx.appcompat.app.AlertDialog dialog;
-    TextView txtCarritoCandidad;
-
-
-    TextView txtCarritoSubtotal;
-    TextView txtCarritoPrecioUnitario;
 
     public ListAdapterCarrito(Activity activity, ArrayList<Item> arrayList, LayoutInflater layoutInflater, Context context, View root) {
         super(activity, R.layout.item_prod_lista_carrito_editar, arrayList);
@@ -81,21 +71,21 @@ public class ListAdapterCarrito extends ArrayAdapter<Item> {
                             .inflate(R.layout.item_prod_lista_carrito_editar, parent, false);
         }
 
-        imgCarrito = convertView.findViewById(R.id.imgCarritoEditFoto);
-        txtNombreProductoCarrito = convertView.findViewById(R.id.txtCarritoEditNombre);
-        //  TextView txtCarritoModelo = convertView.findViewById(R.id.txtCarritoModelo);
-        //  TextView txtCarritoTalla = convertView.findViewById(R.id.txtCarritoTalla);
-      //  btnEdit = convertView.findViewById(R.id.btnMiCarrEditEditar);
-      //  btnQuitar = convertView.findViewById(R.id.btnMiCarrEditQuit);
 
-        txtCarritoCandidad = convertView.findViewById(R.id.editMiCarrEditCantidad);
+        TextView txtNombreProductoCarrito= convertView.findViewById(R.id.txtCarritoEditNombre);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
-        txtCarritoSubtotal = convertView.findViewById(R.id.txtCarritoEditSubtotal);
-        txtCarritoPrecioUnitario = convertView.findViewById(R.id.txtCarritoPrecioEditUnitario);
+        TextView txtCarritoCandidad= convertView.findViewById(R.id.editMiCarrEditCantidad);
+        TextView txtCarritoSubtotal= convertView.findViewById(R.id.txtCarritoEditSubtotal);
+        TextView txtCarritoPrecioUnitario= convertView.findViewById(R.id.txtCarritoPrecioEditUnitario);
+        ImageView imgCarrito = convertView.findViewById(R.id.imgCarritoEditFoto);
 
         txtCarritoPrecioUnitario.setText("$" + arrayList.get(position).getPrecio());
         txtCarritoSubtotal.setText("Subtotal: $" + String.valueOf(arrayList.get(position).getPrecio() * arrayList.get(position).getCantidad()));
+
         storageReference.child(arrayList.get(position).getImg()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -162,37 +152,7 @@ public class ListAdapterCarrito extends ArrayAdapter<Item> {
         txtPrecioEditCar.setText("$"+arrayList.get(position).getPrecio());
         cantidadEditCar.setText(""+arrayList.get(position).getCantidad());
         //  etPopNombre.setText(arrayList.get(position).getDisenio());
-        databaseReference.child("Productos").orderByChild("idProducto").equalTo(arrayList.get(position).getProducto()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
 
-                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                        //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
-                        Productos item = objSnapshot.getValue(Productos.class);
-                        txtNombreEditCar.setText(item.getNombre());
-                        txtDescEditCar.setText(item.getDescripcion());
-                        storageReference.child(arrayList.get(position).getImg()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(context).load(uri).into(imgEditCar);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, "Ha ocurrido un error al leer la imagen", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
         dialogBuilder.setView(aboutPop);
         dialog = dialogBuilder.create();
         dialog.show();
