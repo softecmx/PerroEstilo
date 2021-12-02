@@ -90,13 +90,20 @@ public class MiCarritoFragment extends Fragment {
 
                     }
                 } else {
-                    btnComprarAhora.setVisibility(View.GONE);
-                    txtTotal.setText("$0.0");
-                    txtProductos.setVisibility(View.VISIBLE);
-                    arrayListItems.clear();
-                    com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito adapterProductos = new com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito(getActivity(), arrayListItems);
-                    reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
-                    txtTotal.setText("$" + total);
+                    if(getActivity()!=null){
+                        try {
+                            btnComprarAhora.setVisibility(View.GONE);
+                            txtTotal.setText("$0.0");
+                            txtProductos.setVisibility(View.VISIBLE);
+                            arrayListItems.clear();
+                            com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito adapterProductos = new com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito(getActivity(), arrayListItems);
+                            reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                            txtTotal.setText("$" + total);
+                        }catch (Exception e){
+
+                        }
+
+                    }
                 }
             }
 

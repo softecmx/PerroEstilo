@@ -265,7 +265,11 @@ public class VerDireccionFragment extends Fragment implements OnMapReadyCallback
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mapView.onDestroy();
+        try {
+
+        }catch (Exception e){
+            mapView.onDestroy();
+        }
     }
 
     @Override
