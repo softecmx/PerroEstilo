@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgCarritoEditFoto"
+                android:layout_width="69dp"
+                android:layout_height="66dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/txtDescImg"
+                android:src="@drawable/monio_corbatin_azul" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtCarritoEditNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/txtNombreProducto"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/txtCarritoPrecioEditUnitario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/txtSubtotal"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/txtCantidad"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/editMiCarrEditCantidad"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/black"
+                        android:text="1" />
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/txtCarritoEditSubtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/txtSubtotal"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnMiCarrEditVer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/flat_grey_dark_2"
+                android:clickable="true"
+                android:drawableLeft="@drawable/ic_visibility_black_24dp"
+                android:drawableTint="@color/gray_100"
+                android:focusable="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:minWidth="88dip"
+                android:minHeight="48dip"
+                android:text="Ver"
+                android:textColor="@color/white"
+                android:textAppearance="?attr/textAppearanceButton"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btnMiCarrEditEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/flat_grey_dark_2"
+                android:clickable="true"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:drawableTint="@color/gray_100"
+                android:focusable="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:minWidth="88dip"
+                android:minHeight="48dip"
+                android:text="Editar"
+                android:textColor="@color/white"
+                android:textAppearance="?attr/textAppearanceButton"
+                android:textSize="12dp"/>
+
+            <Button
+                android:id="@+id/btnMiCarrEditQuit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/flat_grey_dark_2"
+                android:clickable="true"
+                android:drawableLeft="@drawable/ic_remove_shopping_cart_black_24dp"
+                android:drawableTint="@color/gray_100"
+                android:focusable="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:minWidth="88dip"
+                android:minHeight="48dip"
+                android:text="Quitar"
+                android:textColor="@color/white"
+                android:textAppearance="?attr/textAppearanceButton"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/flat_grey_light_2" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

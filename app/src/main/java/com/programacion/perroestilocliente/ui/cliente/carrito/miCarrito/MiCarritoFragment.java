@@ -29,7 +29,6 @@ import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.ui.cliente.comprar.comprarAhora.ComprarAhoraFragment;
-import com.programacion.perroestilocliente.ui.cliente.mainCliente.ListAdapterCarrito;
 import com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity;
 import com.programacion.perroestilocliente.ui.cliente.productos.verProductoTienda.VerProductoTiendaFragment;
 import com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment;
@@ -78,9 +77,8 @@ public class MiCarritoFragment extends Fragment {
                         try {
                             Item item = objSnapshot.getValue(Item.class);
                             arrayListItems.add(item);
-                            ListAdapterCarrito adapterProductos = new ListAdapterCarrito(getActivity(), arrayListItems);
+                            ListAdapterCarrito adapterProductos = new ListAdapterCarrito(getActivity(), arrayListItems,getLayoutInflater(),getContext(),root);
                             reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
-                            System.out.println(item.getProducto() + "  " + item.getCantidad());
                             total = total + (item.getPrecio() * item.getCantidad());
                             txtTotal.setText("$" + total);
                             txtProductos.setVisibility(View.GONE);
