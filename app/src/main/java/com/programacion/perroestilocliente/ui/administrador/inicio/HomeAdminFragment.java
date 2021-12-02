@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,7 @@ public class HomeAdminFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
      root = inflater.inflate(R.layout.fragment_home_admin, container, false);
      nombre= root.findViewById(R.id.tvBienvenidaAdmin);
+     listView=root.findViewById(R.id.listaProductosHomeAdmin);
 
      firebaseDatabase = FirebaseDatabase.getInstance();
      databaseReference = firebaseDatabase.getReference();
@@ -139,12 +141,14 @@ public class HomeAdminFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                   // try {
+                    try {
                         Productos p = objSnapshot.getValue(Productos.class);
                         arrayList.add(new ElementListViewInicioAdmin(p.getNombre() ,p.getStock(),p.getImgFoto()));
-                        customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList);
+                        customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList,getContext());
                         listView.setAdapter(customAdapter);
-                   // }catch (Exception e){}
+                   }catch (Exception e){
+                        Log.i("error",e.getMessage());
+                    }
                 }
             }
 

@@ -33,17 +33,19 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
     private ArrayList<ElementListViewInicioAdmin> arrayList;
     private StorageReference storageReference;
     private Context context;
+    String img="";
 
-    public void iniciaFirebase(){
-        storageReference = FirebaseStorage.getInstance().getReference("Productos");
-    }
 
-    public ListAdapterInicioAdmin(Activity activity, ArrayList<ElementListViewInicioAdmin> arrayList) {
+
+    public ListAdapterInicioAdmin(Activity activity, ArrayList<ElementListViewInicioAdmin> arrayList,Context context) {
         super(activity, R.layout.fragment_lista_pocas_existencias_inicio_admin, arrayList);
         this.activity = activity;
         this.arrayList = arrayList;
+        iniciaFirebase();
     }
-
+    public void iniciaFirebase(){
+        storageReference = FirebaseStorage.getInstance().getReference("Productos");
+    }
 
     @NonNull
     @Override
@@ -60,6 +62,7 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
 
         txtNombre.setText(arrayList.get(position).getProducto());
         txtStock.setText(arrayList.get(position).getStock());
+        Toast.makeText(getContext(), "La imagen "+arrayList.get(position).getImgProducto(), Toast.LENGTH_SHORT).show();
         cargaImagen(imgFoto,arrayList.get(position).getImgProducto());
 
         return convertView;
