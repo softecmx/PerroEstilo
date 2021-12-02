@@ -296,6 +296,7 @@
                     android:layout_margin="3dp"
                     android:background="@color/white">
                     <ListView
+                        android:id="@+id/listaProductosHomeAdmin"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
                 </FrameLayout>
