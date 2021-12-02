@@ -20,7 +20,7 @@
                 android:layout_margin="10dp"
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/txtDescImg"
-                android:src="@drawable/monio_corbatin_azul" />
+                android:src="@drawable/logo" />
 
             <LinearLayout
                 android:layout_width="match_parent"

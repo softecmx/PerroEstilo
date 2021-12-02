@@ -15,7 +15,7 @@
             android:layout_height="66dp"
             android:layout_margin="10dp"
             android:contentDescription="@string/txtDescImg"
-            android:src="@drawable/monio_corbatin_azul" />
+            android:src="@drawable/logo" />
 
 
         <LinearLayout
