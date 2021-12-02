@@ -1,22 +1,21 @@
 package com.programacion.perroestilocliente.ui.cliente.pedidos.estadoPedido;
 
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -85,6 +84,8 @@ public class EstadoPedidoFragment extends Fragment {
         txtTotal = root.findViewById(R.id.txtEstPedTotal);
         txtStatus = root.findViewById(R.id.txtEstPedEstatus);
         idCliente = "";
+        btnVerReferencia = root.findViewById(R.id.btnEstPedVerReferencia);
+
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
@@ -192,7 +193,12 @@ public class EstadoPedidoFragment extends Fragment {
 
                     }
                 });
-
+        btnVerReferencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarReferencia();
+            }
+        });
 
         btnVerMisPedidos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,4 +223,20 @@ public class EstadoPedidoFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    public  void mostrarReferencia(){
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_confirmar_compra, null);
+        Button btnCerrar=dialogView.findViewById(R.id.btnDialogCerrar);
+        dialogo.setView(dialogView);
+        AlertDialog dialog_elimAlertDialog = dialogo.create();
+
+
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog_elimAlertDialog.dismiss();
+            }
+        });
+        dialog_elimAlertDialog.show();
+    }
 }
