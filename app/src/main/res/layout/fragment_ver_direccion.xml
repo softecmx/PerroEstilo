@@ -44,7 +44,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
@@ -71,7 +70,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
@@ -97,7 +95,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
@@ -122,7 +119,6 @@
         </LinearLayout>
 
         <TextView
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
@@ -142,7 +138,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
@@ -165,7 +160,6 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:text="@string/txtReferencias"
             android:textColor="@color/primaryDarkColor"
@@ -186,7 +180,6 @@
             android:id="@+id/mapViewVerDireccion"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
         <Button
             android:id="@+id/btnVerDirEditar"
