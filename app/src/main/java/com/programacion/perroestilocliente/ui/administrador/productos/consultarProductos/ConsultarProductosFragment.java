@@ -47,7 +47,7 @@ public class ConsultarProductosFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseUser user;
-    private String img="";
+    private String img = "";
 
     EditText etId;
     View root;
@@ -77,31 +77,30 @@ public class ConsultarProductosFragment extends Fragment {
         iniciaFirebase();
         cargaDatos();
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
-            {
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 productoSelected = (ElementListView) arg0.getItemAtPosition(position);
                 myClipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 myClip = ClipData.newPlainText("text", productoSelected.getIdProducto());
                 myClipboard.setPrimaryClip(myClip);
                 ClipData clip = ClipData.newPlainText("simple text", productoSelected.getIdProducto());
-                CustomToast.mostarToast("ID copiado!",1,false,root,getLayoutInflater(),getContext());
+                CustomToast.mostarToast("ID copiado!", 1, false, root, getLayoutInflater(), getContext());
             }
         });
         ibtnconsProdbsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etId.getText().toString().equals("")){
-                    CustomToast.mostarToast("Ingrese un dato",2,false,root,getLayoutInflater(),getContext());
-                }else{
+                if (etId.getText().toString().equals("")) {
+                    CustomToast.mostarToast("Ingrese un dato", 2, false, root, getLayoutInflater(), getContext());
+                } else {
                     ArrayList<ElementListView> arrayBusca = new ArrayList<>();
-                    for (int i = 0;i<arrayList.size();i++){
-                        if (arrayList.get(i).getNombre().toUpperCase().equals(etId.getText().toString().toUpperCase())){
+                    for (int i = 0; i < arrayList.size(); i++) {
+                        if (arrayList.get(i).getNombre().toUpperCase().equals(etId.getText().toString().toUpperCase())) {
                             arrayBusca.add(arrayList.get(i));
                         }
                     }
-                    customAdapter = new ListAdapterSimple(getActivity(), arrayBusca,getContext());
+                    customAdapter = new ListAdapterSimple(getActivity(), arrayBusca, getContext());
                     lista.setAdapter(customAdapter);
                 }
             }
@@ -109,15 +108,15 @@ public class ConsultarProductosFragment extends Fragment {
         return root;
     }
 
-    public void cargaDatos(){
+    public void cargaDatos() {
         databaseReference.child("Productos").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayList = new ArrayList<>();
-                for (DataSnapshot objSnapshot: snapshot.getChildren()){
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Productos p = objSnapshot.getValue(Productos.class);
-                    arrayList.add(new ElementListView(p.getIdProducto(),p.getNombre(), p.getIdCategoria(), p.getDisenio(), p.getTalla(), p.getPrecioVenta(), p.getCosto(), p.getDescuento(), p.getFechaCreacion(), p.getRaiting(), p.getEstatusStock(), p.getStock(), p.getEstadoLogico(),p.getImgFoto(),p.getDescripcion()));
-                    customAdapter = new ListAdapterSimple(getActivity(), arrayList,getContext());
+                    arrayList.add(new ElementListView(p.getIdProducto(), p.getNombre(), p.getIdCategoria(), p.getDisenio(), p.getTalla(), p.getPrecioVenta(), p.getCosto(), p.getDescuento(), p.getFechaCreacion(), p.getRaiting(), p.getEstatusStock(), p.getStock(), p.getEstadoLogico(), p.getImgFoto(), p.getDescripcion()));
+                    customAdapter = new ListAdapterSimple(getActivity(), arrayList, getContext());
                     lista.setAdapter(customAdapter);
                 }
             }
@@ -128,13 +127,15 @@ public class ConsultarProductosFragment extends Fragment {
             }
         });
     }
-    public void iniciaFirebase(){
+
+    public void iniciaFirebase() {
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("Disenios");
         databaseReference = firebaseDatabase.getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
