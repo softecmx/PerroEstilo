@@ -1,14 +1,7 @@
 package com.programacion.perroestilocliente.ui.administrador.cuenta;
 
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,18 +24,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.programacion.perroestilocliente.CustomToast;
 import com.programacion.perroestilocliente.R;
-import com.programacion.perroestilocliente.modelo.Administrador;
-import com.programacion.perroestilocliente.modelo.Categorias;
-import com.programacion.perroestilocliente.modelo.Clientes;
-import com.programacion.perroestilocliente.modelo.Tallas;
 import com.programacion.perroestilocliente.modelo.Usuarios;
-import com.programacion.perroestilocliente.ui.administrador.perfil.PerfilAdministradorFragment;
 import com.programacion.perroestilocliente.ui.administrador.tallas.ElementListView;
 import com.programacion.perroestilocliente.ui.administrador.tallas.ListAdapter;
 
@@ -65,7 +50,7 @@ public class CuentaFragment extends Fragment {
     private StorageReference storageReference;
 
     private CuentaViewModel mViewModel;
-    private ArrayList<Opciones> ListaOpciones = new ArrayList<Opciones>();
+    private ArrayList<ElementListViewOpciones> listaOpciones = new ArrayList<ElementListViewOpciones>();
     public static CuentaFragment newInstance() {
         return new CuentaFragment();
     }
@@ -108,10 +93,10 @@ public class CuentaFragment extends Fragment {
         return vista;
         }
     public void listarDatos(){
-        Opciones opc= new Opciones();
+        ElementListViewOpciones opc= new ElementListViewOpciones();
         ArrayList<ElementListView> arrayList = new ArrayList<>();
-//                    arrayList.add(new ElementListViewInventario(opc.getInfo(),opc.getAyuda(),opc.getApp(),opc.getPoliticas(),opc.getAjustes(),opc.getCerrar()));
-                    //customAdapter = new ListAdapter(getActivity(), arrayList);
+//                    arrayList.add(new ElementListViewPagosPendientes(opc.getInfo(),opc.getAyuda(),opc.getApp(),opc.getPoliticas(),opc.getAjustes(),opc.getCerrar()));
+                    //customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList);
                    // lista_opciones.setAdapter(customAdapter);
 
             }

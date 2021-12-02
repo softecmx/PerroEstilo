@@ -52,15 +52,21 @@
             android:orientation="vertical">
 
             <FrameLayout
+                android:id="@+id/flVerEnviosFrame"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:id="@+id/flVerEnviosFrame">
+                android:layout_height="490dp"
+                android:layout_marginTop="10dp">
 
-                <ListView
-                    android:id="@+id/listVerEnvios"
+                <ExpandableListView
+                    android:id="@+id/expListVerVentas"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="373dp">
+
+                    <ListView
+                        android:id="@+id/listVerVentas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </ExpandableListView>
 
             </FrameLayout>
         </LinearLayout>
