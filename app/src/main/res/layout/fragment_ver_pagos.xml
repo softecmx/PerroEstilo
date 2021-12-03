@@ -8,7 +8,7 @@
     tools:context=".ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
@@ -47,17 +47,13 @@
                 android:contentDescription="@string/txtDescripcion"
                 app:srcCompat="@drawable/ic_search_black_24dp" />
         </LinearLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:id="@+id/flPagosPendientesFrame">
-            <ListView
-                android:id="@+id/listPagosPendientes"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
 
-        </FrameLayout>
+
+        <ListView
+            android:id="@+id/listPagosPendientes"
+            android:layout_width="match_parent"
+            android:layout_height="515dp" />
+
     </LinearLayout>
 </ScrollView>
 
