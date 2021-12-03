@@ -36,9 +36,9 @@ public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewCon
                             .inflate(R.layout.item_lista_pagos, parent, false);
         }
 
-        TextView txtOrden= convertView.findViewById(R.id.txtNumeroOrdenPedidoPagoPendiente);
-        TextView txtStatus = convertView.findViewById(R.id.txtStatusPagoPendiente);
-        TextView txtTotal= convertView.findViewById(R.id.txtTotalmnx);
+        TextView txtOrden= convertView.findViewById(R.id.txtOrdenPedido);
+        TextView txtStatus = convertView.findViewById(R.id.txtStatusPedido);
+        TextView txtTotal= convertView.findViewById(R.id.txtTotalPedido);
 
         txtOrden.setText(arrayList.get(position).getOrdenPedido());
         txtStatus.setText("Estatus : "+arrayList.get(position).getStatusPedido());

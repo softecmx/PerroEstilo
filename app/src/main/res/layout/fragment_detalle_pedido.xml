@@ -260,6 +260,8 @@
             android:id="@+id/btnImprimirDetallePedido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_print_black_24dp"
+            android:drawableTint="@color/white"
             android:text="@string/txtImprimirGuia" />
 
     </LinearLayout>

@@ -35,12 +35,12 @@ public class ListAdapterPagosPendientes extends ArrayAdapter<ElementListViewPago
                     LayoutInflater.from(getContext())
                             .inflate(R.layout.item_lista_pagos, parent, false);
         }
-        TextView txtOrden= convertView.findViewById(R.id.txtNumeroOrdenPedidoPagoPendiente);
-        TextView txtTotal = convertView.findViewById(R.id.txtTotalmnx);
-        TextView txtStatus = convertView.findViewById(R.id.txtStatusPagoPendiente);
+        TextView txtOrden= convertView.findViewById(R.id.txtOrdenPago);
+        TextView txtTotal = convertView.findViewById(R.id.txtTotalPago);
+        TextView txtStatus = convertView.findViewById(R.id.txtStatusPago);
 
         txtOrden.setText("Orden: "+ arrayList.get(position).getOrden());
-        txtTotal.setText(arrayList.get(position).getTotal());
+        txtTotal.setText(arrayList.get(position).getTotal()+"");
         txtStatus.setText(arrayList.get(position).getStatusPago());
 
         return convertView;

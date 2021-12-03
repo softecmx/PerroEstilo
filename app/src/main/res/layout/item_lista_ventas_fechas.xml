@@ -23,13 +23,14 @@
             android:layout_marginLeft="20dp"
             android:layout_toEndOf="@+id/txtFechaVenta"
             android:text="@string/txtNumeral" />
+
         <TextView
             android:id="@+id/txtTotalVendido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
             android:layout_toEndOf="@+id/txtCantidadDeVentas"
-            android:text="@string/pago"/>
+            android:text="@string/pago" />
 
     </RelativeLayout>
 

@@ -8,11 +8,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,18 +38,20 @@ import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.Recicle
 
 import java.util.ArrayList;
 
-public class ConsultarPedidosFragment extends Fragment {
+public class ConsultarPedidosFragment extends Fragment implements AdapterView.OnItemClickListener {
+
+    ImageButton btnBuscar;
     private ConsultarPedidosViewModel mViewModel;
     View root;
-    androidx.recyclerview.widget.RecyclerView reciclerViewOrdenes;
-    ArrayList<OrdenesCliente> arrayListOrdenes = new ArrayList<>();
-    private ReciclerViewAdapterPedidos adapterOrdenes;
+    RecyclerView listView;
+    String totalOrden;
+    ArrayList<ElementListViewConsultarPedidos> arrayListOrdenes = new ArrayList<>();
+    private ListAdapterConsultarPedidos adapterOrdenes;
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
-
 
     public static ConsultarPedidosFragment newInstance() {
         return new ConsultarPedidosFragment();
@@ -51,47 +60,52 @@ public class ConsultarPedidosFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root=inflater.inflate(R.layout.fragment_consultar_pedidos, container, false);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        storageReference = FirebaseStorage.getInstance().getReference("Productos");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        reciclerViewOrdenes=root.findViewById(R.id.listPedidosProcesando);
-        final String[] idCliente = {""};
-        Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
-        queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
+        root = inflater.inflate(R.layout.fragment_consultar_pedidos, container, false);
+        listView = root.findViewById(R.id.listPedidosProcesando);
+        btnBuscar = root.findViewById(R.id.ibtnBuscarPedidoAdmin);
+
+        iniciaFirebase();
+        registerForContextMenu(listView);
+        listarDatos();
+
+
+        return root;
+    }
+
+    public void listarDatos() {
+
+
+        /*
+        databaseReference.child("OrdenesCliente/").orderByChild("estatusOrden").equalTo("Pago pendiente").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
+                if(snapshot.exists()){
+                    arrayListOrdenes.clear();
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                        Clientes usuario = objSnapshot.getValue(Clientes.class);
-                        idCliente[0] =usuario.getIdUsuario();
-                        databaseReference.child("OrdenesCliente/"+ idCliente[0]).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                arrayListOrdenes.clear();
-                                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                    //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
-                                    OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
-                                    arrayListOrdenes.add(orden);
-                                    adapterOrdenes = new ReciclerViewAdapterPedidos(root.getContext(), arrayListOrdenes, getFragmentManager());
-                                    reciclerViewOrdenes.setLayoutManager(new LinearLayoutManager(getContext()));
-                                    reciclerViewOrdenes.setAdapter(adapterOrdenes);
-                                }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                            }
-                        });
+                        OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
+                        Toast.makeText(getContext(), "S se encontraron", Toast.LENGTH_SHORT).show();
+                    /*Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
+                    OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
+                    arrayListOrdenes.add(new ElementListViewConsultarPedidos(orden.getInOrden(), orden.getEstatusOrden(), "$ " + orden.getTotal()));
+                    adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
+                    listView.setAdapter(adapterOrdenes);
                     }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }else Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
-        return root;
+
+*/
+    }
+
+    public void iniciaFirebase() {
+        FirebaseApp.initializeApp(getContext());
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
     @Override
@@ -101,4 +115,8 @@ public class ConsultarPedidosFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }
