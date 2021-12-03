@@ -2,6 +2,7 @@ package com.programacion.perroestilocliente;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ExpandableListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
@@ -43,10 +45,21 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.programacion.perroestilocliente.ExpandableListAdapter;
 import com.programacion.perroestilocliente.MenuModel;
 import com.programacion.perroestilocliente.R;
+import com.programacion.perroestilocliente.modelo.Administrador;
+import com.programacion.perroestilocliente.modelo.Clientes;
+import com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment;
+
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 
 public class NavAdministradorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,9 +69,11 @@ public class NavAdministradorActivity extends AppCompatActivity
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
-
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
     private FragmentManager mFraFragmentManager;
-
+    Administrador usuarios;
+    TextView txtView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +81,8 @@ public class NavAdministradorActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Inicio");
-       // getSupportActionBar().setDisplayShowTitleEnabled(false);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        // getSupportActionBar().setDisplayShowTitleEnabled(false);
+        txtView= findViewById(R.id.txtSubtituloNav);
 
         expandableListView = findViewById(R.id.expandableListView);
         prepareMenuData();
@@ -81,8 +96,10 @@ public class NavAdministradorActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View navHeader = navigationView.getHeaderView(0);
+        txtView=navHeader.findViewById(R.id.txtSubtituloNav);
 
-        com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
+        com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment = new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
         Bundle args = new Bundle();
         newFragment.setArguments(args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -91,6 +108,7 @@ public class NavAdministradorActivity extends AppCompatActivity
         transaction.commit();
 
         toolbar.setTitle("Inicio");
+
 
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
@@ -112,6 +130,33 @@ public class NavAdministradorActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        Query queryCliente = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(user.getEmail());
+        queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                        usuarios = objSnapshot.getValue(Administrador.class);
+                        //  usuario = usuario.getNombreCliente() + " " + usuario.getApellidoPaterno();
+                        txtView.setText(usuarios.getNombreAdministrador()+" "+usuarios.getApellidoPaterno());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -154,29 +199,29 @@ public class NavAdministradorActivity extends AppCompatActivity
 
     private void prepareMenuData() {
 
-        MenuModel menuModel = new MenuModel("Inicio", true, false, "",R.drawable.ic_home_black_24dp); //Menu of Android Tutorial. No sub menus
+        MenuModel menuModel = new MenuModel("Inicio", true, false, "", R.drawable.ic_home_black_24dp); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
             childList.put(menuModel, null);
         }
 
-        menuModel = new MenuModel("Categorías", true, true, "",R.drawable.outline_category_24); //Menu of Java Tutorials
+        menuModel = new MenuModel("Categorías", true, true, "", R.drawable.outline_category_24); //Menu of Java Tutorials
         headerList.add(menuModel);
         List<MenuModel> childModelsList = new ArrayList<>();
-        MenuModel childModel = new MenuModel("Agregar categoría", false, false, "",R.drawable.ic_add_black_24dp);
+        MenuModel childModel = new MenuModel("Agregar categoría", false, false, "", R.drawable.ic_add_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modifica categoría", false, false, "",R.drawable.ic_edit_black_24dp);
+        childModel = new MenuModel("Modifica categoría", false, false, "", R.drawable.ic_edit_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Buscar categoría", false, false, "",R.drawable.ic_search_black_24dp);
+        childModel = new MenuModel("Buscar categoría", false, false, "", R.drawable.ic_search_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar categoría", false, false, "",R.drawable.ic_list_black_24dp);
+        childModel = new MenuModel("Consultar categoría", false, false, "", R.drawable.ic_list_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Eliminar categoría", false, false, "",R.drawable.ic_delete_forever_black_24dp);
+        childModel = new MenuModel("Eliminar categoría", false, false, "", R.drawable.ic_delete_forever_black_24dp);
         childModelsList.add(childModel);
 
 
@@ -186,18 +231,18 @@ public class NavAdministradorActivity extends AppCompatActivity
 
         //
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Diseños", true, true, "",R.drawable.ic_baseline_style_24); //Menu of Python Tutorials
+        menuModel = new MenuModel("Diseños", true, true, "", R.drawable.ic_baseline_style_24); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Agregar diseños", false, false, "",R.drawable.ic_add_black_24dp);
+        childModel = new MenuModel("Agregar diseños", false, false, "", R.drawable.ic_add_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modificar diseños", false, false, "",R.drawable.ic_edit_black_24dp);
+        childModel = new MenuModel("Modificar diseños", false, false, "", R.drawable.ic_edit_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar diseños", false, false, "",R.drawable.ic_list_black_24dp);
+        childModel = new MenuModel("Consultar diseños", false, false, "", R.drawable.ic_list_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Eliminar diseños", false, false, "",R.drawable.ic_delete_forever_black_24dp);
+        childModel = new MenuModel("Eliminar diseños", false, false, "", R.drawable.ic_delete_forever_black_24dp);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
@@ -205,7 +250,7 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
         //
 
-        menuModel = new MenuModel("Tallas", true, false, "",R.drawable.ic_baseline_straighten_24); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Tallas", true, false, "", R.drawable.ic_baseline_straighten_24); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -213,28 +258,28 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Productos", true, true, "",R.drawable.ic_baseline_shopify_24); //Menu of Python Tutorials
+        menuModel = new MenuModel("Productos", true, true, "", R.drawable.ic_baseline_shopify_24); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Agregar productos", false, false, "",R.drawable.ic_add_black_24dp);
+        childModel = new MenuModel("Agregar productos", false, false, "", R.drawable.ic_add_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modificar productos", false, false, "",R.drawable.ic_edit_black_24dp);
+        childModel = new MenuModel("Modificar productos", false, false, "", R.drawable.ic_edit_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Buscar productos", false, false, "",R.drawable.ic_search_black_24dp);
+        childModel = new MenuModel("Buscar productos", false, false, "", R.drawable.ic_search_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar productos", false, false, "",R.drawable.ic_list_black_24dp);
+        childModel = new MenuModel("Consultar productos", false, false, "", R.drawable.ic_list_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Eliminar productos", false, false, "",R.drawable.ic_delete_forever_black_24dp);
+        childModel = new MenuModel("Eliminar productos", false, false, "", R.drawable.ic_delete_forever_black_24dp);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
 
-        menuModel = new MenuModel("Inventario", true, false, "",R.drawable.outline_inventory_24); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Inventario", true, false, "", R.drawable.outline_inventory_24); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -242,31 +287,31 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Pagos", true, true, "",R.drawable.ic_payment_black_24dp); //Menu of Python Tutorials
+        menuModel = new MenuModel("Pagos", true, true, "", R.drawable.ic_payment_black_24dp); //Menu of Python Tutorials
         headerList.add(menuModel);
 
-        childModel = new MenuModel("Consultar pagos", false, false, "",R.drawable.ic_info_outline_black_24dp);
+        childModel = new MenuModel("Consultar pagos", false, false, "", R.drawable.ic_info_outline_black_24dp);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Pedidos", true, true, "",R.drawable.ic_loyalty_black_24dp); //Menu of Python Tutorials
+        menuModel = new MenuModel("Pedidos", true, true, "", R.drawable.ic_loyalty_black_24dp); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Crear pedidos", false, false, "",R.drawable.ic_add_black_24dp);
+        childModel = new MenuModel("Crear pedidos", false, false, "", R.drawable.ic_add_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Modificar pedidos", false, false, "",R.drawable.ic_edit_black_24dp);
+        childModel = new MenuModel("Modificar pedidos", false, false, "", R.drawable.ic_edit_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Buscar pedidos", false, false, "",R.drawable.ic_search_black_24dp);
+        childModel = new MenuModel("Buscar pedidos", false, false, "", R.drawable.ic_search_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Consultar pedidos", false, false, "",R.drawable.ic_list_black_24dp);
+        childModel = new MenuModel("Consultar pedidos", false, false, "", R.drawable.ic_list_black_24dp);
         childModelsList.add(childModel);
 
-        childModel = new MenuModel("Cancelar pedidos", false, false, "",R.drawable.ic_cancel_black_24dp);
+        childModel = new MenuModel("Cancelar pedidos", false, false, "", R.drawable.ic_cancel_black_24dp);
         childModelsList.add(childModel);
 
 
@@ -275,15 +320,15 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Envios", true, true, "",R.drawable.ic_local_shipping_black_24dp); //Menu of Python Tutorials
+        menuModel = new MenuModel("Envios", true, true, "", R.drawable.ic_local_shipping_black_24dp); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Ver envios", false, false, "",R.drawable.ic_visibility_black_24dp);
+        childModel = new MenuModel("Ver envios", false, false, "", R.drawable.ic_visibility_black_24dp);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
-        menuModel = new MenuModel("Ventas", true, false, "",R.drawable.ic_equalizer_black_24dp); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Ventas", true, false, "", R.drawable.ic_equalizer_black_24dp); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -291,28 +336,28 @@ public class NavAdministradorActivity extends AppCompatActivity
         }
 
         childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Clientes", true, true, "",R.drawable.ic_people_black_24dp); //Menu of Python Tutorials
+        menuModel = new MenuModel("Clientes", true, true, "", R.drawable.ic_people_black_24dp); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Ver clientes", false, false, "",R.drawable.ic_favorite_black_24dp);
+        childModel = new MenuModel("Ver clientes", false, false, "", R.drawable.ic_favorite_black_24dp);
         childModelsList.add(childModel);
 
         if (menuModel.hasChildren) {
             childList.put(menuModel, childModelsList);
         }
 
-        menuModel = new MenuModel("Cuenta", true, false, "",R.drawable.ic_person_black_24dp); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Cuenta", true, false, "", R.drawable.ic_person_black_24dp); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
             childList.put(childModel, null);
         }
-        menuModel = new MenuModel("Ajustes", true, false, "",R.drawable.ic_settings_black_24dp); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Ajustes", true, false, "", R.drawable.ic_settings_black_24dp); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
             childList.put(childModel, null);
         }
-        menuModel = new MenuModel("Salir", true, false, "",R.drawable.ic_exit_to_app_black_24dp); //Menu of Android Tutorial. No sub menus
+        menuModel = new MenuModel("Salir", true, false, "", R.drawable.ic_exit_to_app_black_24dp); //Menu of Android Tutorial. No sub menus
         headerList.add(menuModel);
 
         if (!menuModel.hasChildren) {
@@ -331,9 +376,9 @@ public class NavAdministradorActivity extends AppCompatActivity
                 if (headerList.get(groupPosition).isGroup) {
                     if (!headerList.get(groupPosition).hasChildren) {
                         String dir = headerList.get(groupPosition).menuName.toString();
-                        switch (dir){
+                        switch (dir) {
                             case "Inicio":
-                                com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
+                                com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment = new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
                                 Bundle args = new Bundle();
                                 newFragment.setArguments(args);
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -343,8 +388,8 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 toolbar.setTitle("Inicio");
                                 break;
                             case "Tallas":
-                                com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment newFragment1= new com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment();
-                                 args = new Bundle();
+                                com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment newFragment1 = new com.programacion.perroestilocliente.ui.administrador.tallas.TallasFragment();
+                                args = new Bundle();
                                 newFragment1.setArguments(args);
                                 transaction = getSupportFragmentManager().beginTransaction();
                                 transaction.replace(R.id.container, newFragment1);
@@ -353,7 +398,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 toolbar.setTitle("Tallas");
                                 break;
                             case "Inventario":
-                                com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment2= new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
+                                com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment2 = new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
                                 args = new Bundle();
                                 newFragment2.setArguments(args);
                                 transaction = getSupportFragmentManager().beginTransaction();
@@ -363,7 +408,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 toolbar.setTitle("Inventario");
                                 break;
                             case "Ventas":
-                                com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment frag= new com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment();
+                                com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment frag = new com.programacion.perroestilocliente.ui.administrador.ventas.consultarVentas.ConsultarVentasFragment();
                                 args = new Bundle();
                                 frag.setArguments(args);
                                 transaction = getSupportFragmentManager().beginTransaction();
@@ -373,7 +418,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 toolbar.setTitle("Ventas");
                                 break;
                             case "Cuenta":
-                                com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment frag1= new com.programacion.perroestilocliente.ui.administrador.cuenta.CuentaFragment();
+                                com.programacion.perroestilocliente.ui.administrador.perfil.PerfilAdministradorFragment frag1 = new com.programacion.perroestilocliente.ui.administrador.perfil.PerfilAdministradorFragment();
                                 args = new Bundle();
                                 frag1.setArguments(args);
                                 transaction = getSupportFragmentManager().beginTransaction();
@@ -383,7 +428,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 toolbar.setTitle("Cuenta");
                                 break;
                             case "Ajustes":
-                                com.programacion.perroestilocliente.ui.ajustes.AjustesFragment frag2= new com.programacion.perroestilocliente.ui.ajustes.AjustesFragment();
+                                com.programacion.perroestilocliente.ui.ajustes.AjustesFragment frag2 = new com.programacion.perroestilocliente.ui.ajustes.AjustesFragment();
                                 args = new Bundle();
                                 frag2.setArguments(args);
                                 transaction = getSupportFragmentManager().beginTransaction();
@@ -393,12 +438,12 @@ public class NavAdministradorActivity extends AppCompatActivity
                                 toolbar.setTitle("Ajustes");
                                 break;
                             case "Salir":
-                                FirebaseUser userj=FirebaseAuth.getInstance().getCurrentUser();
+                                FirebaseUser userj = FirebaseAuth.getInstance().getCurrentUser();
                                 FirebaseAuth.getInstance().signOut();
-                                mostarToast("Sessión terminada exitosamente",1,true);
+                                mostarToast("Sessión terminada exitosamente", 1, true);
                                 startActivity(new Intent(NavAdministradorActivity.this, LogginActivity.class));
                                 finish();
-                                FirebaseUser userk=FirebaseAuth.getInstance().getCurrentUser();
+                                FirebaseUser userk = FirebaseAuth.getInstance().getCurrentUser();
 
 
                                 break;
@@ -417,9 +462,9 @@ public class NavAdministradorActivity extends AppCompatActivity
                 if (childList.get(headerList.get(groupPosition)) != null) {
                     MenuModel model = childList.get(headerList.get(groupPosition)).get(childPosition);
                     String dir = childList.get(headerList.get(groupPosition)).get(childPosition).menuName.toString();
-                    switch (dir){
+                    switch (dir) {
                         case "Agregar categoría":
-                            com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment newFragment= new com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment();
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment newFragment = new com.programacion.perroestilocliente.ui.administrador.catalogo.crearCatergoria.CrearCategoriasFragment();
                             Bundle args = new Bundle();
                             newFragment.setArguments(args);
                             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -429,7 +474,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Agregar categoría");
                             break;
                         case "Modifica categoría":
-                            com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment newFragment1= new com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment();
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment newFragment1 = new com.programacion.perroestilocliente.ui.administrador.catalogo.editarCategoria.EditarCategoriaFragment();
                             args = new Bundle();
                             newFragment1.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -439,7 +484,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Modificar categoría");
                             break;
                         case "Buscar categoría":
-                            com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment newFragment2= new com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment();
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment newFragment2 = new com.programacion.perroestilocliente.ui.administrador.catalogo.buscarCategoria.BuscarCategoriaFragment();
                             args = new Bundle();
                             newFragment2.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -449,7 +494,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Buscar categoría");
                             break;
                         case "Consultar categoría":
-                            com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment newFragment3= new com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment();
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment newFragment3 = new com.programacion.perroestilocliente.ui.administrador.catalogo.consularCategorias.ConsultarCategoriasFragment();
                             args = new Bundle();
                             newFragment3.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -459,7 +504,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Consultar categorías");
                             break;
                         case "Eliminar categoría":
-                            com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment newFragment4= new com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment();
+                            com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment newFragment4 = new com.programacion.perroestilocliente.ui.administrador.catalogo.eliminarCategoria.EliminarCategoriaFragment();
                             args = new Bundle();
                             newFragment4.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -469,7 +514,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Eliminar categoría");
                             break;
                         case "Agregar productos":
-                            com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment newFragment5= new com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment newFragment5 = new com.programacion.perroestilocliente.ui.administrador.productos.agregarProductos.AgregarProductosFragment();
                             args = new Bundle();
                             newFragment5.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -479,7 +524,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Agregar productos");
                             break;
                         case "Modificar productos":
-                            com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment newFragment6= new com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment newFragment6 = new com.programacion.perroestilocliente.ui.administrador.productos.editarProductos.EditarProductosFragment();
                             args = new Bundle();
                             newFragment6.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -489,7 +534,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Modificar productos");
                             break;
                         case "Buscar productos":
-                            com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment newFragment7= new com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment newFragment7 = new com.programacion.perroestilocliente.ui.administrador.productos.buscarProductos.BuscarProductosFragment();
                             args = new Bundle();
                             newFragment7.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -499,7 +544,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Buscar productos");
                             break;
                         case "Consultar productos":
-                            com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment newFragment8= new com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment newFragment8 = new com.programacion.perroestilocliente.ui.administrador.productos.consultarProductos.ConsultarProductosFragment();
                             args = new Bundle();
                             newFragment8.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -509,7 +554,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Consultar productos");
                             break;
                         case "Eliminar productos":
-                            com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment newFragment9= new com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment newFragment9 = new com.programacion.perroestilocliente.ui.administrador.productos.eliminarProductos.EliminarProductosFragment();
                             args = new Bundle();
                             newFragment9.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -519,7 +564,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Eliminar productos");
                             break;
                         case "Crear kits":
-                            com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment newFragment10= new com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment();
+                            com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment newFragment10 = new com.programacion.perroestilocliente.ui.administrador.matchs.crearMatch.CrearMath1Fragment();
                             args = new Bundle();
                             newFragment10.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -529,7 +574,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Crear kit");
                             break;
                         case "Modificar kits":
-                            com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment newFragment11= new com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment();
+                            com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment newFragment11 = new com.programacion.perroestilocliente.ui.administrador.matchs.editarMatch.EditarMatchFragment();
                             args = new Bundle();
                             newFragment11.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -539,7 +584,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Modificar kit");
                             break;
                         case "Buscar kits":
-                            com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment newFragment12= new com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment();
+                            com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment newFragment12 = new com.programacion.perroestilocliente.ui.administrador.matchs.buscarMatch.BuscarMatchFragment();
                             args = new Bundle();
                             newFragment12.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -549,7 +594,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Buscar kit");
                             break;
                         case "Consultar kits":
-                            com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment newFragment13= new com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment();
+                            com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment newFragment13 = new com.programacion.perroestilocliente.ui.administrador.matchs.consultarMatchs.ConsultarMatchsFragment();
                             args = new Bundle();
                             newFragment13.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -559,7 +604,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Consultar kit");
                             break;
                         case "Eliminar kits":
-                            com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment newFragment14= new com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment();
+                            com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment newFragment14 = new com.programacion.perroestilocliente.ui.administrador.matchs.eliminarMatch.EliminarMatchFragment();
                             args = new Bundle();
                             newFragment14.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -569,7 +614,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Eliminar kit");
                             break;
                         case "Inventario":
-                            com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment15= new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
+                            com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment newFragment15 = new com.programacion.perroestilocliente.ui.administrador.inventario.InventarioFragment();
                             args = new Bundle();
                             newFragment15.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -579,7 +624,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Inventario");
                             break;
                         case "Crear pedidos":
-                            com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment newFragment16= new com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment();
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment newFragment16 = new com.programacion.perroestilocliente.ui.administrador.pedidos.crearPedido.CrearPedidoFragment();
                             args = new Bundle();
                             newFragment16.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -589,7 +634,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Crear pedido");
                             break;
                         case "Modificar pedidos":
-                            com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment newFragment17= new com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment();
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment newFragment17 = new com.programacion.perroestilocliente.ui.administrador.pedidos.editarPedido.EditarPedidoFragment();
                             args = new Bundle();
                             newFragment17.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -599,7 +644,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Modificar pedido");
                             break;
                         case "Buscar pedidos":
-                            com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment newFragment18= new com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment();
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment newFragment18 = new com.programacion.perroestilocliente.ui.administrador.pedidos.buscarPedido.BuscarPedidoFragment();
                             args = new Bundle();
                             newFragment18.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -609,7 +654,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Buscar pedido");
                             break;
                         case "Consultar pedidos":
-                            com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment newFragment19= new com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment newFragment19 = new com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment();
                             args = new Bundle();
                             newFragment19.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -619,7 +664,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Consultar pedidos");
                             break;
                         case "Cancelar pedidos":
-                            com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment newFragment20= new com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment();
+                            com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment newFragment20 = new com.programacion.perroestilocliente.ui.administrador.pedidos.eliminarPedido.EliminarPedidoFragment();
                             args = new Bundle();
                             newFragment20.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -629,7 +674,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Cancelar pedidos");
                             break;
                         case "Ver envios":
-                            com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment newFragment21= new com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment newFragment21 = new com.programacion.perroestilocliente.ui.administrador.envios.verEnvios.VerEnviosFragment();
                             args = new Bundle();
                             newFragment21.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -639,7 +684,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Ver envios");
                             break;
                         case "Ver clientes":
-                            com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment newFragment22= new com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment();
+                            com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment newFragment22 = new com.programacion.perroestilocliente.ui.administrador.clientes.VerClientesFragment();
                             args = new Bundle();
                             newFragment22.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -649,7 +694,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Ver clientes");
                             break;
                         case "Consultar pagos":
-                            com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment newFragment23= new com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment();
+                            com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment newFragment23 = new com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment();
                             args = new Bundle();
                             newFragment23.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -659,7 +704,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Consultar pagos");
                             break;
                         case "Agregar diseños":
-                            com.programacion.perroestilocliente.ui.administrador.disenios.crearDisenio.CrearDiseniosFragment newFragment24=new com.programacion.perroestilocliente.ui.administrador.disenios.crearDisenio.CrearDiseniosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.disenios.crearDisenio.CrearDiseniosFragment newFragment24 = new com.programacion.perroestilocliente.ui.administrador.disenios.crearDisenio.CrearDiseniosFragment();
                             args = new Bundle();
                             newFragment24.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -669,7 +714,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Agregar diseños");
                             break;
                         case "Modificar diseños":
-                            com.programacion.perroestilocliente.ui.administrador.disenios.editarDisenio.EditarDiseniosFragment newFragment25=new com.programacion.perroestilocliente.ui.administrador.disenios.editarDisenio.EditarDiseniosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.disenios.editarDisenio.EditarDiseniosFragment newFragment25 = new com.programacion.perroestilocliente.ui.administrador.disenios.editarDisenio.EditarDiseniosFragment();
                             args = new Bundle();
                             newFragment25.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -679,7 +724,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Modificar diseños");
                             break;
                         case "Consultar diseños":
-                            com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment newFragment26=new com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment newFragment26 = new com.programacion.perroestilocliente.ui.administrador.disenios.consularDisenios.ConsultarDiseniosFragment();
                             args = new Bundle();
                             newFragment26.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -689,7 +734,7 @@ public class NavAdministradorActivity extends AppCompatActivity
                             toolbar.setTitle("Consultar diseños");
                             break;
                         case "Eliminar diseños":
-                            com.programacion.perroestilocliente.ui.administrador.disenios.eliminarDisenio.EliminarDiseniosFragment newFragment27=new com.programacion.perroestilocliente.ui.administrador.disenios.eliminarDisenio.EliminarDiseniosFragment();
+                            com.programacion.perroestilocliente.ui.administrador.disenios.eliminarDisenio.EliminarDiseniosFragment newFragment27 = new com.programacion.perroestilocliente.ui.administrador.disenios.eliminarDisenio.EliminarDiseniosFragment();
                             args = new Bundle();
                             newFragment27.setArguments(args);
                             transaction = getSupportFragmentManager().beginTransaction();
@@ -705,45 +750,46 @@ public class NavAdministradorActivity extends AppCompatActivity
             }
         });
     }
+
     public void mostarToast(String txt, int estatus, boolean corto) {
         LayoutInflater inflater = getLayoutInflater();
 
         View layout = null;
 
-        if(estatus==0){
+        if (estatus == 0) {
             //Default
             layout = inflater.inflate(R.layout.custom_toast_info,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==1){
+        } else if (estatus == 1) {
             //Success
             layout = inflater.inflate(R.layout.custom_toast_success,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==2) {
+        } else if (estatus == 2) {
             //Warning
             layout = inflater.inflate(R.layout.custom_toast_warning,
                     (ViewGroup) findViewById(R.id.layout_base));
 
-        }else if(estatus==3){
+        } else if (estatus == 3) {
             //Error
             layout = inflater.inflate(R.layout.custom_toast_error,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else if(estatus==4){
+        } else if (estatus == 4) {
             //Falla de red
             layout = inflater.inflate(R.layout.custom_toast_red,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else if(estatus==5){
+        } else if (estatus == 5) {
             //Falla de red
             layout = inflater.inflate(R.layout.custom_toast_sin_data,
                     (ViewGroup) findViewById(R.id.layout_base));
 
 
-        }else{
+        } else {
             //Informacion
             layout = inflater.inflate(R.layout.custom_toast_info,
                     (ViewGroup) findViewById(R.id.layout_base));
@@ -753,9 +799,11 @@ public class NavAdministradorActivity extends AppCompatActivity
         textView.setText(txt);
         Toast toast = new Toast(this);
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 50);
-        if(corto){
-            toast.setDuration(Toast.LENGTH_SHORT);}else{
-            toast.setDuration(Toast.LENGTH_LONG);}
+        if (corto) {
+            toast.setDuration(Toast.LENGTH_SHORT);
+        } else {
+            toast.setDuration(Toast.LENGTH_LONG);
+        }
         toast.setView(layout);
         toast.show();
     }

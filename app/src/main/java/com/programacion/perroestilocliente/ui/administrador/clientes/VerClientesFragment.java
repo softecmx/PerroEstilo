@@ -66,8 +66,6 @@ public class VerClientesFragment extends Fragment {
         //root= inflater.inflate(R.layout.item_lista_clientes_lealtad, container, false);
         listView = root.findViewById(R.id.listClientes);
         imgbtnBuscar = root.findViewById(R.id.ibtnAgregarClienteLeal);
-
-        root= inflater.inflate(R.layout.item_lista_clientes_lealtad, container, false);
         txtNombre= root.findViewById(R.id.txtNombreUsuarioLealtadLista);
         txtStatus= root.findViewById(R.id.txtStatusUsuarioLealtad);
         imgbtnLealtad=root.findViewById(R.id.imgbtnLealtad);

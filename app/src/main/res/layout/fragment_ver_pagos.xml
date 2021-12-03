@@ -1,59 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="?attr/colorOnPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment">
-    <LinearLayout
+  <fragment
+      android:layout_width="match_parent"
+      android:layout_height="190dp"
+      android:layout_weight="1"
+      android:name="com.programacion.perroestilocliente.BuscarPagoPendienteFragment"
+      android:id="@+id/fr21"/>
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                app:endIconMode="clear_text">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPagoPendientePV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/bus_pedido_pago"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageButton
-                android:id="@+id/ibtnBuscarPagoPendiente"
-                android:layout_width="109dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:elevation="4dp"
-                android:backgroundTint="@color/pink_200"
-                android:contentDescription="@string/txtDescripcion"
-                app:srcCompat="@drawable/ic_search_black_24dp" />
-        </LinearLayout>
-
-
-        <ListView
-            android:id="@+id/listPagosPendientes"
-            android:layout_width="match_parent"
-            android:layout_height="515dp" />
-
-    </LinearLayout>
-</ScrollView>
+        android:layout_weight="1"
+        android:name="com.programacion.perroestilocliente.ListaParaPagosFragment"
+        android:id="@+id/fr22"/>
+</LinearLayout>
 

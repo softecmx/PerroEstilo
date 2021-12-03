@@ -52,6 +52,7 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
     private ConsultarPedidosViewModel mViewModel;
     View root;
     ListView listView;
+    String totalOrden;
     ArrayList<ElementListViewConsultarPedidos> arrayListOrdenes = new ArrayList<>();
     private ListAdapterConsultarPedidos adapterOrdenes;
 
@@ -125,8 +126,8 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
                 }
-            }
 
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });

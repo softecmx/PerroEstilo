@@ -76,11 +76,30 @@ public class PagosPendientesFragment extends Fragment {
         databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                arrayListP.clear();
+
                 ArrayList<ElementListViewPagosPendientes> arrayList = new ArrayList<>();
 
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     //Log.i("ids clientes ", objSnapshot.getKey());
 
+/*
+                    databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).orderByChild("estatusOrden").equalTo("Pago pendiente").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                                OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);
+                                assert ordenesCliente != null;
+                                System.out.println("ss"+ordenesCliente.getEstatusOrden());
+                                arrayListP.add(new ElementListViewPagosPendientes(ordenesCliente.getEstatusOrden(),ordenesCliente.getInOrden() ,Float.parseFloat(String.valueOf(ordenesCliente.getTotal()))));
+                                customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
+                                listView.setAdapter(customAdapter);
+                                //lstProdModa.add(productos);
+                                //listAdapterProductosModa = new ListAdapterProductosModa(getActivity(), lstProdModa);
+                                // lstProductosModa.setAdapter(listAdapterProductosModa);
+*/
                     databaseReference.child("OrdenesCliente/" + objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,6 +129,7 @@ public class PagosPendientesFragment extends Fragment {
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) { }
                                 });
+
 
                             }
                         }

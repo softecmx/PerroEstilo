@@ -1,18 +1,31 @@
 package com.programacion.perroestilocliente.ui.administrador.inventario;
 
 public class ElementListViewInventario {
-    private String codigo,producto,modelo,talla,status,stock;
+    private String codigo,producto,modelo,talla,status,stock,img;
 
     public ElementListViewInventario() {
     }
 
-    public ElementListViewInventario(String codigo, String producto, String modelo, String talla, String status, String stock) {
+    public ElementListViewInventario(String codigo, String producto, String modelo, String talla, String status, String stock,String img) {
         this.codigo = codigo;
         this.producto = producto;
         this.modelo = modelo;
         this.talla = talla;
         this.status = status;
         this.stock = stock;
+        this.img=img;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getCodigo() {

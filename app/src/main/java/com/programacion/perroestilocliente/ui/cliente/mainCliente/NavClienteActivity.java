@@ -1,5 +1,6 @@
 package com.programacion.perroestilocliente.ui.cliente.mainCliente;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,15 +34,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
 import com.programacion.perroestilocliente.databinding.ActivityNavClienteBinding;
+import com.programacion.perroestilocliente.modelo.Administrador;
+import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.Productos;
 import com.programacion.perroestilocliente.ui.cliente.comprar.comprarAhora.ComprarAhoraFragment;
 import com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -55,7 +64,13 @@ public class NavClienteActivity extends AppCompatActivity {
     private ActivityNavClienteBinding binding;
     private androidx.appcompat.app.AlertDialog dialog;
     private Button btnPopCerrar;
-
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private FragmentManager mFraFragmentManager;
+    Clientes usuarios;
+    TextView txtSubtitulo;
+    TextView txtTitulo;
+    ImageView imgUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +94,10 @@ public class NavClienteActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         lstCarrito = new ArrayList<>();
-
+        View navHeader = navigationView.getHeaderView(0);
+        txtTitulo=navHeader.findViewById(R.id.txtTituloNavCliente);
+        txtSubtitulo=navHeader.findViewById(R.id.txtSubtituloNavCliente);
+        imgUser=navHeader.findViewById(R.id.imgNavCliente);
     }
 
     @Override
@@ -99,7 +117,74 @@ public class NavClienteActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.nav_cliente, menu);
         return true;
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
+        Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
+        queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                        usuarios = objSnapshot.getValue(Clientes.class);
+                        //  usuario = usuario.getNombreCliente() + " " + usuario.getApellidoPaterno();
+                        txtTitulo.setText(usuarios.getNombreCliente()+" "+usuarios.getApellidoPaterno());
+                        txtSubtitulo.setText(usuarios.getEmail());
+
+                        if(usuarios.getFotoPerfil().contains("facebook")){
+                            if (user.getPhotoUrl() != null) {
+
+                                //cImgFoto.setImageURI(user.getPhotoUrl());
+                                String pholoURL=user.getPhotoUrl().toString();
+                                pholoURL=pholoURL+"?type=large";
+                                Picasso.get().load(pholoURL)
+                                        .error(R.drawable.logo)
+                                        .into(imgUser);
+                            } else {
+                                imgUser.setImageResource(R.drawable.logo);
+                            }
+                        }else if(usuarios.getFotoPerfil().contains("googleusercontent")){
+                            if (user.getPhotoUrl() != null) {
+                                //cImgFoto.setImageURI(user.getPhotoUrl());
+                                Picasso.get().load(user.getPhotoUrl())
+                                        .error(R.drawable.logo)
+                                        .into(imgUser);
+                            } else {
+                                imgUser.setImageResource(R.drawable.logo);
+                            }
+                        }else if(!usuarios.getFotoPerfil().isEmpty()){
+                            if (getApplication() != null) {
+                                storageReference.child(usuarios.getFotoPerfil()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Glide.with(NavClienteActivity.this).load(uri).into(imgUser);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        mostarToast(e.getCause() + "", 3, false);
+                                    }
+                                });
+                            }
+                        }else{
+                            imgUser.setImageResource(R.drawable.logo);
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.container_cliente);
