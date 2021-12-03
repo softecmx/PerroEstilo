@@ -9,17 +9,25 @@ public class ElementListViewClientes {
     private String apellido;
     private String email;
     private String telefono;
+    private String foto;
 
     public ElementListViewClientes() {
     }
 
-    public ElementListViewClientes(String id, String status, String nombre, String apellido, String email, String telefono) {
+    public ElementListViewClientes(String id, String status, String nombre, String apellido, String email, String telefono, String foto) {
         this.id = id;
         this.status = status;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.telefono = telefono;
+        this.foto = foto;
+    }
+
+    public ElementListViewClientes(String status, String nombre, String foto) {
+        this.status = status;
+        this.nombre = nombre;
+        this.foto = foto;
     }
 
     public String getId() {
@@ -70,5 +78,11 @@ public class ElementListViewClientes {
         this.telefono = telefono;
     }
 
+    public String getFoto() {
+        return foto;
+    }
 
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

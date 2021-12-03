@@ -260,6 +260,7 @@
             android:id="@+id/btnContactarDetalleEnvio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/outline_whatsapp_24"
             android:text="@string/txtContactarCliente" />
 
     </LinearLayout>
