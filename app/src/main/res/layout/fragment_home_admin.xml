@@ -11,17 +11,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvBienvenidaAdmin"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:gravity="center"
-            android:text="@string/bienvenidaAdmin"
-            android:textColor="@color/primaryDarkColor"
-            android:textSize="40sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgBienvenida"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/dia"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:id="@+id/tvBienvenidaAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:paddingLeft="5dp"
+                android:text="@string/bienvenidaAdmin"
+                android:textColor="@color/flat_grey_dark_2"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carruselInicioAdmin"

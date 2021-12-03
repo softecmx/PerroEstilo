@@ -56,7 +56,7 @@ public class ListAdapterInicioAdminPedidos extends ArrayAdapter<ElementListViewI
         ImageView imgFoto= convertView.findViewById(R.id.imgItemUsuarioFotoInicioAdminPedidos);
 
         txtUsuario.setText(arrayList.get(position).getUsuario());
-        cargaImagen(imgFoto,arrayList.get(position).getImgUsuario());
+    //    cargaImagen(imgFoto,arrayList.get(position).getImgUsuario());
 
         return convertView;
     }

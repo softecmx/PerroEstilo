@@ -41,7 +41,7 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
     @Override
     public DataObjectHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
-                R.layout.cardview_item_pedido, viewGroup, false);
+                R.layout.cardview_item_pedido_pendiente, viewGroup, false);
         return new DataObjectHolder(view);
     }
 
@@ -109,7 +109,6 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
 
         public DataObjectHolder(@NonNull View itemView) {
             super(itemView);
-            this.img = itemView.findViewById(R.id.imgItemPedido);
             this.txtFechaOrden = itemView.findViewById(R.id.txtItemPedidoFecha);
             this.btnVer = itemView.findViewById(R.id.btnPedidoVerCompra);
             this.txtTotal = itemView.findViewById(R.id.txtItemPedidoTotal);
