@@ -121,6 +121,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
+            <!--
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -130,7 +132,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="4dp"
                     android:src="@drawable/monio1" />
-            </FrameLayout>
+            </FrameLayout>-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -154,6 +156,14 @@
             </LinearLayout>
 
         </LinearLayout>
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/videoViewSobreApp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        app:showFullScreenButton="true"
+        app:videoId="IVblhmlMgB8" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
