@@ -59,13 +59,14 @@ public class PagosPendientesFragment extends Fragment {
         databaseReference.child("Usuarios/Clientes").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayListP.clear();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Clientes clientes = objSnapshot.getValue(Clientes.class);
 
                     databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            arrayListP.clear();
+
                             for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                                 OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);
                                 assert ordenesCliente != null;
