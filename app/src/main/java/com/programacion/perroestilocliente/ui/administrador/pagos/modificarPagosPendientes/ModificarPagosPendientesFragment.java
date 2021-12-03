@@ -40,6 +40,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModificarPagosPendientesFragment extends Fragment {
     Button btnConfirmarPago;
@@ -161,11 +163,9 @@ public class ModificarPagosPendientesFragment extends Fragment {
                                             public void onCancelled(@NonNull DatabaseError error) {
                                             }
                                         });
-
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -173,7 +173,7 @@ public class ModificarPagosPendientesFragment extends Fragment {
                 });
 
 
-        btnConfirmarPago.setOnClickListener(new View.OnClickListener()
+       /* btnConfirmarPago.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
@@ -200,8 +200,8 @@ public class ModificarPagosPendientesFragment extends Fragment {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
-        });
-
+        });*/
+        modificarStatus();
         return root;
     }
     public void inicializarComponentes(){
@@ -227,6 +227,45 @@ public class ModificarPagosPendientesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ModificarPagosPendientesViewModel.class);
         // TODO: Use the ViewModel
+    }
+    public void modificarStatus()
+    {
+        Map<String, Object> encenderMap = new HashMap<>();
+        encenderMap.put("OrdenesCliente/"+idusuario+"/estatus",status);
+        //encenderMap.put("Productos/"+txtCodigo.getText()+"/estatusStock",spnModStatus.getText().toString());
+        databaseReference.updateChildren(encenderMap).toString();
+        if(status=="Pago pendiente")
+        { btnConfirmarPago.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view){
+                ConsultarPedidosFragment newFragment1 = new ConsultarPedidosFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                status ="Preparando pedido";
+            }
+        });
+        }
+        btnAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PagosPendientesFragment newFragment1 = new PagosPendientesFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        Toast.makeText(getContext(), "Inventario Actualizado", Toast.LENGTH_SHORT).show();
+        //dialog.dismiss();
     }
 
 }
