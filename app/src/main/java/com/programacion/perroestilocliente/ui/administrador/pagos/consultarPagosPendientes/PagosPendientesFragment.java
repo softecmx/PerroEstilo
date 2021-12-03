@@ -52,6 +52,7 @@ public class PagosPendientesFragment extends Fragment {
     String total = "";
     String estatusOrden = "";
     ArrayList<ElementListViewPagosPendientes> arrayListP = new ArrayList<>();
+
     public static PagosPendientesFragment newInstance() {
         return new PagosPendientesFragment();
     }
@@ -59,7 +60,7 @@ public class PagosPendientesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root= inflater.inflate(R.layout.fragment_ver_pagos, container, false);
+        root = inflater.inflate(R.layout.fragment_ver_pagos, container, false);
         listView = root.findViewById(R.id.listPagosPendientes);
         btnBuscar = root.findViewById(R.id.ibtnBuscarPagoPendiente);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -73,7 +74,7 @@ public class PagosPendientesFragment extends Fragment {
     }
 
     public void listarDatos() {
-        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Usuarios/Clientes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -82,80 +83,54 @@ public class PagosPendientesFragment extends Fragment {
                 ArrayList<ElementListViewPagosPendientes> arrayList = new ArrayList<>();
 
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    //Log.i("ids clientes ", objSnapshot.getKey());
+                    Clientes clientes = objSnapshot.getValue(Clientes.class);
 
-/*
-                    databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).orderByChild("estatusOrden").equalTo("Pago pendiente").addValueEventListener(new ValueEventListener() {
+                    databaseReference.child("OrdenesCliente/" + clientes.getIdUsuario()).orderByChild("estatusOrden").equalTo("Pago pendiente").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);
-                                assert ordenesCliente != null;
-                                System.out.println("ss"+ordenesCliente.getEstatusOrden());
-                                arrayListP.add(new ElementListViewPagosPendientes(ordenesCliente.getEstatusOrden(),ordenesCliente.getInOrden() ,Float.parseFloat(String.valueOf(ordenesCliente.getTotal()))));
+                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
+                                OrdenesCliente ordenesCliente = objSnapshot2.getValue(OrdenesCliente.class);
+                                ElementListViewPagosPendientes nvo = new ElementListViewPagosPendientes();
+                                nvo.setOrdenPedido(ordenesCliente.getInOrden());
+                                nvo.setTotalPedido(ordenesCliente.getTotal() + "");
+                                nvo.setStatusPedido(ordenesCliente.getEstatusOrden());
+                                arrayListP.add(nvo);
                                 customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
                                 listView.setAdapter(customAdapter);
                                 //lstProdModa.add(productos);
                                 //listAdapterProductosModa = new ListAdapterProductosModa(getActivity(), lstProdModa);
                                 // lstProductosModa.setAdapter(listAdapterProductosModa);
-*/
-                    databaseReference.child("OrdenesCliente/" + objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
-                                Log.i("Construyendoruta ", "OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey());
-                                databaseReference.child("OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey()).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()) {
-
-                                            String estatus = snapshot.child("estatusOrden").getValue().toString();
-
-                                            if (estatus.equals("Pago pendiente")) {
-                                                String id = snapshot.child("inOrden").getValue().toString();
-                                                String total = snapshot.child("total").getValue().toString();
-                                                String idusuario = snapshot.child("idCliente").getValue().toString();
-
-                                                arrayListP.add(new ElementListViewPagosPendientes(id, estatus, "$ " + total,idusuario));
-                                                customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
-                                                listView.setAdapter(customAdapter);
-                                            }
-
-                                        } else
-                                            Log.i("NO hay objeto", snapshot + "");//si no se encuentran pedidos
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) { }
-                                });
-
-
                             }
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
                     });
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
     }
+
+
     public void iniciaFirebase() {
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
+
     private void verdetalles() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                ElementListViewPagosPendientes vistaElement= customAdapter.getItem(position);
+                ElementListViewPagosPendientes vistaElement = customAdapter.getItem(position);
 
                 ModificarPagosPendientesFragment newFragment1 = new ModificarPagosPendientesFragment();
                 Bundle args = new Bundle();
@@ -175,6 +150,7 @@ public class PagosPendientesFragment extends Fragment {
 
 
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

@@ -85,7 +85,7 @@ public class ModificarPagosPendientesFragment extends Fragment {
         listdetalles = root.findViewById(R.id.lstViewDetalleCompraDetPagos);
         ArrayList<ElementListViewConsultarPedidos> arrayList = new ArrayList<>();
         total = 0;
-
+iniciaFirebase();
         databaseReference.child("OrdenesCliente/" + idusuario)
                 .orderByChild("inOrden").equalTo(idOrden)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -230,8 +230,9 @@ public class ModificarPagosPendientesFragment extends Fragment {
     }
     public void modificarStatus()
     {
+        iniciaFirebase();
         Map<String, Object> encenderMap = new HashMap<>();
-        encenderMap.put("OrdenesCliente/"+idusuario+"/estatus",status);
+        encenderMap.put("OrdenesCliente/"+idusuario+"/estatusOrden",status);
         //encenderMap.put("Productos/"+txtCodigo.getText()+"/estatusStock",spnModStatus.getText().toString());
         databaseReference.updateChildren(encenderMap);
         if(status=="Pago pendiente")

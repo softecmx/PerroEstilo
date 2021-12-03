@@ -242,13 +242,18 @@ public class HomeAdminFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
-                                    OrdenesCliente ordenesCliente = objSnapshot2.getValue(OrdenesCliente.class);
-                                    cantidadProductosPedidos++;
-                                    cantidadProductosVentas += ordenesCliente.getTotal();
-                                    DecimalFormat formato = new DecimalFormat("#,###.00");
-                                    String valorFormateado = formato.format(cantidadProductosVentas);
-                                    cantidadVentas.setText("$" + valorFormateado + " MX");
-                                    cantidadPedidos.setText("" + cantidadProductosPedidos);
+                                    try {
+                                        OrdenesCliente ordenesCliente = objSnapshot2.getValue(OrdenesCliente.class);
+                                        cantidadProductosPedidos++;
+                                        cantidadProductosVentas += ordenesCliente.getTotal();
+                                        DecimalFormat formato = new DecimalFormat("#,###.00");
+                                        String valorFormateado = formato.format(cantidadProductosVentas);
+                                        cantidadVentas.setText("$" + valorFormateado + " MX");
+                                        cantidadPedidos.setText("" + cantidadProductosPedidos);
+                                    }catch (Exception e){
+
+                                    }
+
 
                                 }
                             }
