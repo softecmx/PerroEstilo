@@ -31,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Administrador;
+import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
 import com.programacion.perroestilocliente.modelo.Persona;
 import com.programacion.perroestilocliente.modelo.Productos;
@@ -160,76 +161,49 @@ public class HomeAdminFragment extends Fragment {
         pocosProductos = root.findViewById(R.id.textItemPocasExistencias);
     }
     private void listarPedidos() {
-        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+        ArrayList<ElementListViewInicioAdmin> arrayList2 = new ArrayList<>();
+            databaseReference.child("Usuarios/Clientes").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    arrayList2.clear();
+                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                        try {
+                            Clientes usuarios = objSnapshot.getValue(Clientes.class);
+                            databaseReference.child("OrdenesCliente/"+usuarios.getIdUsuario()).orderByChild("estatusOrden").equalTo("Preparando pedido").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    Log.i("ids clientes ", objSnapshot.getKey());
-                    databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()){
-                                Log.i("ids clientes ", objSnapshot2.getKey());
-                                databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        Log.i("Ruta del nombre  ", "OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/nombreContacto");
-                                        String nombrecliente=snapshot.child("nombreContacto").getValue().toString();
-                                        String idcliente=snapshot.child("idCliente").getValue().toString();
 
-                                        Log.i("Ruta a la imagen ", "Usuarios/Clientes/"+idcliente);
+                                    for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
+                                        try {
+                                            // OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);
+                                            contP++;
+                                            arrayList2.add(new ElementListViewInicioAdmin(usuarios.getNombreCliente(), usuarios.getFotoPerfil()));
+                                            customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList2, getContext());
+                                            listViewPedidos.setAdapter(customAdapter1);
 
-                                        llenarlistaPedidos(idcliente,nombrecliente);
-                                   /* databaseReference.child("Usuarios/Clientes/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    String fotocliente=snapshot.child("fotoPerfil").getValue().toString();
-                                                    Log.i("USUARIO ", fotocliente);
-                                                    contP++;
-                                                    arrayList.add(new ElementListViewInicioAdmin(nombrecliente, fotocliente));
-                                                    customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
-                                                    listViewPedidos.setAdapter(customAdapter1);
-                                                /*
-                                                String fotocliente=u.getFotoPerfil();
-                                                //String fotocliente = snapshot.child("fotoPerfil").getValue().toString();
-                                                Log.i("idCliente ", fotocliente);
+                                        }catch (Exception e){
+                                            Log.i("Hay error",e.getMessage()+" ssfsdf");
                                         }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-                                        }
-                                    });*/
                                     }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                }
 
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-
-                                    }
-                                });
-                            }
+                                }
+                            });
+                        }catch (Exception e){
+                            Log.i("Hay error",e.getMessage()+"hahsad");
                         }
-
-
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-
-
-                        }
-                    });
+                    }
                 }
 
-                pocosProductos.setText("Mira los nuevos pedidos "+contP);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
+                }
+            });
     }
     private void llenarlistaPedidos(String idcliente, String nombrecliente) {
         databaseReference.child("Usuarios/Clientes").child(idcliente+"/fotoPerfil").addValueEventListener(new ValueEventListener() {
