@@ -32,7 +32,10 @@ import com.programacion.perroestilocliente.ui.cliente.inicio.ReciclerViewAdapter
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -92,7 +95,7 @@ public class TiendaFragment extends Fragment {
 
         //===========================================================================================
         reciclerViewHomeNuevosProductos = root.findViewById(R.id.reciclerViewTiendaProductos);
-
+/*
         databaseReference.child("Productos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,8 +109,6 @@ public class TiendaFragment extends Fragment {
                     reciclerViewHomeNuevosProductos.setLayoutManager(new StaggeredGridLayoutManager(2,
                             StaggeredGridLayoutManager.VERTICAL));
                     reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
-       /* reciclerViewHomeNuevosProductos.setLayoutManager(new StaggeredGridLayoutManager(2,
-                StaggeredGridLayoutManager.VERTICAL));*/
                     reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
                 }
             }
@@ -116,7 +117,7 @@ public class TiendaFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
+*/
 
         databaseReference.child("Productos").addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,15 +126,48 @@ public class TiendaFragment extends Fragment {
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
                     Productos productos = objSnapshot.getValue(Productos.class);
-                    arrayListProductos.add(productos);
-                    adapterProductos = new ReciclerViewAdapterProductos(root.getContext(), arrayListProductos, getFragmentManager());
+                    boolean nuevo=false;
+                    try {
+                        String fecha=productos.getFechaCreacion();
 
-                    reciclerViewHomeNuevosProductos.setLayoutManager(new StaggeredGridLayoutManager(2,
-                            StaggeredGridLayoutManager.VERTICAL));
-                    reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
+                        int anio=Integer.parseInt(fecha.substring(0,4));
+                        int mes=Integer.parseInt(fecha.substring(4,6));
+                        int dia=Integer.parseInt(fecha.substring(6,7));
+
+                        Calendar c = Calendar.getInstance();
+                        int anioC = c.get(Calendar.YEAR);
+                        int mesC = c.get(Calendar.MONTH);
+                        int diaC = c.get(Calendar.DAY_OF_MONTH);
+
+                        int anios = anioC - anio;
+                        int meses = mesC - mes;
+                        int semanas = (diaC - dia) / 7;
+                        if ((anios) >= 1) {
+                           nuevo=false;
+                        } else {
+                            if (meses < 1) {
+                                nuevo=true;
+                            } else if (meses == 1) {
+                                nuevo=true;
+                            } else {
+                                nuevo=false;
+                            }
+                        }
+
+                    }catch (Exception e){
+                        System.out.println("Trono en la fecha");
+                    }
+                 if(nuevo==true){
+                     arrayListProductos.add(productos);
+                     adapterProductos = new ReciclerViewAdapterProductos(root.getContext(), arrayListProductos, getFragmentManager());
+
+                     reciclerViewHomeNuevosProductos.setLayoutManager(new StaggeredGridLayoutManager(2,
+                             StaggeredGridLayoutManager.VERTICAL));
+                     reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
        /* reciclerViewHomeNuevosProductos.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));*/
-                    reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
+                     reciclerViewHomeNuevosProductos.setAdapter(adapterProductos);
+                 }
                 }
             }
 
@@ -146,7 +180,7 @@ public class TiendaFragment extends Fragment {
         lstProductosModa=root.findViewById(R.id.lstTiendaProductosModa);
 
 
-        databaseReference.child("Productos").limitToFirst(5).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Productos").orderByChild("raiting").equalTo("5.0").limitToFirst(5).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 lstProdModa.clear();

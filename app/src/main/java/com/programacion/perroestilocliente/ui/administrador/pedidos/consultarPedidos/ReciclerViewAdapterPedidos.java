@@ -99,7 +99,6 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
 
     public class DataObjectHolder extends RecyclerView.ViewHolder {
 
-        private ImageView img;
         private TextView txtNoOrden;
         private Button btnVer;
         private TextView txtFechaOrden;
@@ -109,7 +108,6 @@ public class ReciclerViewAdapterPedidos extends RecyclerView.Adapter<ReciclerVie
 
         public DataObjectHolder(@NonNull View itemView) {
             super(itemView);
-            this.img = itemView.findViewById(R.id.imgItemPedido);
             this.txtFechaOrden = itemView.findViewById(R.id.txtItemPedidoFecha);
             this.btnVer = itemView.findViewById(R.id.btnPedidoVerCompra);
             this.txtTotal = itemView.findViewById(R.id.txtItemPedidoTotal);

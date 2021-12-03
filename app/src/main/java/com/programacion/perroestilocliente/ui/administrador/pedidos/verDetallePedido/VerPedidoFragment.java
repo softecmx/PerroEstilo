@@ -90,7 +90,7 @@ public class VerPedidoFragment extends Fragment {
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         //StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
+        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDetAdmin);
         ArrayList<DetOrdenProductos> arrayListItems = new ArrayList<>();
         total = 0;
         Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());

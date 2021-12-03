@@ -59,10 +59,13 @@ import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PerfilFragment extends Fragment {
 
     ImageView cImgFoto;
+    ImageView imgLealtad;
     private Button btnPopCerrar;
     private androidx.appcompat.app.AlertDialog dialog;
     private ListView listView;
@@ -88,7 +91,7 @@ public class PerfilFragment extends Fragment {
     String username = "";
     String email = "";
     String phone = "";
-
+    Clientes usuario;
     private PerfilViewModel mViewModel;
 
     public static PerfilFragment newInstance() {
@@ -108,6 +111,7 @@ public class PerfilFragment extends Fragment {
         cImgFoto = root.findViewById(R.id.imgPerfilFoto);
 
         fBtnFoto = root.findViewById(R.id.fBtnPerfilFoto);
+        imgLealtad = root.findViewById(R.id.imgLealtad);
         this.listView = root.findViewById(R.id.listViewCuenta);
 
 
@@ -120,55 +124,58 @@ public class PerfilFragment extends Fragment {
 
 
         Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
-        queryCliente.addValueEventListener(new ValueEventListener() {
+        queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                        Clientes usuario = objSnapshot.getValue(Clientes.class);
+                        usuario = objSnapshot.getValue(Clientes.class);
                         username = usuario.getNombreCliente() + " " + usuario.getApellidoPaterno();
                         email = usuario.getEmail();
                         phone = usuario.getTelefono();
+                       if(usuario.getFotoPerfil().contains("facebook")){
+                           if (user.getPhotoUrl() != null) {
 
-                        if (usuario.getPassword().equals("Authenticacion por Google")) {
-                            if (user.getPhotoUrl() != null) {
-                                //cImgFoto.setImageURI(user.getPhotoUrl());
-                                Picasso.get().load(user.getPhotoUrl())
-                                        .error(R.drawable.img_user_exist)
-                                        .into(cImgFoto);
-                            } else {
-                                cImgFoto.setImageResource(R.drawable.img_user_exist);
-                            }
-                        } else if (usuario.getPassword().equals("Authenticacion por Facebook")) {
-                            if (user.getPhotoUrl() != null) {
+                               //cImgFoto.setImageURI(user.getPhotoUrl());
+                               String pholoURL=user.getPhotoUrl().toString();
+                               pholoURL=pholoURL+"?type=large";
+                               Picasso.get().load(pholoURL)
+                                       .error(R.drawable.img_user_exist)
+                                       .into(cImgFoto);
+                           } else {
+                               cImgFoto.setImageResource(R.drawable.img_user_exist);
+                           }
+                        }else if(usuario.getFotoPerfil().contains("googleusercontent")){
+                           if (user.getPhotoUrl() != null) {
+                               //cImgFoto.setImageURI(user.getPhotoUrl());
+                               Picasso.get().load(user.getPhotoUrl())
+                                       .error(R.drawable.img_user_exist)
+                                       .into(cImgFoto);
+                           } else {
+                               cImgFoto.setImageResource(R.drawable.img_user_exist);
+                           }
+                        }else if(!usuario.getFotoPerfil().isEmpty()){
+                           if (getActivity() != null) {
+                               storageReference.child(usuario.getFotoPerfil()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                   @Override
+                                   public void onSuccess(Uri uri) {
+                                       Glide.with(getContext()).load(uri).into(cImgFoto);
+                                   }
+                               }).addOnFailureListener(new OnFailureListener() {
+                                   @Override
+                                   public void onFailure(@NonNull Exception e) {
+                                       mostarToast(e.getCause() + "", 3, false);
+                                   }
+                               });
+                           }
+                        }else{
+                           cImgFoto.setImageResource(R.drawable.img_user_exist);
+                        }
 
-                                //cImgFoto.setImageURI(user.getPhotoUrl());
-                                String pholoURL=user.getPhotoUrl().toString();
-                                pholoURL=pholoURL+"?type=large";
-                                Picasso.get().load(pholoURL)
-                                        .error(R.drawable.img_user_exist)
-                                        .into(cImgFoto);
-                            } else {
-                                cImgFoto.setImageResource(R.drawable.img_user_exist);
-                            }
-                        } else {
-                            if (usuario.getFotoPerfil().isEmpty()) {
-                                cImgFoto.setImageResource(R.drawable.img_user_exist);
-                            } else {
-                                if (getActivity() != null) {
-                                    storageReference.child(usuario.getFotoPerfil()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            Glide.with(getContext()).load(uri).into(cImgFoto);
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            mostarToast(e.getCause() + "", 3, false);
-                                        }
-                                    });
-                                }
-                            }
+                        if(usuario.getLealtad().equals("No")){
+                            imgLealtad.setImageResource(R.drawable.ic_pets_grey_24dp);
+                        }else{
+                            imgLealtad.setImageResource(R.drawable.ic_pets_pink_24dp);
                         }
                         arrayList.clear();
                         arrayList.add(new ElementListView("Nombre", username, true, R.drawable.ic_person_black_24dp));
@@ -180,7 +187,7 @@ public class PerfilFragment extends Fragment {
                     }
                 } else {
                     Query queryTienda = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(user.getEmail());
-                    queryTienda.addValueEventListener(
+                    queryTienda.addListenerForSingleValueEvent(
                             new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -367,6 +374,8 @@ public class PerfilFragment extends Fragment {
                     photoURI = miPath;
                     img = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + "." + extension(photoURI);
                     cargaArchivo();
+
+
                     // bitmap = BitmapFactory.decodeFile(path);
                     //  imgProducto.setImageBitmap(bitmap);
                 }
@@ -410,6 +419,9 @@ public class PerfilFragment extends Fragment {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         mostarToast("Imagen cargada exitosamente", 1, true);
+                        Map<String,Object> mapear=new HashMap<>();
+                        mapear.put("Usuarios/Clientes/"+usuario.getIdUsuario()+"/fotoPerfil",img);
+                        databaseReference.updateChildren(mapear);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -421,6 +433,9 @@ public class PerfilFragment extends Fragment {
                 StorageReference ref = storageReference.child(img);
                 ref.putFile(photoURI);
                 mostarToast("Imagen cargada exitosamente\nEstado: sin conexión", 4, true);
+                Map<String,Object> mapear=new HashMap<>();
+                mapear.put("Usuarios/Clientes/"+usuario.getIdUsuario()+"/fotoPerfil",img);
+                databaseReference.updateChildren(mapear);
             }
         } catch (Exception e) {
 

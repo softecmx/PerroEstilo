@@ -53,6 +53,7 @@ import java.util.UUID;
 public class ComprarAhoraFragment extends Fragment {
     float total;
     Button btnComprarAhoraConfirmar;
+    Button btnActualizar;
     Button btnComprarAhoraCancelar;
     TextView txtNombre;
     TextView txtApellidos;
@@ -98,6 +99,7 @@ public class ComprarAhoraFragment extends Fragment {
         txtCalleExterior=root.findViewById(R.id.txtCompAhCalleExt);
         txtCalleInterior=root.findViewById(R.id.txtCompAhCalleInt);
         txtReferencias=root.findViewById(R.id.txtCompAhReferencias);
+        btnActualizar=root.findViewById(R.id.btnActualizaCarro);
 
         FirebaseDatabase firebaseDatabase;
         DatabaseReference databaseReference;
@@ -106,6 +108,11 @@ public class ComprarAhoraFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+// btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
+        TextView txtTotal = root.findViewById(R.id.txtComprarAhoraTotalPagar);
+        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewComprarAhoraCarrito);
+        arrayListItems = new ArrayList<>();
+        total = 0;
 
         Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
         queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -161,11 +168,41 @@ public class ComprarAhoraFragment extends Fragment {
                 txtReferencias.setText(customAdapterDric.getItem(position).getReferencia());
             }
         });
-        // btnPopCerrar = (Button) aboutPop.findViewById(R.id.btnCerrarDialog);
-        TextView txtTotal = root.findViewById(R.id.txtComprarAhoraTotalPagar);
-        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewComprarAhoraCarrito);
-         arrayListItems = new ArrayList<>();
-        total = 0;
+        btnActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference.child("Carrito/" + user.getUid() + "/Items").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        arrayListItems.clear();
+                        total = 0;
+                        if (snapshot.exists()) {
+                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                                //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
+                                try {
+                                    Item item = objSnapshot.getValue(Item.class);
+                                    arrayListItems.add(item);
+                                    ListAdapterCarrito adapterProductos = new ListAdapterCarrito(getActivity(), arrayListItems);
+                                    reciclerViewMiCarritoProductos.setAdapter(adapterProductos);
+                                    total = total + (item.getPrecio() * item.getCantidad());
+                                    txtTotal.setText("$" + total);
+                                } catch (Exception e) {
+
+                                }
+
+                            }
+                        } else {
+                            txtTotal.setText("$0.0");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+        });
+
         databaseReference.child("Carrito/" + user.getUid() + "/Items").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
