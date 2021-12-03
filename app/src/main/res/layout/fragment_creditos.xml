@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.cliente.creditos.CreditosFragment">
 
@@ -175,6 +176,9 @@
             android:layout_marginBottom="10dp">
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                android:id="@+id/carviewAna"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -186,7 +190,7 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:contentDescription="@string/txtDescImg"
-                        android:src="@drawable/img_user_exist"
+                        android:src="@drawable/img_ana"
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -228,6 +232,9 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                android:id="@+id/carviewCarlos"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -239,7 +246,7 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:contentDescription="@string/txtDescImg"
-                        android:src="@drawable/img_user_exist"
+                        android:src="@drawable/img_carlos"
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -280,6 +287,9 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                android:id="@+id/carviewKevin"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -291,7 +301,7 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:contentDescription="@string/txtDescImg"
-                        android:src="@drawable/img_user_exist"
+                        android:src="@drawable/img_kevin"
                         />
                     <LinearLayout
                         android:layout_width="match_parent"

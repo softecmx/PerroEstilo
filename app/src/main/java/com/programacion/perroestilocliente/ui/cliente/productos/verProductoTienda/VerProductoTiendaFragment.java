@@ -212,7 +212,7 @@ public class VerProductoTiendaFragment extends Fragment {
                 setIntent.setType("text/plain");
                 setIntent.setPackage("com.whatsapp");*/
                     setIntent.setAction(Intent.ACTION_VIEW);
-                    String uri="whatsapp://send?phone="+52+"7131037910"+"&text="+"Hola, vengo de la aplicación y necesito ayuda...";
+                    String uri="whatsapp://send?phone="+52+"7131037910"+"&text="+"Hola, vengo de la aplicación y queria preguntarte sobre el producto "+txtNombre.getText().toString();
                     setIntent.setData(Uri.parse(uri));
                     startActivity(setIntent);
                 } catch (android.content.ActivityNotFoundException ex) {

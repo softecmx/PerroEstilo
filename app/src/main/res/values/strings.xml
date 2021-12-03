@@ -337,7 +337,6 @@
     <string name="agEtiq">Agregar etiqeta</string>
 
 
-
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
@@ -521,9 +520,9 @@
     <string name="txtVarAutor2">Kevin Ivan Sanchez Valdin</string>
     <string name="txtVarAutor3">Carlos Emmanuel Mejia Mejia</string>
     <string name="txtAutor">Autores:</string>
-    <string name="txtVarAutor1NoControl">No. Control: 18200987</string>
-    <string name="txtVarAutor2NoControl">No. Control: 17200987</string>
-    <string name="txtVarAutor3NoControl">No. Control: 17200987</string>
+    <string name="txtVarAutor1NoControl">No. Control: 18280675</string>
+    <string name="txtVarAutor2NoControl">No. Control: 17280378</string>
+    <string name="txtVarAutor3NoControl">No. Control: 17280328</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -581,7 +580,8 @@
     <string name="txtMision">Morbi Ut id volutpat mauris, ac vehicula nibh. Pellentesque tempus mauris at rutrum tempor. Vestibulum fringilla odio vitae varius lacinia. Duis at lectus porttitor, efficitur purus rhoncus, viverra massa. In nec tellus ipsum. Pellentesque dapibus sem et nunc ultrices dignissim. Nunc vehicula venenatis eros.</string>
     <string name="txtVision">Vestibulum ligula nisi, dapibus et erat ac, volutpat venenatis velit. Nunc dui lectus, imperdiet at est eu, consectetur rhoncus libero. Integer sed sollicitudin lacus. Mauris ornare nibh non tempor convallis.</string>
     <string name="txtSiguenosRedSocial">Siguenos en nuestras redes sociales</string>
-    <string name="facebook_app_id">959929477953395</string> <string name="fb_login_protocol_scheme">fb959929477953395</string>
+    <string name="facebook_app_id">959929477953395</string>
+    <string name="fb_login_protocol_scheme">fb959929477953395</string>
     <string name="txtConfirmacionSalir">¿Seguro que quieres cerrar sessión?</string>
     <string name="txtRegresar">Regresar</string>
     <string name="txtPublico">Tipo</string>
@@ -600,5 +600,6 @@
     <string name="txtConceptoPagar">Concepto de transferencia: </string>
     <string name="txtInstruccion2">2. Tu pedido ya se encuentra en <b>Mis Pedidos</b> ahora puedes consultarlo</string>
     <string name="menu_mi_carrito">Mi carrito</string>
+    <string name="txtComoFunciona">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et est metus.Vestibulum ligula nisi, dapibus et erat ac, volutpat venenatis velit. </string>
 
 </resources>

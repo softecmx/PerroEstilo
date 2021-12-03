@@ -42,6 +42,7 @@ public class TodosProductosFragment extends Fragment {
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
     ArrayList<Productos> arrayListProductos = new ArrayList<>();
+
     public static TodosProductosFragment newInstance() {
         return new TodosProductosFragment();
     }
@@ -64,7 +65,7 @@ public class TodosProductosFragment extends Fragment {
                     //Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
                     Productos productos = objSnapshot.getValue(Productos.class);
                     arrayListProductos.add(productos);
-                    adapter = new RViewAdapter(root.getContext(),arrayListProductos,fragmentManager);
+                    adapter = new RViewAdapter(root.getContext(), arrayListProductos, fragmentManager);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
@@ -80,15 +81,13 @@ public class TodosProductosFragment extends Fragment {
         });
 
 
-
-        this.adapter = new RViewAdapter(root.getContext(),arrayListProductos,fragmentManager);
+        this.adapter = new RViewAdapter(root.getContext(), arrayListProductos, fragmentManager);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
         isLinear = false;
-
 
 
         return root;
@@ -106,7 +105,6 @@ public class TodosProductosFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference();
         storageReference = FirebaseStorage.getInstance().getReference("Productos");
     }
-
 
 
 }

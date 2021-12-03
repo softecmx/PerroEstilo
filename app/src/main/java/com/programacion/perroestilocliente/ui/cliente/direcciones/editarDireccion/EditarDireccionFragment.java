@@ -1,11 +1,5 @@
 package com.programacion.perroestilocliente.ui.cliente.direcciones.editarDireccion;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -16,22 +10,24 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.os.Looper;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -68,9 +64,7 @@ import java.util.UUID;
 public class EditarDireccionFragment extends Fragment implements OnMapReadyCallback {
 
     GoogleMap gMap;
-
     MapView mapView;
-    Marker marcador;
     float txtLongitud;
     float txtLatitud;
     FusedLocationProviderClient client;
@@ -93,9 +87,9 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
     private LocationManager locationManager;
     public static int REQUEST_PERMISSION = 1;
     Direcciones direcciones;
-    String  id;
-    String estadoF="";
-    String municipioF="";
+    String id;
+    String estadoF = "";
+    String municipioF = "";
     /*
     Modificar la ruta
 
@@ -123,8 +117,8 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_editar_direccion, container, false);
-        Bundle arg=getArguments();
-        id=arg.getString("idDireccion");
+        Bundle arg = getArguments();
+        id = arg.getString("idDireccion");
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -137,7 +131,7 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
         txtCalleExterior = root.findViewById(R.id.editEditDirCalleExt);
         txtCalleInterior = root.findViewById(R.id.editEditDirCalleInt);
         txtReferencias = root.findViewById(R.id.editEditDirReferencias);
-        btnLimpiar = root.findViewById(R.id.btnEditDirActualizaGuardar);
+        btnEdit = root.findViewById(R.id.btnEditDirActualizaGuardar);
         btnCancelar = root.findViewById(R.id.btnEditDirActualizaCancelar);
         int permissionCheck = ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION);
@@ -150,7 +144,6 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
                         1);
             }
         }
-
 
         initGoogleMap(savedInstanceState);
         client = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -171,8 +164,8 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
                         txtCalleExterior.setText(direcciones.getCalleYNumeroExterno());
                         txtCalleInterior.setText(direcciones.getCalleYNumeroInterno());
                         txtReferencias.setText(direcciones.getReferencia());
-                        estadoF=direcciones.getEntidadFederativa();
-                        municipioF=direcciones.getMunicipio();
+                        estadoF = direcciones.getEntidadFederativa();
+                        municipioF = direcciones.getMunicipio();
                         GeoPoint point = direcciones.getCoordenadas();
                         try {
                             txtLatitud = Float.parseFloat(point.getLatitud());
@@ -195,10 +188,6 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
 
             }
         });
-
-
-
-
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,14 +216,15 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
                 direccion.setCoordenadas(coordenadas);
                 direccion.setIdUser(user.getUid());
 
-                databaseReference.child("Direcciones").child(direccion.getIdDireccion()).setValue(direccion).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        limpiar();
-                        CustomToast.mostarToast("Direccion actualizada!", 1, true, root, getLayoutInflater(), getContext());
-
-                    }
-                });
+                databaseReference.child("Direcciones")
+                        .child(id).setValue(direccion)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                limpiar();
+                                CustomToast.mostarToast("Direccion actualizada!", 1, true, root, getLayoutInflater(), getContext());
+                            }
+                        });
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {
@@ -250,12 +240,7 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
                 fragmentTransaction.commit();
             }
         });
-        btnLimpiar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                limpiar();
-            }
-        });
+
 
         return root;
     }
@@ -453,7 +438,7 @@ public class EditarDireccionFragment extends Fragment implements OnMapReadyCallb
         txtCodigoPostal.setText("");
         txtMunicipio.setText("");
         txtEstado.setText("");
-       txtEstado.setText("");
+        txtEstado.setText("");
         txtMunicipio.setText("");
 
 

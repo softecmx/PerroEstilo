@@ -251,13 +251,14 @@ public class HomeAdminFragment extends Fragment {
                             arrayList.add(new ElementListViewInicioAdmin(p.getNombre() ,p.getStock(),p.getImgFoto()));
                             customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList,getContext());
                             listViewProductos.setAdapter(customAdapter);
+                            listView.setAdapter(customAdapter);
+                            cantidadProductos.setText(cont);
                         }
                    }catch (Exception e){
                         Log.i("error",e.getMessage());
                     }
                 }
-               // cantidadProductos.setText(cont);
-                pocosProductos.setText("Productos con pocas existencias "+cont);
+                pocosProductos.setText("Productos con pocas existencias ("+cont+")");
             }
 
             @Override
