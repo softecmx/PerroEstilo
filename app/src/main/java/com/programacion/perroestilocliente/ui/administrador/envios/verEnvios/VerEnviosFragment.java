@@ -1,5 +1,7 @@
 package com.programacion.perroestilocliente.ui.administrador.envios.verEnvios;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,9 +31,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.bd.Item;
+import com.programacion.perroestilocliente.ui.administrador.envios.detalleEnvios.DetalleEnvioFragment;
 import com.programacion.perroestilocliente.ui.administrador.inicio.ElementListViewInicioAdmin;
 import com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ElementListViewConsultarPedidos;
 import com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ListAdapterConsultarPedidos;
+import com.programacion.perroestilocliente.ui.administrador.pedidos.verDetallePedido.VerPedidoFragment;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -54,20 +59,16 @@ public class VerEnviosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        root=inflater.inflate(R.layout.fragment_ver_envios, container, false);
-        FirebaseDatabase firebaseDatabase;
-        DatabaseReference databaseReference;
-        StorageReference storageReference;
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        storageReference = FirebaseStorage.getInstance().getReference("Productos");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        imgbtnBuscar=root.findViewById(R.id.ibtnBuscarPedidoEnvios);
+        root = inflater.inflate(R.layout.fragment_ver_envios, container, false);
+        imgbtnBuscar = root.findViewById(R.id.ibtnBuscarPedidoEnvios);
         listView = root.findViewById(R.id.listVerEnvios);
         ArrayList<Item> arrayListItems = new ArrayList<>();
 
         iniciaFirebase();
+        registerForContextMenu(listView);
         listarDatos();
+        verdetalles();
+
         return root;
     }
 
@@ -77,17 +78,14 @@ public class VerEnviosFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(VerEnviosViewModel.class);
         // TODO: Use the ViewModel
     }
-    public void iniciaFirebase() {
-        FirebaseApp.initializeApp(getContext());
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-    }
+
 
     public void listarDatos() {
+        arrayListOrdenes.clear();
         databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+                ArrayList<ElementListViewVerEnvios> arrayList = new ArrayList<>();
 
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     //Log.i("ids clientes ", objSnapshot.getKey());
@@ -104,13 +102,13 @@ public class VerEnviosFragment extends Fragment {
 
                                             String estatus = snapshot.child("estatusOrden").getValue().toString();
 
-                                            if (estatus.equals("En camino")) {
+                                            if (estatus.equals("Preparando pedido")) {
                                                 String id = snapshot.child("inOrden").getValue().toString();
                                                 String total = snapshot.child("total").getValue().toString();
-                                                LocalDate todaysDate = LocalDate.now();
+                                                String idusuario = snapshot.child("idCliente").getValue().toString();
 
-                                                arrayListOrdenes.add(new ElementListViewVerEnvios(id, estatus, "$ " + total,todaysDate+""));
-                                                adapterOrdenes = new ListAdapterVerEnvios(getActivity(), arrayListOrdenes);
+                                                arrayListOrdenes.add(new ElementListViewVerEnvios(id, estatus, "$ " + total, idusuario));
+                                                adapterOrdenes = new ListAdapterVerEnvios(getActivity(), arrayListOrdenes );
                                                 listView.setAdapter(adapterOrdenes);
                                             }
 
@@ -119,21 +117,56 @@ public class VerEnviosFragment extends Fragment {
                                     }
 
                                     @Override
-                                    public void onCancelled(@NonNull DatabaseError error) { }
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
                                 });
 
                             }
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
                     });
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void iniciaFirebase() {
+        FirebaseApp.initializeApp(getContext());
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }
+
+    private void verdetalles() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ElementListViewVerEnvios vistaElement= adapterOrdenes.getItem(position);
+
+                DetalleEnvioFragment newFragment1 = new DetalleEnvioFragment();
+                Bundle args = new Bundle();
+                args.putString("idOrden", vistaElement.getOrdenPedido());
+                args.putString("status", vistaElement.getStatusPedido());
+                args.putString("total", vistaElement.getTotalPedido());
+                args.putString("idusuario", vistaElement.getIdusuario());
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
         });
 
+
     }
+
 }

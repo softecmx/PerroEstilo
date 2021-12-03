@@ -1,5 +1,7 @@
 package com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,7 +30,9 @@ import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
 import com.programacion.perroestilocliente.ui.administrador.inicio.ElementListViewInicioAdmin;
+import com.programacion.perroestilocliente.ui.administrador.pagos.modificarPagosPendientes.ModificarPagosPendientesFragment;
 import com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ElementListViewConsultarPedidos;
+import com.programacion.perroestilocliente.ui.administrador.pedidos.verDetallePedido.VerPedidoFragment;
 
 import java.util.ArrayList;
 
@@ -62,27 +67,16 @@ public class PagosPendientesFragment extends Fragment {
 
         registerForContextMenu(listView);
         listarDatos();
+        verdetalles();
         return root;
 
-    }
-    public void iniciaFirebase() {
-        FirebaseApp.initializeApp(getContext());
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(PagosPendientesViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     public void listarDatos() {
         databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+                ArrayList<ElementListViewPagosPendientes> arrayList = new ArrayList<>();
 
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     //Log.i("ids clientes ", objSnapshot.getKey());
@@ -102,8 +96,9 @@ public class PagosPendientesFragment extends Fragment {
                                             if (estatus.equals("Pago pendiente")) {
                                                 String id = snapshot.child("inOrden").getValue().toString();
                                                 String total = snapshot.child("total").getValue().toString();
+                                                String idusuario = snapshot.child("idCliente").getValue().toString();
 
-                                                arrayListP.add(new ElementListViewPagosPendientes(id, estatus, Float.parseFloat(total)));
+                                                arrayListP.add(new ElementListViewPagosPendientes(id, estatus, "$ " + total,idusuario));
                                                 customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
                                                 listView.setAdapter(customAdapter);
                                             }
@@ -129,6 +124,42 @@ public class PagosPendientesFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
+    }
+    public void iniciaFirebase() {
+        FirebaseApp.initializeApp(getContext());
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+    }
+    private void verdetalles() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ElementListViewPagosPendientes vistaElement= customAdapter.getItem(position);
+
+                ModificarPagosPendientesFragment newFragment1 = new ModificarPagosPendientesFragment();
+                Bundle args = new Bundle();
+                args.putString("idOrden", vistaElement.getOrdenPedido());
+                args.putString("status", vistaElement.getStatusPedido());
+                args.putString("total", vistaElement.getTotalPedido());
+                args.putString("idusuario", vistaElement.getIdusuario());
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(PagosPendientesViewModel.class);
+        // TODO: Use the ViewModel
     }
 
 }

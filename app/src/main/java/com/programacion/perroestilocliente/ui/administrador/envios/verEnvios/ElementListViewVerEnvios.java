@@ -3,10 +3,16 @@ package com.programacion.perroestilocliente.ui.administrador.envios.verEnvios;
 public class ElementListViewVerEnvios {
 
 
+    private String fecha;
     private String ordenPedido;
     private String statusPedido;
     private String totalPedido;
-    private String fecha;
+    private String idusuario;
+    private String producto;
+    private String unitario;
+    private String cantidad;
+    private String subtotal;
+    private String imgProducto;
 
 
     public ElementListViewVerEnvios() {
@@ -16,6 +22,22 @@ public class ElementListViewVerEnvios {
         this.ordenPedido = ordenPedido;
         this.statusPedido = statusPedido;
         this.totalPedido = totalPedido;
+        this.fecha = fecha;
+    }
+
+    public ElementListViewVerEnvios(String producto, String unitario, String cantidad, String subtotal, String imgProducto) {
+        this.producto = producto;
+        this.unitario = unitario;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.imgProducto = imgProducto;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -43,11 +65,51 @@ public class ElementListViewVerEnvios {
         this.totalPedido = totalPedido;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getIdusuario() {
+        return idusuario;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setIdusuario(String idusuario) {
+        this.idusuario = idusuario;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+
+    public String getUnitario() {
+        return unitario;
+    }
+
+    public void setUnitario(String unitario) {
+        this.unitario = unitario;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(String subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public String getImgProducto() {
+        return imgProducto;
+    }
+
+    public void setImgProducto(String imgProducto) {
+        this.imgProducto = imgProducto;
     }
 }

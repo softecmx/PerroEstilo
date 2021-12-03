@@ -48,22 +48,6 @@ import java.util.List;
 
 public class ConsultarPedidosFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    String idOrden;
-    String status = "";
-    Button btnConfirmarPago;
-    Button btnAtras;
-    TextView txtOrden;
-    TextView txtSerie;
-    TextView txtFechaEstimada;
-    TextView txtContacto;
-    TextView txtTelefono;
-    TextView txtDireccion;
-    TextView txtFechaPedido;
-    TextView txtTotal;
-    TextView txtStatus;
-    String fechaEst;
-    String fechaEntrega;
-    float total;
     ImageButton btnBuscar;
     private ConsultarPedidosViewModel mViewModel;
     View root;
@@ -95,10 +79,11 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
     }
 
     public void listarDatos() {
+        arrayListOrdenes.clear();
         databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+                ArrayList<ElementListViewConsultarPedidos> arrayList = new ArrayList<>();
 
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     //Log.i("ids clientes ", objSnapshot.getKey());
@@ -118,8 +103,9 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
                                             if (estatus.equals("Preparando pedido")) {
                                                 String id = snapshot.child("inOrden").getValue().toString();
                                                 String total = snapshot.child("total").getValue().toString();
+                                                String idusuario = snapshot.child("idCliente").getValue().toString();
 
-                                                arrayListOrdenes.add(new ElementListViewConsultarPedidos(id, estatus, "$ " + total));
+                                                arrayListOrdenes.add(new ElementListViewConsultarPedidos(id, estatus, "$ " + total,idusuario));
                                                 adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
                                                 listView.setAdapter(adapterOrdenes);
                                             }
@@ -162,6 +148,10 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
 
                 VerPedidoFragment newFragment1 = new VerPedidoFragment();
                 Bundle args = new Bundle();
+                args.putString("idOrden", vistaElement.getOrdenPedido());
+                args.putString("status", vistaElement.getStatusPedido());
+                args.putString("total", vistaElement.getTotalPedido());
+                args.putString("idusuario", vistaElement.getIdusuario());
                 newFragment1.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

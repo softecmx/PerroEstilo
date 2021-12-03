@@ -39,9 +39,9 @@ public class ListAdapterPagosPendientes extends ArrayAdapter<ElementListViewPago
         TextView txtTotal = convertView.findViewById(R.id.txtTotalPago);
         TextView txtStatus = convertView.findViewById(R.id.txtStatusPago);
 
-        txtOrden.setText(arrayList.get(position).getOrden());
-        txtTotal.setText("$"+arrayList.get(position).getTotal());
-        txtStatus.setText(arrayList.get(position).getStatusPago());
+        txtOrden.setText(arrayList.get(position).getOrdenPedido());
+        txtTotal.setText("$"+arrayList.get(position).getTotalPedido());
+        txtStatus.setText(arrayList.get(position).getStatusPedido());
 
         return convertView;
     }
