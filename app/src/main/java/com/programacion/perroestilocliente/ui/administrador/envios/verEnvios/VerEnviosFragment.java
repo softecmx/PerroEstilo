@@ -60,7 +60,7 @@ public class VerEnviosFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_ver_envios, container, false);
-        imgbtnBuscar = root.findViewById(R.id.ibtnBuscarPedidoEnvios);
+      //  imgbtnBuscar = root.findViewById(R.id.ibtnBuscarPedidoEnvios);
         listView = root.findViewById(R.id.listVerEnvios);
         ArrayList<Item> arrayListItems = new ArrayList<>();
 
@@ -102,7 +102,7 @@ public class VerEnviosFragment extends Fragment {
 
                                             String estatus = snapshot.child("estatusOrden").getValue().toString();
 
-                                            if (estatus.equals("Preparando pedido")) {
+                                            if (estatus.equals("En camino")) {
                                                 String id = snapshot.child("inOrden").getValue().toString();
                                                 String total = snapshot.child("total").getValue().toString();
                                                 String idusuario = snapshot.child("idCliente").getValue().toString();

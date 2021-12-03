@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/status"
-        android:textColor="@color/flat_yellow_2"
+        android:textColor="@color/flat_green_2"
         android:textSize="20dp"
         android:textStyle="bold" />
 

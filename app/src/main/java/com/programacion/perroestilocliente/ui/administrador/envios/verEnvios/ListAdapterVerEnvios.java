@@ -39,12 +39,12 @@ public class ListAdapterVerEnvios extends ArrayAdapter<ElementListViewVerEnvios>
         TextView txtOrden= convertView.findViewById(R.id.txtOrdenEnvio);
         TextView txtStatus = convertView.findViewById(R.id.txtStatusEnvio);
         TextView txtTotal= convertView.findViewById(R.id.txtTotalEnvio);
-        TextView txtFecha= convertView.findViewById(R.id.txtFechaLlegadaEnvio);
+      //  TextView txtFecha= convertView.findViewById(R.id.txtFechaLlegadaEnvio);
 
         txtOrden.setText(arrayList.get(position).getOrdenPedido());
-        txtStatus.setText("Estatus: "+arrayList.get(position).getStatusPedido());
+        txtStatus.setText(arrayList.get(position).getStatusPedido());
         txtTotal.setText(arrayList.get(position).getTotalPedido());
-        txtFecha.setText(arrayList.get(position).getFecha());
+        //txtFecha.setText(arrayList.get(position).getFecha());
 
         return convertView;
     }

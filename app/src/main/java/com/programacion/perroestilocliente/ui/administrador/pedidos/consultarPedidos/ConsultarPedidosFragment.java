@@ -69,7 +69,7 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_consultar_pedidos, container, false);
         listView = root.findViewById(R.id.listPedidosProcesando);
-        btnBuscar = root.findViewById(R.id.ibtnBuscarPedidoAdmin);
+        //btnBuscar = root.findViewById(R.id.ibtnBuscarPedidoAdmin);
 
         iniciaFirebase();
         registerForContextMenu(listView);
@@ -106,7 +106,7 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
                                                 String total = snapshot.child("total").getValue().toString();
                                                 String idusuario = snapshot.child("idCliente").getValue().toString();
 
-                                                arrayListOrdenes.add(new ElementListViewConsultarPedidos(id, estatus, "$ " + total,idusuario));
+                                                arrayListOrdenes.add(new ElementListViewConsultarPedidos(id, estatus, " $" + total,idusuario));
                                                 adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
                                                 listView.setAdapter(adapterOrdenes);
                                             }

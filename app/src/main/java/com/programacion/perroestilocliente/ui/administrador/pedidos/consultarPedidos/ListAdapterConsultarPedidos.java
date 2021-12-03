@@ -41,7 +41,7 @@ public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewCon
         TextView txtTotal = convertView.findViewById(R.id.txtTotalPedido);
         txtOrden.setText("No. Orden: " + arrayList.get(position).getOrdenPedido());
         txtStatus.setText("" + arrayList.get(position).getStatusPedido());
-        txtTotal.setText("Total: $" + arrayList.get(position).getTotalPedido());
+        txtTotal.setText("Total: " + arrayList.get(position).getTotalPedido());
 
 
         return convertView;
