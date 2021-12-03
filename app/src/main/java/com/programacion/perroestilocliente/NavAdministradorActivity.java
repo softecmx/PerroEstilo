@@ -3,6 +3,7 @@ package com.programacion.perroestilocliente;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -51,11 +55,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.ExpandableListAdapter;
 import com.programacion.perroestilocliente.MenuModel;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Administrador;
 import com.programacion.perroestilocliente.modelo.Clientes;
+import com.programacion.perroestilocliente.ui.cliente.mainCliente.NavClienteActivity;
 import com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment;
 
 import androidx.appcompat.widget.Toolbar;
@@ -74,6 +81,8 @@ public class NavAdministradorActivity extends AppCompatActivity
     private FragmentManager mFraFragmentManager;
     Administrador usuarios;
     TextView txtView;
+    de.hdodenhof.circleimageview.CircleImageView imageViewAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +91,7 @@ public class NavAdministradorActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle("Inicio");
         // getSupportActionBar().setDisplayShowTitleEnabled(false);
-        txtView= findViewById(R.id.txtSubtituloNav);
+        txtView = findViewById(R.id.txtSubtituloNav);
 
         expandableListView = findViewById(R.id.expandableListView);
         prepareMenuData();
@@ -97,7 +106,8 @@ public class NavAdministradorActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View navHeader = navigationView.getHeaderView(0);
-        txtView=navHeader.findViewById(R.id.txtSubtituloNav);
+        txtView = navHeader.findViewById(R.id.txtSubtituloNav);
+        imageViewAdmin = navHeader.findViewById(R.id.imageViewAdmin);
 
         com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment newFragment = new com.programacion.perroestilocliente.ui.administrador.inicio.HomeAdminFragment();
         Bundle args = new Bundle();
@@ -135,10 +145,10 @@ public class NavAdministradorActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
         Query queryCliente = databaseReference.child("Usuarios/Tienda").orderByChild("email").equalTo(user.getEmail());
         queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -147,7 +157,22 @@ public class NavAdministradorActivity extends AppCompatActivity
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                         usuarios = objSnapshot.getValue(Administrador.class);
                         //  usuario = usuario.getNombreCliente() + " " + usuario.getApellidoPaterno();
-                        txtView.setText(usuarios.getNombreAdministrador()+" "+usuarios.getApellidoPaterno());
+                        txtView.setText(usuarios.getNombreAdministrador() + " " + usuarios.getApellidoPaterno());
+                        if (!usuarios.getFotoPerfil().isEmpty()) {
+                            if (getApplication() != null) {
+                                storageReference.child(usuarios.getFotoPerfil()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Glide.with(NavAdministradorActivity.this).load(uri).into(imageViewAdmin);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        mostarToast(e.getCause() + "", 3, false);
+                                    }
+                                });
+                            }
+                        }
                     }
                 }
             }
@@ -299,7 +324,7 @@ public class NavAdministradorActivity extends AppCompatActivity
         childModelsList = new ArrayList<>();
         menuModel = new MenuModel("Pedidos", true, true, "", R.drawable.ic_loyalty_black_24dp); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Crear pedidos", false, false, "", R.drawable.ic_add_black_24dp);
+  /*      childModel = new MenuModel("Crear pedidos", false, false, "", R.drawable.ic_add_black_24dp);
         childModelsList.add(childModel);
 
         childModel = new MenuModel("Modificar pedidos", false, false, "", R.drawable.ic_edit_black_24dp);
@@ -307,12 +332,12 @@ public class NavAdministradorActivity extends AppCompatActivity
 
         childModel = new MenuModel("Buscar pedidos", false, false, "", R.drawable.ic_search_black_24dp);
         childModelsList.add(childModel);
-
+*/
         childModel = new MenuModel("Consultar pedidos", false, false, "", R.drawable.ic_list_black_24dp);
         childModelsList.add(childModel);
-
+/*
         childModel = new MenuModel("Cancelar pedidos", false, false, "", R.drawable.ic_cancel_black_24dp);
-        childModelsList.add(childModel);
+        childModelsList.add(childModel);*/
 
 
         if (menuModel.hasChildren) {

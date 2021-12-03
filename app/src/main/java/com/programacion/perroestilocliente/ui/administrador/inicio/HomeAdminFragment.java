@@ -173,43 +173,6 @@ public class HomeAdminFragment extends Fragment {
 
     private void listarPedidos() {
 
-        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
-
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    //Log.i("ids clientes ", objSnapshot.getKey());
-                    databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()){
-                                //Log.i("ids clientes ", objSnapshot2.getKey());
-                                databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        //Log.i("Ruta del nombre  ", "OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/nombreContacto");
-                                        String nombrecliente=snapshot.child("nombreContacto").getValue().toString();
-                                        String idcliente=snapshot.child("idCliente").getValue().toString();
-
-                                        //Log.i("Ruta a la imagen ", "Usuarios/Clientes/"+idcliente);
-
-                                        llenarlistaPedidos(idcliente,nombrecliente);
-                                   /* databaseReference.child("Usuarios/Clientes/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    String fotocliente=snapshot.child("fotoPerfil").getValue().toString();
-                                                    Log.i("USUARIO ", fotocliente);
-                                                    contP++;
-                                                    arrayList.add(new ElementListViewInicioAdmin(nombrecliente, fotocliente));
-                                                    customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
-                                                    listViewPedidos.setAdapter(customAdapter1);
-                                                /*
-                                                String fotocliente=u.getFotoPerfil();
-                                                //String fotocliente = snapshot.child("fotoPerfil").getValue().toString();
-                                                Log.i("idCliente ", fotocliente);
-                                        }
-                                        @Override
 
         ArrayList<ElementListViewInicioAdmin> arrayList2 = new ArrayList<>();
 
@@ -228,10 +191,10 @@ public class HomeAdminFragment extends Fragment {
                                     try {
                                         OrdenesCliente ordenesCliente = objSnapshot2.getValue(OrdenesCliente.class);
                                         contP++;
-                                        ElementListViewInicioAdmin nvo=new ElementListViewInicioAdmin();
+                                        ElementListViewInicioAdmin nvo = new ElementListViewInicioAdmin();
                                         nvo.setFecha(ordenesCliente.getFechaOrden());
                                         nvo.setImgUsuario(usuarios.getFotoPerfil());
-                                        nvo.setUsuario(usuarios.getNombreCliente()+" "+usuarios.getApellidoPaterno());
+                                        nvo.setUsuario(usuarios.getNombreCliente() + " " + usuarios.getApellidoPaterno());
                                         nvo.setNoOrden(ordenesCliente.getInOrden());
                                         arrayList2.add(nvo);
                                         customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList2, getContext());
@@ -270,22 +233,22 @@ public class HomeAdminFragment extends Fragment {
                 cantidadProductosPedidos = 0;
                 cantidadProductosVentas = 0;
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    Clientes clientes=objSnapshot.getValue(Clientes.class);
+                    Clientes clientes = objSnapshot.getValue(Clientes.class);
                     cantidadProductosClientes++;
-                    cantidadClientes.setText(cantidadProductosClientes+"");
+                    cantidadClientes.setText(cantidadProductosClientes + "");
                     try {
                         Clientes usuarios = objSnapshot.getValue(Clientes.class);
                         databaseReference.child("OrdenesCliente/" + clientes.getIdUsuario()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
-                                    OrdenesCliente ordenesCliente=objSnapshot2.getValue(OrdenesCliente.class);
+                                    OrdenesCliente ordenesCliente = objSnapshot2.getValue(OrdenesCliente.class);
                                     cantidadProductosPedidos++;
-                                    cantidadProductosVentas+=ordenesCliente.getTotal();
+                                    cantidadProductosVentas += ordenesCliente.getTotal();
                                     DecimalFormat formato = new DecimalFormat("#,###.00");
                                     String valorFormateado = formato.format(cantidadProductosVentas);
-                                    cantidadVentas.setText("$"+valorFormateado+" MX");
-                                    cantidadPedidos.setText(""+cantidadProductosPedidos);
+                                    cantidadVentas.setText("$" + valorFormateado + " MX");
+                                    cantidadPedidos.setText("" + cantidadProductosPedidos);
 
                                 }
                             }
@@ -315,7 +278,7 @@ public class HomeAdminFragment extends Fragment {
 
                     try {
                         cantidadProductosContador++;
-                        cantidadProductos.setText(""+cantidadProductosContador);
+                        cantidadProductos.setText("" + cantidadProductosContador);
                     } catch (Exception e) {
                         Log.i("Hay error", e.getMessage() + " ssfsdf");
                     }

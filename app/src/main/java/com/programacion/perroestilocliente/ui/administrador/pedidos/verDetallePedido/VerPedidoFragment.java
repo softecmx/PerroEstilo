@@ -106,7 +106,7 @@ public class VerPedidoFragment extends Fragment {
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         //StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ListView reciclerViewMiCarritoProductos = root.findViewById(R.id.lstViewEstPedDet);
+         listdetalles = root.findViewById(R.id.lstViewEstPedDetAdmin);
         ArrayList<ElementListViewConsultarPedidos> arrayList = new ArrayList<>();
         total = 0;
 
