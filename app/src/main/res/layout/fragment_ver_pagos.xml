@@ -49,13 +49,20 @@
         </LinearLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:id="@+id/flPagosPendientesFrame">
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flPagosPendientesFrame"
+            android:layout_width="match_parent"
+            android:layout_height="530dp"
+            android:layout_marginTop="10dp">
+
             <ListView
                 android:id="@+id/listPagosPendientes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </FrameLayout>
     </LinearLayout>

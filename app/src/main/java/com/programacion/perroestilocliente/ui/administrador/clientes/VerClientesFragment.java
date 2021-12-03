@@ -8,12 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -26,14 +30,15 @@ import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.Disenios;
 import com.programacion.perroestilocliente.modelo.Productos;
 import com.programacion.perroestilocliente.modelo.Tallas;
-import com.programacion.perroestilocliente.ui.administrador.inventario.ElementListViewInventario;
-import com.programacion.perroestilocliente.ui.administrador.inventario.ListAdapterInventario;
+import com.programacion.perroestilocliente.ui.administrador.clientes.ElementListViewClientes;
+import com.programacion.perroestilocliente.ui.administrador.clientes.ListAdapterClientes;
 
 import java.util.ArrayList;
 
-public class VerClientesFragment extends Fragment {
+public class VerClientesFragment extends Fragment implements AdapterView.OnItemClickListener {
     private TextView txtNombre, txtStatus;
     private ImageButton imgbtnLealtad, imgbtnBuscar;
+    private ImageView fotoUsuario;
 
     View root;
     private ListView listView;
@@ -46,6 +51,7 @@ public class VerClientesFragment extends Fragment {
     private ArrayList<Clientes> ListaClientes = new ArrayList<Clientes>();
     String nombre = "";
     String lealtad = "";
+    String img ="";
 
     private VerClientesViewModel mViewModel;
 
@@ -57,31 +63,43 @@ public class VerClientesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root= inflater.inflate(R.layout.fragment_ver_clientes, container, false);
+        //root= inflater.inflate(R.layout.item_lista_clientes_lealtad, container, false);
         listView = root.findViewById(R.id.listClientes);
         imgbtnBuscar = root.findViewById(R.id.ibtnAgregarClienteLeal);
 
-        root= inflater.inflate(R.layout.item_lista_clientes_lealtad, container, false);
+
         txtNombre= root.findViewById(R.id.txtNombreUsuarioLealtadLista);
         txtStatus= root.findViewById(R.id.txtStatusUsuarioLealtad);
         imgbtnLealtad=root.findViewById(R.id.imgbtnLealtad);
 
         iniciaFirebase();
-        listarDatos();
         registerForContextMenu(listView);
+        //listarDatos();
+        //modificarLealtad();
         return root;
     }
+
+
+
     public void listarDatos() {
-/*
-        databaseReference.child("Usuarios/Clientes").orderByChild("username").addValueEventListener(new ValueEventListener() {
+        Toast.makeText(getContext(), "listarDatos", Toast.LENGTH_SHORT).show();
+
+        /*databaseReference.child("Usuarios/Clientes").orderByChild("estadoLogico").equalTo("ACTIVO").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewConsultarPedidos> arrayList = new ArrayList<>();
+                ArrayList<ElementListViewClientes> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    Clientes cl = objSnapshot.getValue(Clientes.class);
+                    try {
+                        Toast.makeText(getContext(), "cliente: "+objSnapshot, Toast.LENGTH_SHORT).show();
+                        Clientes cl = objSnapshot.getValue(Clientes.class);
+                        arrayList.add(new ElementListViewClientes(cl.getNombreCliente(),cl.getLealtad(),cl.getFotoPerfil()));
+                        customAdapter = new ListAdapterClientes(getActivity(), arrayList);
+                        listView.setAdapter(customAdapter);
+                    }catch (Exception e)
+                    {
+                        Log.i("error: ",e.getMessage());
+                    }
 
-                    arrayList.add(new ElementListViewConsultarPedidos(cl.getIdUsuario(),cl.getEstatus(),cl.getNombreCliente(),cl.getApellidoPaterno(),cl.getEmail(),cl.getTelefono()));
-                    customAdapter = new ListAdapterConsultarPedidos(getActivity(), arrayList);
-                    listView.setAdapter(customAdapter);
                 }
                 }
 
@@ -90,8 +108,10 @@ public class VerClientesFragment extends Fragment {
 
             }
         });
-
 */
+
+    }
+    private void modificarLealtad() {
     }
     public void iniciaFirebase() {
         FirebaseApp.initializeApp(getContext());
@@ -105,4 +125,8 @@ public class VerClientesFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }

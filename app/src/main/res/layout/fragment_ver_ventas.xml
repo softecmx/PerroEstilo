@@ -8,6 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -45,31 +47,34 @@
                 android:contentDescription="@string/txtDescripcion"
                 app:srcCompat="@drawable/ic_search_black_24dp" />
         </LinearLayout>
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        </FrameLayout>
             <FrameLayout
                 android:id="@+id/flVerEnviosFrame"
                 android:layout_width="match_parent"
-                android:layout_height="490dp"
+                android:layout_height="530dp"
                 android:layout_marginTop="10dp">
 
                 <ExpandableListView
                     android:id="@+id/expListVerVentas"
                     android:layout_width="match_parent"
-                    android:layout_height="373dp">
+                    android:layout_height="match_parent">
 
                     <ListView
                         android:id="@+id/listVerVentas"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent" />
                 </ExpandableListView>
 
             </FrameLayout>
-        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

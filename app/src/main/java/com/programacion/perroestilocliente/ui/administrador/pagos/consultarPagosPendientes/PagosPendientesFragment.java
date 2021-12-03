@@ -8,9 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,7 +28,7 @@ import com.programacion.perroestilocliente.modelo.OrdenesCliente;
 
 import java.util.ArrayList;
 
-public class PagosPendientesFragment extends Fragment {
+public class PagosPendientesFragment extends Fragment implements AdapterView.OnItemClickListener {
     private TextView txOrden, txtTotal, txtStatus;
     private PagosPendientesViewModel mViewModel;
     private ImageButton btnBuscar;
@@ -54,23 +56,22 @@ public class PagosPendientesFragment extends Fragment {
         btnBuscar = root.findViewById(R.id.ibtnBuscarPagoPendiente);
 
         iniciaFirebase();
-        listarDatos();
         registerForContextMenu(listView);
+        listarDatos();
         return root;
 
     }
     public void listarDatos() {
-
-        databaseReference.child("OrdenesCliente").orderByChild("idCliente").orderByChild("inOrden").addValueEventListener(new ValueEventListener() {
+/*
+        databaseReference.child("OrdenesCliente/2Gh4n1MJ3lhgI6fjS5kbpgcn3m82/1A474BB5-7").orderByChild("estatusOrden").equalTo("Pago pendiente").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("direccion",snapshot.getValue().toString());
                 ArrayList<ElementListViewPagosPendientes> arrayList = new ArrayList<>();
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) { //Subtotales de cada orden
                         OrdenesCliente oc = snapshot.getValue(OrdenesCliente.class);
-                        inOrden =oc.getInOrden();
-                        estatusOrden  =oc.getEstatusOrden();
-                        //total =oc.getTotal();
-                    arrayList.add(new ElementListViewPagosPendientes(inOrden ,Integer.parseInt(estatusOrden),Integer.parseInt(total)));
+                        //total=oc.getTotal();
+                    arrayList.add(new ElementListViewPagosPendientes(oc.getInOrden(),oc.getEstatusOrden(),"Total: $"+oc.getNoSerie()));
                     customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayList);
                     listView.setAdapter(customAdapter);
                 }
@@ -78,7 +79,7 @@ public class PagosPendientesFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
-        });
+        });*/
     }
     public void iniciaFirebase() {
         FirebaseApp.initializeApp(getContext());
@@ -93,4 +94,8 @@ public class PagosPendientesFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }
