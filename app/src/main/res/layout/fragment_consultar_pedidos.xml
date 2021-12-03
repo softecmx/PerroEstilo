@@ -47,21 +47,21 @@
                 app:srcCompat="@drawable/ic_search_black_24dp" />
         </LinearLayout>
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/flPedidosProcesandoFrame"
-            android:layout_width="match_parent"
-            android:layout_height="530dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
             <ListView
                 android:id="@+id/listPedidosProcesando"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </FrameLayout>
     </LinearLayout>
