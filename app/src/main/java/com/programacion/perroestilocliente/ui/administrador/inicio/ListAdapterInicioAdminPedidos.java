@@ -53,10 +53,13 @@ public class ListAdapterInicioAdminPedidos extends ArrayAdapter<ElementListViewI
                             .inflate(R.layout.fragment_lista_nuevos_pedidos_inicio_admin, parent, false);
         }
         TextView txtUsuario= convertView.findViewById(R.id.txtItemPedidoInicioAdminPedidos);
-        ImageView imgFoto= convertView.findViewById(R.id.imgItemUsuarioFotoInicioAdminPedidos);
-
-        txtUsuario.setText(arrayList.get(position).getUsuario());
-    //    cargaImagen(imgFoto,arrayList.get(position).getImgUsuario());
+        TextView txtFecha= convertView.findViewById(R.id.txtItemPedidoInicioAdminFecha);
+        TextView txtNoOrden= convertView.findViewById(R.id.txtItemPedidoInicioAdminNoSerie);
+        de.hdodenhof.circleimageview.CircleImageView imgFoto= convertView.findViewById(R.id.imgItemUsuarioFotoInicioAdminPedidos);
+        txtFecha.setText(" "+arrayList.get(position).getFecha());
+        txtNoOrden.setText("No. Orden: "+arrayList.get(position).getNoOrden());
+        txtUsuario.setText(arrayList.get(position).getUsuario()+"");
+      //  cargaImagen(imgFoto,arrayList.get(position).getImgUsuario());
 
         return convertView;
     }

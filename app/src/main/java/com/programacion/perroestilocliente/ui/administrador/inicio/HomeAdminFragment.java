@@ -184,13 +184,16 @@ public class HomeAdminFragment extends Fragment {
                         databaseReference.child("OrdenesCliente/" + usuarios.getIdUsuario()).orderByChild("estatusOrden").equalTo("Preparando pedido").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
                                 for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
                                     try {
-                                        // OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);
+                                        OrdenesCliente ordenesCliente = objSnapshot2.getValue(OrdenesCliente.class);
                                         contP++;
-                                        arrayList2.add(new ElementListViewInicioAdmin(usuarios.getNombreCliente(), usuarios.getFotoPerfil()));
+                                        ElementListViewInicioAdmin nvo=new ElementListViewInicioAdmin();
+                                        nvo.setFecha(ordenesCliente.getFechaOrden());
+                                        nvo.setImgUsuario(usuarios.getFotoPerfil());
+                                        nvo.setUsuario(usuarios.getNombreCliente()+" "+usuarios.getApellidoPaterno());
+                                        nvo.setNoOrden(ordenesCliente.getInOrden());
+                                        arrayList2.add(nvo);
                                         customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList2, getContext());
                                         listViewPedidos.setAdapter(customAdapter1);
                                         nuevosPedidos.setText("Mira los nuevo pedidos (" + contP + ")");
@@ -274,34 +277,6 @@ public class HomeAdminFragment extends Fragment {
                         cantidadProductos.setText(""+cantidadProductosContador);
                     } catch (Exception e) {
                         Log.i("Hay error", e.getMessage() + " ssfsdf");
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void llenarlistaPedidos(String idcliente, String nombrecliente) {
-        databaseReference.child("Usuarios/Clientes").child(idcliente + "/fotoPerfil").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
-
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    try {
-                        Usuarios u = objSnapshot.getValue(Usuarios.class);
-
-                        contP++;
-                        arrayList.add(new ElementListViewInicioAdmin(nombrecliente, u.getFotoPerfil()));
-                        customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
-                        listViewPedidos.setAdapter(customAdapter1);
-
-                    } catch (Exception e) {
-                        Log.i("Hay error", e.getMessage());
                     }
                 }
             }

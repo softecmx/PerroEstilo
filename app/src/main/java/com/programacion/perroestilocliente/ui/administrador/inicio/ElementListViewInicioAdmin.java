@@ -15,7 +15,8 @@ public class ElementListViewInicioAdmin {
     private String cantidadClientes;
     private String nuevosPedidos;
     private String pocosProductos;
-
+private  String fecha;
+private  String noOrden;
     public ElementListViewInicioAdmin() {
     }
 
@@ -33,6 +34,22 @@ public class ElementListViewInicioAdmin {
         this.cantidadClientes = cantidadClientes;
         this.nuevosPedidos = nuevosPedidos;
         this.pocosProductos = pocosProductos;
+    }
+
+    public String getNoOrden() {
+        return noOrden;
+    }
+
+    public void setNoOrden(String noOrden) {
+        this.noOrden = noOrden;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public ElementListViewInicioAdmin(String usuario, String imgUsuario) {

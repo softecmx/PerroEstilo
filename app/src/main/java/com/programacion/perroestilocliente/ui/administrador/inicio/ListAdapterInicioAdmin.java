@@ -61,7 +61,7 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
         ImageView imgFoto= convertView.findViewById(R.id.imgItemProdFotoInicioAdmin);
 
         txtNombre.setText(arrayList.get(position).getProducto());
-        txtStock.setText(arrayList.get(position).getStock());
+        txtStock.setText("Stock: "+arrayList.get(position).getStock());
       cargaImagen(imgFoto,arrayList.get(position).getImgProducto());
 
         return convertView;
