@@ -233,7 +233,7 @@ public class ModificarPagosPendientesFragment extends Fragment {
         Map<String, Object> encenderMap = new HashMap<>();
         encenderMap.put("OrdenesCliente/"+idusuario+"/estatus",status);
         //encenderMap.put("Productos/"+txtCodigo.getText()+"/estatusStock",spnModStatus.getText().toString());
-        databaseReference.updateChildren(encenderMap).toString();
+        databaseReference.updateChildren(encenderMap);
         if(status=="Pago pendiente")
         { btnConfirmarPago.setOnClickListener(new View.OnClickListener()
         {
@@ -248,6 +248,7 @@ public class ModificarPagosPendientesFragment extends Fragment {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 status ="Preparando pedido";
+                Toast.makeText(getContext(), "Status actualizado", Toast.LENGTH_SHORT).show();
             }
         });
         }
@@ -264,7 +265,7 @@ public class ModificarPagosPendientesFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-        Toast.makeText(getContext(), "Inventario Actualizado", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Inventario Actualizado", Toast.LENGTH_SHORT).show();
         //dialog.dismiss();
     }
 
