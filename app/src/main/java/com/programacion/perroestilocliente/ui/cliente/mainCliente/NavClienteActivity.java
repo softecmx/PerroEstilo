@@ -1,5 +1,6 @@
 package com.programacion.perroestilocliente.ui.cliente.mainCliente;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +24,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +46,7 @@ import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.Productos;
 import com.programacion.perroestilocliente.ui.cliente.comprar.comprarAhora.ComprarAhoraFragment;
 import com.programacion.perroestilocliente.ui.cliente.tienda.TiendaFragment;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -119,6 +124,7 @@ public class NavClienteActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
         Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
         queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -129,6 +135,46 @@ public class NavClienteActivity extends AppCompatActivity {
                         //  usuario = usuario.getNombreCliente() + " " + usuario.getApellidoPaterno();
                         txtTitulo.setText(usuarios.getNombreCliente()+" "+usuarios.getApellidoPaterno());
                         txtSubtitulo.setText(usuarios.getEmail());
+
+                        if(usuarios.getFotoPerfil().contains("facebook")){
+                            if (user.getPhotoUrl() != null) {
+
+                                //cImgFoto.setImageURI(user.getPhotoUrl());
+                                String pholoURL=user.getPhotoUrl().toString();
+                                pholoURL=pholoURL+"?type=large";
+                                Picasso.get().load(pholoURL)
+                                        .error(R.drawable.logo)
+                                        .into(imgUser);
+                            } else {
+                                imgUser.setImageResource(R.drawable.logo);
+                            }
+                        }else if(usuarios.getFotoPerfil().contains("googleusercontent")){
+                            if (user.getPhotoUrl() != null) {
+                                //cImgFoto.setImageURI(user.getPhotoUrl());
+                                Picasso.get().load(user.getPhotoUrl())
+                                        .error(R.drawable.logo)
+                                        .into(imgUser);
+                            } else {
+                                imgUser.setImageResource(R.drawable.logo);
+                            }
+                        }else if(!usuarios.getFotoPerfil().isEmpty()){
+                            if (getApplication() != null) {
+                                storageReference.child(usuarios.getFotoPerfil()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Glide.with(NavClienteActivity.this).load(uri).into(imgUser);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        mostarToast(e.getCause() + "", 3, false);
+                                    }
+                                });
+                            }
+                        }else{
+                            imgUser.setImageResource(R.drawable.logo);
+                        }
+
                     }
                 }
             }
