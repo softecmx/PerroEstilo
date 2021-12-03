@@ -112,7 +112,7 @@ public class InventarioFragment extends Fragment implements AdapterView.OnItemCl
                                             try {
                                                 Tallas t = objSnapshot.getValue(Tallas.class);
                                                 tallas = t.getTallas();
-                                                arrayList.add(new ElementListViewInventario(p.getIdProducto() ,p.getNombre(), disenio, tallas, p.getEstatusStock(), p.getStock()));
+                                                arrayList.add(new ElementListViewInventario(p.getIdProducto() ,p.getNombre(), disenio, tallas, p.getEstatusStock(), p.getStock(),p.getImgFoto()));
                                                 customAdapter = new ListAdapterInventario(getActivity(), arrayList);
                                                 listView.setAdapter(customAdapter);
                                             }catch (Exception e){
@@ -211,7 +211,17 @@ public class InventarioFragment extends Fragment implements AdapterView.OnItemCl
                         sumarStock();
                     }
                 });
-
+                btnAceptar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String, Object> encenderMap = new HashMap<>();
+                        encenderMap.put("Productos/"+txtCodigo.getText()+"/stock",txtStock.getText());
+                        encenderMap.put("Productos/"+txtCodigo.getText()+"/estatusStock",spnModStatus.getText().toString());
+                        databaseReference.updateChildren(encenderMap).toString();
+                         Toast.makeText(getContext(), "Inventario Actualizado", Toast.LENGTH_SHORT).show();
+                         dialog.dismiss();
+                    }
+                });
 
                 dialog.show();
             }
