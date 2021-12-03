@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,19 +73,24 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
 
     public void listarDatos() {
 
+
+        /*
         databaseReference.child("OrdenesCliente/").orderByChild("estatusOrden").equalTo("Pago pendiente").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                arrayListOrdenes.clear();
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
-                    Log.i("Datos ",orden.getEstatusOrden());
-                    /*//Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
+                if(snapshot.exists()){
+                    arrayListOrdenes.clear();
+                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                        OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
+                        Toast.makeText(getContext(), "S se encontraron", Toast.LENGTH_SHORT).show();
+                    /*Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
                     OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
                     arrayListOrdenes.add(new ElementListViewConsultarPedidos(orden.getInOrden(), orden.getEstatusOrden(), "$ " + orden.getTotal()));
                     adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
-                    listView.setAdapter(adapterOrdenes);*/
-                }
+                    listView.setAdapter(adapterOrdenes);
+                    }
+                }else Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -92,7 +98,7 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
             }
         });
 
-
+*/
     }
 
     public void iniciaFirebase() {
