@@ -29,7 +29,7 @@ public class ConsultarVentasFragment extends Fragment implements AdapterView.OnI
 
     View root;
     ExpandableListView expandableListView;
-    private ListView listView;
+    private ExpandableListView listView;
     private ListAdapterVentas customAdapter;
 
     FirebaseDatabase firebaseDatabase;
@@ -47,11 +47,11 @@ public class ConsultarVentasFragment extends Fragment implements AdapterView.OnI
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root=inflater.inflate(R.layout.fragment_ver_ventas, container, false);
-        //listView=root.findViewById(R.id.listPedidosProcesando);
+        listView=root.findViewById(R.id.expListVerVentas);
         btnBuscar=root.findViewById(R.id.ibtnBuscarPedidosVentaConsulta);
 
         iniciaFirebase();
-        registerForContextMenu(listView);
+        //registerForContextMenu(listView);
         //listarDatos();
 
 
