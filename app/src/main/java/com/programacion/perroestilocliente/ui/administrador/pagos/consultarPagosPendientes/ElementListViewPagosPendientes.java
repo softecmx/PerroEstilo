@@ -43,6 +43,7 @@ public class ElementListViewPagosPendientes {
         this.imgProducto = imgProducto;
     }
 
+
     public String getOrdenPedido() {
         return ordenPedido;
     }

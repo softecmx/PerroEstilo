@@ -5,10 +5,14 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.23425925925925925" />
         <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.2" />
-        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_pedidos_admin.xml" value="0.1" />
-        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_creditos.xml" value="0.18229166666666666" />
-        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/nav_header_main.xml" value="0.18229166666666666" />
-        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/nav_header_nav_cliente.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_pedidos.xml" value="0.1" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_envios.xml" value="0.1" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_expandible_carrito.xml" value="0.1" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_carrito.xml" value="0.1" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_disenio.xml" value="0.1" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_envios.xml" value="0.4111111111111111" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_pagos.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_pedidos.xml" value="0.1" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-action/ic_dashboard_black_24dp.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-av/ic_equalizer_black_24dp.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-v24/background_personalizado.xml" value="0.1984375" />
@@ -468,6 +472,7 @@
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_detalle_pedido.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_detalle_venta.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_envios.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_modelo.xml" value="0.1453125" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_pagos.xml" value="0.22" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_pedido.xml" value="0.22" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_producto.xml" value="0.20416666666666666" />

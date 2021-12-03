@@ -58,14 +58,14 @@ public class MisPedidosFragment extends Fragment {
         reciclerViewOrdenes=root.findViewById(R.id.listMisPedidos);
         final String[] idCliente = {""};
         Query queryCliente = databaseReference.child("Usuarios/Clientes").orderByChild("email").equalTo(user.getEmail());
-        queryCliente.addListenerForSingleValueEvent(new ValueEventListener() {
+        queryCliente.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                         Clientes usuario = objSnapshot.getValue(Clientes.class);
                         idCliente[0] =usuario.getIdUsuario();
-                        databaseReference.child("OrdenesCliente/"+ idCliente[0]).addListenerForSingleValueEvent(new ValueEventListener() {
+                        databaseReference.child("OrdenesCliente/"+ idCliente[0]).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 arrayListOrdenes.clear();

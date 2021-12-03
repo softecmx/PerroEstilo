@@ -1,0 +1,148 @@
+Index: app/src/main/java/com/programacion/perroestilocliente/ui/administrador/pagos/modificarPagosPendientes/ModificarPagosPendientesFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.programacion.perroestilocliente.ui.administrador.pagos.modificarPagosPendientes;\r\n\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.firebase.FirebaseApp;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.programacion.perroestilocliente.R;\r\nimport com.programacion.perroestilocliente.modelo.DetOrdenProductos;\r\nimport com.programacion.perroestilocliente.modelo.Direcciones;\r\nimport com.programacion.perroestilocliente.modelo.OrdenesCliente;\r\nimport com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes.PagosPendientesFragment;\r\nimport com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment;\r\nimport com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ElementListViewConsultarPedidos;\r\nimport com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ListAdapterConsultarPedidosinterna;\r\n\r\nimport java.text.DateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\nimport java.util.Date;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class ModificarPagosPendientesFragment extends Fragment {\r\n    Button btnConfirmarPago;\r\n    Button btnAtras;\r\n    TextView txtStatus,txtFecha,txtOrden,txtSerie,txtFechaDetalle,txtNombreContacto,txtTelContacto,txtDireccionContacto;\r\n    TextView txtTotal;\r\n\r\n    String idOrden;\r\n    String status = \"\";\r\n    String fechaEst;\r\n    String fechaEntrega;\r\n    float total;\r\n    String idCliente;\r\n    String idordengt, statusgt, idusuario;\r\n    float totalgt;\r\n    ListView listdetalles;\r\n    View root;\r\n    FirebaseDatabase firebaseDatabase;\r\n    DatabaseReference databaseReference;\r\n\r\n    private ModificarPagosPendientesViewModel mViewModel;\r\n\r\n    public static ModificarPagosPendientesFragment newInstance() { return new ModificarPagosPendientesFragment(); }\r\n\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,\r\n                             @Nullable Bundle savedInstanceState) {\r\n        root=inflater.inflate(R.layout.fragment_detalle_pagos, container, false);\r\n        btnConfirmarPago=root.findViewById(R.id.btnConfirmarDetallePago);\r\n        btnAtras=root.findViewById(R.id.btnAtrasDetaPago);\r\n\r\n        Bundle args = getArguments();\r\n        idOrden = args.getString(\"idOrden\");\r\n        idusuario = args.getString(\"idusuario\");\r\n        statusgt = args.getString(\"status\");\r\n        totalgt = args.getFloat(\"total\");\r\n        inicializarComponentes();FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();\r\n        DatabaseReference databaseReference = firebaseDatabase.getReference();\r\n        //StorageReference storageReference = FirebaseStorage.getInstance().getReference(\"Productos\");\r\n        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();\r\n        listdetalles = root.findViewById(R.id.lstViewDetalleCompraDetPagos);\r\n        ArrayList<ElementListViewConsultarPedidos> arrayList = new ArrayList<>();\r\n        total = 0;\r\n\r\n        databaseReference.child(\"OrdenesCliente/\" + idusuario)\r\n                .orderByChild(\"inOrden\").equalTo(idOrden)\r\n                .addListenerForSingleValueEvent(new ValueEventListener() {\r\n                    @Override\r\n                    public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                        arrayList.clear();\r\n                        if (snapshot.exists()) {\r\n                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {\r\n                                OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);\r\n                                txtOrden.setText(ordenesCliente.getInOrden());\r\n                                txtSerie.setText(ordenesCliente.getNoSerie());\r\n                                txtFecha.setText(ordenesCliente.getFechaOrden());\r\n                                txtTelContacto.setText(ordenesCliente.getTelefonoContacto());\r\n                                txtNombreContacto.setText(ordenesCliente.getNombreContacto() + ordenesCliente.getApPContacto());\r\n                                Direcciones direccionEnvio = ordenesCliente.getDireccionEnvio();\r\n                                String dir = direccionEnvio.getEntidadFederativa() + \", \" + direccionEnvio.getMunicipio() + \", \" +\r\n                                        direccionEnvio.getLocalidad() + \". CP: \" + direccionEnvio.getCodigoPostal()\r\n                                        + \". Calle Externa: \" + direccionEnvio.getCalleYNumeroExterno() +\r\n                                        \". Calle Interna: \" + direccionEnvio.getCalleYNumeroInterno() + \". Con referencias: \" + direccionEnvio.getReferencia();\r\n                                txtDireccionContacto.setText(dir);\r\n                                Date dt = new Date();\r\n                                Calendar c = Calendar.getInstance();\r\n                                c.setTime(dt);\r\n                                c.add(Calendar.DATE, 7);\r\n                                DateFormat formateadorFechaCorta = DateFormat.getDateInstance(DateFormat.SHORT);\r\n                                txtFechaDetalle.setText(formateadorFechaCorta.format(c.getTime()));\r\n                                status = ordenesCliente.getEstatusOrden();\r\n                                fechaEntrega = ordenesCliente.getFechaEntrega();\r\n                                fechaEst = ordenesCliente.getFechaOrden();\r\n                                if (status.equals(\"Pago pendiente\")) {\r\n                                    txtFecha.setText(\"Proximamente\");\r\n                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.danger));\r\n                                } else if (status.equals(\"Preparando pedido\")) {\r\n                                    txtFecha.setText(\"Proximamente\");\r\n                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_orange_2));\r\n                                } else if (status.equals(\"En camino\")) {\r\n                                    txtFecha.setText(\"Proximamente \");\r\n                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_yellow_1));\r\n                                } else if (status.equals(\"Entregado\")) {\r\n                                    txtFecha.setText(\"Entregado el \" + fechaEntrega);\r\n                                    txtStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.flat_green_1));\r\n                                }\r\n\r\n                                txtStatus.setText(status);\r\n\r\n                                databaseReference.child(\"DetalleOrdenesCliente/\" + idOrden)\r\n                                        .addListenerForSingleValueEvent(new ValueEventListener() {\r\n                                            @Override\r\n                                            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                                                arrayList.clear();\r\n                                                if (snapshot.exists()) {\r\n                                                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {\r\n\r\n                                                        try {\r\n                                                            DetOrdenProductos ordenesCliente = objSnapshot.getValue(DetOrdenProductos.class);\r\n                                                            arrayList.add(new ElementListViewConsultarPedidos(\r\n                                                                    ordenesCliente.getModelos(),\r\n                                                                    ordenesCliente.getPrecioUnitario()+\"\",\r\n                                                                    ordenesCliente.getCantidad()+\"\",\r\n                                                                    ordenesCliente.getSubtotal(),\r\n                                                                    ordenesCliente.getImgFoto()));\r\n                                                            ListAdapterConsultarPedidosinterna adapterlista= new ListAdapterConsultarPedidosinterna(getActivity(), arrayList,getContext());\r\n                                                            listdetalles.setAdapter(adapterlista);\r\n                                                            total = total + (ordenesCliente.getPrecioUnitario() * ordenesCliente.getCantidad());\r\n                                                            txtTotal.setText(\"$\" + total);\r\n                                                        } catch (Exception e) {\r\n\r\n                                                        }\r\n\r\n                                                    }\r\n                                                }\r\n                                            }\r\n\r\n                                            @Override\r\n                                            public void onCancelled(@NonNull DatabaseError error) {\r\n                                            }\r\n                                        });\r\n                            }\r\n                        }\r\n                    }\r\n                    @Override\r\n                    public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n                    }\r\n                });\r\n\r\n\r\n       /* btnConfirmarPago.setOnClickListener(new View.OnClickListener()\r\n\r\n        {\r\n            @Override\r\n            public void onClick (View view){\r\n                PagosPendientesFragment newFragment1 = new PagosPendientesFragment();\r\n                Bundle args = new Bundle();\r\n                newFragment1.setArguments(args);\r\n                FragmentManager fragmentManager = getFragmentManager();\r\n                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n                fragmentTransaction.replace(R.id.container, newFragment1);\r\n                fragmentTransaction.addToBackStack(null);\r\n                fragmentTransaction.commit();\r\n            }\r\n        });\r\n        btnAtras.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                PagosPendientesFragment newFragment1 = new PagosPendientesFragment();\r\n                Bundle args = new Bundle();\r\n                newFragment1.setArguments(args);\r\n                FragmentManager fragmentManager = getFragmentManager();\r\n                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n                fragmentTransaction.replace(R.id.container, newFragment1);\r\n                fragmentTransaction.addToBackStack(null);\r\n                fragmentTransaction.commit();\r\n            }\r\n        });*/\r\n        modificarStatus();\r\n        return root;\r\n    }\r\n    public void inicializarComponentes(){\r\n        txtStatus= root.findViewById(R.id.txtStatusDetPagos);\r\n        txtFecha=root.findViewById(R.id.txtFechaDetPagos);\r\n        txtOrden= root.findViewById(R.id.txtNoOrdenDetPagos);\r\n        txtSerie= root.findViewById(R.id.txtNoSerieDetPagos);\r\n        txtFechaDetalle=root.findViewById(R.id.txtFechaEstimadaDetPago);\r\n        txtNombreContacto=root.findViewById(R.id.txtContactoDetPago);\r\n        txtTelContacto=root.findViewById(R.id.txtTelefonoDetPago);\r\n        txtDireccionContacto= root.findViewById(R.id.txtDireccionDetPago);\r\n        txtTotal=root.findViewById(R.id.txtTotalDetPago);\r\n    }\r\n\r\n    public void iniciaFirebase() {\r\n        FirebaseApp.initializeApp(getContext());\r\n        firebaseDatabase = FirebaseDatabase.getInstance();\r\n        databaseReference = firebaseDatabase.getReference();\r\n    }\r\n\r\n    @Override\r\n    public void onActivityCreated(@Nullable Bundle savedInstanceState) {\r\n        super.onActivityCreated(savedInstanceState);\r\n        mViewModel = new ViewModelProvider(this).get(ModificarPagosPendientesViewModel.class);\r\n        // TODO: Use the ViewModel\r\n    }\r\n    public void modificarStatus()\r\n    {\r\n        Map<String, Object> encenderMap = new HashMap<>();\r\n        encenderMap.put(\"OrdenesCliente/\"+idusuario+\"/estatus\",status);\r\n        //encenderMap.put(\"Productos/\"+txtCodigo.getText()+\"/estatusStock\",spnModStatus.getText().toString());\r\n        databaseReference.updateChildren(encenderMap).toString();\r\n        if(status==\"Pago pendiente\")\r\n        { btnConfirmarPago.setOnClickListener(new View.OnClickListener()\r\n        {\r\n            @Override\r\n            public void onClick (View view){\r\n                ConsultarPedidosFragment newFragment1 = new ConsultarPedidosFragment();\r\n                Bundle args = new Bundle();\r\n                newFragment1.setArguments(args);\r\n                FragmentManager fragmentManager = getFragmentManager();\r\n                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n                fragmentTransaction.replace(R.id.container, newFragment1);\r\n                fragmentTransaction.addToBackStack(null);\r\n                fragmentTransaction.commit();\r\n                status =\"Preparando pedido\";\r\n            }\r\n        });\r\n        }\r\n        btnAtras.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                PagosPendientesFragment newFragment1 = new PagosPendientesFragment();\r\n                Bundle args = new Bundle();\r\n                newFragment1.setArguments(args);\r\n                FragmentManager fragmentManager = getFragmentManager();\r\n                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n                fragmentTransaction.replace(R.id.container, newFragment1);\r\n                fragmentTransaction.addToBackStack(null);\r\n                fragmentTransaction.commit();\r\n            }\r\n        });\r\n        Toast.makeText(getContext(), \"Inventario Actualizado\", Toast.LENGTH_SHORT).show();\r\n        //dialog.dismiss();\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/pagos/modificarPagosPendientes/ModificarPagosPendientesFragment.java b/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/pagos/modificarPagosPendientes/ModificarPagosPendientesFragment.java
+--- a/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/pagos/modificarPagosPendientes/ModificarPagosPendientesFragment.java	(revision 2d4223a68f602643d8fc8813b61d1bfc8232f2b5)
++++ b/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/pagos/modificarPagosPendientes/ModificarPagosPendientesFragment.java	(date 1638541019302)
+@@ -46,7 +46,7 @@
+ public class ModificarPagosPendientesFragment extends Fragment {
+     Button btnConfirmarPago;
+     Button btnAtras;
+-    TextView txtStatus,txtFecha,txtOrden,txtSerie,txtFechaDetalle,txtNombreContacto,txtTelContacto,txtDireccionContacto;
++    TextView txtStatus, txtFecha, txtOrden, txtSerie, txtFechaDetalle, txtNombreContacto, txtTelContacto, txtDireccionContacto;
+     TextView txtTotal;
+ 
+     String idOrden;
+@@ -64,21 +64,24 @@
+ 
+     private ModificarPagosPendientesViewModel mViewModel;
+ 
+-    public static ModificarPagosPendientesFragment newInstance() { return new ModificarPagosPendientesFragment(); }
++    public static ModificarPagosPendientesFragment newInstance() {
++        return new ModificarPagosPendientesFragment();
++    }
+ 
+     @Override
+     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                              @Nullable Bundle savedInstanceState) {
+-        root=inflater.inflate(R.layout.fragment_detalle_pagos, container, false);
+-        btnConfirmarPago=root.findViewById(R.id.btnConfirmarDetallePago);
+-        btnAtras=root.findViewById(R.id.btnAtrasDetaPago);
++        root = inflater.inflate(R.layout.fragment_detalle_pagos, container, false);
++        btnConfirmarPago = root.findViewById(R.id.btnConfirmarDetallePago);
++        btnAtras = root.findViewById(R.id.btnAtrasDetaPago);
+ 
+         Bundle args = getArguments();
+         idOrden = args.getString("idOrden");
+         idusuario = args.getString("idusuario");
+         statusgt = args.getString("status");
+         totalgt = args.getFloat("total");
+-        inicializarComponentes();FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
++        inicializarComponentes();
++        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+         DatabaseReference databaseReference = firebaseDatabase.getReference();
+         //StorageReference storageReference = FirebaseStorage.getInstance().getReference("Productos");
+         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+@@ -143,11 +146,11 @@
+                                                             DetOrdenProductos ordenesCliente = objSnapshot.getValue(DetOrdenProductos.class);
+                                                             arrayList.add(new ElementListViewConsultarPedidos(
+                                                                     ordenesCliente.getModelos(),
+-                                                                    ordenesCliente.getPrecioUnitario()+"",
+-                                                                    ordenesCliente.getCantidad()+"",
++                                                                    ordenesCliente.getPrecioUnitario() + "",
++                                                                    ordenesCliente.getCantidad() + "",
+                                                                     ordenesCliente.getSubtotal(),
+                                                                     ordenesCliente.getImgFoto()));
+-                                                            ListAdapterConsultarPedidosinterna adapterlista= new ListAdapterConsultarPedidosinterna(getActivity(), arrayList,getContext());
++                                                            ListAdapterConsultarPedidosinterna adapterlista = new ListAdapterConsultarPedidosinterna(getActivity(), arrayList, getContext());
+                                                             listdetalles.setAdapter(adapterlista);
+                                                             total = total + (ordenesCliente.getPrecioUnitario() * ordenesCliente.getCantidad());
+                                                             txtTotal.setText("$" + total);
+@@ -166,6 +169,7 @@
+                             }
+                         }
+                     }
++
+                     @Override
+                     public void onCancelled(@NonNull DatabaseError error) {
+ 
+@@ -204,16 +208,17 @@
+         modificarStatus();
+         return root;
+     }
+-    public void inicializarComponentes(){
+-        txtStatus= root.findViewById(R.id.txtStatusDetPagos);
+-        txtFecha=root.findViewById(R.id.txtFechaDetPagos);
+-        txtOrden= root.findViewById(R.id.txtNoOrdenDetPagos);
+-        txtSerie= root.findViewById(R.id.txtNoSerieDetPagos);
+-        txtFechaDetalle=root.findViewById(R.id.txtFechaEstimadaDetPago);
+-        txtNombreContacto=root.findViewById(R.id.txtContactoDetPago);
+-        txtTelContacto=root.findViewById(R.id.txtTelefonoDetPago);
+-        txtDireccionContacto= root.findViewById(R.id.txtDireccionDetPago);
+-        txtTotal=root.findViewById(R.id.txtTotalDetPago);
++
++    public void inicializarComponentes() {
++        txtStatus = root.findViewById(R.id.txtStatusDetPagos);
++        txtFecha = root.findViewById(R.id.txtFechaDetPagos);
++        txtOrden = root.findViewById(R.id.txtNoOrdenDetPagos);
++        txtSerie = root.findViewById(R.id.txtNoSerieDetPagos);
++        txtFechaDetalle = root.findViewById(R.id.txtFechaEstimadaDetPago);
++        txtNombreContacto = root.findViewById(R.id.txtContactoDetPago);
++        txtTelContacto = root.findViewById(R.id.txtTelefonoDetPago);
++        txtDireccionContacto = root.findViewById(R.id.txtDireccionDetPago);
++        txtTotal = root.findViewById(R.id.txtTotalDetPago);
+     }
+ 
+     public void iniciaFirebase() {
+@@ -228,28 +233,27 @@
+         mViewModel = new ViewModelProvider(this).get(ModificarPagosPendientesViewModel.class);
+         // TODO: Use the ViewModel
+     }
+-    public void modificarStatus()
+-    {
++
++    public void modificarStatus() {
+         Map<String, Object> encenderMap = new HashMap<>();
+-        encenderMap.put("OrdenesCliente/"+idusuario+"/estatus",status);
++        encenderMap.put("OrdenesCliente/" + idusuario + "/estatus", status);
+         //encenderMap.put("Productos/"+txtCodigo.getText()+"/estatusStock",spnModStatus.getText().toString());
+-        databaseReference.updateChildren(encenderMap).toString();
+-        if(status=="Pago pendiente")
+-        { btnConfirmarPago.setOnClickListener(new View.OnClickListener()
+-        {
+-            @Override
+-            public void onClick (View view){
+-                ConsultarPedidosFragment newFragment1 = new ConsultarPedidosFragment();
+-                Bundle args = new Bundle();
+-                newFragment1.setArguments(args);
+-                FragmentManager fragmentManager = getFragmentManager();
+-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+-                fragmentTransaction.replace(R.id.container, newFragment1);
+-                fragmentTransaction.addToBackStack(null);
+-                fragmentTransaction.commit();
+-                status ="Preparando pedido";
+-            }
+-        });
++        databaseReference.updateChildren(encenderMap);
++        if (status == "Pago pendiente") {
++            btnConfirmarPago.setOnClickListener(new View.OnClickListener() {
++                @Override
++                public void onClick(View view) {
++                    ConsultarPedidosFragment newFragment1 = new ConsultarPedidosFragment();
++                    Bundle args = new Bundle();
++                    newFragment1.setArguments(args);
++                    FragmentManager fragmentManager = getFragmentManager();
++                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
++                    fragmentTransaction.replace(R.id.container, newFragment1);
++                    fragmentTransaction.addToBackStack(null);
++                    fragmentTransaction.commit();
++                    status = "Preparando pedido";
++                }
++            });
+         }
+         btnAtras.setOnClickListener(new View.OnClickListener() {
+             @Override
