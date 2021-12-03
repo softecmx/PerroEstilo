@@ -43,7 +43,7 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
     ImageButton btnBuscar;
     private ConsultarPedidosViewModel mViewModel;
     View root;
-    RecyclerView listView;
+    ListView listView;
     String totalOrden;
     ArrayList<ElementListViewConsultarPedidos> arrayListOrdenes = new ArrayList<>();
     private ListAdapterConsultarPedidos adapterOrdenes;
@@ -73,33 +73,44 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
     }
 
     public void listarDatos() {
-
-
-        /*
-        databaseReference.child("OrdenesCliente/").orderByChild("estatusOrden").equalTo("Pago pendiente").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Usuarios/Clientes").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    arrayListOrdenes.clear();
+             //   arrayListOrdenes.clear();
+                if (snapshot.exists()) {
+
                     for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                        OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
-                        Toast.makeText(getContext(), "S se encontraron", Toast.LENGTH_SHORT).show();
-                    /*Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
-                    OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
-                    arrayListOrdenes.add(new ElementListViewConsultarPedidos(orden.getInOrden(), orden.getEstatusOrden(), "$ " + orden.getTotal()));
-                    adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
-                    listView.setAdapter(adapterOrdenes);
+                        Clientes clientes = objSnapshot.getValue(Clientes.class);
+                        databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).orderByChild("estatusOrden").equalTo("Preparando pedido").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
+                                        OrdenesCliente orden = objSnapshot2.getValue(OrdenesCliente.class);
+                                        arrayListOrdenes.add(new ElementListViewConsultarPedidos(orden.getInOrden(), orden.getEstatusOrden(), "$ " + orden.getTotal()));
+                                        adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
+                                        listView.setAdapter(adapterOrdenes);
+                                    }
+                                } else {Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();}
+
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+
+
                     }
-                }else Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();
+                } else {}
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-*/
+
+
     }
 
     public void iniciaFirebase() {

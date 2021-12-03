@@ -7,120 +7,152 @@
     android:background="?attr/colorOnPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.administrador.perfil.PerfilAdministradorFragment">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/nav_header_title"
-        android:textColor="@color/titulos"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:gravity="right"/>
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@drawable/img_user_exist"/>
-    <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_add_a_photo_black_24dp"
-        android:layout_marginStart="225dp"
-        android:layout_marginTop="-30dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/nombre"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/valorNombreApellidosAdmin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txtNombreCompleto"
-            android:textSize="17dp"/>
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txtFechaNaciimiento"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/valorFechaNacimientoAdmin"
+            android:layout_height="match_parent"
+            android:text="@string/nav_header_title"
+            android:textColor="@color/pink_400"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:gravity="right"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fechaLimite"
-            android:textSize="17dp"/>
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txtGenero"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/valorGeneroAdmin"
+            android:layout_height="214dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="13dp">
+
+            <!--  app:civ_border_color="@color/primaryColor"
+                app:civ_border_width="4dp"-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPerfilFotoAdmin"
+                android:layout_width="197dp"
+                android:layout_height="162dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/txtDescImg"
+                android:src="@drawable/img_user_exist"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fBtnPerfilFotoAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:src="@drawable/ic_menu_camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imgPerfilFotoAdmin"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/fragmenDatos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txtGenero"
-            android:textSize="17dp"/>
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txtTelefono"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/valorTelefonoAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/telefono"
-            android:textSize="17dp"/>
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/email"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/valorEmailAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/email"
-            android:textSize="17dp"/>
-    </RelativeLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/listViewCuentaAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="204dp"
+                android:divider="@color/blue_100"
+                android:dividerHeight="0.5dp"
+                android:scrollbars="none" />
+
+        </FrameLayout>
+
+        <!---
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginBottom="0dp"
+             android:layout_marginTop="45dp">
+             <TextView
+                 android:layout_width="240dp"
+                 android:layout_height="wrap_content"
+                 android:text="Nombre:"
+                 android:textColor="@color/primaryColor"
+                 android:textSize="20sp"
+                 android:textStyle="bold"
+                 android:layout_weight="1"/>
+             <TextView
+                 android:id="@+id/txtCuentaNombre"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:text="@string/txtVarAutor"
+                 android:textColor="@color/grey"
+                 android:textSize="20sp"
+                 android:textStyle="bold" />
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginTop="6dp"
+             android:layout_marginBottom="0dp">
+             <TextView
+                 android:layout_width="240dp"
+                 android:layout_height="wrap_content"
+                 android:text="Email:"
+                 android:textColor="@color/primaryColor"
+                 android:textSize="20sp"
+                 android:textStyle="bold"
+                 android:layout_weight="1"/>
+             <TextView
+                 android:id="@+id/txtCuentaEmail"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:text="@string/txtVarAutor"
+                 android:textColor="@color/grey"
+                 android:textSize="20sp"
+                 android:textStyle="bold" />
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginTop="6dp"
+             android:layout_marginBottom="15dp">
+             <TextView
+                 android:layout_width="240dp"
+                 android:layout_height="wrap_content"
+                 android:text="Teléfono:"
+                 android:textColor="@color/primaryColor"
+                 android:textSize="20sp"
+                 android:textStyle="bold"
+                 android:layout_weight="1"/>
+             <TextView
+                 android:id="@+id/txtCuentaFecha"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:text="@string/txtVarAutor"
+                 android:textColor="@color/grey"
+                 android:textSize="20sp"
+                 android:textStyle="bold" />
+         </LinearLayout>
+        -->
+
     <Button
+        android:id="@+id/btnCambiarContraseniaAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtCambiarContrasena"
-        android:textSize="20dp"
         android:layout_margin="15dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -131,8 +163,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtContactoEmpresa"
-            android:textSize="20dp"
-            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/flat_grey_dark_2"
             android:textStyle="bold"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -144,6 +177,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
+            app:startIconDrawable="@drawable/ic_person_black_24dp"
             android:transitionName="nombreTrans"
             app:endIconMode="clear_text">
             <com.google.android.material.textfield.TextInputEditText
@@ -163,6 +197,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             android:transitionName="nombreTrans"
+            app:startIconDrawable="@drawable/ic_phone_black_24dp"
             app:endIconMode="clear_text">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTelefonoContactoEmpresa"
@@ -181,6 +216,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             android:transitionName="nombreTrans"
+            app:startIconDrawable="@drawable/ic_email_black_24dp"
             app:endIconMode="clear_text">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editEmailContactoEmpresa"
@@ -199,8 +235,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/redesEmpresariales"
-            android:textSize="20dp"
-            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/flat_grey_dark_2"
             android:textStyle="bold"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -214,12 +251,12 @@
             app:boxCornerRadiusTopStart="10dp"
             android:transitionName="nombreTrans"
             app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/facebook">
+            app:startIconDrawable="@drawable/ic_link_black_24dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editFacebookEmpresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/facebook"
+                android:hint="Link de Facebook"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -233,12 +270,12 @@
             app:boxCornerRadiusTopStart="10dp"
             android:transitionName="nombreTrans"
             app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/facebook">
+            app:startIconDrawable="@drawable/ic_link_black_24dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editInstagramEmpresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/instagram"
+                android:hint="Link de Instagram"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -252,12 +289,12 @@
             app:boxCornerRadiusTopStart="10dp"
             android:transitionName="nombreTrans"
             app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/facebook">
+            app:startIconDrawable="@drawable/ic_link_black_24dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edittiktokEmpresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/tiktok"
+                android:hint="Link TikTok"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -266,7 +303,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtGuardar"
-        android:textSize="20dp"
         android:layout_margin="15dp"/>
 
 </LinearLayout>

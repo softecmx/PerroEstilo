@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgItemUsuarioFotoInicioAdminPedidos"
         android:layout_width="70dp"
         android:layout_height="54dp"
@@ -14,22 +14,46 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
-        app:srcCompat="@drawable/logo" />
+        android:contentDescription="@string/txtDescImg"
+        android:src="@drawable/img_user_exist" />
+
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_toEndOf="@+id/imgItemUsuarioFotoInicioAdminPedidos"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtItemPedidoInicioAdminPedidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Pedido del usuario..."
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtItemPedidoInicioAdminFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textAlignment="textEnd"
+                android:textColor="@color/flat_pink_2"
+                android:text="Pedido del usuario..."
+                android:textSize="14sp"/>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/txtItemPedidoInicioAdminPedidos"
+            android:id="@+id/txtItemPedidoInicioAdminNoSerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="Pedido del usuario..."
             android:textSize="14sp"/>
-
-
     </LinearLayout>
 </RelativeLayout>
