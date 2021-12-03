@@ -1,5 +1,7 @@
 package com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -15,8 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -33,25 +37,43 @@ import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
+import com.programacion.perroestilocliente.ui.administrador.inicio.ElementListViewInicioAdmin;
+import com.programacion.perroestilocliente.ui.administrador.inventario.ElementListViewInventario;
+import com.programacion.perroestilocliente.ui.administrador.pedidos.verDetallePedido.VerPedidoFragment;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.MisPedidosViewModel;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.ReciclerViewAdapterPedidos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ConsultarPedidosFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+    String idOrden;
+    String status = "";
+    Button btnConfirmarPago;
+    Button btnAtras;
+    TextView txtOrden;
+    TextView txtSerie;
+    TextView txtFechaEstimada;
+    TextView txtContacto;
+    TextView txtTelefono;
+    TextView txtDireccion;
+    TextView txtFechaPedido;
+    TextView txtTotal;
+    TextView txtStatus;
+    String fechaEst;
+    String fechaEntrega;
+    float total;
     ImageButton btnBuscar;
     private ConsultarPedidosViewModel mViewModel;
     View root;
-    RecyclerView listView;
-    String totalOrden;
+    ListView listView;
     ArrayList<ElementListViewConsultarPedidos> arrayListOrdenes = new ArrayList<>();
     private ListAdapterConsultarPedidos adapterOrdenes;
 
     //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private StorageReference storageReference;
 
     public static ConsultarPedidosFragment newInstance() {
         return new ConsultarPedidosFragment();
@@ -67,45 +89,90 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
         iniciaFirebase();
         registerForContextMenu(listView);
         listarDatos();
-
+        verdetalles();
 
         return root;
     }
 
     public void listarDatos() {
-
-
-        /*
-        databaseReference.child("OrdenesCliente/").orderByChild("estatusOrden").equalTo("Pago pendiente").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    arrayListOrdenes.clear();
-                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                        OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
-                        Toast.makeText(getContext(), "S se encontraron", Toast.LENGTH_SHORT).show();
-                    /*Toast.makeText(getContext(), "Recuperando datos...", Toast.LENGTH_LONG).show();
-                    OrdenesCliente orden = objSnapshot.getValue(OrdenesCliente.class);
-                    arrayListOrdenes.add(new ElementListViewConsultarPedidos(orden.getInOrden(), orden.getEstatusOrden(), "$ " + orden.getTotal()));
-                    adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
-                    listView.setAdapter(adapterOrdenes);
-                    }
-                }else Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();
+                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
 
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    //Log.i("ids clientes ", objSnapshot.getKey());
+
+                    databaseReference.child("OrdenesCliente/" + objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
+                                Log.i("Construyendoruta ", "OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey());
+                                databaseReference.child("OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+
+                                            String estatus = snapshot.child("estatusOrden").getValue().toString();
+
+                                            if (estatus.equals("Preparando pedido")) {
+                                                String id = snapshot.child("inOrden").getValue().toString();
+                                                String total = snapshot.child("total").getValue().toString();
+
+                                                arrayListOrdenes.add(new ElementListViewConsultarPedidos(id, estatus, "$ " + total));
+                                                adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
+                                                listView.setAdapter(adapterOrdenes);
+                                            }
+
+                                        } else
+                                            Log.i("NO hay objeto", snapshot + "");//si no se encuentran pedidos
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) { }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-*/
     }
 
     public void iniciaFirebase() {
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+    }
+
+    private void verdetalles() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ElementListViewConsultarPedidos vistaElement= adapterOrdenes.getItem(position);
+
+                VerPedidoFragment newFragment1 = new VerPedidoFragment();
+                Bundle args = new Bundle();
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+
     }
 
     @Override

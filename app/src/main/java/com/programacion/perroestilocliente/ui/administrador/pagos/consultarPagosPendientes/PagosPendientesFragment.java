@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
+import com.programacion.perroestilocliente.ui.administrador.inicio.ElementListViewInicioAdmin;
+import com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ElementListViewConsultarPedidos;
 
 import java.util.ArrayList;
 
@@ -56,65 +59,9 @@ public class PagosPendientesFragment extends Fragment {
         btnBuscar = root.findViewById(R.id.ibtnBuscarPagoPendiente);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("Usuarios/Clientes").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    Clientes clientes = objSnapshot.getValue(Clientes.class);
 
-                    databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            arrayListP.clear();
-                            for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                                OrdenesCliente ordenesCliente = objSnapshot.getValue(OrdenesCliente.class);
-                                assert ordenesCliente != null;
-                                System.out.println("ss"+ordenesCliente.getEstatusOrden());
-                                arrayListP.add(new ElementListViewPagosPendientes(ordenesCliente.getEstatusOrden(),ordenesCliente.getInOrden() ,Float.parseFloat(String.valueOf(ordenesCliente.getTotal()))));
-                                customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
-                                listView.setAdapter(customAdapter);
-                                //lstProdModa.add(productos);
-                                //listAdapterProductosModa = new ListAdapterProductosModa(getActivity(), lstProdModa);
-                                // lstProductosModa.setAdapter(listAdapterProductosModa);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        /* databaseReference.child("OrdenesCliente").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-              arrayListP.clear();
-                for (DataSnapshot objSnapshot : snapshot.getChildren()) { //Subtotales de cada orden
-                    OrdenesCliente oc = objSnapshot.getValue(OrdenesCliente.class);
-                    //  inOrden =oc.getInOrden();
-                    //  estatusOrden  =oc.getEstatusOrden();
-                    //  total =oc.getTotal();
-                    System.out.println(oc.getEstatusOrden()+" ");
-                    arrayListP.add(new ElementListViewPagosPendientes(oc.getEstatusOrden(),oc.getInOrden() ,Float.parseFloat(String.valueOf(oc.getTotal()))));
-                    customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
-                    listView.setAdapter(customAdapter);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-         */
         registerForContextMenu(listView);
+        listarDatos();
         return root;
 
     }
@@ -129,6 +76,59 @@ public class PagosPendientesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(PagosPendientesViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+    public void listarDatos() {
+        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    //Log.i("ids clientes ", objSnapshot.getKey());
+
+                    databaseReference.child("OrdenesCliente/" + objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
+                                Log.i("Construyendoruta ", "OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey());
+                                databaseReference.child("OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+
+                                            String estatus = snapshot.child("estatusOrden").getValue().toString();
+
+                                            if (estatus.equals("Pago pendiente")) {
+                                                String id = snapshot.child("inOrden").getValue().toString();
+                                                String total = snapshot.child("total").getValue().toString();
+
+                                                arrayListP.add(new ElementListViewPagosPendientes(id, estatus, Float.parseFloat(total)));
+                                                customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
+                                                listView.setAdapter(customAdapter);
+                                            }
+
+                                        } else
+                                            Log.i("NO hay objeto", snapshot + "");//si no se encuentran pedidos
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) { }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+
     }
 
 }

@@ -33,6 +33,7 @@ import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.DetOrdenProductos;
 import com.programacion.perroestilocliente.modelo.Direcciones;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
+import com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos.ConsultarPedidosFragment;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.estadoPedido.EstadoPedidoFragment;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.estadoPedido.EstadoPedidoViewModel;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.MisPedidosFragment;
@@ -198,12 +199,12 @@ public class VerPedidoFragment extends Fragment {
         btnConfirmarPago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MisPedidosFragment newFragment1 = new MisPedidosFragment();
+                ConsultarPedidosFragment newFragment1 = new ConsultarPedidosFragment();
                 Bundle args = new Bundle();
                 newFragment1.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_cliente, newFragment1);
+                fragmentTransaction.replace(R.id.container, newFragment1);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

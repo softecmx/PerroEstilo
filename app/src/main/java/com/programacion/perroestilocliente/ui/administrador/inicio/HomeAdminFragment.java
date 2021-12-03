@@ -144,20 +144,20 @@ public class HomeAdminFragment extends Fragment {
                 ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
 
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                    Log.i("ids clientes ", objSnapshot.getKey());
+                    //Log.i("ids clientes ", objSnapshot.getKey());
                     databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot objSnapshot2 : snapshot.getChildren()){
-                                Log.i("ids clientes ", objSnapshot2.getKey());
+                                //Log.i("ids clientes ", objSnapshot2.getKey());
                                 databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        Log.i("Ruta del nombre  ", "OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/nombreContacto");
+                                        //Log.i("Ruta del nombre  ", "OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/nombreContacto");
                                         String nombrecliente=snapshot.child("nombreContacto").getValue().toString();
                                         String idcliente=snapshot.child("idCliente").getValue().toString();
 
-                                        Log.i("Ruta a la imagen ", "Usuarios/Clientes/"+idcliente);
+                                        //Log.i("Ruta a la imagen ", "Usuarios/Clientes/"+idcliente);
 
                                         llenarlistaPedidos(idcliente,nombrecliente);
                                    /* databaseReference.child("Usuarios/Clientes/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {

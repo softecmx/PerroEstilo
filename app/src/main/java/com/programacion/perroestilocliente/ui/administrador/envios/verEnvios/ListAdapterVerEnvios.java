@@ -1,4 +1,4 @@
-package com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos;
+package com.programacion.perroestilocliente.ui.administrador.envios.verEnvios;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -14,13 +14,13 @@ import com.programacion.perroestilocliente.R;
 
 import java.util.ArrayList;
 
-public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewConsultarPedidos> {
+public class ListAdapterVerEnvios extends ArrayAdapter<ElementListViewVerEnvios> {
 
     private Activity activity;
-    private ArrayList<ElementListViewConsultarPedidos> arrayList;
+    private ArrayList<ElementListViewVerEnvios> arrayList;
 
-    public ListAdapterConsultarPedidos(Activity activity, ArrayList<ElementListViewConsultarPedidos> arrayList) {
-        super(activity, R.layout.item_lista_pedidos, arrayList);
+    public ListAdapterVerEnvios(Activity activity, ArrayList<ElementListViewVerEnvios> arrayList) {
+        super(activity, R.layout.item_lista_envios, arrayList);
         this.activity = activity;
         this.arrayList = arrayList;
     }
@@ -33,16 +33,18 @@ public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewCon
         if (convertView == null) {
             convertView =
                     LayoutInflater.from(getContext())
-                            .inflate(R.layout.item_lista_pedidos, parent, false);
+                            .inflate(R.layout.item_lista_envios, parent, false);
         }
 
-        TextView txtOrden= convertView.findViewById(R.id.txtOrdenPedido);
-        TextView txtStatus = convertView.findViewById(R.id.txtStatusPedido);
-        TextView txtTotal= convertView.findViewById(R.id.txtTotalPedido);
+        TextView txtOrden= convertView.findViewById(R.id.txtOrdenEnvio);
+        TextView txtStatus = convertView.findViewById(R.id.txtStatusEnvio);
+        TextView txtTotal= convertView.findViewById(R.id.txtTotalEnvio);
+        TextView txtFecha= convertView.findViewById(R.id.txtFechaLlegadaEnvio);
 
         txtOrden.setText(arrayList.get(position).getOrdenPedido());
         txtStatus.setText("Estatus: "+arrayList.get(position).getStatusPedido());
         txtTotal.setText(arrayList.get(position).getTotalPedido());
+        txtFecha.setText(arrayList.get(position).getFecha());
 
         return convertView;
     }
