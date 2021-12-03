@@ -155,25 +155,6 @@ public class HomeAdminFragment extends Fragment {
             }
         });
         estadisticas();
-        listarPedidos();
-        listarProductos();
-        indicadores();
-        return root;
-    }
-
-
-    private void estadisticas() {
-        cantidadProductos = root.findViewById(R.id.textViewcantidadInicioAProductos);
-        cantidadPedidos = root.findViewById(R.id.textViewcantidadInicioAPedidos);
-        cantidadVentas = root.findViewById(R.id.textViewcantidadInicioAVentas);
-        cantidadClientes = root.findViewById(R.id.textViewcantidadInicioAClientes);
-        nuevosPedidos = root.findViewById(R.id.textItemNuevosPedidos);
-        pocosProductos = root.findViewById(R.id.textItemPocasExistencias);
-    }
-
-    private void listarPedidos() {
-
-
         ArrayList<ElementListViewInicioAdmin> arrayList2 = new ArrayList<>();
 
         databaseReference.child("Usuarios/Clientes").addValueEventListener(new ValueEventListener() {
@@ -223,6 +204,19 @@ public class HomeAdminFragment extends Fragment {
 
             }
         });
+        listarProductos();
+        indicadores();
+        return root;
+    }
+
+
+    private void estadisticas() {
+        cantidadProductos = root.findViewById(R.id.textViewcantidadInicioAProductos);
+        cantidadPedidos = root.findViewById(R.id.textViewcantidadInicioAPedidos);
+        cantidadVentas = root.findViewById(R.id.textViewcantidadInicioAVentas);
+        cantidadClientes = root.findViewById(R.id.textViewcantidadInicioAClientes);
+        nuevosPedidos = root.findViewById(R.id.textItemNuevosPedidos);
+        pocosProductos = root.findViewById(R.id.textItemPocasExistencias);
     }
 
     public void indicadores() {

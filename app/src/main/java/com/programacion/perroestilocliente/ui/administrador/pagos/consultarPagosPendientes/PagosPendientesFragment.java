@@ -35,6 +35,8 @@ import com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPed
 import com.programacion.perroestilocliente.ui.administrador.pedidos.verDetallePedido.VerPedidoFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PagosPendientesFragment extends Fragment {
     private TextView txOrden, txtTotal, txtStatus;
@@ -77,23 +79,20 @@ public class PagosPendientesFragment extends Fragment {
         databaseReference.child("Usuarios/Clientes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 arrayListP.clear();
-
-                ArrayList<ElementListViewPagosPendientes> arrayList = new ArrayList<>();
-
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Clientes clientes = objSnapshot.getValue(Clientes.class);
-
                     databaseReference.child("OrdenesCliente/" + clientes.getIdUsuario()).orderByChild("estatusOrden").equalTo("Pago pendiente").addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        public void onDataChange(@NonNull DataSnapshot snapshotr) {
 
-                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
+                            for (DataSnapshot objSnapshot2 : snapshotr.getChildren()) {
                                 OrdenesCliente ordenesCliente = objSnapshot2.getValue(OrdenesCliente.class);
                                 ElementListViewPagosPendientes nvo = new ElementListViewPagosPendientes();
+                                assert ordenesCliente != null;
                                 nvo.setOrdenPedido(ordenesCliente.getInOrden());
                                 nvo.setTotalPedido(ordenesCliente.getTotal() + "");
+                                nvo.setIdusuario(ordenesCliente.getIdCliente());
                                 nvo.setStatusPedido(ordenesCliente.getEstatusOrden());
                                 arrayListP.add(nvo);
                                 customAdapter = new ListAdapterPagosPendientes(getActivity(), arrayListP);
@@ -130,7 +129,7 @@ public class PagosPendientesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                ElementListViewPagosPendientes vistaElement = customAdapter.getItem(position);
+               ElementListViewPagosPendientes vistaElement = customAdapter.getItem(position);
 
                 ModificarPagosPendientesFragment newFragment1 = new ModificarPagosPendientesFragment();
                 Bundle args = new Bundle();
