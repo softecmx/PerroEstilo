@@ -2,12 +2,13 @@ package com.programacion.perroestilocliente.ui.administrador.pagos.consultarPago
 
 public class ElementListViewPagosPendientes {
     private String statusPago;
-    private Integer orden,Total;
+    private float Total;
+    private  String orden;
 
     public ElementListViewPagosPendientes() {
     }
 
-    public ElementListViewPagosPendientes(String statusPago, Integer orden, Integer Total) {
+    public ElementListViewPagosPendientes(String statusPago, String orden, float Total) {
         this.statusPago = statusPago;
         this.orden = orden;
         this.Total = Total;
@@ -21,19 +22,19 @@ public class ElementListViewPagosPendientes {
         this.statusPago = statusPago;
     }
 
-    public Integer getOrden() {
+    public String getOrden() {
         return orden;
     }
 
-    public void setOrden(Integer orden) {
+    public void setOrden(String orden) {
         this.orden = orden;
     }
 
-    public Integer getTotal() {
+    public float getTotal() {
         return Total;
     }
 
-    public void setTotal(Integer Total) {
+    public void setTotal(float Total) {
         this.Total = Total;
     }
 }

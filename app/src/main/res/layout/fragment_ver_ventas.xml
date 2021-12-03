@@ -60,13 +60,7 @@
                 <ExpandableListView
                     android:id="@+id/expListVerVentas"
                     android:layout_width="match_parent"
-                    android:layout_height="373dp">
-
-                    <ListView
-                        android:id="@+id/listVerVentas"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </ExpandableListView>
+                    android:layout_height="373dp"/>
 
             </FrameLayout>
         </LinearLayout>

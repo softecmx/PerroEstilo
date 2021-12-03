@@ -17,17 +17,13 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
-import com.programacion.perroestilocliente.ui.ajustes.ElementListView;
 
 import java.util.ArrayList;
 
-public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAdmin> {
+public class ListAdapterInicioAdminPedidos extends ArrayAdapter<ElementListViewInicioAdmin> {
 
     private Activity activity;
     private ArrayList<ElementListViewInicioAdmin> arrayList;
@@ -37,14 +33,14 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
 
 
 
-    public ListAdapterInicioAdmin(Activity activity, ArrayList<ElementListViewInicioAdmin> arrayList,Context context) {
-        super(activity, R.layout.fragment_lista_pocas_existencias_inicio_admin, arrayList);
+    public ListAdapterInicioAdminPedidos(Activity activity, ArrayList<ElementListViewInicioAdmin> arrayList, Context context) {
+        super(activity, R.layout.fragment_lista_nuevos_pedidos_inicio_admin, arrayList);
         this.activity = activity;
         this.arrayList = arrayList;
         iniciaFirebase();
     }
     public void iniciaFirebase(){
-        storageReference = FirebaseStorage.getInstance().getReference("Productos");
+        storageReference = FirebaseStorage.getInstance().getReference("Perfiles");
     }
 
     @NonNull
@@ -54,15 +50,13 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
         if (convertView == null) {
             convertView =
                     LayoutInflater.from(getContext())
-                            .inflate(R.layout.fragment_lista_pocas_existencias_inicio_admin, parent, false);
+                            .inflate(R.layout.fragment_lista_nuevos_pedidos_inicio_admin, parent, false);
         }
-        TextView txtNombre= convertView.findViewById(R.id.txtItemProdNombreInicioAdmin);
-        TextView txtStock= convertView.findViewById(R.id.txtItemProdStockInicioAdmin);
-        ImageView imgFoto= convertView.findViewById(R.id.imgItemProdFotoInicioAdmin);
+        TextView txtUsuario= convertView.findViewById(R.id.txtItemPedidoInicioAdminPedidos);
+        ImageView imgFoto= convertView.findViewById(R.id.imgItemUsuarioFotoInicioAdminPedidos);
 
-        txtNombre.setText(arrayList.get(position).getProducto());
-        txtStock.setText(arrayList.get(position).getStock());
-      cargaImagen(imgFoto,arrayList.get(position).getImgProducto());
+        txtUsuario.setText(arrayList.get(position).getUsuario());
+        cargaImagen(imgFoto,arrayList.get(position).getImgUsuario());
 
         return convertView;
     }
@@ -75,7 +69,7 @@ public class ListAdapterInicioAdmin extends ArrayAdapter<ElementListViewInicioAd
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context,"Ups! Ha ocurrido un erro al recuperar la imagen\n" + e.getCause(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Ups! Ha ocurrido un erro al recuperar la imagen\n" + e.getCause(),Toast.LENGTH_SHORT).show();
             }
         });
     }

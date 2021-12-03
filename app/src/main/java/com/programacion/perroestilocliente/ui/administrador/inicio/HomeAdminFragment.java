@@ -67,9 +67,12 @@ public class HomeAdminFragment extends Fragment {
     private StorageReference storageReferenceUsuario;
     List<CarouselItem> list = new ArrayList<>();
     View root;
+    int contP=0;
 
-    private ListView listView;
+    private ListView listViewProductos;
+    private ListView listViewPedidos;
     private ListAdapterInicioAdmin customAdapter;
+    private ListAdapterInicioAdminPedidos customAdapter1;
     public static HomeAdminFragment newInstance() {
         return new HomeAdminFragment();
     }
@@ -79,7 +82,8 @@ public class HomeAdminFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
      root = inflater.inflate(R.layout.fragment_home_admin, container, false);
      nombre= root.findViewById(R.id.tvBienvenidaAdmin);
-     listView=root.findViewById(R.id.listaProductosHomeAdmin);
+     listViewProductos=root.findViewById(R.id.listaProductosHomeAdmin);
+     listViewPedidos= root.findViewById(R.id.listaPedidosHomeAdmin);
 
      firebaseDatabase = FirebaseDatabase.getInstance();
      databaseReference = firebaseDatabase.getReference();
@@ -134,7 +138,105 @@ public class HomeAdminFragment extends Fragment {
         pocosProductos = root.findViewById(R.id.textItemPocasExistencias);
     }
     private void listarPedidos() {
+        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    Log.i("ids clientes ", objSnapshot.getKey());
+                    databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()){
+                                Log.i("ids clientes ", objSnapshot2.getKey());
+                                databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Log.i("Ruta del nombre  ", "OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/nombreContacto");
+                                        String nombrecliente=snapshot.child("nombreContacto").getValue().toString();
+                                        String idcliente=snapshot.child("idCliente").getValue().toString();
+
+                                        Log.i("Ruta a la imagen ", "Usuarios/Clientes/"+idcliente);
+
+                                        llenarlistaPedidos(idcliente,nombrecliente);
+                                   /* databaseReference.child("Usuarios/Clientes/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    String fotocliente=snapshot.child("fotoPerfil").getValue().toString();
+                                                    Log.i("USUARIO ", fotocliente);
+                                                    contP++;
+                                                    arrayList.add(new ElementListViewInicioAdmin(nombrecliente, fotocliente));
+                                                    customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
+                                                    listViewPedidos.setAdapter(customAdapter1);
+                                                /*
+                                                String fotocliente=u.getFotoPerfil();
+                                                //String fotocliente = snapshot.child("fotoPerfil").getValue().toString();
+                                                Log.i("idCliente ", fotocliente);
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });*/
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+                                    }
+                                });
+                            }
+                        }
+
+
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+                        }
+                    });
+                }
+
+                pocosProductos.setText("Mira los nuevos pedidos "+contP);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
     }
+    private void llenarlistaPedidos(String idcliente, String nombrecliente) {
+        databaseReference.child("Usuarios/Clientes").child(idcliente+"/fotoPerfil").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    try {
+                        Usuarios u = objSnapshot.getValue(Usuarios.class);
+
+                        contP++;
+                        arrayList.add(new ElementListViewInicioAdmin(nombrecliente, u.getFotoPerfil()));
+                        customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
+                        listViewPedidos.setAdapter(customAdapter1);
+
+                    }catch (Exception e){
+                        Log.i("Hay error",e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void listarProductos() {
         databaseReference.child("Productos").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
             @Override
@@ -148,6 +250,7 @@ public class HomeAdminFragment extends Fragment {
                             cont++;
                             arrayList.add(new ElementListViewInicioAdmin(p.getNombre() ,p.getStock(),p.getImgFoto()));
                             customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList,getContext());
+                            listViewProductos.setAdapter(customAdapter);
                             listView.setAdapter(customAdapter);
                             cantidadProductos.setText(cont);
                         }
@@ -155,7 +258,6 @@ public class HomeAdminFragment extends Fragment {
                         Log.i("error",e.getMessage());
                     }
                 }
-
                 pocosProductos.setText("Productos con pocas existencias ("+cont+")");
             }
 
@@ -165,20 +267,6 @@ public class HomeAdminFragment extends Fragment {
             }
         });
 
-    }
-
-    private void cargaImagenUsuarios(ImageView ivFoto, String img) {
-        storageReferenceUsuario.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getContext()).load(uri).into(ivFoto);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),"Ups! Ha ocurrido un erro al recuperar la imagen\n" + e.getCause(),Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

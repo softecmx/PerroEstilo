@@ -253,6 +253,8 @@
             android:id="@+id/btnContactarDetalleVentas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/outline_whatsapp_24"
+            android:drawableTint="@color/white"
             android:text="@string/txtContactarCliente" />
     </LinearLayout>
 </ScrollView>

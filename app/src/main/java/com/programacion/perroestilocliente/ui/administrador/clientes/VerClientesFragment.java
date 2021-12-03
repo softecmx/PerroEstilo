@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,8 +35,11 @@ import java.util.ArrayList;
 
 public class VerClientesFragment extends Fragment {
     private TextView txtNombre, txtStatus;
-    private ImageButton imgbtnLealtad, imgbtnBuscar;
+    private ImageButton imgbtnBuscar;
+    private ImageView fotoUsuario;
 
+
+    private Button imgbtnLealtad;
     View root;
     private ListView listView;
     private ListAdapterClientes customAdapter;
@@ -46,6 +51,7 @@ public class VerClientesFragment extends Fragment {
     private ArrayList<Clientes> ListaClientes = new ArrayList<Clientes>();
     String nombre = "";
     String lealtad = "";
+    String img ="";
 
     private VerClientesViewModel mViewModel;
 
@@ -57,6 +63,7 @@ public class VerClientesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root= inflater.inflate(R.layout.fragment_ver_clientes, container, false);
+        //root= inflater.inflate(R.layout.item_lista_clientes_lealtad, container, false);
         listView = root.findViewById(R.id.listClientes);
         imgbtnBuscar = root.findViewById(R.id.ibtnAgregarClienteLeal);
 

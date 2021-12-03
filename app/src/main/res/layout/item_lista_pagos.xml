@@ -3,53 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txtNumeroOrdenPedidoPagoPendiente"
+            android:id="@+id/txtOrdenPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txtordenPedido"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold" />
-
         <TextView
-            android:id="@+id/txtTotaldelPedido"
+            android:id="@+id/txtTotalPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
-            android:layout_toEndOf="@+id/txtNumeroOrdenPedidoPagoPendiente"
             android:text="@string/txtTotalAPagar"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+    </LinearLayout>
         <TextView
-            android:id="@+id/txtStatusPagoPendiente"
+            android:id="@+id/txtStatusPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/status"
             android:textColor="@color/red"
             android:textSize="20dp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtTotalmnx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_toEndOf="@+id/txtStatusPagoPendiente"
-            android:text="@string/txtPrecio"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
 </LinearLayout>
