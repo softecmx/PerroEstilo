@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.23425925925925925" />
         <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.2" />
+        <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_pedidos_admin.xml" value="0.1" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-action/ic_dashboard_black_24dp.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-av/ic_equalizer_black_24dp.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/Colossus/AndroidStudioProjects/PerroEstiloCliente/app/src/main/res/drawable-v24/background_personalizado.xml" value="0.1984375" />
@@ -495,7 +496,6 @@
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_simple_lista_disenio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/list_group_child.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/list_group_header.xml" value="0.20416666666666666" />
-
         <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_nav_administrador.xml" value="0.15760869565217392" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_pedidos.xml" value="0.16" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_pedidos_admin.xml" value="0.25" />
@@ -507,7 +507,6 @@
         <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_envios.xml" value="0.25" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_pagos.xml" value="0.25" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_pedidos.xml" value="0.22" />
-
         <entry key="app/src/main/res/layout/custom_toast_error.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/custom_toast_info.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/custom_toast_sin_data.xml" value="0.1921875" />
