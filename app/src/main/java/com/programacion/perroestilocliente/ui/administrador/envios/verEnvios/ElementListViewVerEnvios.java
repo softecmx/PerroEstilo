@@ -1,7 +1,9 @@
-package com.programacion.perroestilocliente.ui.administrador.pagos.consultarPagosPendientes;
+package com.programacion.perroestilocliente.ui.administrador.envios.verEnvios;
 
-public class ElementListViewPagosPendientes {
+public class ElementListViewVerEnvios {
 
+
+    private String fecha;
     private String ordenPedido;
     private String statusPedido;
     private String totalPedido;
@@ -12,15 +14,18 @@ public class ElementListViewPagosPendientes {
     private String subtotal;
     private String imgProducto;
 
-    public ElementListViewPagosPendientes() {
+
+    public ElementListViewVerEnvios() {
     }
 
-    public ElementListViewPagosPendientes(String ordenPedido, String statusPedido, String totalPedido, String idusuario,
-                                          String producto, String unitario, String cantidad, String subtotal, String imgProducto) {
+    public ElementListViewVerEnvios(String ordenPedido, String statusPedido, String totalPedido, String fecha) {
         this.ordenPedido = ordenPedido;
         this.statusPedido = statusPedido;
         this.totalPedido = totalPedido;
-        this.idusuario = idusuario;
+        this.fecha = fecha;
+    }
+
+    public ElementListViewVerEnvios(String producto, String unitario, String cantidad, String subtotal, String imgProducto) {
         this.producto = producto;
         this.unitario = unitario;
         this.cantidad = cantidad;
@@ -28,19 +33,12 @@ public class ElementListViewPagosPendientes {
         this.imgProducto = imgProducto;
     }
 
-    public ElementListViewPagosPendientes(String ordenPedido, String statusPedido, String totalPedido, String idusuario) {
-        this.ordenPedido = ordenPedido;
-        this.statusPedido = statusPedido;
-        this.totalPedido = totalPedido;
-        this.idusuario = idusuario;
+    public String getFecha() {
+        return fecha;
     }
 
-    public ElementListViewPagosPendientes(String producto, String unitario, String cantidad, String subtotal, String imgProducto) {
-        this.producto = producto;
-        this.unitario = unitario;
-        this.cantidad = cantidad;
-        this.subtotal = subtotal;
-        this.imgProducto = imgProducto;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getOrdenPedido() {

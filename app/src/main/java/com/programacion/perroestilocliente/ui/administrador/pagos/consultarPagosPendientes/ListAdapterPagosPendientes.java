@@ -43,6 +43,7 @@ public class ListAdapterPagosPendientes extends ArrayAdapter<ElementListViewPago
         txtTotal.setText("Total: $"+arrayList.get(position).getTotal()+"");
         txtStatus.setText(arrayList.get(position).getStatusPago());
 
+
         return convertView;
     }
 

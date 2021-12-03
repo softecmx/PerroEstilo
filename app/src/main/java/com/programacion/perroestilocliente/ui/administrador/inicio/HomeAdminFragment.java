@@ -172,7 +172,47 @@ public class HomeAdminFragment extends Fragment {
     }
 
     private void listarPedidos() {
+
+        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    //Log.i("ids clientes ", objSnapshot.getKey());
+                    databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()){
+                                //Log.i("ids clientes ", objSnapshot2.getKey());
+                                databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        //Log.i("Ruta del nombre  ", "OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/nombreContacto");
+                                        String nombrecliente=snapshot.child("nombreContacto").getValue().toString();
+                                        String idcliente=snapshot.child("idCliente").getValue().toString();
+
+                                        //Log.i("Ruta a la imagen ", "Usuarios/Clientes/"+idcliente);
+
+                                        llenarlistaPedidos(idcliente,nombrecliente);
+                                   /* databaseReference.child("Usuarios/Clientes/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    String fotocliente=snapshot.child("fotoPerfil").getValue().toString();
+                                                    Log.i("USUARIO ", fotocliente);
+                                                    contP++;
+                                                    arrayList.add(new ElementListViewInicioAdmin(nombrecliente, fotocliente));
+                                                    customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
+                                                    listViewPedidos.setAdapter(customAdapter1);
+                                                /*
+                                                String fotocliente=u.getFotoPerfil();
+                                                //String fotocliente = snapshot.child("fotoPerfil").getValue().toString();
+                                                Log.i("idCliente ", fotocliente);
+                                        }
+                                        @Override
+
         ArrayList<ElementListViewInicioAdmin> arrayList2 = new ArrayList<>();
+
         databaseReference.child("Usuarios/Clientes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -199,6 +239,7 @@ public class HomeAdminFragment extends Fragment {
                                         nuevosPedidos.setText("Mira los nuevo pedidos (" + contP + ")");
                                     } catch (Exception e) {
                                         Log.i("Hay error", e.getMessage() + " ssfsdf");
+
                                     }
                                 }
                             }

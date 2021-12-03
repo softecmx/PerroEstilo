@@ -20,7 +20,7 @@ public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewCon
     private ArrayList<ElementListViewConsultarPedidos> arrayList;
 
     public ListAdapterConsultarPedidos(Activity activity, ArrayList<ElementListViewConsultarPedidos> arrayList) {
-        super(activity, R.layout.item_lista_clientes_lealtad, arrayList);
+        super(activity, R.layout.item_lista_pedidos, arrayList);
         this.activity = activity;
         this.arrayList = arrayList;
     }
@@ -33,16 +33,16 @@ public class ListAdapterConsultarPedidos extends ArrayAdapter<ElementListViewCon
         if (convertView == null) {
             convertView =
                     LayoutInflater.from(getContext())
-                            .inflate(R.layout.item_lista_pagos, parent, false);
+                            .inflate(R.layout.item_lista_pedidos, parent, false);
         }
 
         TextView txtOrden = convertView.findViewById(R.id.txtOrdenPedido);
         TextView txtStatus = convertView.findViewById(R.id.txtStatusPedido);
         TextView txtTotal = convertView.findViewById(R.id.txtTotalPedido);
-
         txtOrden.setText("No. Orden: " + arrayList.get(position).getOrdenPedido());
         txtStatus.setText("" + arrayList.get(position).getStatusPedido());
         txtTotal.setText("Total: $" + arrayList.get(position).getTotalPedido());
+
 
         return convertView;
     }

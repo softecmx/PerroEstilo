@@ -1,5 +1,7 @@
 package com.programacion.perroestilocliente.ui.administrador.pedidos.consultarPedidos;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -15,8 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -33,10 +37,14 @@ import com.google.firebase.storage.StorageReference;
 import com.programacion.perroestilocliente.R;
 import com.programacion.perroestilocliente.modelo.Clientes;
 import com.programacion.perroestilocliente.modelo.OrdenesCliente;
+import com.programacion.perroestilocliente.ui.administrador.inicio.ElementListViewInicioAdmin;
+import com.programacion.perroestilocliente.ui.administrador.inventario.ElementListViewInventario;
+import com.programacion.perroestilocliente.ui.administrador.pedidos.verDetallePedido.VerPedidoFragment;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.MisPedidosViewModel;
 import com.programacion.perroestilocliente.ui.cliente.pedidos.misPedidos.ReciclerViewAdapterPedidos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ConsultarPedidosFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -51,7 +59,6 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
     //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private StorageReference storageReference;
 
     public static ConsultarPedidosFragment newInstance() {
         return new ConsultarPedidosFragment();
@@ -67,49 +74,63 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
         iniciaFirebase();
         registerForContextMenu(listView);
         listarDatos();
-
+        verdetalles();
 
         return root;
     }
 
     public void listarDatos() {
-        databaseReference.child("Usuarios/Clientes").addListenerForSingleValueEvent(new ValueEventListener() {
+        arrayListOrdenes.clear();
+        databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-             //   arrayListOrdenes.clear();
-                if (snapshot.exists()) {
+                ArrayList<ElementListViewConsultarPedidos> arrayList = new ArrayList<>();
 
-                    for (DataSnapshot objSnapshot : snapshot.getChildren()) {
-                        Clientes clientes = objSnapshot.getValue(Clientes.class);
-                        databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).orderByChild("estatusOrden").equalTo("Preparando pedido").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
-                                        OrdenesCliente orden = objSnapshot2.getValue(OrdenesCliente.class);
-                                        arrayListOrdenes.add(new ElementListViewConsultarPedidos(orden.getInOrden(), orden.getEstatusOrden(), "$ " + orden.getTotal()));
-                                        adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
-                                        listView.setAdapter(adapterOrdenes);
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    //Log.i("ids clientes ", objSnapshot.getKey());
+
+                    databaseReference.child("OrdenesCliente/" + objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()) {
+                                Log.i("Construyendoruta ", "OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey());
+                                databaseReference.child("OrdenesCliente/" + objSnapshot.getKey() + "/" + objSnapshot2.getKey()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+
+                                            String estatus = snapshot.child("estatusOrden").getValue().toString();
+
+                                            if (estatus.equals("Preparando pedido")) {
+                                                String id = snapshot.child("inOrden").getValue().toString();
+                                                String total = snapshot.child("total").getValue().toString();
+                                                String idusuario = snapshot.child("idCliente").getValue().toString();
+
+                                                arrayListOrdenes.add(new ElementListViewConsultarPedidos(id, estatus, "$ " + total,idusuario));
+                                                adapterOrdenes = new ListAdapterConsultarPedidos(getActivity(), arrayListOrdenes);
+                                                listView.setAdapter(adapterOrdenes);
+                                            }
+
+                                        } else
+                                            Log.i("NO hay objeto", snapshot + "");//si no se encuentran pedidos
                                     }
-                                } else {Toast.makeText(getContext(), "No hay datos", Toast.LENGTH_SHORT).show();}
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) { }
+                                });
 
                             }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                            }
-                        });
+                        }
 
-
-                    }
-                } else {}
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+                }
 
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
-
-
 
     }
 
@@ -117,6 +138,32 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+    }
+
+    private void verdetalles() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ElementListViewConsultarPedidos vistaElement= adapterOrdenes.getItem(position);
+
+                VerPedidoFragment newFragment1 = new VerPedidoFragment();
+                Bundle args = new Bundle();
+                args.putString("idOrden", vistaElement.getOrdenPedido());
+                args.putString("status", vistaElement.getStatusPedido());
+                args.putString("total", vistaElement.getTotalPedido());
+                args.putString("idusuario", vistaElement.getIdusuario());
+                newFragment1.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, newFragment1);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+
     }
 
     @Override

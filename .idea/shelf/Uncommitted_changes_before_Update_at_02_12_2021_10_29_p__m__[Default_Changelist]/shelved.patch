@@ -1,0 +1,217 @@
+Index: .idea/render.experimental.xml
+===================================================================
+diff --git a/.idea/render.experimental.xml b/.idea/render.experimental.xml
+deleted file mode 100644
+--- a/.idea/render.experimental.xml	(revision 29efc92082eb5ccf7e420aee0b6058bf420cf1b8)
++++ /dev/null	(revision 29efc92082eb5ccf7e420aee0b6058bf420cf1b8)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RenderSettings">
+-    <option name="showDecorations" value="true" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision 29efc92082eb5ccf7e420aee0b6058bf420cf1b8)
++++ /dev/null	(revision 29efc92082eb5ccf7e420aee0b6058bf420cf1b8)
+@@ -1,3 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 29efc92082eb5ccf7e420aee0b6058bf420cf1b8)
++++ b/.idea/gradle.xml	(date 1638476632450)
+@@ -5,8 +5,10 @@
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="testRunner" value="GRADLE" />
+-        <option name="distributionType" value="DEFAULT_WRAPPED" />
++        <option name="distributionType" value="LOCAL" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="gradleHome" value="$USER_HOME$/.gradle/daemon/7.0.2/gradle-7.0.2" />
++        <option name="gradleJvm" value="Android Studio default JDK" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision 29efc92082eb5ccf7e420aee0b6058bf420cf1b8)
++++ b/.idea/vcs.xml	(date 1638476632490)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++    <mapping directory="" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/java/com/programacion/perroestilocliente/ui/administrador/inicio/HomeAdminFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.programacion.perroestilocliente.ui.administrador.inicio;\r\n\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.programacion.perroestilocliente.R;\r\nimport com.programacion.perroestilocliente.modelo.OrdenesCliente;\r\nimport com.programacion.perroestilocliente.modelo.Persona;\r\nimport com.programacion.perroestilocliente.modelo.Productos;\r\nimport com.programacion.perroestilocliente.modelo.Usuarios;\r\nimport com.programacion.perroestilocliente.ui.administrador.inventario.ListAdapterInventario;\r\n\r\nimport org.imaginativeworld.whynotimagecarousel.ImageCarousel;\r\nimport org.imaginativeworld.whynotimagecarousel.model.CarouselItem;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class HomeAdminFragment extends Fragment {\r\n\r\n    private HomeAdminViewModel mViewModel;\r\n\r\n    TextView nombre;\r\n    ImageCarousel carousel;\r\n\r\n    //Elementos del list view\r\n    private TextView producto;\r\n    private TextView cantidadStock;\r\n    private TextView usuario;\r\n    private ImageView imgUsuario;\r\n    private ImageView imgProducto;\r\n    private TextView cantidadProductos;\r\n    private TextView cantidadPedidos;\r\n    private TextView cantidadVentas;\r\n    private TextView cantidadClientes;\r\n    private TextView nuevosPedidos;\r\n    private TextView pocosProductos;\r\n    //Fisebase\r\n    private FirebaseDatabase firebaseDatabase;\r\n    private DatabaseReference databaseReference;\r\n    private StorageReference storageReferenceProductos;\r\n    private StorageReference storageReferenceUsuario;\r\n    List<CarouselItem> list = new ArrayList<>();\r\n    View root;\r\n\r\n    private ListView listViewProductos;\r\n    private ListView listViewPedidos;\r\n    private ListAdapterInicioAdmin customAdapter;\r\n    private ListAdapterInicioAdminPedidos customAdapter1;\r\n    public static HomeAdminFragment newInstance() {\r\n        return new HomeAdminFragment();\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,\r\n                             @Nullable Bundle savedInstanceState) {\r\n     root = inflater.inflate(R.layout.fragment_home_admin, container, false);\r\n     nombre= root.findViewById(R.id.tvBienvenidaAdmin);\r\n     listViewProductos=root.findViewById(R.id.listaProductosHomeAdmin);\r\n     listViewPedidos= root.findViewById(R.id.listaPedidosHomeAdmin);\r\n\r\n     firebaseDatabase = FirebaseDatabase.getInstance();\r\n     databaseReference = firebaseDatabase.getReference();\r\n     storageReferenceProductos = FirebaseStorage.getInstance().getReference(\"Productos\");\r\n     storageReferenceUsuario =FirebaseStorage.getInstance().getReference(\"Perfiles\");\r\n\r\n        carousel = root.findViewById(R.id.carruselInicioAdmin);\r\n        list.add(new CarouselItem(R.drawable.img_carrucel_admin1));\r\n        list.add(new CarouselItem(R.drawable.img_carrucel_admin2));\r\n        list.add(new CarouselItem(R.drawable.img_carrucel_admin3));\r\n        list.add(new CarouselItem(R.drawable.img_carrucel_admin4));\r\n        list.add(new CarouselItem(R.drawable.img_carrucel_admin5));\r\n\r\n        carousel.setData(list);\r\n\r\n        databaseReference.child(\"Usuarios/Tienda\").orderByChild(\"email\").equalTo(\"admin@perroestilo.com.mx\").addListenerForSingleValueEvent(new ValueEventListener(){\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot){\r\n                Usuarios u=null;\r\n                OrdenesCliente pedidos= null;\r\n                Productos produ=null;\r\n                Persona persona= null;\r\n                for (DataSnapshot objSnapshot: snapshot.getChildren()){\r\n                    u = objSnapshot.getValue(Usuarios.class);\r\n                    pedidos= objSnapshot.getValue(OrdenesCliente.class);\r\n                    //produ= objSnapshot.getValue(Productos.class);\r\n                    persona= objSnapshot.getValue(Persona.class);\r\n                }\r\n                if (u!=null){\r\n                    nombre.setText(\"!Bienvenida \" + u.getUsername()+\" !\");\r\n                    //stock.setText(\"Productos con pocas existencias... \"+produ.getStock());\r\n                }\r\n            }\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error){\r\n\r\n            }\r\n        });\r\n        estadisticas();\r\n        listarPedidos();\r\n        listarProductos();\r\n        return root;\r\n    }\r\n\r\n\r\n    private void estadisticas() {\r\n        cantidadProductos=root.findViewById(R.id.textViewcantidadInicioAProductos);\r\n        cantidadPedidos =root.findViewById(R.id.textViewcantidadInicioAPedidos);\r\n        cantidadVentas=root.findViewById(R.id.textViewcantidadInicioAVentas);\r\n        cantidadClientes = root.findViewById(R.id.textViewcantidadInicioAClientes);\r\n        nuevosPedidos=root.findViewById(R.id.textItemNuevosPedidos);\r\n        pocosProductos = root.findViewById(R.id.textItemPocasExistencias);\r\n    }\r\n    private void listarPedidos() {\r\n        databaseReference.child(\"OrdenesCliente/\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();\r\n                int cont=0;\r\n                for (DataSnapshot objSnapshot : snapshot.getChildren()) {\r\n\r\n                    databaseReference.child(\"OrdenesCliente/\"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {\r\n                        @Override\r\n                        public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                            for (DataSnapshot objSnapshot2 : snapshot.getChildren()){\r\n\r\n                                databaseReference.child(\"OrdenesCliente/\"+objSnapshot.getKey()+\"/\"+objSnapshot2.getKey()+\"/\").addValueEventListener(new ValueEventListener() {\r\n                                    @Override\r\n                                    public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                                        String nombrecliente=snapshot.child(\"nombreContacto\").getValue().toString();\r\n                                        for (DataSnapshot objSnapshot3 : snapshot.getChildren()) {\r\n                                        databaseReference.child(\"Usuarios/Clientes\"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {\r\n                                            @Override\r\n                                            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                                                    int cont = 0;\r\n                                                    Usuarios u=objSnapshot3.getValue(Usuarios.class);\r\n                                                    String fotocliente=u.getFotoPerfil();\r\n                                                    //String fotocliente = snapshot.child(\"fotoPerfil\").getValue().toString();\r\n                                                    Log.i(\"idCliente \", fotocliente);\r\n                                                    cont++;\r\n                                                    arrayList.add(new ElementListViewInicioAdmin(nombrecliente, fotocliente));\r\n                                                    customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());\r\n                                                    listViewPedidos.setAdapter(customAdapter1);\r\n\r\n\r\n                                            }\r\n\r\n                                            @Override\r\n                                            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n                                            }\r\n                                        });}\r\n\r\n                                    }\r\n\r\n\r\n\r\n                                    @Override\r\n                                    public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n\r\n\r\n                                    }\r\n                                });\r\n                            }\r\n                        }\r\n\r\n\r\n\r\n                        @Override\r\n                        public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n\r\n\r\n                        }\r\n                    });\r\n                }\r\n                \r\n                pocosProductos.setText(\"Mira los nuevos pedidos \"+cont);\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n            }\r\n        });\r\n    }\r\n\r\n    private void listarProductos() {\r\n        databaseReference.child(\"Productos\").orderByChild(\"estadoLogico\").equalTo(\"1\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();\r\n                int cont=0;\r\n                for (DataSnapshot objSnapshot : snapshot.getChildren()) {\r\n                    try {\r\n                        Productos p = objSnapshot.getValue(Productos.class);\r\n                        if(Integer.parseInt(p.getStock())<= 5){\r\n                            cont++;\r\n                            arrayList.add(new ElementListViewInicioAdmin(p.getNombre() ,p.getStock(),p.getImgFoto()));\r\n                            customAdapter = new ListAdapterInicioAdmin(getActivity(), arrayList,getContext());\r\n                            listViewProductos.setAdapter(customAdapter);\r\n                        }\r\n                   }catch (Exception e){\r\n                        Log.i(\"error\",e.getMessage());\r\n                    }\r\n                }\r\n               // cantidadProductos.setText(cont);\r\n                pocosProductos.setText(\"Productos con pocas existencias \"+cont);\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void cargaImagenUsuarios(ImageView ivFoto, String img) {\r\n        storageReferenceUsuario.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {\r\n            @Override\r\n            public void onSuccess(Uri uri) {\r\n                Glide.with(getContext()).load(uri).into(ivFoto);\r\n            }\r\n        }).addOnFailureListener(new OnFailureListener() {\r\n            @Override\r\n            public void onFailure(@NonNull Exception e) {\r\n                Toast.makeText(getContext(),\"Ups! Ha ocurrido un erro al recuperar la imagen\\n\" + e.getCause(),Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n    }\r\n\r\n    @Override\r\n    public void onActivityCreated(@Nullable Bundle savedInstanceState) {\r\n        super.onActivityCreated(savedInstanceState);\r\n        mViewModel = new ViewModelProvider(this).get(HomeAdminViewModel.class);\r\n        // TODO: Use the ViewModel\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/inicio/HomeAdminFragment.java b/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/inicio/HomeAdminFragment.java
+--- a/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/inicio/HomeAdminFragment.java	(revision 29efc92082eb5ccf7e420aee0b6058bf420cf1b8)
++++ b/app/src/main/java/com/programacion/perroestilocliente/ui/administrador/inicio/HomeAdminFragment.java	(date 1638479671542)
+@@ -67,7 +67,7 @@
+     private StorageReference storageReferenceUsuario;
+     List<CarouselItem> list = new ArrayList<>();
+     View root;
+-
++    int contP=0;
+     private ListView listViewProductos;
+     private ListView listViewPedidos;
+     private ListAdapterInicioAdmin customAdapter;
+@@ -137,35 +137,44 @@
+         pocosProductos = root.findViewById(R.id.textItemPocasExistencias);
+     }
+     private void listarPedidos() {
++
+         databaseReference.child("OrdenesCliente/").addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
+-                int cont=0;
++
+                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+-
++                    Log.i("ids clientes ", objSnapshot.getKey());
+                     databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                             for (DataSnapshot objSnapshot2 : snapshot.getChildren()){
+-
++                                Log.i("ids clientes ", objSnapshot2.getKey());
+                                 databaseReference.child("OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/").addValueEventListener(new ValueEventListener() {
+                                     @Override
+                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
++                                        Log.i("Ruta del nombre  ", "OrdenesCliente/"+objSnapshot.getKey()+"/"+objSnapshot2.getKey()+"/nombreContacto");
+                                         String nombrecliente=snapshot.child("nombreContacto").getValue().toString();
+-                                        for (DataSnapshot objSnapshot3 : snapshot.getChildren()) {
+-                                        databaseReference.child("Usuarios/Clientes"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
++                                        String idcliente=snapshot.child("idCliente").getValue().toString();
++
++                                        Log.i("Ruta a la imagen ", "Usuarios/Clientes/"+idcliente);
++
++                                        llenarlistaPedidos(idcliente,nombrecliente);
++                                       /* databaseReference.child("Usuarios/Clientes/"+objSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                                             @Override
+                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+-                                                    int cont = 0;
+-                                                    Usuarios u=objSnapshot3.getValue(Usuarios.class);
++                                                        String fotocliente=snapshot.child("fotoPerfil").getValue().toString();
++                                                        Log.i("USUARIO ", fotocliente);
++                                                        contP++;
++                                                        arrayList.add(new ElementListViewInicioAdmin(nombrecliente, fotocliente));
++                                                        customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
++                                                        listViewPedidos.setAdapter(customAdapter1);
++
++                                                    /*
+                                                     String fotocliente=u.getFotoPerfil();
+                                                     //String fotocliente = snapshot.child("fotoPerfil").getValue().toString();
+                                                     Log.i("idCliente ", fotocliente);
+-                                                    cont++;
+-                                                    arrayList.add(new ElementListViewInicioAdmin(nombrecliente, fotocliente));
+-                                                    customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
+-                                                    listViewPedidos.setAdapter(customAdapter1);
++
+ 
+ 
+                                             }
+@@ -174,9 +183,10 @@
+                                             public void onCancelled(@NonNull DatabaseError error) {
+ 
+                                             }
+-                                        });}
++                                        });*/
++                                    }
+ 
+-                                    }
++
+ 
+ 
+ 
+@@ -201,7 +211,7 @@
+                     });
+                 }
+                 
+-                pocosProductos.setText("Mira los nuevos pedidos "+cont);
++                pocosProductos.setText("Mira los nuevos pedidos "+contP);
+             }
+ 
+             @Override
+@@ -209,7 +219,33 @@
+             }
+         });
+     }
++    private void llenarlistaPedidos(String idcliente, String nombrecliente) {
++        databaseReference.child("Usuarios/Clientes").child(idcliente+"/fotoPerfil").addValueEventListener(new ValueEventListener() {
++            @Override
++            public void onDataChange(@NonNull DataSnapshot snapshot) {
++                ArrayList<ElementListViewInicioAdmin> arrayList = new ArrayList<>();
++
++                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
++                    try {
++                        Usuarios u = objSnapshot.getValue(Usuarios.class);
++
++                        contP++;
++                        arrayList.add(new ElementListViewInicioAdmin(nombrecliente, u.getFotoPerfil()));
++                        customAdapter1 = new ListAdapterInicioAdminPedidos(getActivity(), arrayList, getContext());
++                        listViewPedidos.setAdapter(customAdapter1);
++
++                    }catch (Exception e){
++                        Log.i("Hay error",e.getMessage());
++                    }
++                }
++            }
+ 
++            @Override
++            public void onCancelled(@NonNull DatabaseError error) {
++
++            }
++        });
++    }
+     private void listarProductos() {
+         databaseReference.child("Productos").orderByChild("estadoLogico").equalTo("1").addValueEventListener(new ValueEventListener() {
+             @Override
+@@ -241,20 +277,6 @@
+ 
+     }
+ 
+-    private void cargaImagenUsuarios(ImageView ivFoto, String img) {
+-        storageReferenceUsuario.child(img).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+-            @Override
+-            public void onSuccess(Uri uri) {
+-                Glide.with(getContext()).load(uri).into(ivFoto);
+-            }
+-        }).addOnFailureListener(new OnFailureListener() {
+-            @Override
+-            public void onFailure(@NonNull Exception e) {
+-                Toast.makeText(getContext(),"Ups! Ha ocurrido un erro al recuperar la imagen\n" + e.getCause(),Toast.LENGTH_SHORT).show();
+-            }
+-        });
+-    }
+-
+     @Override
+     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+         super.onActivityCreated(savedInstanceState);

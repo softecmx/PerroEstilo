@@ -495,6 +495,19 @@
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_simple_lista_disenio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/list_group_child.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/aagui/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/list_group_header.xml" value="0.20416666666666666" />
+
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/activity_nav_administrador.xml" value="0.15760869565217392" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_pedidos.xml" value="0.16" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_pedidos_admin.xml" value="0.25" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_consultar_productos.xml" value="0.1408514492753623" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_detalle_envio.xml" value="0.2" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_detalle_pagos.xml" value="0.22" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/fragment_ver_pagos.xml" value="0.12092391304347826" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_detalle_venta.xml" value="0.25" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_envios.xml" value="0.25" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_pagos.xml" value="0.25" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/PerroEstilo/app/src/main/res/layout/item_lista_pedidos.xml" value="0.22" />
+
         <entry key="app/src/main/res/layout/custom_toast_error.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/custom_toast_info.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/custom_toast_sin_data.xml" value="0.1921875" />
