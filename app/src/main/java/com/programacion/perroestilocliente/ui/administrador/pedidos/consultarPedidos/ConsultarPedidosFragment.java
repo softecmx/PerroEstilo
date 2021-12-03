@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class ConsultarPedidosFragment extends Fragment implements AdapterView.On
     ImageButton btnBuscar;
     private ConsultarPedidosViewModel mViewModel;
     View root;
-    ListView listView;
+    RecyclerView listView;
     String totalOrden;
     ArrayList<ElementListViewConsultarPedidos> arrayListOrdenes = new ArrayList<>();
     private ListAdapterConsultarPedidos adapterOrdenes;
