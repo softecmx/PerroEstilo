@@ -324,7 +324,7 @@ public class NavAdministradorActivity extends AppCompatActivity
         childModelsList = new ArrayList<>();
         menuModel = new MenuModel("Pedidos", true, true, "", R.drawable.ic_loyalty_black_24dp); //Menu of Python Tutorials
         headerList.add(menuModel);
-        childModel = new MenuModel("Crear pedidos", false, false, "", R.drawable.ic_add_black_24dp);
+  /*      childModel = new MenuModel("Crear pedidos", false, false, "", R.drawable.ic_add_black_24dp);
         childModelsList.add(childModel);
 
         childModel = new MenuModel("Modificar pedidos", false, false, "", R.drawable.ic_edit_black_24dp);
@@ -332,12 +332,12 @@ public class NavAdministradorActivity extends AppCompatActivity
 
         childModel = new MenuModel("Buscar pedidos", false, false, "", R.drawable.ic_search_black_24dp);
         childModelsList.add(childModel);
-
+*/
         childModel = new MenuModel("Consultar pedidos", false, false, "", R.drawable.ic_list_black_24dp);
         childModelsList.add(childModel);
-
+/*
         childModel = new MenuModel("Cancelar pedidos", false, false, "", R.drawable.ic_cancel_black_24dp);
-        childModelsList.add(childModel);
+        childModelsList.add(childModel);*/
 
 
         if (menuModel.hasChildren) {
