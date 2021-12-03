@@ -63,7 +63,7 @@ public class PagosPendientesFragment extends Fragment {
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Clientes clientes = objSnapshot.getValue(Clientes.class);
 
-                    databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).addValueEventListener(new ValueEventListener() {
+                    databaseReference.child("OrdenesCliente/"+clientes.getIdUsuario()).orderByChild("estatusOrden").equalTo("Pago pendiente").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
