@@ -337,7 +337,8 @@ public class NavAdministradorActivity extends AppCompatActivity
         childModelsList.add(childModel);
 /*
         childModel = new MenuModel("Cancelar pedidos", false, false, "", R.drawable.ic_cancel_black_24dp);
-        childModelsList.add(childModel);*/
+        childModelsList.add(childModel);
+ */
 
 
         if (menuModel.hasChildren) {
